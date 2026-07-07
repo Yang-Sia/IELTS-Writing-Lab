@@ -1,0 +1,1334 @@
+const storageKey = "ielts-writing-lab-v4";
+
+const task1Modules = [
+  {
+    title: "Line Graph 折线图",
+    detail: "训练趋势：rise, fall, fluctuate, remain stable, reach a peak。"
+  },
+  {
+    title: "Bar Chart 柱状图",
+    detail: "训练比较：最高/最低、组间差异、明显变化。"
+  },
+  {
+    title: "Table 表格",
+    detail: "训练筛选：不要全写数字，先找最大值、最小值和异常值。"
+  },
+  {
+    title: "Pie Chart 饼图",
+    detail: "训练比例：account for, make up, represent, respectively。"
+  },
+  {
+    title: "Map 地图",
+    detail: "训练方位和变化：be replaced by, be converted into, be expanded。"
+  },
+  {
+    title: "Process 流程图",
+    detail: "训练顺序和被动语态：first, then, subsequently, be transported。"
+  }
+];
+
+const bookMethodModules = [
+  {
+    title: "1. 先读评分标准",
+    badge: "TR / CC / LR / GRA",
+    points: ["Task Response: 是否真正回答题目", "Coherence and Cohesion: 段落是否连贯", "Lexical / Grammar: 表达是否准确稳定"],
+    practice: "练习方式：每次写完先检查有没有跑题、段落是否清楚，再看词汇语法。"
+  },
+  {
+    title: "2. Task 2 ABC审题法",
+    badge: "ABC审题法",
+    points: ["先判断题型", "圈出关键词和限定范围", "确定立场和两个主体段方向"],
+    practice: "练习方式：看到题目先写中文审题卡，再进入英文输出。"
+  },
+  {
+    title: "3. 大作文题型分类",
+    badge: "优缺点 / 观点 / 论述 / 报告 / 混合",
+    points: ["优缺点类: 比较利弊", "观点类: 明确立场", "报告类: 原因和解决办法", "混合类: 分清两个任务"],
+    practice: "练习方式：先识别题型，再决定开头和两个主体段怎么写。"
+  },
+  {
+    title: "4. 主体段结构训练",
+    badge: "开头 / 主体 / 连接 / 结尾",
+    points: ["一个主体段只服务一个 main idea", "用原因、影响、例子展开", "段末回扣题目"],
+    practice: "练习方式：先练主体段，再练整篇，不急着套模板。"
+  },
+  {
+    title: "5. 语言准确度和翻译",
+    badge: "换词 / 减少中式英文 / 句型变化",
+    points: ["先保证主谓宾清楚", "再处理被动、从句、there be、it 形式主语", "最后做自然换词"],
+    practice: "练习方式：用 100句翻译训练准确表达，而不是只背高级词。"
+  },
+  {
+    title: "6. Task 1 图表作文",
+    badge: "动态图 / 静态图 / 流程图 / 地图",
+    points: ["动态图抓趋势", "静态图抓比较", "流程图和地图抓顺序与变化"],
+    practice: "练习方式：先写 overview，再写细节。"
+  },
+  {
+    title: "7. 常见错误清单",
+    badge: "冠词 / 单复数 / 谓语 / 词性 / 句子结构",
+    points: ["优先消灭高频语法错误", "检查连接词是否自然", "避免句子结构混乱"],
+    practice: "练习方式：每次保存练习时写一条错误记录。"
+  }
+];
+
+const grammarWritingPoints = [
+  ["主谓宾结构", "保证句子有清楚动作关系", "Governments should provide affordable public transport.", "缺谓语或一个句子堆多个动词", "用 education / technology 各写 2 个 SVO 观点句。"],
+  ["There be 句型", "引出社会现象或问题", "There are several reasons why traffic congestion is getting worse.", "There has many people...", "把 3 个中文现象改成 there be 句。"],
+  ["It is + adj. + to do / that", "写评价和立场", "It is important to protect children from harmful online content.", "It is benefit to...", "用 necessary / difficult / unfair 各造一句。"],
+  ["基础时态", "区分现在事实、过去变化和未来影响", "Online learning has become more common in recent years.", "全文时态乱跳", "给同一观点写现在、过去到现在、未来影响三句。"],
+  ["名词单复数", "避免低级语法扣分", "Students need opportunities to develop practical skills.", "student need many opportunity", "圈出 5 个可数名词并改成正确形式。"],
+  ["冠词", "让抽象概念和具体对象更准确", "A balanced curriculum can prepare students for the workplace.", "the education is important", "给 8 个名词短语补 a / an / the / 零冠词。"],
+  ["形容词和副词", "描述程度、性质和变化", "Strict regulations can significantly reduce pollution.", "significant reduce", "把 5 个中文副词加入英文句。"],
+  ["比较级和最高级", "写对比论证", "Public transport is more affordable than private cars.", "more better", "用 safer / more efficient / the most effective 写比较句。"],
+  ["被动语态", "写政策、法律、图表和社会措施", "More public money should be allocated to healthcare.", "be allocate", "把主动句改成政策类被动句。"],
+  ["名词性从句", "写复杂观点", "What matters most is whether students can apply knowledge in real life.", "that 乱用导致句子断裂", "用 whether / what / that 写 3 个观点句。"],
+  ["定语从句", "补充说明对象", "Students who lack digital access may fall behind.", "从句缺主语或重复代词", "用 who / which / that 改写 3 个短句。"],
+  ["状语从句", "写因果、让步、条件", "Although technology improves efficiency, it may reduce face-to-face communication.", "because 和 so 同时出现", "用 although / because / if 各写一句。"],
+  ["非谓语基础", "压缩句子并提升连贯", "Living in large cities, many people rely heavily on public transport.", "主语不一致", "把两个简单句合并成非谓语句。"]
+];
+
+const coursePhases = [
+  {
+    id: "stage1",
+    title: "01 第一阶段：语言地基",
+    badge: "句子 -> 小段落",
+    audience: ["初中生", "英语基础较弱", "备考时间较长", "还不能稳定写出完整英文句子的学生"],
+    goals: ["建立基础语法意识", "积累 Task 2 高频主题词汇", "写观点句、原因句、结果句和例子句", "写出简单但逻辑清楚的小段落"],
+    modules: [
+      {
+        id: "foundation-grammar",
+        title: "01 基础语法",
+        goal: "让每个语法点服务 Task 2 写作，不做孤立语法课。",
+        students: "基础弱、句子常缺谓语、单复数和冠词错误多的学生。",
+        knowledge: grammarWritingPoints.map(([name]) => name),
+        lecture: "先给写作用途，再看 Task 2 句子，最后立刻做替换和纠错。",
+        board: "语法点 -> 写作用途 -> 主题例句 -> 常见错误 -> 立即输出",
+        examples: ["It is necessary to give students equal access to educational resources.", "There are several reasons why young people struggle to find stable jobs."],
+        exercises: ["用同一主题写 3 个 SVO 观点句。", "把 5 个中文政策句改成被动语态。", "用 although / because / if 合并短句。"],
+        homework: "每天选 1 个主题，写 8 个准确句子，并标出主语、谓语和宾语。",
+        errors: ["中文顺序直译", "谓语缺失", "冠词和单复数忽略", "复杂句写长但关系不清"],
+        future: ["给每个语法点补 10 道填空题", "补学生错句库", "补顾家北翻译练习对应页"]
+      },
+      {
+        id: "sentence-patterns",
+        title: "02 句型训练",
+        goal: "把观点、原因、结果、例子、让步和对比变成可重复使用的句型。",
+        students: "能写句子但表达单一、只会 because / so 的学生。",
+        knowledge: ["观点句", "原因句", "结果句", "举例句", "对比句", "让步句", "强调句", "倒装句", "非谓语句", "名词化表达"],
+        lecture: "每个句型都和主题词汇绑定，例如科技、工作、政府题；先普通句，再升级句。",
+        board: "功能句型 -> 普通句 -> 升级句 -> 主题替换 -> 学生造句",
+        examples: ["Technology improves workplace efficiency.", "Not only does technology improve workplace efficiency, but it also raises concerns about privacy and unemployment.", "The expansion of online learning has made education more accessible."],
+        exercises: ["把 5 个普通句升级成让步句。", "用 not only...but also 写 3 个科技/教育句。", "把动词表达改成名词化表达。"],
+        homework: "每个主题写 1 个观点句、1 个原因句、1 个结果句、1 个例子句。",
+        errors: ["倒装只背结构不服务观点", "强调句过度使用", "名词化后句子没有谓语", "非谓语主语不一致"],
+        future: ["补 50 个句型替换卡", "补句型默写题", "补不同分数段句型对比"]
+      },
+      {
+        id: "topic-vocabulary",
+        title: "03 主题词汇",
+        goal: "建立 10 大高频主题的核心词汇、搭配、观点和可迁移表达。",
+        students: "词汇零散、背了不会放进观点句的学生。",
+        knowledge: ["教育", "科技", "环境", "政府", "工作", "健康", "家庭与儿童", "犯罪与法律", "城市与交通", "文化、媒体与全球化"],
+        lecture: "每个主题按照：核心词 -> 高频搭配 -> 常见观点 -> 适配句型 -> 造句练习。",
+        board: "主题 -> 分支 -> 词汇 -> 搭配 -> 观点 -> 句型 -> 输出",
+        examples: ["equal access to education", "stricter environmental regulations", "reduce the risk of reoffending"],
+        exercises: ["每个主题选 5 个词写观点句。", "把中文观点改写成英文观点句。", "用同一表达迁移到两个不同题目。"],
+        homework: "每天完成 1 个主题：5 个词组默写 + 5 个造句 + 1 个小段落。",
+        errors: ["只背单词不背搭配", "中文观点套高级词导致不自然", "一个词不会迁移到不同题目"],
+        future: ["继续导入 Excel 1000 词组", "给每个主题补配对/填空/默写", "补同义替换和易错表达"]
+      },
+      {
+        id: "opinion-sentences",
+        title: "04 观点句训练",
+        goal: "训练学生从中文观点稳定转成英文观点句。",
+        students: "有想法但英文第一句写不出来的学生。",
+        knowledge: ["简单观点句", "带原因的观点句", "带让步的观点句", "带对比的观点句", "更学术的观点句"],
+        lecture: "先中文判断立场，再选句型骨架，最后加入主题词汇。",
+        board: "中文观点 -> 立场词 -> 句型骨架 -> 主题词 -> 英文观点句",
+        examples: ["Schools should not focus only on practical skills because academic subjects develop transferable abilities.", "Although online learning is convenient, it cannot fully replace face-to-face interaction."],
+        exercises: ["给 10 个中文观点写英文观点句。", "把简单观点句升级成带原因版本。", "把绝对观点改成更稳的学术观点。"],
+        homework: "每天 10 个中文观点转英文，标出观点核心词。",
+        errors: ["观点太绝对", "句子像翻译腔", "原因和观点重复"],
+        future: ["补观点句评分标准", "补中英对照观点库", "补口头快速反应训练"]
+      },
+      {
+        id: "mini-paragraph",
+        title: "05 小段落训练",
+        goal: "写 4-6 句的清楚小段落，为主体段做准备。",
+        students: "能写单句但段落展开空、散、重复的学生。",
+        knowledge: ["Topic sentence", "Explanation", "Reason", "Result", "Example", "Link back"],
+        lecture: "先中文思路，再英文句子框架，最后替换表达和补例子。",
+        board: "观点句 -> 解释 -> 原因 -> 结果 -> 例子 -> 回扣题目",
+        examples: ["Public transport should be improved because it gives commuters a practical alternative to private cars. When buses and trains are reliable, people are less likely to drive every day."],
+        exercises: ["给中文思路补英文句子框架。", "给一个观点补原因、结果和例子。", "把 3 句扩成 6 句小段落。"],
+        homework: "每周 5 个小段落，每段必须包含回扣句。",
+        errors: ["例子太长", "原因和结果混在一起", "段末不回题"],
+        future: ["补基础版/6.5版/7+版小段落对比", "补学生作业批改模板"]
+      }
+    ]
+  },
+  {
+    id: "stage2",
+    title: "02 第二阶段：论证与段落",
+    badge: "审题 -> 主体段",
+    audience: ["能写基本句子", "有一定词汇量", "文章逻辑空、散、重复", "不知道主体段如何展开的学生"],
+    goals: ["学会审题", "学会生成观点", "掌握常见论证手法", "写出完整主体段", "能写开头和结尾"],
+    modules: [
+      ["argument-question", "01 审题方法", ["判断题型", "圈关键词", "找限定范围", "判断是否需要表态", "分析 only / all / always / never", "判断几个任务", "避免跑题"], "题型 -> 关键词 -> 限定范围 -> 任务数量 -> 立场"],
+      ["idea-generation", "02 观点生成", ["个人", "家庭", "学校", "社会", "政府", "经济", "短期影响", "长期影响", "正面影响", "负面影响"], "对象角度 -> 时间角度 -> 影响方向 -> 可写观点"],
+      ["cause-effect", "03 因果论证", ["观点", "原因", "结果", "回扣题目"], "Point -> Why -> So what -> Link back"],
+      ["comparison", "04 对比论证", ["A/B 优势", "短期/长期", "个人/社会", "效率/公平"], "比较对象 -> 比较标准 -> 判断更重要的一方"],
+      ["examples", "05 举例论证", ["具体例子", "泛化例子", "错误例子"], "观点 -> 例子一句话 -> 解释例子如何证明观点"],
+      ["concession", "06 让步反驳", ["Although A is true, B is more important because...", "避免两边都写但没有立场"], "承认对方 -> 转折 -> 强化自己立场"],
+      ["intro-conclusion", "07 开头结尾", ["背景改写", "题目改写", "立场句", "不同题型开头", "总结立场", "避免新观点"], "背景句 -> 改写题目 -> 立场 / 总结立场 -> 总结主体段"],
+      ["body-paragraph", "08 主体段写法", ["基础版", "6.5 分版", "7+ 分版", "Topic sentence", "Explanation", "Reason", "Result", "Example", "Link back"], "Topic sentence -> Explanation -> Reason -> Result -> Example -> Link back"]
+    ].map(([id, title, knowledge, board]) => ({
+      id, title,
+      goal: "以主体段和论证为核心，让观点能展开、能回题、能支撑立场。",
+      students: "句子基本能写，但展开空泛、重复或跑题的学生。",
+      knowledge,
+      lecture: "用真题先做中文审题和观点生成，再把论证链转成英文主体段。",
+      board,
+      examples: ["Although this view is understandable, the long-term social cost is more serious.", "This policy can reduce inequality because it gives low-income families access to essential services."],
+      exercises: ["给题目圈关键词并判断任务数量。", "用一个观点写原因、结果和回扣。", "把空泛段落改成完整主体段。"],
+      homework: "每天 1 道题只写审题卡 + 1 个主体段。",
+      errors: ["没有明确立场", "例子不能证明观点", "两段观点重复", "段落最后没有回扣题目"],
+      future: ["补更多真题审题卡", "补学生段落批改记录", "补不同题型主体段范文"]
+    }))
+  },
+  {
+    id: "stage3",
+    title: "03 第三阶段：成篇训练",
+    badge: "整篇 -> 考前",
+    audience: ["已经能写主体段", "需要整篇输出", "准备考试", "需要稳定分数和提分的学生"],
+    goals: ["掌握常见题型结构", "40 分钟内完成文章", "按评分标准自查", "通过批改复盘持续提分"],
+    modules: [
+      ["agree-disagree", "01 同不同意", ["完全同意", "完全不同意", "部分同意", "双主体段结构", "常见错误"], "立场 -> 两个理由 -> 回扣"],
+      ["discussion", "02 双边讨论", ["Discuss both views and give your opinion", "两边观点平衡", "自己观点位置", "避免只讨论不表态"], "View A -> View B -> My opinion"],
+      ["advantages", "03 优缺点", ["advantages and disadvantages", "outweigh", "利弊比较", "判断哪边更重要"], "Advantage -> Disadvantage -> 判断权重"],
+      ["two-question", "04 双问题", ["causes and solutions", "problems and solutions", "reasons and effects", "两个问题如何分段"], "Question 1 paragraph -> Question 2 paragraph"],
+      ["mixed-question", "05 混合题", ["两个不同任务拆分", "避免漏答", "安排段落"], "任务 A -> 任务 B -> 共同立场"],
+      ["timed-training", "06 限时训练", ["5 分钟审题", "5 分钟列提纲", "25 分钟正文", "5 分钟检查", "10 分钟审题", "15 分钟主体段", "40 分钟整篇"], "审题 -> 提纲 -> 正文 -> 检查"],
+      ["revision", "07 批改复盘", ["Task Response", "Coherence and Cohesion", "Lexical Resource", "Grammatical Range and Accuracy", "主要问题", "可保留表达", "必须修改句", "下次目标"], "评分项 -> 问题 -> 修改 -> 下次训练"],
+      ["exam-template", "08 考前模板", ["题型稳定结构", "高频开头句", "高频结尾句", "主体段连接句", "常见主题观点", "考前检查清单"], "题型模板 -> 主题观点 -> 检查清单"]
+    ].map(([id, title, knowledge, board]) => ({
+      id, title,
+      goal: "把段落能力组合成稳定整篇输出，重点服务考试时间和评分标准。",
+      students: "能写主体段，但整篇结构不稳、时间不够或复盘无方向的学生。",
+      knowledge,
+      lecture: "先固定题型结构，再做限时输出，最后用四项评分标准复盘。",
+      board,
+      examples: ["In conclusion, although this policy may be costly, it is justified because it improves social equality.", "The advantages outweigh the disadvantages when the long-term benefits are considered."],
+      exercises: ["给题型选结构。", "40 分钟整篇写作。", "按 TR / CC / LR / GRA 做自查。"],
+      homework: "每周 2 篇整文 + 1 次批改复盘 + 1 张下次训练目标卡。",
+      errors: ["开头背模板但不回应题目", "结尾出现新观点", "主体段和题型任务不匹配", "写完不复盘"],
+      future: ["补各题型范文库", "补限时训练计时器", "补批改表导出功能"]
+    }))
+  }
+];
+
+const task2Topics = {
+  education: {
+    name: "1. 教育 Education",
+    branches: ["学校与家庭教育", "大学教育与职业教育", "在线教育", "课程设置与考试", "教育公平", "教师的作用"],
+    vocab: ["curriculum", "employability", "critical thinking", "educational resources", "equal access"],
+    question: "Some people believe that schools should focus more on practical skills than academic subjects. To what extent do you agree or disagree?",
+    guide: "核心：教育的目的是什么？短期就业技能 vs 长期思维能力。",
+    viewpoint: "学校可以增加实践内容，但不应削弱学术科目，因为学术训练提供更底层的迁移能力。",
+    phrases: [
+      "give students access to a wide range of educational resources",
+      "develop transferable skills",
+      "build a strong academic foundation",
+      "prepare students for the demands of the modern workplace"
+    ],
+    mainIdeas: [
+      "思路一：支持学术科目。学术科目不是“没用的理论”，它训练推理、分析和解决问题的能力，这些能力可以迁移到不同职业。",
+      "思路二：支持平衡。学校应该加入实践技能，但不能让实用技能取代学术学习，因为学生未来需要的不只是某一份工作的技能。"
+    ],
+    chain: "观点: 学术科目仍然重要 -> 原因: 它训练推理和抽象思维 -> 影响: 学生未来能适应不同工作 -> 例子: 数学和科学培养解决问题能力 -> 回扣: 学校不应只服务短期就业。",
+    teaching: "教学重点：让学生从“二选一”升级到“承认A但强调B更底层”。"
+  },
+  technology: {
+    name: "2. 科技 Technology",
+    branches: ["日常便利", "人工智能与自动化", "网络与社交媒体", "信息获取", "隐私与数据安全", "数字鸿沟"],
+    vocab: ["digital literacy", "automation", "privacy", "accessibility", "online platforms"],
+    question: "Digital technology has changed the way people learn. Is this a positive or negative development?",
+    guide: "核心：科技提高效率，但也可能削弱深度思考。",
+    viewpoint: "科技本身不是问题，关键是它是否被用来支持主动学习，而不是替代思考。",
+    phrases: [
+      "enable students to study at their own pace",
+      "make high-quality resources accessible",
+      "reduce face-to-face interaction",
+      "be distracted by digital entertainment"
+    ],
+    mainIdeas: [
+      "思路一：科技是积极的，因为它让学生更容易获得资源，并按照自己的节奏学习。",
+      "思路二：科技也有风险，如果学生只是被动看视频或依赖工具，深度思考会变弱。"
+    ],
+    chain: "观点: 科技在正确引导下是积极的 -> 原因: 它扩大资源获取 -> 影响: 学生可以个性化学习 -> 例子: 录播课帮助学生反复复习难点 -> 回扣: 科技应服务学习质量。",
+    teaching: "教学重点：科技题不要只写 convenient，要写行为、能力和长期影响。"
+  },
+  government: {
+    name: "3. 政府与公共政策 Government",
+    branches: ["公共资金分配", "政府与个人责任", "法律监管", "公共服务", "税收", "国际合作"],
+    vocab: ["public funding", "regulation", "welfare", "budget allocation", "public services"],
+    question: "Some people think governments should spend more money on public services rather than arts. To what extent do you agree or disagree?",
+    guide: "核心：公共资源有限时，基本服务和文化价值如何排序？",
+    viewpoint: "公共服务应优先，但艺术不应被完全忽视，因为它也有文化和社会价值。",
+    phrases: [
+      "allocate public money according to social needs",
+      "improve access to essential services",
+      "preserve cultural identity",
+      "place a heavier burden on taxpayers"
+    ],
+    mainIdeas: [
+      "思路一：公共服务优先，因为医疗、交通、教育直接影响人的基本生活质量。",
+      "思路二：艺术也值得支持，因为它能保存文化身份、提升城市吸引力，但预算应低于基本服务。"
+    ],
+    chain: "观点: 基础公共服务优先 -> 原因: 医疗、交通影响基本生活 -> 影响: 改善公平和社会稳定 -> 例子: 公共交通让低收入者更容易就业 -> 回扣: 艺术重要但基本需求更紧急。",
+    teaching: "教学重点：政府题要写 policy -> people -> society。"
+  },
+  environment: {
+    name: "4. 环境与动物 Environment",
+    branches: ["气候变化", "污染", "能源资源", "垃圾处理", "动物保护", "个人与政府责任"],
+    vocab: ["sustainability", "carbon emissions", "renewable energy", "consumer behavior", "environmental regulation"],
+    question: "Some people believe individuals can do little to improve the environment, and only governments and large companies can make a difference. To what extent do you agree or disagree?",
+    guide: "核心：个人行动和系统改变谁更有效？",
+    viewpoint: "政府和企业影响更大，但个人消费选择也能推动市场变化。",
+    phrases: [
+      "reduce carbon emissions",
+      "encourage sustainable consumption",
+      "introduce stricter environmental regulations",
+      "make environmentally friendly choices easier"
+    ],
+    mainIdeas: [
+      "思路一：政府和企业更有力量，因为它们能改变生产方式、基础设施和规则。",
+      "思路二：个人也有作用，因为消费选择会影响市场需求，并推动企业改变。"
+    ],
+    chain: "观点: 系统力量更大但个人仍重要 -> 原因: 政策和生产方式决定选择空间 -> 影响: 绿色基础设施让环保行为更容易 -> 例子: 公共交通投资减少开车依赖 -> 回扣: 环境改善需要制度和个人共同作用。",
+    teaching: "教学重点：环境题要写 incentives, regulation, consumption patterns。"
+  },
+  health: {
+    name: "5. 健康与生活方式 Health",
+    branches: ["公共医疗", "饮食肥胖", "体育锻炼", "心理健康", "工作压力", "个人与政府责任"],
+    vocab: ["public healthcare", "obesity", "mental health", "sedentary lifestyle", "preventive measures"],
+    question: "Some people think governments should be responsible for improving public health. Others believe individuals should take responsibility. Discuss both views and give your opinion.",
+    guide: "核心：健康是个人选择，还是公共政策的结果？",
+    viewpoint: "个人需要改变生活方式，但政府能通过教育、城市规划和医疗服务降低健康风险。",
+    phrases: [
+      "promote a healthier lifestyle",
+      "take preventive measures",
+      "reduce pressure on the healthcare system",
+      "create public spaces for exercise"
+    ],
+    mainIdeas: [
+      "思路一：个人要负责，因为饮食、运动和作息最终取决于自己的选择。",
+      "思路二：政府也要负责，因为城市环境、医疗服务和公共教育会影响人的选择。"
+    ],
+    chain: "观点: 责任应共享 -> 原因: 个人选择受环境影响 -> 影响: 健康政策能让好选择更容易 -> 例子: 公园和运动设施鼓励锻炼 -> 回扣: 公共健康不能只靠个人自律。",
+    teaching: "教学重点：健康题适合写 individual behavior + public environment。"
+  },
+  work: {
+    name: "6. 工作、商业与经济 Work",
+    branches: ["就业失业", "自动化", "远程办公", "工作生活平衡", "薪酬满意度", "全球贸易"],
+    vocab: ["job satisfaction", "career prospects", "automation", "work-life balance", "financial stability"],
+    question: "Some people think job satisfaction is more important than job security. Discuss both views and give your opinion.",
+    guide: "核心：工作的稳定性和意义感哪个更重要？",
+    viewpoint: "稳定性是基础，但满意度决定长期表现和心理健康。",
+    phrases: [
+      "provide financial stability",
+      "increase long-term motivation",
+      "lead to burnout",
+      "maintain a healthy work-life balance"
+    ],
+    mainIdeas: [
+      "思路一：工作稳定性更重要，因为它保证收入、安全感和基本生活。",
+      "思路二：工作满意度也重要，因为它影响长期动力、心理健康和职业发展。"
+    ],
+    chain: "观点: 两者都重要 -> 原因: 收入稳定满足基本需求 -> 影响: 满意度影响动力和长期发展 -> 例子: 稳定但无意义的工作可能导致 burnout -> 回扣: 最好根据人生阶段平衡。",
+    teaching: "教学重点：工作题适合写 realistic trade-off。"
+  },
+  family: {
+    name: "7. 家庭、儿童与社会 Family",
+    branches: ["父母与学校责任", "儿童成长", "老龄化", "代际关系", "性别角色", "社区关系"],
+    vocab: ["parental guidance", "child development", "ageing population", "social responsibility", "community ties"],
+    question: "Some people think parents should teach children how to be good members of society. Others believe schools should do this. Discuss both views and give your opinion.",
+    guide: "核心：价值观教育主要来自家庭还是学校？",
+    viewpoint: "家庭影响早期价值观，学校提供社会规则和集体环境，两者缺一不可。",
+    phrases: [
+      "shape children's values",
+      "provide parental guidance",
+      "learn social rules",
+      "develop a sense of responsibility"
+    ],
+    mainIdeas: [
+      "思路一：父母更重要，因为孩子最早从家庭中学习行为习惯和价值观。",
+      "思路二：学校也重要，因为学校提供集体环境，让孩子学习合作、规则和社会责任。"
+    ],
+    chain: "观点: 家庭和学校共同负责 -> 原因: 家庭塑造习惯，学校提供社会化环境 -> 影响: 儿童既有道德基础也懂公共规则 -> 例子: 父母教诚实，学校训练合作 -> 回扣: 好公民教育需要双重支持。",
+    teaching: "教学重点：家庭题常连接教育、社会责任和儿童发展。"
+  },
+  crime: {
+    name: "8. 犯罪与法律 Crime",
+    branches: ["犯罪原因", "惩罚与改造", "青少年犯罪", "监狱作用", "监控技术", "社会预防"],
+    vocab: ["rehabilitation", "deterrence", "juvenile crime", "surveillance", "social prevention"],
+    question: "Some people think criminals should be punished, while others believe they should be rehabilitated. Discuss both views and give your opinion.",
+    guide: "核心：惩罚是为了报应、威慑，还是减少再犯？",
+    viewpoint: "严重犯罪需要惩罚，但多数情况下改造更能减少长期犯罪率。",
+    phrases: [
+      "reduce the risk of reoffending",
+      "act as a deterrent",
+      "offer rehabilitation programmes",
+      "address the root causes of crime"
+    ],
+    mainIdeas: [
+      "思路一：惩罚有必要，因为它能体现法律后果，并威慑潜在犯罪者。",
+      "思路二：改造更有长期价值，因为教育和职业培训能减少再次犯罪。"
+    ],
+    chain: "观点: 改造应成为重点 -> 原因: 很多犯罪来自教育和就业缺失 -> 影响: 技能训练降低再犯率 -> 例子: 监狱课程帮助犯人重新就业 -> 回扣: 社会安全来自减少重复犯罪。",
+    teaching: "教学重点：犯罪题要区分 punishment, deterrence, rehabilitation。"
+  },
+  cities: {
+    name: "9. 城市、住房与交通 Cities",
+    branches: ["城市化", "住房短缺", "城乡差距", "公共交通", "交通拥堵", "城市规划"],
+    vocab: ["urbanization", "housing shortage", "public transport", "traffic congestion", "urban planning"],
+    question: "In many cities, traffic congestion is becoming a serious problem. What are the causes and what solutions can be taken?",
+    guide: "核心：交通拥堵来自个人选择，还是城市规划问题？",
+    viewpoint: "拥堵通常由城市扩张、私家车依赖和公共交通不足共同造成。",
+    phrases: [
+      "reduce dependence on private cars",
+      "improve public transport networks",
+      "ease traffic congestion",
+      "make commuting more efficient"
+    ],
+    mainIdeas: [
+      "思路一：拥堵的原因是城市扩张和私家车依赖，很多人没有好的替代交通方式。",
+      "思路二：解决办法是改善公共交通和城市规划，让人们更愿意少开车。"
+    ],
+    chain: "观点: 改善公共交通是关键 -> 原因: 人们开车是因为替代选择差 -> 影响: 可靠交通能减少私家车使用 -> 例子: 地铁和公交专用道提升通勤效率 -> 回扣: 解决拥堵要改变出行结构。",
+    teaching: "教学重点：城市题适合写 cause + solution，逻辑要具体。"
+  },
+  culture: {
+    name: "10. 文化、媒体、旅游与全球化 Culture",
+    branches: ["传统文化保护", "艺术价值", "广告消费", "新闻娱乐", "国际旅游", "全球文化趋同"],
+    vocab: ["cultural identity", "heritage", "consumerism", "mass media", "globalisation"],
+    question: "In many countries, traditional customs are disappearing. Is this a positive or negative development?",
+    guide: "核心：传统是限制，还是身份认同和社会连接？",
+    viewpoint: "有意义的传统应被保留，但限制个人自由的传统可以被调整。",
+    phrases: [
+      "preserve cultural identity",
+      "strengthen social cohesion",
+      "adapt to modern values",
+      "maintain a sense of belonging"
+    ],
+    mainIdeas: [
+      "思路一：传统应该保留，因为它连接家庭、语言、节日和身份认同。",
+      "思路二：传统也需要更新，如果某些传统限制个人自由，就应该适应现代价值观。"
+    ],
+    chain: "观点: 有价值的传统不应消失 -> 原因: 它连接家庭、语言和社区记忆 -> 影响: 人们获得身份认同和归属感 -> 例子: 节日保留食物、故事和家庭仪式 -> 回扣: 现代化不等于抹掉文化。",
+    teaching: "教学重点：抽象题先定义关键词，不要空谈 tradition。"
+  }
+};
+
+const exerciseBank = {
+  education: {
+    matching: [
+      ["curriculum", "课程设置"],
+      ["employability", "就业能力"],
+      ["equal access", "公平获得机会"]
+    ],
+    cloze: {
+      sentence: "Digital platforms can ____ high-quality educational resources to students in remote areas.",
+      answer: "give access to"
+    },
+    dictation: {
+      chinese: "默写：学校可以增加实践技能，但不应削弱学术科目。",
+      answer: "Schools can include more practical skills, but they should not weaken academic subjects."
+    }
+  },
+  technology: {
+    matching: [
+      ["automation", "自动化"],
+      ["privacy", "隐私"],
+      ["digital literacy", "数字素养"]
+    ],
+    cloze: {
+      sentence: "Online tools can ____ students to study at their own pace.",
+      answer: "enable"
+    },
+    dictation: {
+      chinese: "默写：科技只有在支持主动思考时才真正改善学习。",
+      answer: "Technology improves learning only when it supports active thinking."
+    }
+  },
+  government: {
+    matching: [
+      ["public funding", "公共资金"],
+      ["regulation", "监管"],
+      ["welfare", "福利"]
+    ],
+    cloze: {
+      sentence: "Governments should ____ public money according to social needs.",
+      answer: "allocate"
+    },
+    dictation: {
+      chinese: "默写：公共服务应该优先，因为它们影响人们的基本生活。",
+      answer: "Public services should be prioritized because they affect people's basic living standards."
+    }
+  },
+  environment: {
+    matching: [
+      ["sustainability", "可持续性"],
+      ["carbon emissions", "碳排放"],
+      ["consumer behavior", "消费行为"]
+    ],
+    cloze: {
+      sentence: "Stricter rules can reduce ____ and encourage cleaner production.",
+      answer: "carbon emissions"
+    },
+    dictation: {
+      chinese: "默写：环境改善需要制度改变和个人参与。",
+      answer: "Environmental improvement requires both systemic change and individual participation."
+    }
+  },
+  health: {
+    matching: [
+      ["obesity", "肥胖"],
+      ["mental health", "心理健康"],
+      ["preventive measures", "预防措施"]
+    ],
+    cloze: {
+      sentence: "Public campaigns can encourage people to take ____ before health problems become serious.",
+      answer: "preventive measures"
+    },
+    dictation: {
+      chinese: "默写：公共健康不能只依赖个人自律。",
+      answer: "Public health cannot rely only on individual self-discipline."
+    }
+  },
+  work: {
+    matching: [
+      ["job satisfaction", "工作满意度"],
+      ["financial stability", "经济稳定"],
+      ["burnout", "职业倦怠"]
+    ],
+    cloze: {
+      sentence: "A stable income gives employees a sense of ____.",
+      answer: "financial stability"
+    },
+    dictation: {
+      chinese: "默写：稳定性是基础，但满意度影响长期表现。",
+      answer: "Security is the foundation, but satisfaction affects long-term performance."
+    }
+  },
+  family: {
+    matching: [
+      ["parental guidance", "父母引导"],
+      ["child development", "儿童发展"],
+      ["community ties", "社区联系"]
+    ],
+    cloze: {
+      sentence: "Schools provide a social environment where children learn rules and ____.",
+      answer: "cooperation"
+    },
+    dictation: {
+      chinese: "默写：家庭和学校都应该参与儿童价值观教育。",
+      answer: "Both families and schools should be involved in children's moral education."
+    }
+  },
+  crime: {
+    matching: [
+      ["rehabilitation", "改造"],
+      ["deterrence", "威慑"],
+      ["juvenile crime", "青少年犯罪"]
+    ],
+    cloze: {
+      sentence: "Education and job training can reduce the risk of ____.",
+      answer: "reoffending"
+    },
+    dictation: {
+      chinese: "默写：改造比单纯惩罚更能减少再次犯罪。",
+      answer: "Rehabilitation can reduce reoffending more effectively than punishment alone."
+    }
+  },
+  cities: {
+    matching: [
+      ["urbanization", "城市化"],
+      ["traffic congestion", "交通拥堵"],
+      ["urban planning", "城市规划"]
+    ],
+    cloze: {
+      sentence: "Reliable public transport can reduce people's ____ on private cars.",
+      answer: "dependence"
+    },
+    dictation: {
+      chinese: "默写：解决拥堵需要改变人们的出行结构。",
+      answer: "Solving congestion requires changing the way people travel."
+    }
+  },
+  culture: {
+    matching: [
+      ["cultural identity", "文化身份"],
+      ["heritage", "遗产"],
+      ["consumerism", "消费主义"]
+    ],
+    cloze: {
+      sentence: "Traditional festivals help preserve a sense of ____.",
+      answer: "cultural identity"
+    },
+    dictation: {
+      chinese: "默写：现代化不应该意味着抹掉有价值的传统。",
+      answer: "Modernization should not mean erasing valuable traditions."
+    }
+  }
+};
+
+const nativePhraseBank = [
+  { topic: "education", en: "sth. be an arduous process", zh: "某事是一个需要付出艰苦努力的过程", definition: "a tiring process that requires a great deal of effort" },
+  { topic: "education", en: "be very rewarding", zh: "有回报的", definition: "making someone feel satisfied" },
+  { topic: "education", en: "someone's aspiration/pursuit", zh: "梦想，追求", definition: "someone's strong wish for achievement" },
+  { topic: "education", en: "concentrate on sth.", zh: "集中精力于某事", definition: "direct someone's attention towards sth." },
+  { topic: "education", en: "form the basis of sth.", zh: "为某事物打下基础", definition: "provide the ideas or actions from which sth. can develop" },
+  { topic: "work", en: "job security", zh: "工作稳定性", definition: "being free from the threat of losing one's job" },
+  { topic: "work", en: "be unemployed", zh: "失业的", definition: "be without a job" },
+  { topic: "work", en: "job satisfaction", zh: "工作满意度", definition: "the pleasant feeling you get from a job" },
+  { topic: "work", en: "be entitled to sth.", zh: "享有某种权利", definition: "be given the right to do sth." },
+  { topic: "work", en: "a sense of fulfilment", zh: "成就感", definition: "the feeling that your abilities and interests are developed" },
+  { topic: "technology", en: "become widely available", zh: "得到广泛的普及", definition: "can be easily obtained or used" },
+  { topic: "technology", en: "break new ground", zh: "开拓新的领域", definition: "do something completely different from what has been done before" },
+  { topic: "technology", en: "scientific breakthroughs", zh: "科学上的新突破", definition: "a scientific discovery or achievement" },
+  { topic: "technology", en: "the advent of sth.", zh: "某种新科技、新产品或新制度的到来", definition: "the introduction of new technology, product or system" },
+  { topic: "technology", en: "supersede / supplant sth.", zh: "取代过去的某种事物", definition: "replace something, often by being more powerful" },
+  { topic: "government", en: "play a regulatory role", zh: "发挥监管者的作用", definition: "control an activity, process or industry" },
+  { topic: "government", en: "regulate and oversee", zh: "监督管理，监管", definition: "watch and control something to ensure it works properly" },
+  { topic: "government", en: "rules and regulations", zh: "规章制度", definition: "official rules that control the way things are done" },
+  { topic: "government", en: "impose a ban on sth.", zh: "禁止某事物", definition: "officially order that sth. should be forbidden" },
+  { topic: "government", en: "impose a burden on sb./sth.", zh: "给某人或事物造成负担", definition: "have a negative effect by causing trouble" },
+  { topic: "environment", en: "dispose of sth.", zh: "处理掉，扔掉", definition: "get rid of sth. that you no longer need" },
+  { topic: "environment", en: "disposable...", zh: "一次性的用品", definition: "designed to be thrown away after being used once" },
+  { topic: "environment", en: "vicious circle", zh: "恶性循环", definition: "a situation in which one problem causes another" },
+  { topic: "environment", en: "adverse effect", zh: "负面影响", definition: "negative effect" },
+  { topic: "environment", en: "non-biodegradable material", zh: "生物不可降解的材料", definition: "material that cannot be broken down naturally" },
+  { topic: "health", en: "life expectancy", zh: "人口的预期寿命", definition: "the number of years a person is expected to live" },
+  { topic: "health", en: "extend life", zh: "延长寿命", definition: "make people live longer" },
+  { topic: "health", en: "be health-conscious", zh: "注重健康的", definition: "concerned about nutrition and healthy habits" },
+  { topic: "health", en: "an exercise regimen", zh: "健身计划", definition: "a programme of exercise for improving health" },
+  { topic: "health", en: "an allergy to sth.", zh: "对某种物质的过敏", definition: "a medical condition caused by something eaten, touched or breathed" },
+  { topic: "crime", en: "law-abiding citizens", zh: "遵纪守法的公民", definition: "people who respect and obey the law" },
+  { topic: "crime", en: "the judicial system", zh: "司法系统", definition: "the system connected with courts, judges and legal decisions" },
+  { topic: "crime", en: "pass new legislation", zh: "通过新的立法", definition: "pass a new law or a set of new laws" },
+  { topic: "crime", en: "uphold an ordered society", zh: "维持社会稳定与安全", definition: "keep social order and safety" },
+  { topic: "crime", en: "curb lawless behaviour", zh: "遏制违法行为", definition: "stop or control illegal conduct" },
+  { topic: "culture", en: "multicultural society", zh: "多元文化社会", definition: "a society with many different customs and beliefs" },
+  { topic: "culture", en: "cultural mosaic", zh: "多元的文化", definition: "a culture made up of many different things" },
+  { topic: "culture", en: "disseminate", zh: "传播信息或知识", definition: "make information or knowledge available to many people" },
+  { topic: "culture", en: "mainstream", zh: "主流的", definition: "accepted by most people as ordinary or normal" },
+  { topic: "culture", en: "be customary", zh: "按惯例做某事", definition: "usual in a particular society or situation" },
+  { topic: "family", en: "sth. runs in the family", zh: "在家族中世代相传", definition: "occur often in the family through generations" },
+  { topic: "family", en: "be hereditary", zh: "是遗传的", definition: "be passed through the genes of a parent to a child" },
+  { topic: "family", en: "someone's attachment to sb./sth.", zh: "对某人或事物的依恋", definition: "the feeling of liking sb./sth. very much" },
+  { topic: "family", en: "be estranged from sb.", zh: "与亲友疏远的", definition: "not seeing friends or relatives very often" },
+  { topic: "family", en: "family bonds", zh: "亲情，亲人间的感情纽带", definition: "a uniting force between family members" },
+  { topic: "cities", en: "transport infrastructure", zh: "交通设施", definition: "the basic structure on which a transport system is built" },
+  { topic: "cities", en: "road network", zh: "公路网", definition: "a large road system consisting of connected roads" },
+  { topic: "cities", en: "traffic bottleneck", zh: "交通瓶颈", definition: "a place where a road is narrow or blocked" },
+  { topic: "cities", en: "inch along", zh: "极为缓慢地行进", definition: "move very slowly" },
+  { topic: "cities", en: "bumper-to-bumper", zh: "交通十分拥堵的", definition: "very close together and moving slowly" }
+];
+
+const defaultState = {
+  course: "task2",
+  activeView: "course-system",
+  topic: "education",
+  stage: "stage1",
+  module: "foundation-grammar",
+  sidebarCollapsed: false,
+  phraseMode: "match",
+  phraseRound: [],
+  phraseAnswers: {},
+  phraseFeedback: "",
+  phraseStats: { correct: 0, total: 0 },
+  branchNote: "",
+  vocabulary: "",
+  angles: "",
+  argumentChain: "",
+  reflection: "",
+  savedNote: "",
+  feedback: "",
+  matchingAnswers: {},
+  clozeAnswer: "",
+  dictationAnswer: "",
+  exerciseFeedback: {}
+};
+
+let state = loadState();
+
+const fields = ["branchNote", "vocabulary", "angles", "argumentChain", "reflection"];
+
+function loadState() {
+  try {
+    return { ...defaultState, ...JSON.parse(localStorage.getItem(storageKey)) };
+  } catch {
+    return { ...defaultState };
+  }
+}
+
+function saveState() {
+  localStorage.setItem(storageKey, JSON.stringify(state));
+}
+
+function setActiveView(viewId, shouldScroll = true) {
+  state.activeView = viewId;
+  saveState();
+  applyState();
+  if (shouldScroll) {
+    document.querySelector(`#${viewId}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function renderVisiblePanels() {
+  document.querySelectorAll(".content > .panel").forEach((panel) => {
+    panel.hidden = panel.id !== state.activeView;
+  });
+  document.querySelectorAll(".utility-nav a").forEach((link) => {
+    link.classList.toggle("active", link.getAttribute("href") === `#${state.activeView}`);
+  });
+}
+
+function getCurrentPhase() {
+  return coursePhases.find((phase) => phase.id === state.stage) || coursePhases[0];
+}
+
+function getCurrentModule() {
+  const phase = getCurrentPhase();
+  return phase.modules.find((module) => module.id === state.module) || phase.modules[0];
+}
+
+function setStage(stageId) {
+  const phase = coursePhases.find((item) => item.id === stageId) || coursePhases[0];
+  state.stage = phase.id;
+  state.module = phase.modules[0].id;
+  state.activeView = "course-system";
+  saveState();
+  applyState();
+  document.querySelector("#course-system").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function setModule(moduleId) {
+  state.module = moduleId;
+  state.activeView = "course-system";
+  saveState();
+  applyState();
+  document.querySelector("#course-system").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function renderCourseNavigation() {
+  document.querySelector("#sidebarCourseTree").innerHTML = coursePhases.map((phase) => `
+    <div class="course-tree-stage ${phase.id === state.stage ? "open" : ""}">
+      <button type="button" class="topic-nav-button stage-toggle ${phase.id === state.stage ? "active" : ""}" data-stage-id="${phase.id}">
+        <span>${phase.title}</span>
+        <small>${phase.badge}</small>
+      </button>
+      <div class="course-tree-modules">
+        ${phase.modules.map((module) => `
+          <button type="button" class="module-nav-button ${module.id === state.module ? "active" : ""}" data-module-id="${module.id}">
+            <span>${module.title}</span>
+          </button>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+
+  document.querySelectorAll("[data-stage-id]").forEach((button) => {
+    button.addEventListener("click", () => setStage(button.dataset.stageId));
+  });
+  document.querySelectorAll("[data-module-id]").forEach((button) => {
+    button.addEventListener("click", () => setModule(button.dataset.moduleId));
+  });
+}
+
+function renderCourseSystem() {
+  const phase = getCurrentPhase();
+  const module = getCurrentModule();
+  document.querySelector("#courseModuleDetail").innerHTML = `
+    <div class="module-title-row">
+      <div>
+        <p class="eyebrow">${phase.title}</p>
+        <h3>${module.title}</h3>
+      </div>
+      <span class="method-badge">${phase.badge}</span>
+    </div>
+    <div class="module-focus">
+      <article><strong>教学目标</strong><p>${module.goal}</p></article>
+      <article><strong>适合学生</strong><p>${module.students}</p></article>
+    </div>
+    <div class="course-detail-grid compact-detail-grid">
+      ${renderCourseBlock("核心知识点", module.knowledge)}
+      ${renderCourseBlock("课堂讲法", [module.lecture])}
+      ${renderCourseBlock("板书结构", [module.board])}
+      ${renderCourseBlock("示例句", module.examples)}
+    </div>
+    <details class="module-more" open>
+      <summary>练习、作业和常见错误</summary>
+      <div class="course-detail-grid">
+        ${renderCourseBlock("学生练习", module.exercises)}
+        ${renderCourseBlock("作业", [module.homework])}
+        ${renderCourseBlock("常见错误", module.errors)}
+        ${renderCourseBlock("后续可补充内容", module.future)}
+      </div>
+    </details>
+    ${module.id === "foundation-grammar" ? renderGrammarMatrix() : ""}
+    ${module.id === "topic-vocabulary" ? renderTopicVocabularyMatrix() : ""}
+    <details class="daily-fill module-more">
+      <summary>每日填充模板</summary>
+      <div class="daily-fill-grid">
+        <label><span>今天补充的例句</span><textarea placeholder="把今天讲到的 Task 2 例句放这里。"></textarea></label>
+        <label><span>学生课堂产出</span><textarea placeholder="记录学生写出的好句、错句或小段落。"></textarea></label>
+        <label><span>下次要补</span><textarea placeholder="记录下一节课要补的主题、句型或错误。"></textarea></label>
+      </div>
+    </details>
+  `;
+}
+
+function renderCourseBlock(title, items) {
+  return `
+    <article class="course-block">
+      <strong>${title}</strong>
+      <ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+    </article>
+  `;
+}
+
+function renderGrammarMatrix() {
+  return `
+    <details class="matrix-panel module-more">
+      <summary>基础语法写作化清单</summary>
+      <div class="grammar-matrix">
+        ${grammarWritingPoints.map(([name, use, example, error, exercise]) => `
+          <article>
+            <span>${name}</span>
+            <p><b>用途</b>${use}</p>
+            <p><b>例句</b>${example}</p>
+            <p><b>错误</b>${error}</p>
+            <p><b>练习</b>${exercise}</p>
+          </article>
+        `).join("")}
+      </div>
+    </details>
+  `;
+}
+
+function renderTopicVocabularyMatrix() {
+  return `
+    <details class="matrix-panel module-more">
+      <summary>10 大主题词汇入口</summary>
+      <div class="topic-vocab-matrix">
+        ${Object.values(task2Topics).map((topic) => `
+          <article>
+            <span>${topic.name}</span>
+            <p><b>核心词汇</b>${topic.vocab.join(" / ")}</p>
+            <p><b>高频搭配</b>${topic.phrases.slice(0, 3).join(" / ")}</p>
+            <p><b>常见观点</b>${topic.mainIdeas[0]}</p>
+            <p><b>造句练习</b>用上面 3 个表达各写 1 个观点句，再扩成 1 个原因句和 1 个结果句。</p>
+          </article>
+        `).join("")}
+      </div>
+    </details>
+  `;
+}
+
+function renderCoursePanel() {
+  const panel = document.querySelector("#coursePanel");
+  if (state.course === "task1") {
+    panel.innerHTML = `
+      <div class="module-grid">
+        ${task1Modules.map((item) => `
+          <article class="mini-card">
+            <strong>${item.title}</strong>
+            <p>${item.detail}</p>
+          </article>
+        `).join("")}
+      </div>
+    `;
+  } else {
+    panel.innerHTML = `
+      <div class="course-summary">
+        <strong>Task 2 大作文</strong>
+        <p>核心顺序：评分标准 -> ABC审题 -> 题型分类 -> 两个主体段思路 -> 语言准确度。</p>
+        <p>当前练习：先选话题看题目和好词好句，再用中文 main 思路带动英文主体段输出。</p>
+      </div>
+    `;
+  }
+
+  document.querySelectorAll(".course-tab").forEach((button) => {
+    button.classList.toggle("active", button.dataset.course === state.course);
+  });
+}
+
+function renderBookMethod() {
+  document.querySelector("#bookMethodGrid").innerHTML = bookMethodModules.map((module) => `
+    <article class="method-card">
+      <span class="method-badge">${module.badge}</span>
+      <strong>${module.title}</strong>
+      <ul>
+        ${module.points.map((point) => `<li>${point}</li>`).join("")}
+      </ul>
+      <p>${module.practice}</p>
+    </article>
+  `).join("");
+}
+
+function renderTopicGrid() {
+  const grid = document.querySelector("#topicGrid");
+  grid.innerHTML = Object.entries(task2Topics).map(([key, topic]) => `
+    <article class="topic-card ${key === state.topic ? "selected" : ""}" data-topic-card="${key}">
+      <strong>${topic.name}</strong>
+      <div class="topic-columns">
+        <span><b>常见分支</b>${topic.branches.join(" / ")}</span>
+        <span><b>核心词汇</b>${topic.vocab.join(" / ")}</span>
+        <span><b>两个思路</b>${topic.mainIdeas.join(" | ")}</span>
+        <span><b>练习题</b>${topic.question}</span>
+      </div>
+    </article>
+  `).join("");
+
+  document.querySelectorAll("[data-topic-card]").forEach((card) => {
+    card.addEventListener("click", () => {
+      state.topic = card.dataset.topicCard;
+      state.activeView = "practice";
+      saveState();
+      applyState();
+      document.querySelector("#practice").scrollIntoView({ behavior: "smooth" });
+    });
+  });
+}
+
+function renderTopicSelect() {
+  document.querySelector("#sidebarTopicList").innerHTML = Object.entries(task2Topics).map(([key, topic]) => `
+    <button type="button" class="topic-nav-button ${key === state.topic ? "active" : ""}" data-sidebar-topic="${key}">
+      <span>${topic.name}</span>
+      <small>${topic.branches.slice(0, 2).join(" / ")}</small>
+    </button>
+  `).join("");
+
+  document.querySelectorAll("[data-sidebar-topic]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.topic = button.dataset.sidebarTopic;
+      state.matchingAnswers = {};
+      state.clozeAnswer = "";
+      state.dictationAnswer = "";
+      state.exerciseFeedback = {};
+      state.phraseRound = [];
+      state.phraseAnswers = {};
+      state.phraseFeedback = "已跟随左侧话题切换，系统会生成新的词组练习。";
+      state.activeView = "practice";
+      saveState();
+      applyState();
+      document.querySelector("#practice").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
+function renderPractice() {
+  const topic = task2Topics[state.topic];
+  document.querySelector("#topicName").textContent = topic.name;
+  document.querySelector("#questionText").textContent = topic.question;
+  document.querySelector("#questionGuide").textContent = topic.guide;
+  document.querySelector("#coachTip").textContent = topic.teaching;
+  renderTopicResources(topic);
+}
+
+function renderTopicResources(topic) {
+  document.querySelector("#topicResourcePanel").innerHTML = `
+    <div class="resource-grid">
+      <article class="resource-card">
+        <strong>这题可用好词好句</strong>
+        <ul>
+          ${topic.phrases.map((phrase) => `<li>${phrase}</li>`).join("")}
+        </ul>
+      </article>
+      <article class="resource-card">
+        <strong>两个 main 思路（中文）</strong>
+        <ol>
+          ${topic.mainIdeas.map((idea) => `<li>${idea}</li>`).join("")}
+        </ol>
+      </article>
+    </div>
+  `;
+}
+
+function renderInteractiveDrills() {
+  const exercise = exerciseBank[state.topic];
+  const meanings = exercise.matching.map((pair) => pair[1]).sort();
+  document.querySelector("#matchingRows").innerHTML = exercise.matching.map(([term], index) => `
+    <label class="match-row">
+      <span>${term}</span>
+      <select data-match-index="${index}">
+        <option value="">选择中文含义</option>
+        ${meanings.map((meaning) => `<option value="${meaning}">${meaning}</option>`).join("")}
+      </select>
+    </label>
+  `).join("");
+
+  document.querySelectorAll("[data-match-index]").forEach((select) => {
+    select.value = state.matchingAnswers[select.dataset.matchIndex] || "";
+    select.addEventListener("change", (event) => {
+      state.matchingAnswers[event.target.dataset.matchIndex] = event.target.value;
+      saveState();
+    });
+  });
+
+  document.querySelector("#clozeSentence").textContent = exercise.cloze.sentence;
+  document.querySelector("#clozeInput").value = state.clozeAnswer || "";
+  document.querySelector("#dictationChinese").textContent = exercise.dictation.chinese;
+  document.querySelector("#dictationInput").value = state.dictationAnswer || "";
+  renderExerciseFeedback();
+}
+
+function getPhrasePool() {
+  const topicPool = nativePhraseBank.filter((item) => item.topic === state.topic);
+  return topicPool.length ? topicPool : nativePhraseBank;
+}
+
+function shuffleItems(items) {
+  return [...items].sort(() => Math.random() - 0.5);
+}
+
+function startPhraseRound() {
+  const pool = getPhrasePool();
+  const size = state.phraseMode === "match" ? 6 : 5;
+  state.phraseRound = shuffleItems(pool).slice(0, size).map((item) => nativePhraseBank.indexOf(item));
+  state.phraseAnswers = {};
+  state.phraseFeedback = "新一组题已生成。完成后点击“检查本轮”。";
+  saveState();
+  renderPhraseDrill();
+}
+
+function renderPhraseDrill() {
+  document.querySelector("#phraseTopicName").textContent = task2Topics[state.topic]?.name || "当前话题";
+
+  document.querySelectorAll(".phrase-mode").forEach((button) => {
+    button.classList.toggle("active", button.dataset.phraseMode === state.phraseMode);
+  });
+
+  if (!state.phraseRound.length) {
+    startPhraseRound();
+    return;
+  }
+
+  const roundItems = state.phraseRound.map((index) => nativePhraseBank[index]).filter(Boolean);
+  const round = document.querySelector("#phraseRound");
+
+  if (state.phraseMode === "match") {
+    const meanings = shuffleItems(roundItems.map((item) => item.zh));
+    round.innerHTML = roundItems.map((item, index) => `
+      <label class="phrase-item">
+        <span class="phrase-en">${item.en}</span>
+        <small>${item.definition || "根据中文意思判断这个表达的用法。"}</small>
+        <select data-phrase-answer="${index}">
+          <option value="">选择中文含义</option>
+          ${meanings.map((meaning) => `<option value="${meaning}">${meaning}</option>`).join("")}
+        </select>
+      </label>
+    `).join("");
+  } else {
+    round.innerHTML = roundItems.map((item, index) => `
+      <label class="phrase-item">
+        <span class="phrase-zh">${index + 1}. ${item.zh}</span>
+        <small>${state.phraseMode === "dictation" ? item.definition || "根据中文提示默写完整英文表达。" : "输入对应英文词组。"}</small>
+        ${state.phraseMode === "dictation"
+          ? `<textarea data-phrase-answer="${index}" placeholder="默写英文表达，例如：${item.en.split(" ")[0]} ..."></textarea>`
+          : `<input data-phrase-answer="${index}" type="text" placeholder="输入英文词组">`}
+      </label>
+    `).join("");
+  }
+
+  document.querySelectorAll("[data-phrase-answer]").forEach((input) => {
+    input.value = state.phraseAnswers[input.dataset.phraseAnswer] || "";
+    input.addEventListener("input", (event) => {
+      state.phraseAnswers[event.target.dataset.phraseAnswer] = event.target.value;
+      saveState();
+    });
+    input.addEventListener("change", (event) => {
+      state.phraseAnswers[event.target.dataset.phraseAnswer] = event.target.value;
+      saveState();
+    });
+  });
+
+  renderPhraseStats();
+}
+
+function normalizePhraseAnswer(value) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[.,!?。！？]/g, "")
+    .replace(/\s*\/\s*/g, "/")
+    .replace(/\s+/g, " ");
+}
+
+function isPhraseCorrect(actual, expected) {
+  const normalizedActual = normalizePhraseAnswer(actual);
+  const normalizedExpected = normalizePhraseAnswer(expected);
+  const alternatives = normalizedExpected.split("/").map((part) => part.trim()).filter(Boolean);
+  return normalizedActual === normalizedExpected || alternatives.includes(normalizedActual);
+}
+
+function checkPhraseRound() {
+  const roundItems = state.phraseRound.map((index) => nativePhraseBank[index]).filter(Boolean);
+  const results = roundItems.map((item, index) => {
+    const answer = state.phraseAnswers[index] || "";
+    const correct = state.phraseMode === "match" ? answer === item.zh : isPhraseCorrect(answer, item.en);
+    return { item, answer, correct };
+  });
+  const correctCount = results.filter((result) => result.correct).length;
+  state.phraseStats.correct += correctCount;
+  state.phraseStats.total += results.length;
+  state.phraseFeedback = [
+    `本轮：${correctCount} / ${results.length} 正确。`,
+    ...results
+      .filter((result) => !result.correct)
+      .slice(0, 3)
+      .map((result) => `再记一下：${result.item.zh} = ${result.item.en}`)
+  ].join(" ");
+  saveState();
+  renderPhraseStats();
+}
+
+function renderPhraseStats() {
+  const total = state.phraseStats.total || 0;
+  const correct = state.phraseStats.correct || 0;
+  const accuracy = total ? Math.round((correct / total) * 100) : 0;
+  document.querySelector("#phraseAccuracy").textContent = `正确率 ${accuracy}% · ${correct}/${total}`;
+  document.querySelector("#phraseFeedback").textContent = state.phraseFeedback || "选择话题和模式后开始练习。";
+}
+
+function updateProgress() {
+  const progressText = document.querySelector("#progressText");
+  const progressBar = document.querySelector("#progressBar");
+  if (!progressText || !progressBar) return;
+  progressText.textContent = "实时查看";
+  progressBar.style.width = "100%";
+}
+
+function renderSavedNote() {
+  document.querySelector("#savedNote").textContent = state.savedNote || "还没有保存练习。";
+}
+
+function renderFeedback() {
+  document.querySelector("#instantFeedback").innerHTML = state.feedback || "<strong>学习反馈</strong><p>完成练习后点击“生成学习反馈”，这里会告诉你下一步该补什么。</p>";
+}
+
+function renderExerciseFeedback() {
+  document.querySelector("#matchingResult").textContent = state.exerciseFeedback.matching || "请选择每个词的中文含义。";
+  document.querySelector("#clozeResult").textContent = state.exerciseFeedback.cloze || "注意大小写不重要，但拼写要准确。";
+  document.querySelector("#dictationResult").textContent = state.exerciseFeedback.dictation || "尽量写完整观点句，不只是关键词。";
+}
+
+function applyState() {
+  document.body.classList.toggle("sidebar-collapsed", Boolean(state.sidebarCollapsed));
+  document.querySelector("#sidebarToggle").setAttribute("aria-expanded", String(!state.sidebarCollapsed));
+  document.querySelector(".toggle-text").textContent = state.sidebarCollapsed ? "显示侧栏" : "隐藏侧栏";
+  renderCourseNavigation();
+  renderCourseSystem();
+  renderCoursePanel();
+  renderBookMethod();
+  renderTopicGrid();
+  renderTopicSelect();
+  renderPractice();
+  renderInteractiveDrills();
+  renderPhraseDrill();
+  renderFeedback();
+  renderSavedNote();
+  updateProgress();
+  renderVisiblePanels();
+
+  fields.forEach((id) => {
+    document.querySelector(`#${id}`).value = state[id] || "";
+  });
+
+}
+
+function normalizeAnswer(value) {
+  return value.trim().toLowerCase().replace(/[.!?。！？]/g, "").replace(/\s+/g, " ");
+}
+
+function checkMatchingAnswers() {
+  const exercise = exerciseBank[state.topic];
+  const correct = exercise.matching.filter(([, meaning], index) => state.matchingAnswers[index] === meaning).length;
+  state.exerciseFeedback.matching = `配对结果：${correct} / ${exercise.matching.length} 正确。`;
+  saveState();
+  renderExerciseFeedback();
+}
+
+function checkClozeAnswers() {
+  const expected = normalizeAnswer(exerciseBank[state.topic].cloze.answer);
+  const actual = normalizeAnswer(state.clozeAnswer);
+  state.exerciseFeedback.cloze = actual === expected ? "填空正确。这个表达可以放进你的表达库。" : `还不对。提示：答案是 ${exerciseBank[state.topic].cloze.answer}。`;
+  saveState();
+  renderExerciseFeedback();
+}
+
+function checkDictationAnswer() {
+  const expected = normalizeAnswer(exerciseBank[state.topic].dictation.answer);
+  const actual = normalizeAnswer(state.dictationAnswer);
+  const expectedWords = expected.split(" ");
+  const matched = expectedWords.filter((word) => actual.includes(word)).length;
+  const score = Math.round((matched / expectedWords.length) * 100);
+  state.exerciseFeedback.dictation = score >= 75 ? `默写基本合格，相似度约 ${score}%。可以再检查语法和拼写。` : `默写还需要补。参考句：${exerciseBank[state.topic].dictation.answer}`;
+  saveState();
+  renderExerciseFeedback();
+}
+
+function buildFeedback() {
+  const advice = [];
+  const vocabCount = state.vocabulary.split(/[,，、\n]/).map((item) => item.trim()).filter(Boolean).length;
+  const topic = task2Topics[state.topic];
+
+  if (!state.branchNote.trim()) advice.push("先从上面的两个中文 main 思路里选一个。");
+  if (vocabCount < 2) advice.push("至少选 2 个上方好词好句，并尝试写成自己的句子。");
+  if (state.angles.trim().length < 30) advice.push("中文展开逻辑还不够：补充原因、结果或例子。");
+  if (state.argumentChain.trim().length < 80) advice.push("英文主体段草稿还太短，建议写到 80 词以上。");
+  if (!state.reflection.trim()) advice.push("最后写一句修改记录：哪句话最需要改？");
+  if (advice.length === 0) advice.push(`这次 ${topic.name} 练习结构完整。下一步可以扩写成 120-150 词主体段。`);
+
+  state.feedback = `<strong>学习反馈</strong><ul>${advice.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+  saveState();
+  renderFeedback();
+}
+
+function fillModel() {
+  const topic = task2Topics[state.topic];
+  state.branchNote = topic.mainIdeas[0];
+  state.vocabulary = topic.phrases.slice(0, 3).join("\n");
+  state.angles = `原因：${topic.guide}\n结果：这个观点能解释学生/社会/政府为什么会受到影响。\n例子：可以用学校课程、公共服务或个人选择来举例。`;
+  state.argumentChain = topic.chain;
+  state.reflection = "修改重点：把中文思路转成英文时，注意不要只堆词，要写清楚 cause and effect。";
+  state.feedback = `<strong>示范素材已填入</strong><p>你可以直接在示范基础上改写成自己的主体段。</p>`;
+  saveState();
+  applyState();
+}
+
+function savePractice() {
+  const topic = task2Topics[state.topic];
+  state.savedNote = [
+    `IELTS Writing Lab - ${topic.name}`,
+    "",
+    `题目：${topic.question}`,
+    `选择的 main 思路：${state.branchNote || "-"}`,
+    "",
+    "使用的好词好句：",
+    state.vocabulary || "-",
+    "",
+    "中文展开逻辑：",
+    state.angles || "-",
+    "",
+    "英文主体段草稿：",
+    state.argumentChain || "-",
+    "",
+    "修改记录：",
+    state.reflection || "-"
+  ].join("\n");
+  saveState();
+  renderSavedNote();
+}
+
+document.querySelectorAll(".course-tab").forEach((button) => {
+  button.addEventListener("click", () => {
+    state.course = button.dataset.course;
+    saveState();
+    renderCoursePanel();
+  });
+});
+
+document.querySelector("#sidebarToggle").addEventListener("click", () => {
+  state.sidebarCollapsed = !state.sidebarCollapsed;
+  saveState();
+  applyState();
+});
+
+document.querySelectorAll(".utility-nav a").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const viewId = link.getAttribute("href").replace("#", "");
+    setActiveView(viewId);
+  });
+});
+
+fields.forEach((id) => {
+  document.querySelector(`#${id}`).addEventListener("input", (event) => {
+    state[id] = event.target.value;
+    saveState();
+  });
+});
+
+document.querySelector("#feedbackBtn").addEventListener("click", buildFeedback);
+document.querySelector("#modelBtn").addEventListener("click", fillModel);
+document.querySelector("#saveBtn").addEventListener("click", savePractice);
+document.querySelector("#copyModuleBtn").addEventListener("click", () => {
+  const phase = getCurrentPhase();
+  const module = getCurrentModule();
+  state.savedNote = [
+    `${phase.title} - ${module.title}`,
+    "",
+    `教学目标：${module.goal}`,
+    `适合学生：${module.students}`,
+    "",
+    `核心知识点：${module.knowledge.join(" / ")}`,
+    `课堂讲法：${module.lecture}`,
+    `板书结构：${module.board}`,
+    "",
+    "示例句：",
+    module.examples.map((item) => `- ${item}`).join("\n"),
+    "",
+    "学生练习：",
+    module.exercises.map((item) => `- ${item}`).join("\n"),
+    "",
+    `作业：${module.homework}`,
+    "",
+    "常见错误：",
+    module.errors.map((item) => `- ${item}`).join("\n"),
+    "",
+    "后续可补充内容：",
+    module.future.map((item) => `- ${item}`).join("\n")
+  ].join("\n");
+  state.activeView = "record";
+  saveState();
+  applyState();
+  renderSavedNote();
+  document.querySelector("#record").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+document.querySelector("#checkMatchingBtn").addEventListener("click", checkMatchingAnswers);
+document.querySelector("#checkClozeBtn").addEventListener("click", checkClozeAnswers);
+document.querySelector("#checkDictationBtn").addEventListener("click", checkDictationAnswer);
+document.querySelector("#checkPhraseRoundBtn").addEventListener("click", checkPhraseRound);
+document.querySelector("#newPhraseRoundBtn").addEventListener("click", startPhraseRound);
+document.querySelectorAll(".phrase-mode").forEach((button) => {
+  button.addEventListener("click", () => {
+    state.phraseMode = button.dataset.phraseMode;
+    state.phraseRound = [];
+    state.phraseAnswers = {};
+    state.phraseFeedback = "已切换练习模式，系统会生成新的练习。";
+    saveState();
+    renderPhraseDrill();
+  });
+});
+document.querySelector("#clozeInput").addEventListener("input", (event) => {
+  state.clozeAnswer = event.target.value;
+  saveState();
+});
+document.querySelector("#dictationInput").addEventListener("input", (event) => {
+  state.dictationAnswer = event.target.value;
+  saveState();
+});
+document.querySelector("#resetBtn").addEventListener("click", () => {
+  const keepCourse = state.course;
+  const keepTopic = state.topic;
+  const keepActiveView = state.activeView;
+  state = { ...defaultState, course: keepCourse, topic: keepTopic, activeView: keepActiveView };
+  saveState();
+  applyState();
+});
+
+applyState();
