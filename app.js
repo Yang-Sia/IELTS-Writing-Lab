@@ -1629,6 +1629,7 @@ const defaultState = {
   module: "foundation-grammar",
   grammarPoint: "svo",
   topicVocab: "government",
+  topicVocabRevealed: {},
   grammarSet: {},
   grammarPractice: {},
   sidebarCollapsed: false,
@@ -2053,6 +2054,10 @@ function getCurrentTopicVocabularyLesson() {
   return topicVocabularyLessons[state.topicVocab] || topicVocabularyLessons.government;
 }
 
+function isTopicVocabRevealed(key) {
+  return Boolean(state.topicVocabRevealed?.[key]);
+}
+
 function renderTopicVocabularyMatrix() {
   const lesson = getCurrentTopicVocabularyLesson();
   const selectedKey = Object.entries(topicVocabularyLessons).find(([, item]) => item === lesson)?.[0] || "government";
@@ -2076,22 +2081,35 @@ function renderTopicVocabularyMatrix() {
         </div>
         <div class="topic-vocab-section">
           <strong>核心词伙</strong>
+          <p class="micro-hint">先看中文，心里想英文；点卡片后再看答案。</p>
           <div class="phrase-chip-grid">
-            ${lesson.chunks.map(([zh, en]) => `
-              <span class="phrase-chip"><b>${zh}</b><em>${en}</em></span>
-            `).join("")}
+            ${lesson.chunks.map(([zh, en], index) => {
+              const revealKey = `${selectedKey}:chunk:${index}`;
+              const revealed = isTopicVocabRevealed(revealKey);
+              return `
+              <button type="button" class="phrase-chip reveal-card ${revealed ? "revealed" : ""}" data-reveal-card="${revealKey}">
+                <b>${zh}</b>
+                <em>${revealed ? en : "点击看英文"}</em>
+              </button>
+            `;
+            }).join("")}
           </div>
         </div>
         <div class="topic-vocab-section">
           <strong>输入句型</strong>
+          <p class="micro-hint">先根据中文和句型功能自己想英文，再点击查看参考句。</p>
           <div class="sentence-pattern-list">
-            ${lesson.sentences.map(([zh, en, note]) => `
-              <article>
+            ${lesson.sentences.map(([zh, en, note], index) => {
+              const revealKey = `${selectedKey}:sentence:${index}`;
+              const revealed = isTopicVocabRevealed(revealKey);
+              return `
+              <button type="button" class="sentence-reveal-card ${revealed ? "revealed" : ""}" data-reveal-card="${revealKey}">
                 <span>${note}</span>
                 <p>${zh}</p>
-                <strong>${en}</strong>
-              </article>
-            `).join("")}
+                <strong>${revealed ? en : "点击查看英文参考句"}</strong>
+              </button>
+            `;
+            }).join("")}
           </div>
         </div>
         <div class="topic-vocab-section">
@@ -2123,6 +2141,19 @@ function bindTopicVocabularyControls() {
   document.querySelectorAll("[data-topic-vocab]").forEach((button) => {
     button.addEventListener("click", () => {
       state.topicVocab = button.dataset.topicVocab;
+      state.topicVocabRevealed = {};
+      saveState();
+      document.querySelector("#courseModuleDetail").innerHTML = renderTopicVocabularyModule();
+      bindTopicVocabularyControls();
+    });
+  });
+  document.querySelectorAll("[data-reveal-card]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const key = card.dataset.revealCard;
+      state.topicVocabRevealed = {
+        ...(state.topicVocabRevealed || {}),
+        [key]: !isTopicVocabRevealed(key)
+      };
       saveState();
       document.querySelector("#courseModuleDetail").innerHTML = renderTopicVocabularyModule();
       bindTopicVocabularyControls();
