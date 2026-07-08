@@ -722,7 +722,7 @@ button.secondary:hover {
 
 .grammar-exercise-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -737,8 +737,25 @@ button.secondary:hover {
   border-radius: 8px;
 }
 
+.grammar-practice-header > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.grammar-practice-header small {
+  color: var(--muted);
+  font-weight: 900;
+}
+
 .grammar-practice-header strong {
   color: var(--accent-dark);
+}
+
+.grammar-set-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .grammar-identify-list {
