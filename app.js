@@ -757,16 +757,16 @@ const coursePhases = [
       {
         id: "topic-vocabulary",
         title: "03 主题词汇",
-        goal: "建立 10 大高频主题的核心词汇、搭配、观点和可迁移表达。",
+        goal: "建立 13 个 Task 2 高频主题的核心词伙、输入句型和可迁移表达。",
         students: "词汇零散、背了不会放进观点句的学生。",
-        knowledge: ["教育", "科技", "环境", "政府", "工作", "健康", "家庭与儿童", "犯罪与法律", "城市与交通", "文化、媒体与全球化"],
-        lecture: "每个主题按照：核心词 -> 高频搭配 -> 常见观点 -> 适配句型 -> 造句练习。",
-        board: "主题 -> 分支 -> 词汇 -> 搭配 -> 观点 -> 句型 -> 输出",
-        examples: ["equal access to education", "stricter environmental regulations", "reduce the risk of reoffending"],
-        exercises: ["每个主题选 5 个词写观点句。", "把中文观点改写成英文观点句。", "用同一表达迁移到两个不同题目。"],
+        knowledge: ["政府", "动物", "工作", "教育", "生活", "科技", "广告媒体", "犯罪", "城市发展", "家庭", "环境", "健康", "语言文化"],
+        lecture: "每个主题按照：核心词伙 -> 输入句型 -> 句型迁移 -> 填空/排序/造句练习。",
+        board: "主题 -> 词伙 -> 例句 -> 句型功能 -> 互动练习 -> 输出句",
+        examples: ["allocate public money according to social needs", "reduce the risk of reoffending", "Exposure to foreign cultures can broaden students' horizons."],
+        exercises: ["每个主题先做词伙识别。", "把输入句型拆成可复用结构。", "用同一表达迁移到一个新题目。"],
         homework: "每天完成 1 个主题：5 个词组默写 + 5 个造句 + 1 个小段落。",
         errors: ["只背单词不背搭配", "中文观点套高级词导致不自然", "一个词不会迁移到不同题目"],
-        future: ["继续导入 Excel 1000 词组", "给每个主题补配对/填空/默写", "补同义替换和易错表达"]
+        future: ["继续给每个主题补真题", "给每个主题补更多配对/填空/默写", "补同义替换和易错表达"]
       },
       {
         id: "opinion-sentences",
@@ -1061,6 +1061,360 @@ const task2Topics = {
   }
 };
 
+const topicVocabularyLessons = {
+  government: {
+    title: "01 政府类",
+    focus: "公共服务、税收、政府责任、公共资金分配。",
+    chunks: [
+      ["公共服务", "public services"],
+      ["征税", "impose taxes"],
+      ["提高公民意识", "raise people's awareness"],
+      ["公民安全与福利", "the security and well-being of citizens"],
+      ["公务员", "civil servants"],
+      ["政府资助", "government grants"],
+      ["纳税人的税务负担", "the tax burden on taxpayers"],
+      ["减轻财政负担", "ease the government's financial burden"],
+      ["充足资金", "sufficient funds"],
+      ["预算赤字", "budget deficit"]
+    ],
+    sentences: [
+      ["公民个人交税是政府收入的重要来源。", "Taxes paid by individual citizens are an important source of government revenue.", "非谓语作后置定语"],
+      ["税收经常被投入到公交、学校和医院等基础设施。", "Tax money is often allocated to infrastructure projects such as improvements to public transport, schools and hospitals.", "被动语态"],
+      ["政府需要财政资源来保证经济和环境的可持续发展。", "Governments need financial resources to ensure sustainable economic and environmental development.", "目的表达"]
+    ],
+    drill: {
+      cloze: "Tax money is often ____ to public services.",
+      answer: "allocated",
+      order: ["should", "public money", "Governments", "allocate", "according to social needs"],
+      orderAnswer: ["Governments", "should", "allocate", "public money", "according to social needs"]
+    }
+  },
+  animals: {
+    title: "02 动物类",
+    focus: "动物实验、素食、野生动物保护、动物伦理。",
+    chunks: [
+      ["科学实验", "scientific research"],
+      ["医疗实验", "medical tests"],
+      ["道德错误", "morally wrong"],
+      ["替代研究方法", "alternative methods of research"],
+      ["素食主义者", "vegetarians"],
+      ["均衡饮食", "a balanced diet"],
+      ["野生动物保护", "wildlife conservation"],
+      ["保护濒危物种", "protect endangered species"],
+      ["自然栖息地", "natural habitats"],
+      ["动物实验", "animal testing / animal experimentation"]
+    ],
+    sentences: [
+      ["动物实验帮助我们提高医疗和科学知识。", "Animal testing helps to advance medical and scientific knowledge.", "因果论证开头"],
+      ["在很多国家，化妆品行业的动物实验已经被禁止。", "Testing for the cosmetics industry is now banned in many countries.", "被动语态"],
+      ["人类没有道德权利进行动物实验，因为动物生命应被尊重。", "Humans have no moral right to do experiments on animals since the lives of animals should be respected.", "since 原因句"]
+    ],
+    drill: {
+      cloze: "Governments should protect ____ instead of keeping animals in artificial environments.",
+      answer: "natural habitats",
+      order: ["should", "be respected", "the lives of animals", "because"],
+      orderAnswer: ["the lives of animals", "should", "be respected", "because"]
+    }
+  },
+  work: {
+    title: "03 工作类",
+    focus: "职业前景、就业保障、工作生活平衡、失业与职业培训。",
+    chunks: [
+      ["好的职业前景", "better job prospects"],
+      ["养老金和医疗保险", "pension and health insurance"],
+      ["体面的收入", "a decent income"],
+      ["公司内部升职", "promotions within the organization"],
+      ["积累工作经验", "accumulate work experience"],
+      ["职业满足感", "job satisfaction"],
+      ["职业指导", "career advice"],
+      ["职业课程", "vocational courses"],
+      ["工作生活平衡", "a work-life balance"],
+      ["灵活工作时间", "flexible working hours"]
+    ],
+    sentences: [
+      ["很多人看重稳定工作，因为它提供养老金和医保。", "Many people value stable jobs because they provide pensions and health insurance.", "because 原因句"],
+      ["职业课程可以帮助年轻人积累实用技能。", "Vocational courses can help young people acquire practical skills.", "观点句"],
+      ["灵活的工作时间能让员工更好地平衡工作和家庭。", "Flexible working hours allow employees to combine work and family commitments more effectively.", "结果句"]
+    ],
+    drill: {
+      cloze: "Flexible working hours help employees achieve a better ____.",
+      answer: "work-life balance",
+      order: ["can", "vocational courses", "employability", "improve"],
+      orderAnswer: ["vocational courses", "can", "improve", "employability"]
+    }
+  },
+  education: {
+    title: "04 教育类",
+    focus: "教育公平、课程设置、留学、线上学习、家庭与学校责任。",
+    chunks: [
+      ["学历", "qualification"],
+      ["赚更高收入", "earn a higher salary"],
+      ["道德观念", "moral values"],
+      ["名牌大学", "prestigious universities"],
+      ["开阔眼界", "broaden students' horizons"],
+      ["语言障碍", "language barrier"],
+      ["远程教育", "distance learning"],
+      ["识字率", "literacy rates"],
+      ["义务教育", "compulsory education"],
+      ["更好就业前景", "better employment prospects"]
+    ],
+    sentences: [
+      ["教育能提高就业前景，并帮助学生对社会作出贡献。", "Education can improve employment prospects and help students contribute positively to society.", "并列观点"],
+      ["留学可以开阔学生眼界，但也可能带来语言障碍。", "Studying abroad can broaden students' horizons, but it may also create language barriers.", "让步对比"],
+      ["政府应该让所有孩子接受义务教育。", "Governments should make education compulsory for all children.", "政策观点句"]
+    ],
+    drill: {
+      cloze: "Studying abroad can broaden students' ____.",
+      answer: "horizons",
+      order: ["should", "compulsory", "Governments", "make education", "for all children"],
+      orderAnswer: ["Governments", "should", "make education", "compulsory", "for all children"]
+    }
+  },
+  life: {
+    title: "05 生活类",
+    focus: "城市生活、生活压力、住房、隐私、快节奏生活。",
+    chunks: [
+      ["改变生活的发明", "life-altering inventions"],
+      ["财富分配", "wealth distribution"],
+      ["社会动荡", "social unrest"],
+      ["城市扩张", "urban sprawl"],
+      ["人口激增", "population explosion"],
+      ["快节奏生活", "a fast-paced modern life"],
+      ["高额生活费用", "high cost of living"],
+      ["住房问题", "housing problems"],
+      ["保护隐私", "privacy protection"],
+      ["交通拥堵", "traffic congestion"]
+    ],
+    sentences: [
+      ["快节奏现代生活会导致压力相关疾病。", "A fast-paced modern life can lead to stress-related illnesses.", "因果句"],
+      ["城市能提供更多就业机会，但生活成本也更高。", "Cities can offer more job opportunities, but they also have a higher cost of living.", "对比句"],
+      ["住房问题会影响低收入家庭的生活质量。", "Housing problems can affect the quality of life of low-income families.", "影响句"]
+    ],
+    drill: {
+      cloze: "A high ____ can place pressure on young workers.",
+      answer: "cost of living",
+      order: ["can", "stress-related illnesses", "fast-paced life", "lead to"],
+      orderAnswer: ["fast-paced life", "can", "lead to", "stress-related illnesses"]
+    }
+  },
+  technology: {
+    title: "06 科技类",
+    focus: "效率、自动化、沟通、数字鸿沟、医学科技。",
+    chunks: [
+      ["增加选择", "offer alternatives"],
+      ["解放工人", "free workers from repetitive tasks"],
+      ["提高效率", "enhance efficiency"],
+      ["科学研究", "scientific research"],
+      ["促进沟通", "promote communication"],
+      ["加大贫富差距", "widen the gap between the rich and the poor"],
+      ["改善人际关系", "improve interpersonal relationships"],
+      ["使生活更便利", "make life more convenient"],
+      ["医学突破", "medical breakthroughs"],
+      ["获取知识和信息", "get wide access to knowledge and information"]
+    ],
+    sentences: [
+      ["科技可以把工人从重复任务中解放出来。", "Technology can free workers from repetitive tasks.", "SVO 观点句"],
+      ["现代科技提高效率，但也可能削弱面对面交流。", "Modern technology improves efficiency, but it may also reduce face-to-face communication.", "对比句"],
+      ["互联网让学生更容易获取知识和信息。", "The Internet gives students wider access to knowledge and information.", "结果句"]
+    ],
+    drill: {
+      cloze: "Automation can free workers from ____ tasks.",
+      answer: "repetitive",
+      order: ["can", "efficiency", "Technology", "enhance"],
+      orderAnswer: ["Technology", "can", "enhance", "efficiency"]
+    }
+  },
+  media: {
+    title: "07 广告媒体类",
+    focus: "广告影响、消费者、媒体娱乐、信息审查、品牌形象。",
+    chunks: [
+      ["电视广告", "TV commercials"],
+      ["公益广告", "public-service ads"],
+      ["虚假广告", "fake and illegal ads"],
+      ["理性消费者", "wise consumers"],
+      ["广告审查", "censorship of ads"],
+      ["误导性信息", "misleading information"],
+      ["醒目图片", "eye-catching pictures"],
+      ["产品需求", "demand for products"],
+      ["品牌形象", "brand image"],
+      ["容易被广告影响", "be easily influenced by advertisements"]
+    ],
+    sentences: [
+      ["广告可以提供信息，但也可能误导非理性消费者。", "Advertisements can provide information, but they may also mislead irrational consumers.", "对比句"],
+      ["公益广告可以提高公众对社会问题的意识。", "Public-service ads can raise public awareness of social issues.", "功能句"],
+      ["一些品牌把产品和更高社会地位联系起来。", "Some brands associate their products with a higher social status.", "媒体观点句"]
+    ],
+    drill: {
+      cloze: "Public-service ads can raise public ____ of social issues.",
+      answer: "awareness",
+      order: ["can", "Advertisements", "consumers", "mislead"],
+      orderAnswer: ["Advertisements", "can", "mislead", "consumers"]
+    }
+  },
+  crime: {
+    title: "08 犯罪类",
+    focus: "犯罪预防、青少年犯罪、监狱、改造、社区服务。",
+    chunks: [
+      ["罪犯", "criminals / offenders"],
+      ["违法活动", "illegal activities"],
+      ["预防犯罪", "crime prevention"],
+      ["青少年犯罪", "juvenile delinquency"],
+      ["坐牢", "be put into prison"],
+      ["改造", "rehabilitation"],
+      ["惯犯", "re-offenders"],
+      ["职业训练", "vocational training"],
+      ["犯罪记录", "criminal records"],
+      ["社区服务", "community service"]
+    ],
+    sentences: [
+      ["职业训练可以降低再犯罪风险。", "Vocational training can reduce the risk of reoffending.", "因果观点"],
+      ["社区服务让罪犯有机会回报社会。", "Community service gives offenders a chance to repay the community.", "结果句"],
+      ["只把年轻罪犯关进监狱可能无法解决根本原因。", "Simply putting young offenders into prison may fail to address the root causes of crime.", "批判句"]
+    ],
+    drill: {
+      cloze: "Rehabilitation can reduce the risk of ____.",
+      answer: "reoffending",
+      order: ["can", "community service", "help offenders", "repay the community"],
+      orderAnswer: ["community service", "can", "help offenders", "repay the community"]
+    }
+  },
+  city: {
+    title: "09 城市发展类",
+    focus: "城市化、交通、基础设施、分区、消费主义、绿色空间。",
+    chunks: [
+      ["城市化", "urbanization"],
+      ["城市犯罪率上升", "rising urban crime rates"],
+      ["就业机会", "employment opportunities"],
+      ["公共基础设施", "public infrastructure"],
+      ["生活节奏", "the pace of life"],
+      ["社区感", "a sense of community"],
+      ["城市功能分区", "functional zoning"],
+      ["公共绿地", "public green space"],
+      ["步行区", "car-free pedestrian zones"],
+      ["完善公共交通", "improve public transport services"]
+    ],
+    sentences: [
+      ["城市化能创造就业机会，但也会加重交通压力。", "Urbanization can create employment opportunities, but it may also increase traffic pressure.", "对比句"],
+      ["公共绿地可以提升城市居民的生活质量。", "Public green space can improve the quality of life of urban residents.", "影响句"],
+      ["完善公共交通能减少市民对私家车的依赖。", "Improving public transport can reduce citizens' reliance on private cars.", "非谓语主语"]
+    ],
+    drill: {
+      cloze: "Improving public transport can reduce citizens' ____ on private cars.",
+      answer: "reliance",
+      order: ["can", "public green space", "quality of life", "improve"],
+      orderAnswer: ["public green space", "can", "improve", "quality of life"]
+    }
+  },
+  family: {
+    title: "10 家庭类",
+    focus: "家庭结构、育儿、老人照护、亲情关系、工作家庭平衡。",
+    chunks: [
+      ["核心家庭", "nuclear family"],
+      ["大家庭", "extended family"],
+      ["抚养孩子", "bring children up"],
+      ["同伴压力", "peer pressure"],
+      ["青少年犯罪", "juvenile delinquency"],
+      ["单亲家庭", "single-parent families"],
+      ["老人父母", "elderly parents"],
+      ["家庭关系", "family ties"],
+      ["情感支持", "emotional support"],
+      ["工作家庭责任", "work and family commitments"]
+    ],
+    sentences: [
+      ["父母应该为孩子的行为负责。", "Parents should take responsibility for their children's behaviour.", "责任句"],
+      ["稳定的家庭关系能给孩子提供情感支持。", "Stable family ties can provide children with emotional support.", "影响句"],
+      ["灵活工作制度帮助父母兼顾工作和家庭责任。", "Flexible working arrangements help parents combine work and family commitments.", "结果句"]
+    ],
+    drill: {
+      cloze: "Stable family ties can provide children with ____ support.",
+      answer: "emotional",
+      order: ["should", "Parents", "for children's behaviour", "take responsibility"],
+      orderAnswer: ["Parents", "should", "take responsibility", "for children's behaviour"]
+    }
+  },
+  environment: {
+    title: "11 环境类",
+    focus: "全球变暖、污染、能源、包装垃圾、政府与个人责任。",
+    chunks: [
+      ["二氧化碳", "carbon dioxide"],
+      ["温室效应", "greenhouse effect"],
+      ["全球变暖", "global warming"],
+      ["极端天气", "extreme weather conditions"],
+      ["化石燃料", "fossil fuels"],
+      ["野生动物栖息地", "wildlife habitats"],
+      ["可再生能源", "renewable energy"],
+      ["环保税", "green taxes"],
+      ["不可降解塑料", "non-biodegradable plastics"],
+      ["削减碳排放", "reduce carbon emissions"]
+    ],
+    sentences: [
+      ["工厂和汽车排放会加剧全球变暖。", "Emissions from factories and cars can worsen global warming.", "因果句"],
+      ["政府可以制定法律限制工厂排放。", "Governments can introduce laws to limit emissions from factories.", "政策句"],
+      ["使用可再生能源有助于削减碳排放。", "Using renewable energy helps to reduce carbon emissions.", "非谓语主语"]
+    ],
+    drill: {
+      cloze: "Renewable energy helps to reduce carbon ____.",
+      answer: "emissions",
+      order: ["can", "Governments", "green taxes", "impose"],
+      orderAnswer: ["Governments", "can", "impose", "green taxes"]
+    }
+  },
+  health: {
+    title: "12 健康类",
+    focus: "饮食、肥胖、运动、医保、现代生活方式。",
+    chunks: [
+      ["均衡饮食", "a balanced diet"],
+      ["肥胖", "obesity"],
+      ["糖尿病", "diabetes"],
+      ["心脏病", "heart disease"],
+      ["高血压", "high blood pressure"],
+      ["保持身体健康", "maintain physical fitness"],
+      ["经常锻炼", "exercise on a regular basis"],
+      ["久坐生活方式", "sedentary lifestyles"],
+      ["国家医保", "state health care"],
+      ["副作用", "side effects"]
+    ],
+    sentences: [
+      ["人体需要均衡饮食，因为不健康饮食会导致健康问题。", "The human body requires a balanced diet because an unhealthy diet can cause various health problems.", "because 原因句"],
+      ["过度摄入垃圾食品会导致体重增加。", "Excessive intake of junk food can lead to weight gain.", "因果句"],
+      ["经常运动是保持身体健康的重要前提。", "Regular exercise is essential for maintaining physical fitness.", "名词化表达"]
+    ],
+    drill: {
+      cloze: "Regular exercise is essential for maintaining physical ____.",
+      answer: "fitness",
+      order: ["can", "junk food", "lead to", "weight gain"],
+      orderAnswer: ["junk food", "can", "lead to", "weight gain"]
+    }
+  },
+  culture: {
+    title: "13 语言文化类",
+    focus: "全球语言、文化认同、跨文化交流、外语学习。",
+    chunks: [
+      ["国际语言", "international languages"],
+      ["主导语言", "dominant language"],
+      ["少数民族语言", "minority languages"],
+      ["语言全球化", "the globalization of languages"],
+      ["跨文化交流", "cross-cultural communication"],
+      ["接触外国文化", "exposure to foreign cultures"],
+      ["英语能力好", "have a good command of English"],
+      ["文化载体", "a carrier of culture"],
+      ["文化认同", "cultural identity"],
+      ["掌握外语", "master another language"]
+    ],
+    sentences: [
+      ["英语是科技、科学和国际商务领域的主导语言。", "English is the dominant language of technology, science and international business.", "SVO 描述句"],
+      ["接触外国文化可以拓展学生视野。", "Exposure to foreign cultures can broaden students' horizons.", "名词化主语"],
+      ["少数语言构成一个国家文化认同的重要部分。", "Minority languages form an important part of a nation's cultural identity.", "文化观点句"]
+    ],
+    drill: {
+      cloze: "Exposure to foreign cultures can broaden students' ____.",
+      answer: "horizons",
+      order: ["form", "Minority languages", "cultural identity", "part of"],
+      orderAnswer: ["Minority languages", "form", "part of", "cultural identity"]
+    }
+  }
+};
+
 const exerciseBank = {
   education: {
     matching: [
@@ -1274,6 +1628,7 @@ const defaultState = {
   stage: "stage1",
   module: "foundation-grammar",
   grammarPoint: "svo",
+  topicVocab: "government",
   grammarSet: {},
   grammarPractice: {},
   sidebarCollapsed: false,
@@ -1422,6 +1777,11 @@ function renderCourseSystem() {
     bindGrammarPointButtons();
     return;
   }
+  if (module.id === "topic-vocabulary") {
+    document.querySelector("#courseModuleDetail").innerHTML = renderTopicVocabularyModule();
+    bindTopicVocabularyControls();
+    return;
+  }
   document.querySelector("#courseModuleDetail").innerHTML = `
     <div class="module-title-row">
       <div>
@@ -1449,7 +1809,6 @@ function renderCourseSystem() {
         ${renderCourseBlock("后续可补充内容", module.future)}
       </div>
     </details>
-    ${module.id === "topic-vocabulary" ? renderTopicVocabularyMatrix() : ""}
     <details class="daily-fill module-more">
       <summary>每日填充模板</summary>
       <div class="daily-fill-grid">
@@ -1690,20 +2049,109 @@ function renderGrammarReference(pointId) {
   `;
 }
 
+function getCurrentTopicVocabularyLesson() {
+  return topicVocabularyLessons[state.topicVocab] || topicVocabularyLessons.government;
+}
+
 function renderTopicVocabularyMatrix() {
+  const lesson = getCurrentTopicVocabularyLesson();
+  const selectedKey = Object.entries(topicVocabularyLessons).find(([, item]) => item === lesson)?.[0] || "government";
+  const orderAnswer = lesson.drill.orderAnswer.join(" ");
   return `
-    <details class="matrix-panel module-more">
-      <summary>10 大主题词汇入口</summary>
-      <div class="topic-vocab-matrix">
-        ${Object.values(task2Topics).map((topic) => `
-          <article>
-            <span>${topic.name}</span>
-            <p><b>核心词汇</b>${topic.vocab.join(" / ")}</p>
-            <p><b>高频搭配</b>${topic.phrases.slice(0, 3).join(" / ")}</p>
-            <p><b>常见观点</b>${topic.mainIdeas[0]}</p>
-            <p><b>造句练习</b>用上面 3 个表达各写 1 个观点句，再扩成 1 个原因句和 1 个结果句。</p>
-          </article>
+    <section class="topic-vocab-lesson">
+      <div class="topic-vocab-tabs" aria-label="13 个主题词汇导航">
+        ${Object.entries(topicVocabularyLessons).map(([key, item]) => `
+          <button type="button" class="topic-vocab-tab ${key === selectedKey ? "active" : ""}" data-topic-vocab="${key}">
+            ${item.title}
+          </button>
         `).join("")}
+      </div>
+      <article class="topic-vocab-card">
+        <div class="module-title-row compact-title-row">
+          <div>
+            <p class="eyebrow">Topic Vocabulary</p>
+            <h4>${lesson.title}</h4>
+          </div>
+          <span class="method-badge">${lesson.focus}</span>
+        </div>
+        <div class="topic-vocab-section">
+          <strong>核心词伙</strong>
+          <div class="phrase-chip-grid">
+            ${lesson.chunks.map(([zh, en]) => `
+              <span class="phrase-chip"><b>${zh}</b><em>${en}</em></span>
+            `).join("")}
+          </div>
+        </div>
+        <div class="topic-vocab-section">
+          <strong>输入句型</strong>
+          <div class="sentence-pattern-list">
+            ${lesson.sentences.map(([zh, en, note]) => `
+              <article>
+                <span>${note}</span>
+                <p>${zh}</p>
+                <strong>${en}</strong>
+              </article>
+            `).join("")}
+          </div>
+        </div>
+        <div class="topic-vocab-section">
+          <strong>练习任务</strong>
+          <div class="topic-vocab-practice">
+            <article>
+              <span>填空默写</span>
+              <p>${lesson.drill.cloze}</p>
+              <small>答案：${lesson.drill.answer}</small>
+            </article>
+            <article>
+              <span>点击排序素材</span>
+              <p>${lesson.drill.order.join(" / ")}</p>
+              <small>参考句：${orderAnswer}</small>
+            </article>
+            <article>
+              <span>输出任务</span>
+              <p>从本主题选择 3 个词伙，各写 1 个观点句；再选其中 1 句扩成“观点 -> 原因 -> 结果”。</p>
+              <small>目标：不要只背词，要把词放进可评分的句子。</small>
+            </article>
+          </div>
+        </div>
+      </article>
+    </section>
+  `;
+}
+
+function bindTopicVocabularyControls() {
+  document.querySelectorAll("[data-topic-vocab]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.topicVocab = button.dataset.topicVocab;
+      saveState();
+      document.querySelector("#courseModuleDetail").innerHTML = renderTopicVocabularyModule();
+      bindTopicVocabularyControls();
+    });
+  });
+}
+
+function renderTopicVocabularyModule() {
+  const phase = getCurrentPhase();
+  const module = getCurrentModule();
+  return `
+    <div class="module-title-row">
+      <div>
+        <p class="eyebrow">${phase.title}</p>
+        <h3>${module.title}</h3>
+      </div>
+      <span class="method-badge">${phase.badge}</span>
+    </div>
+    <div class="module-focus">
+      <article><strong>教学目标</strong><p>${module.goal}</p></article>
+      <article><strong>适合学生</strong><p>${module.students}</p></article>
+    </div>
+    ${renderTopicVocabularyMatrix()}
+    <details class="daily-fill module-more">
+      <summary>每日填充模板</summary>
+      <div class="daily-fill-grid">
+        <label><span>今天补充的词伙</span><textarea placeholder="把今天新增的主题词伙放这里。"></textarea></label>
+        <label><span>学生课堂产出</span><textarea placeholder="记录学生写出的好句、错句或小段落。"></textarea></label>
+        <label><span>下次要补</span><textarea placeholder="记录下一节课要补的主题、句型或错误。"></textarea></label>
       </div>
     </details>
   `;

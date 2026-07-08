@@ -617,6 +617,132 @@ button.secondary:hover {
   color: var(--accent-dark);
 }
 
+.topic-vocab-lesson {
+  display: grid;
+  gap: 14px;
+}
+
+.topic-vocab-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.topic-vocab-tab {
+  min-height: auto;
+  padding: 9px 12px;
+  color: var(--ink);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: none;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.topic-vocab-tab:hover,
+.topic-vocab-tab.active {
+  color: #ffffff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.topic-vocab-card {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.compact-title-row {
+  align-items: start;
+}
+
+.compact-title-row h4 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+}
+
+.topic-vocab-section {
+  display: grid;
+  gap: 10px;
+}
+
+.topic-vocab-section > strong {
+  color: var(--accent-dark);
+  font-size: 1.05rem;
+}
+
+.phrase-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.phrase-chip {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid #edf1f5;
+  border-radius: 8px;
+}
+
+.phrase-chip b {
+  color: var(--ink);
+}
+
+.phrase-chip em {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.sentence-pattern-list,
+.topic-vocab-practice {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sentence-pattern-list article,
+.topic-vocab-practice article {
+  padding: 14px;
+  background: #f8fafc;
+  border: 1px solid #edf1f5;
+  border-radius: 8px;
+}
+
+.sentence-pattern-list span,
+.topic-vocab-practice span {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--accent-dark);
+  font-weight: 900;
+}
+
+.sentence-pattern-list p,
+.topic-vocab-practice p {
+  color: var(--muted);
+}
+
+.sentence-pattern-list strong {
+  display: block;
+  color: var(--ink);
+}
+
+.topic-vocab-practice small {
+  display: block;
+  color: var(--accent-dark);
+  font-weight: 800;
+}
+
 .grammar-lesson-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -1424,6 +1550,9 @@ textarea:focus {
   .grammar-exercise-grid,
   .grammar-matrix,
   .topic-vocab-matrix,
+  .phrase-chip-grid,
+  .sentence-pattern-list,
+  .topic-vocab-practice,
   .daily-fill-grid,
   .phrase-toolbar,
   .phrase-round,
