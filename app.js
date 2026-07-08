@@ -231,6 +231,178 @@ const grammarWritingPoints = [
   }
 ];
 
+const grammarPracticeBank = {
+  svo: {
+    identifyPrompt: "Schools should teach practical skills.",
+    identify: [
+      { label: "主语", answer: "Schools" },
+      { label: "谓语", answer: "should teach" },
+      { label: "宾语", answer: "practical skills" }
+    ],
+    orderPrompt: "点击词块，排序成一个正确的 SVO 句子。",
+    chunks: ["should", "Governments", "provide", "affordable", "public transport"],
+    orderAnswer: ["Governments", "should", "provide", "affordable", "public transport"],
+    correctionPrompt: "Government should affordable public transport.",
+    correctionAnswer: "Governments should provide affordable public transport."
+  },
+  "there-be": {
+    identifyPrompt: "There is a growing demand for online education.",
+    identify: [
+      { label: "There be 结构", answer: "There is" },
+      { label: "被引出的现象", answer: "a growing demand" },
+      { label: "主题范围", answer: "online education" }
+    ],
+    orderPrompt: "点击词块，排序成一个 there be 现象句。",
+    chunks: ["several", "There", "reasons", "are", "for unemployment"],
+    orderAnswer: ["There", "are", "several", "reasons", "for unemployment"],
+    correctionPrompt: "There have many reasons cause unemployment.",
+    correctionAnswer: "There are many reasons for unemployment."
+  },
+  "it-structure": {
+    identifyPrompt: "It is difficult for governments to control online misinformation.",
+    identify: [
+      { label: "形式主语", answer: "It" },
+      { label: "评价形容词", answer: "difficult" },
+      { label: "真正动作", answer: "to control online misinformation" }
+    ],
+    orderPrompt: "点击词块，排序成 It is + adj. + to do 句子。",
+    chunks: ["important", "is", "to protect", "It", "children"],
+    orderAnswer: ["It", "is", "important", "to protect", "children"],
+    correctionPrompt: "It is benefit for students to study abroad.",
+    correctionAnswer: "It is beneficial for students to study abroad."
+  },
+  tense: {
+    identifyPrompt: "Remote work has changed the way people communicate.",
+    identify: [
+      { label: "时态结构", answer: "has changed" },
+      { label: "主语", answer: "Remote work" },
+      { label: "影响对象", answer: "the way people communicate" }
+    ],
+    orderPrompt: "点击词块，排序成现在完成时句子。",
+    chunks: ["has", "more common", "Online learning", "become", "recently"],
+    orderAnswer: ["Online learning", "has", "become", "more common", "recently"],
+    correctionPrompt: "In recent years, online courses become more popular.",
+    correctionAnswer: "In recent years, online courses have become more popular."
+  },
+  "plural-nouns": {
+    identifyPrompt: "Schools should offer students more opportunities.",
+    identify: [
+      { label: "复数名词 1", answer: "Schools" },
+      { label: "复数名词 2", answer: "students" },
+      { label: "复数名词 3", answer: "opportunities" }
+    ],
+    orderPrompt: "点击词块，排序成单复数正确的句子。",
+    chunks: ["need", "Students", "practical", "skills"],
+    orderAnswer: ["Students", "need", "practical", "skills"],
+    correctionPrompt: "Child need many skill to solve problem.",
+    correctionAnswer: "Children need many skills to solve problems."
+  },
+  articles: {
+    identifyPrompt: "A balanced curriculum can prepare students for the workplace.",
+    identify: [
+      { label: "泛指冠词", answer: "A" },
+      { label: "特指冠词", answer: "the" },
+      { label: "零冠词名词", answer: "students" }
+    ],
+    orderPrompt: "点击词块，排序成冠词正确的句子。",
+    chunks: ["balanced", "A", "curriculum", "is", "important"],
+    orderAnswer: ["A", "balanced", "curriculum", "is", "important"],
+    correctionPrompt: "The technology is useful in the modern society.",
+    correctionAnswer: "Technology is useful in modern society."
+  },
+  "adj-adv": {
+    identifyPrompt: "Strict regulations can significantly reduce pollution.",
+    identify: [
+      { label: "形容词", answer: "Strict" },
+      { label: "副词", answer: "significantly" },
+      { label: "被修饰的动词", answer: "reduce" }
+    ],
+    orderPrompt: "点击词块，排序成形容词/副词正确的句子。",
+    chunks: ["can", "Strict", "significantly", "regulations", "reduce pollution"],
+    orderAnswer: ["Strict", "regulations", "can", "significantly", "reduce pollution"],
+    correctionPrompt: "Online learning is convenience and can easy help students.",
+    correctionAnswer: "Online learning is convenient and can easily help students."
+  },
+  comparatives: {
+    identifyPrompt: "Public transport is more affordable than private cars.",
+    identify: [
+      { label: "比较对象 A", answer: "Public transport" },
+      { label: "比较级", answer: "more affordable" },
+      { label: "比较对象 B", answer: "private cars" }
+    ],
+    orderPrompt: "点击词块，排序成比较句。",
+    chunks: ["is", "Public transport", "than", "private cars", "cheaper"],
+    orderAnswer: ["Public transport", "is", "cheaper", "than", "private cars"],
+    correctionPrompt: "Online classes are more better than traditional classes.",
+    correctionAnswer: "Online classes are better than traditional classes."
+  },
+  passive: {
+    identifyPrompt: "More public money should be allocated to healthcare.",
+    identify: [
+      { label: "情态动词", answer: "should" },
+      { label: "被动结构", answer: "be allocated" },
+      { label: "对象", answer: "healthcare" }
+    ],
+    orderPrompt: "点击词块，排序成被动语态句子。",
+    chunks: ["should", "More money", "allocated", "be", "to healthcare"],
+    orderAnswer: ["More money", "should", "be", "allocated", "to healthcare"],
+    correctionPrompt: "More money should spend on public transport.",
+    correctionAnswer: "More money should be spent on public transport."
+  },
+  "noun-clauses": {
+    identifyPrompt: "What matters most is whether students can apply knowledge.",
+    identify: [
+      { label: "主语从句", answer: "What matters most" },
+      { label: "系动词", answer: "is" },
+      { label: "表语从句", answer: "whether students can apply knowledge" }
+    ],
+    orderPrompt: "点击词块，排序成名词性从句句子。",
+    chunks: ["is", "What matters most", "whether", "students can apply knowledge"],
+    orderAnswer: ["What matters most", "is", "whether", "students can apply knowledge"],
+    correctionPrompt: "Whether children use phones too much it is a serious problem.",
+    correctionAnswer: "Whether children use phones too much is a serious problem."
+  },
+  "relative-clauses": {
+    identifyPrompt: "Students who lack digital access may fall behind.",
+    identify: [
+      { label: "先行词", answer: "Students" },
+      { label: "定语从句", answer: "who lack digital access" },
+      { label: "主句谓语", answer: "may fall behind" }
+    ],
+    orderPrompt: "点击词块，排序成定语从句句子。",
+    chunks: ["who", "may fall behind", "Students", "lack digital access"],
+    orderAnswer: ["Students", "who", "lack digital access", "may fall behind"],
+    correctionPrompt: "People who they live in cities face more pressure.",
+    correctionAnswer: "People who live in cities face more pressure."
+  },
+  "adverbial-clauses": {
+    identifyPrompt: "Although technology improves efficiency, it may reduce communication.",
+    identify: [
+      { label: "从属连词", answer: "Although" },
+      { label: "让步内容", answer: "technology improves efficiency" },
+      { label: "主句观点", answer: "it may reduce communication" }
+    ],
+    orderPrompt: "点击词块，排序成让步状语从句。",
+    chunks: ["online learning is useful,", "Although", "it has limitations"],
+    orderAnswer: ["Although", "online learning is useful,", "it has limitations"],
+    correctionPrompt: "Although online learning is useful, but it has limitations.",
+    correctionAnswer: "Although online learning is useful, it has limitations."
+  },
+  "non-finite": {
+    identifyPrompt: "Living in large cities, many people rely on public transport.",
+    identify: [
+      { label: "非谓语结构", answer: "Living in large cities" },
+      { label: "逻辑主语", answer: "many people" },
+      { label: "主句谓语", answer: "rely on" }
+    ],
+    orderPrompt: "点击词块，排序成非谓语句子。",
+    chunks: ["Living in large cities,", "many people", "on public transport", "rely"],
+    orderAnswer: ["Living in large cities,", "many people", "rely", "on public transport"],
+    correctionPrompt: "Using public transport, pollution can be reduced.",
+    correctionAnswer: "By using public transport, people can reduce pollution."
+  }
+};
+
 const coursePhases = [
   {
     id: "stage1",
@@ -787,6 +959,7 @@ const defaultState = {
   stage: "stage1",
   module: "foundation-grammar",
   grammarPoint: "svo",
+  grammarPractice: {},
   sidebarCollapsed: false,
   phraseMode: "match",
   phraseRound: [],
@@ -987,6 +1160,9 @@ function getCurrentGrammarPoint() {
 
 function renderGrammarLesson() {
   const point = getCurrentGrammarPoint();
+  const practice = grammarPracticeBank[point.id];
+  const saved = getGrammarPracticeState(point.id);
+  const identifyOptions = practice.identify.map((item) => item.answer).sort();
   return `
     <article class="grammar-lesson-card">
       <div class="grammar-lesson-head">
@@ -1007,15 +1183,47 @@ function renderGrammarLesson() {
           <p>${point.error}</p>
         </section>
       </div>
-      <div class="grammar-exercise-grid">
-        ${point.exercises.map((exercise) => `
-          <article class="grammar-exercise-card">
-            <strong>${exercise.title}</strong>
-            <p>${exercise.task}</p>
-            <textarea placeholder="在这里写你的答案。"></textarea>
-          </article>
-        `).join("")}
+      <div class="grammar-practice-header">
+        <strong id="grammarAccuracy">${saved.feedback || "完成下面 3 题后点击检查，会显示正确率和参考答案。"}</strong>
+        <button type="button" class="secondary" id="resetGrammarPracticeBtn">重做本节</button>
       </div>
+      <div class="grammar-exercise-grid">
+        <article class="grammar-exercise-card">
+          <strong>识别练习</strong>
+          <p>${practice.identifyPrompt}</p>
+          <div class="grammar-identify-list">
+            ${practice.identify.map((item, index) => `
+              <label>
+                <span>${item.label}</span>
+                <select data-identify-index="${index}">
+                  <option value="">选择答案</option>
+                  ${identifyOptions.map((option) => `<option value="${option}">${option}</option>`).join("")}
+                </select>
+              </label>
+            `).join("")}
+          </div>
+        </article>
+        <article class="grammar-exercise-card">
+          <strong>点击排序题</strong>
+          <p>${practice.orderPrompt}</p>
+          <div class="token-bank">
+            ${practice.chunks.map((chunk, index) => `
+              <button type="button" class="token-chip" data-order-token="${chunk}" data-token-index="${index}">${chunk}</button>
+            `).join("")}
+          </div>
+          <div class="ordered-answer" id="orderedAnswer">${saved.order.map((chunk) => `<span>${chunk}</span>`).join("") || "<em>点击上面的词块组成句子</em>"}</div>
+          <button type="button" class="secondary mini-action" id="clearOrderBtn">清空排序</button>
+        </article>
+        <article class="grammar-exercise-card">
+          <strong>改错/升级练习</strong>
+          <p class="wrong-sentence">${practice.correctionPrompt}</p>
+          <textarea id="grammarCorrectionInput" placeholder="输入修改后的完整句子。">${saved.correction}</textarea>
+        </article>
+      </div>
+      <div class="grammar-answer-panel" id="grammarAnswerPanel">
+        ${saved.checked ? renderGrammarReference(point.id) : "检查后这里会显示参考答案。"}
+      </div>
+      <button type="button" id="checkGrammarPracticeBtn">检查本节练习</button>
     </article>
   `;
 }
@@ -1029,8 +1237,104 @@ function bindGrammarPointButtons() {
         item.classList.toggle("active", item.dataset.grammarPoint === state.grammarPoint);
       });
       document.querySelector("#grammarLessonDetail").innerHTML = renderGrammarLesson();
+      bindGrammarPracticeControls();
     });
   });
+  bindGrammarPracticeControls();
+}
+
+function getGrammarPracticeState(pointId) {
+  const empty = { identify: {}, order: [], correction: "", checked: false, feedback: "" };
+  return { ...empty, ...(state.grammarPractice?.[pointId] || {}) };
+}
+
+function setGrammarPracticeState(pointId, nextState) {
+  state.grammarPractice = {
+    ...(state.grammarPractice || {}),
+    [pointId]: { ...getGrammarPracticeState(pointId), ...nextState }
+  };
+  saveState();
+}
+
+function bindGrammarPracticeControls() {
+  const point = getCurrentGrammarPoint();
+  const saved = getGrammarPracticeState(point.id);
+
+  document.querySelectorAll("[data-identify-index]").forEach((select) => {
+    select.value = saved.identify[select.dataset.identifyIndex] || "";
+    select.addEventListener("change", (event) => {
+      const nextIdentify = { ...getGrammarPracticeState(point.id).identify, [event.target.dataset.identifyIndex]: event.target.value };
+      setGrammarPracticeState(point.id, { identify: nextIdentify, checked: false, feedback: "" });
+    });
+  });
+
+  document.querySelectorAll("[data-order-token]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const current = getGrammarPracticeState(point.id);
+      const nextOrder = [...current.order, button.dataset.orderToken];
+      setGrammarPracticeState(point.id, { order: nextOrder, checked: false, feedback: "" });
+      renderOrderedAnswer(nextOrder);
+    });
+  });
+
+  document.querySelector("#clearOrderBtn")?.addEventListener("click", () => {
+    setGrammarPracticeState(point.id, { order: [], checked: false, feedback: "" });
+    renderOrderedAnswer([]);
+  });
+
+  document.querySelector("#grammarCorrectionInput")?.addEventListener("input", (event) => {
+    setGrammarPracticeState(point.id, { correction: event.target.value, checked: false, feedback: "" });
+  });
+
+  document.querySelector("#resetGrammarPracticeBtn")?.addEventListener("click", () => {
+    setGrammarPracticeState(point.id, { identify: {}, order: [], correction: "", checked: false, feedback: "" });
+    document.querySelector("#grammarLessonDetail").innerHTML = renderGrammarLesson();
+    bindGrammarPracticeControls();
+  });
+
+  document.querySelector("#checkGrammarPracticeBtn")?.addEventListener("click", checkGrammarPractice);
+}
+
+function renderOrderedAnswer(order) {
+  const target = document.querySelector("#orderedAnswer");
+  if (!target) return;
+  target.innerHTML = order.length ? order.map((chunk) => `<span>${chunk}</span>`).join("") : "<em>点击上面的词块组成句子</em>";
+}
+
+function normalizeGrammarValue(value) {
+  return value.trim().toLowerCase().replace(/[.,!?。！？]/g, "").replace(/\s+/g, " ");
+}
+
+function checkGrammarPractice() {
+  const point = getCurrentGrammarPoint();
+  const practice = grammarPracticeBank[point.id];
+  const current = getGrammarPracticeState(point.id);
+  let correct = 0;
+  const total = practice.identify.length + 2;
+
+  practice.identify.forEach((item, index) => {
+    if (current.identify[index] === item.answer) correct += 1;
+  });
+  if (current.order.join(" ") === practice.orderAnswer.join(" ")) correct += 1;
+  if (normalizeGrammarValue(current.correction) === normalizeGrammarValue(practice.correctionAnswer)) correct += 1;
+
+  const accuracy = Math.round((correct / total) * 100);
+  const feedback = `本节正确率 ${accuracy}% · ${correct}/${total}`;
+  setGrammarPracticeState(point.id, { checked: true, feedback });
+  document.querySelector("#grammarAccuracy").textContent = feedback;
+  document.querySelector("#grammarAnswerPanel").innerHTML = renderGrammarReference(point.id);
+}
+
+function renderGrammarReference(pointId) {
+  const practice = grammarPracticeBank[pointId];
+  return `
+    <strong>参考答案</strong>
+    <ul>
+      ${practice.identify.map((item) => `<li>${item.label}: ${item.answer}</li>`).join("")}
+      <li>排序题: ${practice.orderAnswer.join(" ")}</li>
+      <li>改错题: ${practice.correctionAnswer}</li>
+    </ul>
+  `;
 }
 
 function renderTopicVocabularyMatrix() {
