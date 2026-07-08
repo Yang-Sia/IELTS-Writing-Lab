@@ -73,19 +73,162 @@ const bookMethodModules = [
 ];
 
 const grammarWritingPoints = [
-  ["主谓宾结构", "保证句子有清楚动作关系", "Governments should provide affordable public transport.", "缺谓语或一个句子堆多个动词", "用 education / technology 各写 2 个 SVO 观点句。"],
-  ["There be 句型", "引出社会现象或问题", "There are several reasons why traffic congestion is getting worse.", "There has many people...", "把 3 个中文现象改成 there be 句。"],
-  ["It is + adj. + to do / that", "写评价和立场", "It is important to protect children from harmful online content.", "It is benefit to...", "用 necessary / difficult / unfair 各造一句。"],
-  ["基础时态", "区分现在事实、过去变化和未来影响", "Online learning has become more common in recent years.", "全文时态乱跳", "给同一观点写现在、过去到现在、未来影响三句。"],
-  ["名词单复数", "避免低级语法扣分", "Students need opportunities to develop practical skills.", "student need many opportunity", "圈出 5 个可数名词并改成正确形式。"],
-  ["冠词", "让抽象概念和具体对象更准确", "A balanced curriculum can prepare students for the workplace.", "the education is important", "给 8 个名词短语补 a / an / the / 零冠词。"],
-  ["形容词和副词", "描述程度、性质和变化", "Strict regulations can significantly reduce pollution.", "significant reduce", "把 5 个中文副词加入英文句。"],
-  ["比较级和最高级", "写对比论证", "Public transport is more affordable than private cars.", "more better", "用 safer / more efficient / the most effective 写比较句。"],
-  ["被动语态", "写政策、法律、图表和社会措施", "More public money should be allocated to healthcare.", "be allocate", "把主动句改成政策类被动句。"],
-  ["名词性从句", "写复杂观点", "What matters most is whether students can apply knowledge in real life.", "that 乱用导致句子断裂", "用 whether / what / that 写 3 个观点句。"],
-  ["定语从句", "补充说明对象", "Students who lack digital access may fall behind.", "从句缺主语或重复代词", "用 who / which / that 改写 3 个短句。"],
-  ["状语从句", "写因果、让步、条件", "Although technology improves efficiency, it may reduce face-to-face communication.", "because 和 so 同时出现", "用 although / because / if 各写一句。"],
-  ["非谓语基础", "压缩句子并提升连贯", "Living in large cities, many people rely heavily on public transport.", "主语不一致", "把两个简单句合并成非谓语句。"]
+  {
+    id: "svo",
+    name: "主谓宾结构",
+    purpose: "让 Task 2 句子先有清楚的动作关系：谁做什么，什么影响什么。基础弱的学生先把主谓宾写稳，再谈复杂句。",
+    example: "Governments should provide affordable public transport.",
+    error: "缺谓语，或一个句子里堆多个动词：Government should affordable public transport.",
+    exercises: [
+      { title: "识别练习", task: "标出例句中的主语、谓语和宾语：Schools should teach practical skills." },
+      { title: "造句练习", task: "用 education / government / technology 各写 1 个 SVO 观点句。" },
+      { title: "改错/升级练习", task: "修改：Many students lack of confidence when write essays." }
+    ]
+  },
+  {
+    id: "there-be",
+    name: "There be 句型",
+    purpose: "用来引出现象、问题、原因或趋势，适合开头背景句和原因段第一句。",
+    example: "There are several reasons why traffic congestion is getting worse.",
+    error: "There has many people... / There are many students feel stressed.",
+    exercises: [
+      { title: "识别练习", task: "判断句子中的 there be 在引出现象还是原因：There is a growing demand for online education." },
+      { title: "造句练习", task: "用 environment / health / cities 各写 1 个 there be 现象句。" },
+      { title: "改错/升级练习", task: "修改：There have many reasons cause unemployment." }
+    ]
+  },
+  {
+    id: "it-structure",
+    name: "It is + adj. + to do / that",
+    purpose: "用来写评价、立场和重要性，比中文直译更像议论文表达。",
+    example: "It is important to protect children from harmful online content.",
+    error: "It is benefit to... / It is important students learn...",
+    exercises: [
+      { title: "识别练习", task: "判断例句中 it 是形式主语还是普通代词：It is difficult for governments to control online misinformation." },
+      { title: "造句练习", task: "用 necessary / unfair / difficult 各写 1 个 Task 2 观点句。" },
+      { title: "改错/升级练习", task: "修改：It is benefit for students to study abroad." }
+    ]
+  },
+  {
+    id: "tense",
+    name: "基础时态",
+    purpose: "区分现在事实、过去到现在的变化、未来可能影响，让论证时间线更清楚。",
+    example: "Online learning has become more common in recent years.",
+    error: "同一段里时态乱跳：Technology changed life and improves education and will created jobs.",
+    exercises: [
+      { title: "识别练习", task: "判断句子为什么用现在完成时：Remote work has changed the way people communicate." },
+      { title: "造句练习", task: "围绕 technology 写 1 个现在事实句、1 个过去到现在变化句、1 个未来影响句。" },
+      { title: "改错/升级练习", task: "修改：In recent years, online courses become more popular and changed education." }
+    ]
+  },
+  {
+    id: "plural-nouns",
+    name: "名词单复数",
+    purpose: "减少低级语法错误，尤其是 students, governments, skills, resources 这些高频可数名词。",
+    example: "Students need opportunities to develop practical skills.",
+    error: "student need many opportunity / government should provide resource",
+    exercises: [
+      { title: "识别练习", task: "圈出例句中的可数名词复数：Schools should offer students more opportunities." },
+      { title: "造句练习", task: "用 skills / resources / problems 各写 1 个观点句。" },
+      { title: "改错/升级练习", task: "修改：Child need many skill to solve problem in future." }
+    ]
+  },
+  {
+    id: "articles",
+    name: "冠词",
+    purpose: "让名词短语更准确：泛指用 a/an，特指用 the，抽象概念很多时候不用冠词。",
+    example: "A balanced curriculum can prepare students for the workplace.",
+    error: "the education is important / a public transport can reduce pollution",
+    exercises: [
+      { title: "识别练习", task: "解释例句中 A balanced curriculum 和 the workplace 为什么用不同冠词。" },
+      { title: "造句练习", task: "用 a policy / the government / education 各写 1 句。" },
+      { title: "改错/升级练习", task: "修改：The technology is useful in the modern society." }
+    ]
+  },
+  {
+    id: "adj-adv",
+    name: "形容词和副词",
+    purpose: "形容词修饰名词，副词修饰动词/形容词/整句，用来提高表达精确度。",
+    example: "Strict regulations can significantly reduce pollution.",
+    error: "significant reduce / government should strict control pollution",
+    exercises: [
+      { title: "识别练习", task: "标出例句中的形容词和副词，并说明各自修饰什么。" },
+      { title: "造句练习", task: "用 effective / significantly / increasingly 各写 1 个 Task 2 句子。" },
+      { title: "改错/升级练习", task: "修改：Online learning is convenience and can easy help students." }
+    ]
+  },
+  {
+    id: "comparatives",
+    name: "比较级和最高级",
+    purpose: "服务对比论证：比较效率、公平、成本、长期影响，而不是只写 more good。",
+    example: "Public transport is more affordable than private cars.",
+    error: "more better / more cheaper / the most effective way than",
+    exercises: [
+      { title: "识别练习", task: "找出例句比较的两个对象和比较标准。" },
+      { title: "造句练习", task: "用 more efficient than / less harmful than / the most effective way 各写 1 句。" },
+      { title: "改错/升级练习", task: "修改：Online classes are more better than traditional classes." }
+    ]
+  },
+  {
+    id: "passive",
+    name: "被动语态",
+    purpose: "写政策、法律、公共服务和社会措施时，突出动作本身而不是动作执行者。",
+    example: "More public money should be allocated to healthcare.",
+    error: "be allocate / should be spend / policies should introduced",
+    exercises: [
+      { title: "识别练习", task: "标出例句中的被动结构，并说明为什么这里适合用被动。" },
+      { title: "造句练习", task: "用 should be provided / can be reduced / must be protected 各写 1 句。" },
+      { title: "改错/升级练习", task: "修改：More money should spend on public transport." }
+    ]
+  },
+  {
+    id: "noun-clauses",
+    name: "名词性从句",
+    purpose: "把一个完整想法变成主语、宾语或表语，适合写更学术的观点句。",
+    example: "What matters most is whether students can apply knowledge in real life.",
+    error: "that 乱用导致句子断裂：That students learn skills is important is true.",
+    exercises: [
+      { title: "识别练习", task: "找出例句中的 What 从句和 whether 从句分别充当什么成分。" },
+      { title: "造句练习", task: "用 what / whether / that 各写 1 个观点句。" },
+      { title: "改错/升级练习", task: "修改：Whether children use phones too much it is a serious problem." }
+    ]
+  },
+  {
+    id: "relative-clauses",
+    name: "定语从句",
+    purpose: "补充说明人、事物或政策，让句子信息更具体，但不要无限加长。",
+    example: "Students who lack digital access may fall behind.",
+    error: "从句缺主语或重复代词：Students who they lack access may fall behind.",
+    exercises: [
+      { title: "识别练习", task: "找出例句中的先行词和定语从句。" },
+      { title: "造句练习", task: "用 who / which / that 各写 1 个 Task 2 句子。" },
+      { title: "改错/升级练习", task: "修改：People who they live in cities face more pressure." }
+    ]
+  },
+  {
+    id: "adverbial-clauses",
+    name: "状语从句",
+    purpose: "写因果、让步、条件和时间关系，是主体段展开逻辑的核心工具。",
+    example: "Although technology improves efficiency, it may reduce face-to-face communication.",
+    error: "because 和 so 同时出现：Because public transport is cheap, so people use it.",
+    exercises: [
+      { title: "识别练习", task: "判断例句是让步、原因还是条件关系。" },
+      { title: "造句练习", task: "用 although / because / if 各写 1 个 Task 2 句子。" },
+      { title: "改错/升级练习", task: "修改：Although online learning is useful, but it has limitations." }
+    ]
+  },
+  {
+    id: "non-finite",
+    name: "非谓语基础",
+    purpose: "压缩句子、连接信息，但前提是主语关系清楚，不能为了高级而乱用。",
+    example: "Living in large cities, many people rely heavily on public transport.",
+    error: "非谓语主语不一致：Living in large cities, traffic is a serious problem.",
+    exercises: [
+      { title: "识别练习", task: "判断例句中 Living in large cities 的逻辑主语是谁。" },
+      { title: "造句练习", task: "用 living / facing / having 各写 1 个句子，主题可选城市、工作、教育。" },
+      { title: "改错/升级练习", task: "修改：Using public transport, pollution can be reduced." }
+    ]
+  }
 ];
 
 const coursePhases = [
@@ -101,7 +244,7 @@ const coursePhases = [
         title: "01 基础语法",
         goal: "让每个语法点服务 Task 2 写作，不做孤立语法课。",
         students: "基础弱、句子常缺谓语、单复数和冠词错误多的学生。",
-        knowledge: grammarWritingPoints.map(([name]) => name),
+        knowledge: grammarWritingPoints.map((point) => point.name),
         lecture: "先给写作用途，再看 Task 2 句子，最后立刻做替换和纠错。",
         board: "语法点 -> 写作用途 -> 主题例句 -> 常见错误 -> 立即输出",
         examples: ["It is necessary to give students equal access to educational resources.", "There are several reasons why young people struggle to find stable jobs."],
@@ -643,6 +786,7 @@ const defaultState = {
   topic: "education",
   stage: "stage1",
   module: "foundation-grammar",
+  grammarPoint: "svo",
   sidebarCollapsed: false,
   phraseMode: "match",
   phraseRound: [],
@@ -751,6 +895,44 @@ function renderCourseNavigation() {
 function renderCourseSystem() {
   const phase = getCurrentPhase();
   const module = getCurrentModule();
+  if (module.id === "foundation-grammar") {
+    document.querySelector("#courseModuleDetail").innerHTML = `
+      <div class="module-title-row">
+        <div>
+          <p class="eyebrow">${phase.title}</p>
+          <h3>${module.title}</h3>
+        </div>
+        <span class="method-badge">${phase.badge}</span>
+      </div>
+      <div class="module-focus">
+        <article><strong>教学目标</strong><p>${module.goal}</p></article>
+        <article><strong>适合学生</strong><p>${module.students}</p></article>
+      </div>
+      <div class="grammar-lesson-layout">
+        <aside class="grammar-point-list" aria-label="基础语法小节">
+          ${grammarWritingPoints.map((point, index) => `
+            <button type="button" class="grammar-point-button ${point.id === state.grammarPoint ? "active" : ""}" data-grammar-point="${point.id}">
+              <span>${String(index + 1).padStart(2, "0")}</span>
+              <strong>${point.name}</strong>
+            </button>
+          `).join("")}
+        </aside>
+        <div id="grammarLessonDetail" class="grammar-lesson-detail">
+          ${renderGrammarLesson()}
+        </div>
+      </div>
+      <details class="daily-fill module-more">
+        <summary>每日填充模板</summary>
+        <div class="daily-fill-grid">
+          <label><span>今天补充的例句</span><textarea placeholder="把今天讲到的 Task 2 例句放这里。"></textarea></label>
+          <label><span>学生课堂产出</span><textarea placeholder="记录学生写出的好句、错句或小段落。"></textarea></label>
+          <label><span>下次要补</span><textarea placeholder="记录下一节课要补的主题、句型或错误。"></textarea></label>
+        </div>
+      </details>
+    `;
+    bindGrammarPointButtons();
+    return;
+  }
   document.querySelector("#courseModuleDetail").innerHTML = `
     <div class="module-title-row">
       <div>
@@ -778,7 +960,6 @@ function renderCourseSystem() {
         ${renderCourseBlock("后续可补充内容", module.future)}
       </div>
     </details>
-    ${module.id === "foundation-grammar" ? renderGrammarMatrix() : ""}
     ${module.id === "topic-vocabulary" ? renderTopicVocabularyMatrix() : ""}
     <details class="daily-fill module-more">
       <summary>每日填充模板</summary>
@@ -800,23 +981,56 @@ function renderCourseBlock(title, items) {
   `;
 }
 
-function renderGrammarMatrix() {
+function getCurrentGrammarPoint() {
+  return grammarWritingPoints.find((point) => point.id === state.grammarPoint) || grammarWritingPoints[0];
+}
+
+function renderGrammarLesson() {
+  const point = getCurrentGrammarPoint();
   return `
-    <details class="matrix-panel module-more">
-      <summary>基础语法写作化清单</summary>
-      <div class="grammar-matrix">
-        ${grammarWritingPoints.map(([name, use, example, error, exercise]) => `
-          <article>
-            <span>${name}</span>
-            <p><b>用途</b>${use}</p>
-            <p><b>例句</b>${example}</p>
-            <p><b>错误</b>${error}</p>
-            <p><b>练习</b>${exercise}</p>
+    <article class="grammar-lesson-card">
+      <div class="grammar-lesson-head">
+        <span class="method-badge">基础语法小节</span>
+        <h4>${point.name}</h4>
+      </div>
+      <div class="grammar-lesson-main">
+        <section>
+          <strong>写作用途</strong>
+          <p>${point.purpose}</p>
+        </section>
+        <section>
+          <strong>Task 2 例句</strong>
+          <p class="example-line">${point.example}</p>
+        </section>
+        <section>
+          <strong>常见错误</strong>
+          <p>${point.error}</p>
+        </section>
+      </div>
+      <div class="grammar-exercise-grid">
+        ${point.exercises.map((exercise) => `
+          <article class="grammar-exercise-card">
+            <strong>${exercise.title}</strong>
+            <p>${exercise.task}</p>
+            <textarea placeholder="在这里写你的答案。"></textarea>
           </article>
         `).join("")}
       </div>
-    </details>
+    </article>
   `;
+}
+
+function bindGrammarPointButtons() {
+  document.querySelectorAll("[data-grammar-point]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.grammarPoint = button.dataset.grammarPoint;
+      saveState();
+      document.querySelectorAll("[data-grammar-point]").forEach((item) => {
+        item.classList.toggle("active", item.dataset.grammarPoint === state.grammarPoint);
+      });
+      document.querySelector("#grammarLessonDetail").innerHTML = renderGrammarLesson();
+    });
+  });
 }
 
 function renderTopicVocabularyMatrix() {

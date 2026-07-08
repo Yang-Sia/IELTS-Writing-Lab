@@ -35,6 +35,11 @@ assertIncludes(js, "data-sidebar-topic", "sidebar topic switching");
 assertIncludes(js, "ABC审题法", "book method content");
 assertIncludes(js, "coursePhases", "course phase data");
 assertIncludes(js, "grammarWritingPoints", "grammar writing matrix");
+assertIncludes(js, "renderGrammarLesson", "single grammar lesson renderer");
+assertIncludes(js, "data-grammar-point", "grammar point selector");
+assertIncludes(js, "识别练习", "grammar lesson exercise one");
+assertIncludes(js, "造句练习", "grammar lesson exercise two");
+assertIncludes(js, "改错/升级练习", "grammar lesson exercise three");
 assertIncludes(js, "renderCourseSystem", "course renderer");
 assertIncludes(js, "course-tree-stage", "nested course tree");
 assertIncludes(js, "module-more", "collapsible module details");
@@ -55,6 +60,10 @@ if (html.includes('id="topicSelect"') || html.includes('id="phraseTopicSelect"')
 
 if (html.includes('id="stageOverview"') || html.includes('id="sidebarStageList"') || html.includes('id="sidebarModuleList"')) {
   throw new Error("course navigation should be a single nested tree");
+}
+
+if (js.includes("基础语法写作化清单")) {
+  throw new Error("foundation grammar should render single lesson pages, not a large matrix");
 }
 
 if (html.includes("书信写作") || js.includes("书信写作")) {

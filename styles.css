@@ -617,6 +617,120 @@ button.secondary:hover {
   color: var(--accent-dark);
 }
 
+.grammar-lesson-layout {
+  display: grid;
+  grid-template-columns: minmax(210px, 280px) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.grammar-point-list {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.grammar-point-button {
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  color: var(--ink);
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.grammar-point-button span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.grammar-point-button strong {
+  font-size: 0.94rem;
+}
+
+.grammar-point-button:hover,
+.grammar-point-button.active {
+  color: #ffffff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.grammar-point-button:hover span,
+.grammar-point-button.active span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.grammar-lesson-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.grammar-lesson-head {
+  display: grid;
+  gap: 8px;
+}
+
+.grammar-lesson-head h4 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+}
+
+.grammar-lesson-main {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.grammar-lesson-main section,
+.grammar-exercise-card {
+  padding: 14px;
+  background: #f8fafc;
+  border: 1px solid #edf1f5;
+  border-radius: 8px;
+}
+
+.grammar-lesson-main strong,
+.grammar-exercise-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-dark);
+}
+
+.grammar-lesson-main p,
+.grammar-exercise-card p {
+  margin-bottom: 0;
+}
+
+.example-line {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.grammar-exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.grammar-exercise-card textarea {
+  min-height: 110px;
+  margin-top: 10px;
+}
+
 .daily-fill-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1188,6 +1302,9 @@ textarea:focus {
   .stage-overview,
   .module-meta,
   .course-detail-grid,
+  .grammar-lesson-layout,
+  .grammar-lesson-main,
+  .grammar-exercise-grid,
   .grammar-matrix,
   .topic-vocab-matrix,
   .daily-fill-grid,
