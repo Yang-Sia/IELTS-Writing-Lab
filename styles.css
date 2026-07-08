@@ -619,13 +619,13 @@ button.secondary:hover {
 
 .grammar-lesson-layout {
   display: grid;
-  grid-template-columns: minmax(210px, 280px) minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
 .grammar-point-list {
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 12px;
   background: #f8fafc;
@@ -635,11 +635,11 @@ button.secondary:hover {
 
 .grammar-point-button {
   min-height: auto;
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
+  display: flex;
   gap: 8px;
   align-items: center;
-  padding: 10px;
+  flex: 0 1 auto;
+  padding: 9px 12px;
   color: var(--ink);
   text-align: left;
   background: #ffffff;
@@ -654,7 +654,8 @@ button.secondary:hover {
 }
 
 .grammar-point-button strong {
-  font-size: 0.94rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .grammar-point-button:hover,
