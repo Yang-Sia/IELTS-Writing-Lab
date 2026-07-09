@@ -2104,8 +2104,7 @@ function renderTopicVocabularyMatrix() {
               const revealed = isTopicVocabRevealed(revealKey);
               return `
               <button type="button" class="sentence-reveal-card ${revealed ? "revealed" : ""}" data-reveal-card="${revealKey}">
-                <span>${note}</span>
-                <p>${zh}</p>
+                <span><b>${note}</b><em>${zh}</em></span>
                 <strong>${revealed ? en : "点击查看英文参考句"}</strong>
               </button>
             `;

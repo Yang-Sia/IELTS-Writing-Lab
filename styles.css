@@ -694,9 +694,11 @@ button.secondary:hover {
 
 .phrase-chip {
   display: grid;
-  gap: 5px;
-  padding: 12px;
-  min-height: 86px;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(180px, 1.2fr);
+  gap: 14px;
+  align-items: center;
+  padding: 14px 16px;
+  min-height: 76px;
   color: var(--ink);
   text-align: left;
   background: #f8fafc;
@@ -705,13 +707,22 @@ button.secondary:hover {
   box-shadow: none;
 }
 
+.phrase-chip:hover,
+.sentence-reveal-card:hover {
+  color: var(--ink);
+  background: #f0fdfa;
+  border-color: #99f6e4;
+}
+
 .phrase-chip b {
   color: var(--ink);
 }
 
 .phrase-chip em {
+  justify-self: end;
   color: var(--muted);
   font-style: normal;
+  text-align: right;
 }
 
 .reveal-card.revealed,
@@ -736,6 +747,10 @@ button.secondary:hover {
 .sentence-pattern-list article,
 .sentence-reveal-card,
 .topic-vocab-practice article {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 14px;
+  align-items: start;
   padding: 14px;
   min-height: 150px;
   color: var(--ink);
@@ -748,10 +763,28 @@ button.secondary:hover {
 
 .sentence-pattern-list span,
 .topic-vocab-practice span {
-  display: inline-block;
-  margin-bottom: 8px;
   color: var(--accent-dark);
   font-weight: 900;
+}
+
+.sentence-pattern-list span {
+  display: grid;
+  gap: 8px;
+}
+
+.sentence-pattern-list span b {
+  color: var(--accent-dark);
+}
+
+.sentence-pattern-list span em {
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.topic-vocab-practice span {
+  display: inline-block;
+  margin-bottom: 8px;
 }
 
 .sentence-pattern-list p,
@@ -761,7 +794,9 @@ button.secondary:hover {
 
 .sentence-pattern-list strong {
   display: block;
+  align-self: center;
   color: var(--ink);
+  text-align: right;
 }
 
 .topic-vocab-practice small {
@@ -1596,6 +1631,17 @@ textarea:focus {
 }
 
 @media (max-width: 520px) {
+  .phrase-chip,
+  .sentence-reveal-card {
+    grid-template-columns: 1fr;
+  }
+
+  .phrase-chip em,
+  .sentence-pattern-list strong {
+    justify-self: start;
+    text-align: left;
+  }
+
   .sidebar {
     grid-template-columns: 1fr;
   }
