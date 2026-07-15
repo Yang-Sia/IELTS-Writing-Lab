@@ -1556,6 +1556,100 @@ const topicVocabularyEnhancements = {
   }
 };
 
+const topicQuestionExamples = {
+  government: [
+    ["公共服务", "观点类", "Governments should spend more money on public services such as health care and transport than on arts. To what extent do you agree or disagree?", "British Council Academic Writing practice format", "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing/academic"],
+    ["税收", "讨论类", "Some people believe higher taxes are necessary to improve public services, while others think people should keep more of their income. Discuss both views and give your opinion.", "IELTS Mentor Task 2 sample bank", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["政府责任", "双问题", "What social problems should governments solve first, and what can individuals do to help?", "IELTS Buddy Task 2 topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["公共资金分配", "优缺点/权衡", "Some cities spend large amounts of public money on sports facilities. Do the advantages outweigh the disadvantages?", "IELTS Liz essay question collections", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["监管", "观点类", "Governments should control the price of basic goods such as food and fuel. To what extent do you agree or disagree?", "IELTS Mentor public question bank style", "https://www.ielts-mentor.com/writing-sample/writing-task-2"]
+  ],
+  animals: [
+    ["动物实验", "观点类", "Some people think animal testing is necessary for medical progress. Others believe it is morally wrong. Discuss both views and give your opinion.", "IELTS Liz topic question style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["动物园", "观点类", "Zoos are no longer necessary in the modern world. To what extent do you agree or disagree?", "IELTS Mentor Task 2 sample bank", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["野生动物保护", "双问题", "Why are many wild animals becoming endangered, and what can be done to protect them?", "IELTS Buddy Task 2 topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["素食", "讨论类", "Some people choose a vegetarian diet for ethical reasons, while others believe eating meat is natural. Discuss both views and give your opinion.", "IELTS Advantage Task 2 training style", "https://www.ieltsadvantage.com/writing-task-2/"],
+    ["宠物与责任", "观点类", "Keeping animals as pets teaches children responsibility. To what extent do you agree or disagree?", "IELTS Mentor public question bank style", "https://www.ielts-mentor.com/writing-sample/writing-task-2"]
+  ],
+  work: [
+    ["工作时长", "观点类", "The working week should be shorter and workers should have longer weekends. To what extent do you agree or disagree?", "IELTS Mentor Essay #1529 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["大公司/小公司", "比较类", "It is better to work for a large company than a small one. To what extent do you agree or disagree?", "IELTS Mentor Essay #1524 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["求职标准", "观点类", "Employers should focus more on personal qualities than qualifications when hiring new staff. To what extent do you agree or disagree?", "IELTS Mentor Essay #1518 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["远程办公", "优缺点", "More people are working from home instead of travelling to offices. Do the advantages outweigh the disadvantages?", "IELTS Liz recent topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["职业变化", "原因/影响", "In the past, people often had one job for life, but now they change jobs more often. What are the reasons and effects?", "IELTS Mentor Essay #1526 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"]
+  ],
+  education: [
+    ["教师作用", "观点类", "The academic success of students depends mainly on good teachers. To what extent do you agree or disagree?", "IELTS Mentor Essay #1519 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["实践技能", "观点类", "Schools should focus more on practical skills than academic subjects. To what extent do you agree or disagree?", "IELTS Advantage Task 2 training style", "https://www.ieltsadvantage.com/writing-task-2/"],
+    ["线上教育", "利弊类", "Online learning is becoming increasingly common. Do the advantages outweigh the disadvantages?", "British Council Academic practice format", "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing/academic"],
+    ["教育公平", "双问题", "Why do some children have less access to good education, and what can governments do to solve this problem?", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["考试", "讨论类", "Some people think exams are the best way to measure students' ability, while others prefer continuous assessment. Discuss both views and give your opinion.", "IELTS Liz question collection style", "https://ieltsliz.com/100-ielts-essay-questions/"]
+  ],
+  life: [
+    ["储蓄", "观点类", "It is important for everyone to save money for the future. To what extent do you agree or disagree?", "IELTS Mentor Essay #1531 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["消费主义", "观点类", "Individual greed and selfishness have become the basis of modern society. To what extent do you agree or disagree?", "IELTS Mentor Essay #1523 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["社会变化", "观点类", "Some people dislike changes in society and in their own lives. Why do they feel this way, and is this positive or negative?", "IELTS Mentor Essay #1527 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["生活压力", "双问题", "Modern life is becoming more stressful. What are the causes, and what solutions can you suggest?", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["快节奏生活", "优缺点", "Fast-paced modern life gives people more opportunities but also creates more pressure. Do the advantages outweigh the disadvantages?", "IELTS Advantage Task 2 style", "https://www.ieltsadvantage.com/writing-task-2/"]
+  ],
+  technology: [
+    ["自动化", "利弊类", "Machines and robots are replacing human workers in many jobs. Do the advantages outweigh the disadvantages?", "IELTS Liz technology topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["网络学习", "观点类", "Digital technology has changed the way people learn. Is this a positive or negative development?", "British Council Academic practice format", "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing/academic"],
+    ["隐私", "讨论类", "Some people think technology improves security, while others believe it reduces privacy. Discuss both views and give your opinion.", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["社交关系", "观点类", "Technology has made communication easier but has weakened real relationships. To what extent do you agree or disagree?", "IELTS Mentor public question bank style", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["科技与贫富差距", "双问题", "Why can new technology widen the gap between rich and poor people, and how can this be reduced?", "IELTS Advantage Task 2 style", "https://www.ieltsadvantage.com/writing-task-2/"]
+  ],
+  media: [
+    ["新闻获取", "观点类", "The best way to get the news is through newspapers. To what extent do you agree or disagree?", "IELTS Mentor Essay #1517 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["广告影响", "观点类", "Advertising encourages people to buy things they do not need. To what extent do you agree or disagree?", "IELTS Liz advertising topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["儿童广告", "讨论类", "Some people think advertisements aimed at children should be banned. Others think parents should control children's choices. Discuss both views.", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["社交媒体", "利弊类", "Social media has changed how people receive information. Do the advantages outweigh the disadvantages?", "IELTS Advantage Task 2 style", "https://www.ieltsadvantage.com/writing-task-2/"],
+    ["名人广告", "观点类", "Famous people are often used in advertisements. Is this a positive or negative development?", "IELTS Mentor Essay #1535 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"]
+  ],
+  crime: [
+    ["惩罚与改造", "讨论类", "Some people think criminals should be punished, while others believe they should be rehabilitated. Discuss both views and give your opinion.", "IELTS Buddy Task 2 topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["青少年犯罪", "双问题", "What are the causes of juvenile crime, and what can be done to reduce it?", "IELTS Liz crime topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["监狱", "观点类", "Prison is the best way to reduce crime. To what extent do you agree or disagree?", "IELTS Mentor public question bank style", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["社区服务", "观点类", "Community service is a better punishment than prison for minor crimes. To what extent do you agree or disagree?", "IELTS Advantage Task 2 style", "https://www.ieltsadvantage.com/writing-task-2/"],
+    ["网络犯罪", "双问题", "Why is cybercrime increasing, and how can individuals and governments protect people online?", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"]
+  ],
+  city: [
+    ["城市化", "原因/影响", "More people are moving from rural areas to cities. What are the causes and effects of this trend?", "IELTS Liz city topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["交通拥堵", "双问题", "Traffic congestion is a serious problem in many cities. What are the causes and what solutions can you suggest?", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["住房", "观点类", "Governments should provide affordable housing for people who cannot buy homes. To what extent do you agree or disagree?", "IELTS Mentor public question bank style", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["购物与城市", "原因/影响", "The shopping habits of people depend more on their age group than on other factors. To what extent do you agree or disagree?", "IELTS Mentor Essay #1516 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["公共空间", "利弊类", "Cities are creating more car-free zones and public green spaces. Do the advantages outweigh the disadvantages?", "British Council Academic practice format", "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing/academic"]
+  ],
+  family: [
+    ["离家独立", "观点类", "Young people should be encouraged to leave home when they become adults. To what extent do you agree or disagree?", "IELTS Mentor Essay #1520 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["父母与学校", "讨论类", "Some people think parents should teach children to be good members of society, while others believe schools should do this. Discuss both views and give your opinion.", "IELTS Liz family topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["老人照护", "讨论类", "Some people think families should look after elderly relatives, while others believe governments should provide care. Discuss both views.", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["儿童行为", "双问题", "Why do some children behave badly, and what can parents and schools do to solve this problem?", "IELTS Advantage Task 2 style", "https://www.ieltsadvantage.com/writing-task-2/"],
+    ["工作家庭平衡", "观点类", "Employers should help workers balance work and family life. To what extent do you agree or disagree?", "IELTS Mentor public question bank style", "https://www.ielts-mentor.com/writing-sample/writing-task-2"]
+  ],
+  environment: [
+    ["可持续生活", "观点类", "There is a growing emphasis on sustainable living and reducing environmental impact. Is this a positive development?", "IELTS Mentor Essay #1522 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["个人与政府", "观点类", "Individuals can do little to improve the environment, and only governments and large companies can make a difference. To what extent do you agree or disagree?", "IELTS Liz environment topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["消费与环境", "双问题", "How does consumer culture damage the environment, and what can be done to reduce this damage?", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["本地产品", "观点类", "Consumers are choosing to buy goods that are produced locally. Is this a positive or negative development?", "IELTS Mentor Essay #1534 direction", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["能源", "讨论类", "Some people support the use of renewable energy, while others believe fossil fuels are still necessary. Discuss both views.", "British Council Academic practice format", "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing/academic"]
+  ],
+  health: [
+    ["公共健康", "观点类", "Governments should be responsible for improving public health. To what extent do you agree or disagree?", "IELTS Liz health topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["饮食", "双问题", "Why are more people eating unhealthy food, and what can be done to encourage healthier diets?", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["运动", "观点类", "Schools should spend more time teaching children about exercise and healthy lifestyles. To what extent do you agree or disagree?", "IELTS Advantage Task 2 style", "https://www.ieltsadvantage.com/writing-task-2/"],
+    ["医疗资源", "讨论类", "Some people think public money should be spent on preventing illness, while others think it should be spent on treating patients. Discuss both views.", "IELTS Mentor public question bank style", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["心理健康", "原因/解决", "Mental health problems are becoming more common among young people. What are the causes and solutions?", "British Council Academic practice format", "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing/academic"]
+  ],
+  culture: [
+    ["英语全球化", "观点类", "The spread of English as a global language has more advantages than disadvantages. To what extent do you agree or disagree?", "IELTS Liz language topic style", "https://ieltsliz.com/100-ielts-essay-questions/"],
+    ["少数语言", "讨论类", "Some people believe minority languages should be protected, while others think this is too expensive. Discuss both views.", "IELTS Buddy topic practice", "https://www.ieltsbuddy.com/ielts-writing-task-2.html"],
+    ["文化全球化", "观点类", "Global culture is making countries more similar. Is this a positive or negative development?", "IELTS Advantage Task 2 style", "https://www.ieltsadvantage.com/writing-task-2/"],
+    ["传统文化", "双问题", "Why are traditional cultures disappearing, and what can be done to preserve them?", "IELTS Mentor public question bank style", "https://www.ielts-mentor.com/writing-sample/writing-task-2"],
+    ["外语学习", "观点类", "Learning a foreign language should be compulsory in schools. To what extent do you agree or disagree?", "British Council Academic practice format", "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing/academic"]
+  ]
+};
+
 const exerciseBank = {
   education: {
     matching: [
@@ -2203,6 +2297,7 @@ function renderTopicVocabularyMatrix() {
   const lesson = getCurrentTopicVocabularyLesson();
   const selectedKey = Object.entries(topicVocabularyLessons).find(([, item]) => item === lesson)?.[0] || "government";
   const extension = topicVocabularyEnhancements[selectedKey] || { extraChunks: [], logicIdeas: [], sentenceBank: [] };
+  const questionExamples = topicQuestionExamples[selectedKey] || [];
   const topicChunks = [...lesson.chunks, ...extension.extraChunks];
   const topicSentences = [...lesson.sentences, ...extension.sentenceBank];
   const orderAnswer = lesson.drill.orderAnswer.join(" ");
@@ -2227,6 +2322,7 @@ function renderTopicVocabularyMatrix() {
           <article><strong>${topicChunks.length}</strong><span>核心词伙</span></article>
           <article><strong>${extension.logicIdeas.length}</strong><span>中文逻辑思路</span></article>
           <article><strong>${topicSentences.length}</strong><span>可迁移句子</span></article>
+          <article><strong>${questionExamples.length}</strong><span>题目例子</span></article>
         </div>
         <div class="topic-vocab-section">
           <strong>核心词伙</strong>
@@ -2270,6 +2366,23 @@ function renderTopicVocabularyMatrix() {
               </button>
             `;
             }).join("")}
+          </div>
+        </div>
+        <div class="topic-vocab-section">
+          <strong>近年题型方向与题目例子</strong>
+          <p class="micro-hint">这些题目按公开题库、备考网站和官方 Academic 写作格式整理，作为真题风格训练，不标成官方原题。</p>
+          <div class="topic-question-grid">
+            ${questionExamples.map(([branch, type, question, source, url], index) => `
+              <article>
+                <div class="question-meta">
+                  <span>${String(index + 1).padStart(2, "0")}</span>
+                  <b>${branch}</b>
+                  <em>${type}</em>
+                </div>
+                <p>${question}</p>
+                <a href="${url}" target="_blank" rel="noreferrer">${source}</a>
+              </article>
+            `).join("")}
           </div>
         </div>
         <div class="topic-vocab-section">

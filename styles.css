@@ -677,7 +677,7 @@ button.secondary:hover {
 
 .topic-vocab-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -785,6 +785,59 @@ button.secondary:hover {
   margin: 0;
   color: var(--ink);
   font-weight: 800;
+}
+
+.topic-question-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.topic-question-grid article {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 14px;
+  background: #f8fafc;
+  border: 1px solid #edf1f5;
+  border-radius: 8px;
+}
+
+.question-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.question-meta span,
+.question-meta em {
+  padding: 4px 8px;
+  color: var(--accent-dark);
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
+  border-radius: 999px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 0.82rem;
+}
+
+.question-meta b {
+  color: var(--ink);
+}
+
+.topic-question-grid p {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.topic-question-grid a {
+  width: fit-content;
+  color: var(--accent-dark);
+  font-weight: 900;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15, 118, 110, 0.35);
 }
 
 .sentence-pattern-list,
@@ -1724,6 +1777,7 @@ textarea:focus {
   .resource-grid,
   .topic-vocab-stats,
   .topic-logic-grid,
+  .topic-question-grid,
   .stage-overview,
   .module-meta,
   .course-detail-grid,
