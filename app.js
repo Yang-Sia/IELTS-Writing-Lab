@@ -1488,6 +1488,74 @@ const topicVocabularyLessons = {
   }
 };
 
+const topicVocabularyEnhancements = {
+  government: {
+    extraChunks: [["公共资金分配", "public spending allocation"], ["优先考虑基本需求", "prioritise basic needs"], ["社会稳定", "social stability"], ["公共利益", "the public interest"], ["财政资源有限", "limited financial resources"], ["有效监管", "effective regulation"]],
+    logicIdeas: ["基本公共服务优先：医疗、教育、交通直接影响普通人的生活质量。", "政府干预要有限度：有些问题需要法律监管，但过度干预会压缩个人选择。", "税收要能解释给纳税人听：公共资金应流向能产生长期社会收益的领域。"],
+    sentenceBank: [["政府应该优先把公共资金用于基本服务。", "Governments should prioritise essential public services when allocating public money.", "政策观点句"], ["有效监管可以保护公众利益。", "Effective regulation can protect the public interest without limiting personal freedom excessively.", "平衡句"], ["如果税收使用透明，公众更容易接受较高税负。", "If tax revenue is used transparently, citizens are more likely to accept a higher tax burden.", "条件句"]]
+  },
+  animals: {
+    extraChunks: [["动物福利", "animal welfare"], ["伦理争议", "ethical controversy"], ["医学进步", "medical progress"], ["减少动物痛苦", "reduce animal suffering"], ["生态系统", "ecosystems"], ["生物多样性", "biodiversity"]],
+    logicIdeas: ["动物实验题要平衡：医学收益真实存在，但非必要实验应被限制。", "动物保护不能只写同情心，也要写生态平衡和生物多样性。", "素食题可以从健康、伦理和环境三个角度展开。"],
+    sentenceBank: [["动物实验在医学研究中仍有一定价值。", "Animal testing still has some value in medical research.", "让步句"], ["保护濒危物种有助于维持生态平衡。", "Protecting endangered species helps maintain ecological balance.", "影响句"], ["不必要的动物实验应该被更严格地限制。", "Unnecessary animal experiments should be subject to stricter restrictions.", "被动表达"]]
+  },
+  work: {
+    extraChunks: [["职业安全感", "job security"], ["远程办公", "remote working"], ["职业发展", "career development"], ["员工福利", "employee benefits"], ["工作压力", "workplace pressure"], ["技能提升", "upskill / improve one's skills"]],
+    logicIdeas: ["工作题常写现实权衡：收入、稳定性、兴趣和自由通常不能同时最大化。", "远程办公可以提高灵活性，但也可能削弱团队沟通和边界感。", "失业问题要从教育、职业培训和经济结构三方面找原因。"],
+    sentenceBank: [["职业安全感会影响员工的长期生活规划。", "Job security can influence employees' long-term life planning.", "影响句"], ["远程办公使员工更容易平衡工作和家庭。", "Remote working makes it easier for employees to balance work and family life.", "结果句"], ["职业培训可以帮助工人适应劳动力市场变化。", "Job training can help workers adapt to changes in the labour market.", "解决方案句"]]
+  },
+  education: {
+    extraChunks: [["教育公平", "educational equality"], ["学习动机", "learning motivation"], ["批判性思维", "critical thinking"], ["实践技能", "practical skills"], ["学术基础", "academic foundation"], ["个性化学习", "personalised learning"]],
+    logicIdeas: ["教育题不要只写就业：还要写思维能力、社会责任和长期适应力。", "线上教育适合资源获取，但不能完全替代面对面互动。", "课程设置题适合写平衡：实用技能重要，学术基础也不能弱。"],
+    sentenceBank: [["教育公平可以减少长期社会不平等。", "Educational equality can reduce long-term social inequality.", "因果观点"], ["批判性思维让学生更好地判断信息。", "Critical thinking enables students to evaluate information more effectively.", "能力句"], ["学校不应该只关注短期就业技能。", "Schools should not focus only on short-term employability skills.", "限制观点"]]
+  },
+  life: {
+    extraChunks: [["生活质量", "quality of life"], ["物质主义", "materialism"], ["消费压力", "consumer pressure"], ["心理压力", "psychological stress"], ["社会孤立", "social isolation"], ["生活便利", "convenience in daily life"]],
+    logicIdeas: ["生活类题常从现代化的代价展开：便利增加，但压力和孤独也增加。", "消费主义题可以写经济增长，也要写浪费、债务和价值观。", "城市生活题要连接住房、交通、就业和心理健康。"],
+    sentenceBank: [["现代生活的便利并不一定带来更高幸福感。", "The convenience of modern life does not necessarily lead to greater happiness.", "反常识观点"], ["高生活成本会给年轻人造成巨大压力。", "A high cost of living can place considerable pressure on young people.", "影响句"], ["过度消费可能导致债务和资源浪费。", "Excessive consumption may lead to debt and a waste of resources.", "结果句"]]
+  },
+  technology: {
+    extraChunks: [["人工智能", "artificial intelligence"], ["数字鸿沟", "the digital divide"], ["数据隐私", "data privacy"], ["自动化", "automation"], ["网络安全", "cybersecurity"], ["技术依赖", "dependence on technology"]],
+    logicIdeas: ["科技题不要只写方便，要写效率、机会、公平、隐私和人际关系。", "AI 和自动化可以提升生产力，但会改变就业结构。", "数字鸿沟是高分点：技术发展可能扩大不同群体之间的差距。"],
+    sentenceBank: [["自动化可以提高生产力，但也可能取代部分低技能工作。", "Automation can improve productivity, but it may also replace some low-skilled jobs.", "对比句"], ["数据隐私应该受到法律保护。", "Data privacy should be protected by law.", "被动观点"], ["数字鸿沟会限制弱势学生获得教育资源。", "The digital divide can limit disadvantaged students' access to educational resources.", "影响句"]]
+  },
+  media: {
+    extraChunks: [["媒体素养", "media literacy"], ["虚假信息", "misinformation"], ["广告监管", "advertising regulation"], ["消费者行为", "consumer behaviour"], ["社会媒体平台", "social media platforms"], ["公众舆论", "public opinion"]],
+    logicIdeas: ["广告媒体题要区分信息功能和操纵功能。", "儿童广告可以从心智不成熟和消费压力两个角度写。", "媒体监管要平衡：防止虚假信息，但不应过度限制表达自由。"],
+    sentenceBank: [["媒体素养可以帮助人们识别误导性信息。", "Media literacy can help people identify misleading information.", "能力句"], ["广告会影响消费者行为，尤其是儿童。", "Advertisements can influence consumer behaviour, especially among children.", "影响句"], ["社交媒体平台应该承担更多审核责任。", "Social media platforms should take greater responsibility for content moderation.", "责任句"]]
+  },
+  crime: {
+    extraChunks: [["法律威慑", "legal deterrence"], ["根本原因", "root causes"], ["社会不平等", "social inequality"], ["再融入社会", "reintegration into society"], ["严厉惩罚", "severe punishment"], ["预防性政策", "preventive policies"]],
+    logicIdeas: ["犯罪题要避免只写惩罚，7+ 通常要写预防和改造。", "青少年犯罪可从家庭、学校、同伴压力和贫困解释。", "严厉惩罚有威慑作用，但不能解决教育和就业缺失等根本原因。"],
+    sentenceBank: [["改造项目能帮助罪犯重新融入社会。", "Rehabilitation programmes can help offenders reintegrate into society.", "解决方案句"], ["严厉惩罚可能有威慑作用。", "Severe punishment may act as a deterrent.", "让步句"], ["解决犯罪的根本原因比单纯延长刑期更有效。", "Addressing the root causes of crime is more effective than simply extending prison sentences.", "比较句"]]
+  },
+  city: {
+    extraChunks: [["城市规划", "urban planning"], ["住房负担能力", "housing affordability"], ["通勤时间", "commuting time"], ["公共设施", "public facilities"], ["空气质量", "air quality"], ["城市更新", "urban renewal"]],
+    logicIdeas: ["城市题常用个人/社会双层：个人通勤压力，社会交通拥堵和污染。", "城市发展不能只追求经济，还要考虑住房、绿地和公共设施。", "交通题适合写公共交通、限车政策和城市规划组合方案。"],
+    sentenceBank: [["良好的城市规划可以减少交通拥堵。", "Good urban planning can reduce traffic congestion.", "解决方案句"], ["住房负担能力影响年轻人的生活选择。", "Housing affordability affects young people's life choices.", "影响句"], ["增加公共绿地有助于改善空气质量和心理健康。", "Increasing public green space can improve air quality and mental health.", "双结果句"]]
+  },
+  family: {
+    extraChunks: [["育儿责任", "parenting responsibilities"], ["代际关系", "intergenerational relationships"], ["儿童早期发展", "early childhood development"], ["家庭稳定", "family stability"], ["养老负担", "elderly care burden"], ["亲子沟通", "parent-child communication"]],
+    logicIdeas: ["家庭题要写影响链：家庭环境 -> 儿童行为 -> 社会结果。", "父母和学校责任题适合写分工：家庭塑造价值观，学校提供规则和社交环境。", "老龄化题可以从家庭压力、公共服务和财政负担展开。"],
+    sentenceBank: [["家庭稳定对儿童早期发展非常重要。", "Family stability is crucial for early childhood development.", "观点句"], ["良好的亲子沟通可以减少青少年行为问题。", "Good parent-child communication can reduce behavioural problems among teenagers.", "因果句"], ["养老负担不应完全落在家庭身上。", "The burden of elderly care should not fall entirely on families.", "政策观点"]]
+  },
+  environment: {
+    extraChunks: [["环境可持续性", "environmental sustainability"], ["过度消费", "overconsumption"], ["垃圾分类", "waste sorting"], ["环保意识", "environmental awareness"], ["政府干预", "government intervention"], ["企业责任", "corporate responsibility"]],
+    logicIdeas: ["环境题最好写多方责任：政府立法、企业减排、个人改变消费习惯。", "个人行动不是无效，但系统性改变通常影响更大。", "环保政策要说明代价和收益：短期成本换长期可持续。"],
+    sentenceBank: [["政府干预对减少工业污染至关重要。", "Government intervention is essential for reducing industrial pollution.", "政策句"], ["个人消费习惯也会影响环境可持续性。", "Individual consumption habits can also affect environmental sustainability.", "补充观点"], ["企业应该为其碳排放承担责任。", "Companies should take responsibility for their carbon emissions.", "责任句"]]
+  },
+  health: {
+    extraChunks: [["公共健康", "public health"], ["预防措施", "preventive measures"], ["医疗资源", "medical resources"], ["心理健康", "mental health"], ["健康意识", "health awareness"], ["生活方式疾病", "lifestyle-related diseases"]],
+    logicIdeas: ["健康题不要只写个人自律，也要写政府、学校和食品行业的影响。", "预防比治疗更适合写公共政策，因为成本更低、影响更广。", "心理健康可以连接工作压力、城市生活和社交媒体。"],
+    sentenceBank: [["预防措施比后期治疗更具成本效益。", "Preventive measures are more cost-effective than later treatment.", "比较句"], ["学校可以帮助学生建立健康意识。", "Schools can help students develop health awareness.", "教育连接"], ["心理健康问题会影响学习和工作效率。", "Mental health problems can affect academic and workplace performance.", "影响句"]]
+  },
+  culture: {
+    extraChunks: [["文化多样性", "cultural diversity"], ["文化传承", "cultural heritage"], ["本土文化", "local culture"], ["全球文化", "global culture"], ["语言保护", "language preservation"], ["跨文化理解", "cross-cultural understanding"]],
+    logicIdeas: ["语言文化题要避免只写英语有用，还要写文化身份和少数语言保护。", "全球化可以促进交流，但也可能削弱本土文化。", "学习外语的价值不仅是就业，还包括跨文化理解。"],
+    sentenceBank: [["语言保护有助于维护文化多样性。", "Language preservation helps maintain cultural diversity.", "文化观点"], ["全球文化的传播可能削弱本土传统。", "The spread of global culture may weaken local traditions.", "负面影响"], ["外语学习可以促进跨文化理解。", "Learning a foreign language can promote cross-cultural understanding.", "正面影响"]]
+  }
+};
+
 const exerciseBank = {
   education: {
     matching: [
@@ -2134,6 +2202,9 @@ function isTopicVocabRevealed(key) {
 function renderTopicVocabularyMatrix() {
   const lesson = getCurrentTopicVocabularyLesson();
   const selectedKey = Object.entries(topicVocabularyLessons).find(([, item]) => item === lesson)?.[0] || "government";
+  const extension = topicVocabularyEnhancements[selectedKey] || { extraChunks: [], logicIdeas: [], sentenceBank: [] };
+  const topicChunks = [...lesson.chunks, ...extension.extraChunks];
+  const topicSentences = [...lesson.sentences, ...extension.sentenceBank];
   const orderAnswer = lesson.drill.orderAnswer.join(" ");
   return `
     <section class="topic-vocab-lesson">
@@ -2152,11 +2223,16 @@ function renderTopicVocabularyMatrix() {
           </div>
           <span class="method-badge">${lesson.focus}</span>
         </div>
+        <div class="topic-vocab-stats">
+          <article><strong>${topicChunks.length}</strong><span>核心词伙</span></article>
+          <article><strong>${extension.logicIdeas.length}</strong><span>中文逻辑思路</span></article>
+          <article><strong>${topicSentences.length}</strong><span>可迁移句子</span></article>
+        </div>
         <div class="topic-vocab-section">
           <strong>核心词伙</strong>
           <p class="micro-hint">先看中文，心里想英文；点卡片后再看答案。</p>
           <div class="phrase-chip-grid">
-            ${lesson.chunks.map(([zh, en], index) => {
+            ${topicChunks.map(([zh, en], index) => {
               const revealKey = `${selectedKey}:chunk:${index}`;
               const revealed = isTopicVocabRevealed(revealKey);
               return `
@@ -2169,10 +2245,22 @@ function renderTopicVocabularyMatrix() {
           </div>
         </div>
         <div class="topic-vocab-section">
+          <strong>中文逻辑思路</strong>
+          <p class="micro-hint">先用中文抓住论证方向，再把词伙放进英文句子里。</p>
+          <div class="topic-logic-grid">
+            ${extension.logicIdeas.map((idea, index) => `
+              <article>
+                <span>${String(index + 1).padStart(2, "0")}</span>
+                <p>${idea}</p>
+              </article>
+            `).join("")}
+          </div>
+        </div>
+        <div class="topic-vocab-section">
           <strong>输入句型</strong>
           <p class="micro-hint">先根据中文和句型功能自己想英文，再点击查看参考句。</p>
           <div class="sentence-pattern-list">
-            ${lesson.sentences.map(([zh, en, note], index) => {
+            ${topicSentences.map(([zh, en, note], index) => {
               const revealKey = `${selectedKey}:sentence:${index}`;
               const revealed = isTopicVocabRevealed(revealKey);
               return `

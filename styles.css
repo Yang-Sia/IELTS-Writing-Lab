@@ -675,6 +675,30 @@ button.secondary:hover {
   gap: 10px;
 }
 
+.topic-vocab-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.topic-vocab-stats article {
+  padding: 12px;
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
+  border-radius: 8px;
+}
+
+.topic-vocab-stats strong {
+  display: block;
+  color: var(--accent-dark);
+  font-size: 1.35rem;
+}
+
+.topic-vocab-stats span {
+  color: var(--muted);
+  font-weight: 900;
+}
+
 .topic-vocab-section > strong {
   color: var(--accent-dark);
   font-size: 1.05rem;
@@ -735,6 +759,32 @@ button.secondary:hover {
 .sentence-reveal-card:not(.revealed) strong {
   color: var(--accent-dark);
   font-weight: 900;
+}
+
+.topic-logic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.topic-logic-grid article {
+  padding: 14px;
+  background: #fff8e8;
+  border: 1px solid #f0d79d;
+  border-radius: 8px;
+}
+
+.topic-logic-grid span {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #8a5a12;
+  font-weight: 900;
+}
+
+.topic-logic-grid p {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 800;
 }
 
 .sentence-pattern-list,
@@ -1672,6 +1722,8 @@ textarea:focus {
   .academic-rule-strip,
   .source-grid,
   .resource-grid,
+  .topic-vocab-stats,
+  .topic-logic-grid,
   .stage-overview,
   .module-meta,
   .course-detail-grid,
