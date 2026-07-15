@@ -72,6 +72,79 @@ const bookMethodModules = [
   }
 ];
 
+const academicSourceLessons = [
+  {
+    title: "IELTS 官方 Academic Test Format",
+    label: "官方规则",
+    url: "https://ielts.org/take-a-test/test-types/ielts-academic-test",
+    why: "用它校准考试格式，避免课程跑偏。",
+    absorb: "网站所有训练只围绕 Academic Writing：Task 1 图表描述和 Task 2 议论文。"
+  },
+  {
+    title: "IELTS 官方 Scoring in Detail",
+    label: "分数意识",
+    url: "https://ielts.org/take-a-test/your-results/ielts-scoring-in-detail",
+    why: "用它理解 7 分以上不是背高级词，而是能处理复杂语言和详细推理。",
+    absorb: "加入 7.5+ 能力地图：清楚立场、充分展开、准确表达、稳定复杂句。"
+  },
+  {
+    title: "IELTS 官方 Writing Resources",
+    label: "四项评分",
+    url: "https://ielts.org/take-a-test/preparation-resources/writing-test-resources",
+    why: "官方明确写作按 TR / CC / LR / GRA 四项评分。",
+    absorb: "每次作文复盘都按四项评分标准分类问题，而不是只改语法。"
+  },
+  {
+    title: "IELTS 官方 Academic Sample Questions",
+    label: "安全题源",
+    url: "https://ielts.org/take-a-test/preparation-resources/sample-test-questions/academic-test",
+    why: "官方样题最适合做题型和难度基准。",
+    absorb: "题库要标记来源：官方样题、剑桥真题、课堂练习题，避免混在一起。"
+  },
+  {
+    title: "British Council Writing Practice",
+    label: "练习入口",
+    url: "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing",
+    why: "它把练习和考试类型入口分清楚。",
+    absorb: "网站明确只保留 Academic 写作路线，Task 1/Task 2 入口要清晰。"
+  },
+  {
+    title: "British Council Academic Writing Tests",
+    label: "限时训练",
+    url: "https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-english-practice-tests/writing/academic",
+    why: "适合学习真实考试练习的呈现方式。",
+    absorb: "后续加入限时模式：Task 1 20 分钟、Task 2 40 分钟、最后 5 分钟检查。"
+  },
+  {
+    title: "IELTS Advantage Task 2",
+    label: "流程训练",
+    url: "https://www.ieltsadvantage.com/writing-task-2/",
+    why: "它把 Task 2 拆成审题、计划、开头、主体段、结尾。",
+    absorb: "网站训练路径固定为：审题 -> 提纲 -> 主体段 -> 整篇 -> 反馈。"
+  },
+  {
+    title: "IELTS Liz Task 2",
+    label: "自学结构",
+    url: "https://ieltsliz.com/ielts-writing-task-2/",
+    why: "它把信息、题目、技巧、范文和练习课放在同一页。",
+    absorb: "我们的模块也按信息区、技巧区、范文拆解、互动练习、复盘记录来组织。"
+  },
+  {
+    title: "IELTS Buddy Task 2",
+    label: "诊断式课程",
+    url: "https://www.ieltsbuddy.com/ielts-writing-task-2.html",
+    why: "它强调先找到弱点，再按弱点训练。",
+    absorb: "左侧课程目录继续按弱点拆：审题弱、观点弱、段落弱、衔接弱、语言弱。"
+  },
+  {
+    title: "IELTS Mentor Sample Answers",
+    label: "题库索引",
+    url: "https://www.ielts-mentor.com/writing-sample/writing-task-2",
+    why: "它的优势是题量大、题目索引清楚。",
+    absorb: "以后题库用题号、话题、题型、难点、范文拆解来管理，不直接堆范文。"
+  }
+];
+
 const grammarWritingPoints = [
   {
     id: "svo",
@@ -2228,6 +2301,20 @@ function renderBookMethod() {
   `).join("");
 }
 
+function renderAcademicSources() {
+  document.querySelector("#academicSourceGrid").innerHTML = academicSourceLessons.map((item) => `
+    <article class="source-card">
+      <div>
+        <span class="method-badge">${item.label}</span>
+        <strong>${item.title}</strong>
+      </div>
+      <p><b>为什么吸收：</b>${item.why}</p>
+      <p><b>吸收到网站：</b>${item.absorb}</p>
+      <a href="${item.url}" target="_blank" rel="noreferrer">查看来源</a>
+    </article>
+  `).join("");
+}
+
 function renderTopicGrid() {
   const grid = document.querySelector("#topicGrid");
   grid.innerHTML = Object.entries(task2Topics).map(([key, topic]) => `
@@ -2482,6 +2569,7 @@ function applyState() {
   renderCourseNavigation();
   renderCourseSystem();
   renderCoursePanel();
+  renderAcademicSources();
   renderBookMethod();
   renderTopicGrid();
   renderTopicSelect();

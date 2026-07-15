@@ -1147,6 +1147,72 @@ button.secondary:hover {
   margin-top: 8px;
 }
 
+.academic-rule-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.academic-rule-strip article {
+  padding: 14px;
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
+  border-radius: 8px;
+}
+
+.academic-rule-strip strong {
+  display: block;
+  color: var(--accent-dark);
+  font-size: 1.4rem;
+}
+
+.academic-rule-strip span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.source-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.source-card strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+.source-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.source-card b {
+  color: var(--accent-dark);
+}
+
+.source-card a {
+  width: fit-content;
+  color: var(--accent-dark);
+  font-weight: 900;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15, 118, 110, 0.35);
+}
+
 .method-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1603,6 +1669,8 @@ textarea:focus {
   .drill-grid,
   .exercise-grid,
   .method-grid,
+  .academic-rule-strip,
+  .source-grid,
   .resource-grid,
   .stage-overview,
   .module-meta,

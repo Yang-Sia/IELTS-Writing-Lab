@@ -13,6 +13,8 @@ function assertIncludes(source, value, label) {
 
 assertIncludes(html, 'id="interactive-drills"', "exercise section");
 assertIncludes(html, 'id="course-system"', "task 2 course system");
+assertIncludes(html, 'id="academic-standard"', "academic standard section");
+assertIncludes(html, 'id="academicSourceGrid"', "academic source grid");
 assertIncludes(html, 'id="courseModuleDetail"', "course module detail");
 assertIncludes(html, 'id="sidebarCourseTree"', "sidebar course tree");
 assertIncludes(html, 'id="phrase-drills"', "native phrase drill section");
@@ -27,6 +29,10 @@ assertIncludes(js, "checkMatchingAnswers", "matching checker");
 assertIncludes(js, "checkClozeAnswers", "cloze checker");
 assertIncludes(js, "checkDictationAnswer", "dictation checker");
 assertIncludes(js, "renderBookMethod", "book method renderer");
+assertIncludes(js, "academicSourceLessons", "academic source lesson data");
+assertIncludes(js, "renderAcademicSources", "academic source renderer");
+assertIncludes(js, "IELTS 官方 Academic Test Format", "official academic source");
+assertIncludes(js, "TR / CC / LR / GRA", "academic scoring criteria");
 assertIncludes(js, "nativePhraseBank", "native phrase bank");
 assertIncludes(js, "renderPhraseDrill", "native phrase renderer");
 assertIncludes(js, "checkPhraseRound", "native phrase checker");
@@ -82,6 +88,10 @@ if (js.includes("基础语法写作化清单")) {
 
 if (html.includes("书信写作") || js.includes("书信写作")) {
   throw new Error("letter writing module should be excluded");
+}
+
+if (html.includes("General Training") || js.includes("General Training")) {
+  throw new Error("site should stay focused on Academic writing only");
 }
 
 console.log("IELTS Writing Lab smoke test passed");
