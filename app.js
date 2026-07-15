@@ -2379,22 +2379,43 @@ function renderQuestionSupport(selectedKey, questionIndex, branch, type, questio
         <article><b>GRA</b><span>是否至少有 because / although / if / relative clause 等句型变化？</span></article>
       </div>
       <article class="model-answer-card">
-        <strong>参考范文</strong>
+        <strong>主体段示范</strong>
         <div class="model-legend">
           <span class="mark-connective">连接/结构</span>
           <span class="mark-phrase">主题词伙</span>
           <span class="mark-argument">论证动作</span>
         </div>
-        <p>
-          <span class="mark-argument">A strong answer to this ${type} question should not simply list examples;</span>
-          it should build <span class="mark-argument">two clear body paragraphs</span> around the issue of <span class="mark-phrase">${branch}</span>.
-          <span class="mark-connective">First,</span> ${modelSentences[0] || "this issue can have a direct impact on individuals and society."}
-          <span class="mark-argument">This point can be developed</span> with <span class="mark-phrase">precise topic vocabulary</span> rather than vague words.
-          <span class="mark-connective">Second,</span> ${modelSentences[1] || "a wider social effect should also be considered."}
-          <span class="mark-connective">For example,</span> expressions such as <span class="mark-phrase">${chosenChunks.slice(0, 3).map(([, en]) => en).join(", ")}</span> can be used to make the argument more specific.
-          <span class="mark-connective">Admittedly,</span> ${modelSentences[2] || "there may be another side to the argument."}
-          <span class="mark-connective">However,</span> <span class="mark-argument">the final position should return clearly to the question</span> and explain which side has the stronger long-term impact.
-        </p>
+        <div class="model-paragraphs">
+          <section>
+            <span>主体段 1 示范</span>
+            <p>
+              <span class="mark-connective">First,</span> ${modelSentences[0] || "this issue can have a direct impact on individuals and society."}
+              <span class="mark-argument">This idea matters because it explains one clear reason behind the writer's position.</span>
+              <span class="mark-connective">As a result,</span> students can connect the point to <span class="mark-phrase">${chosenChunks[0]?.[1] || branch}</span> and <span class="mark-phrase">${chosenChunks[1]?.[1] || "the wider social impact"}</span>.
+              <span class="mark-connective">For example,</span> a short, relevant example can show how this issue affects real people or institutions.
+              <span class="mark-argument">This links back to the question by showing why ${branch} should be treated as a serious issue.</span>
+            </p>
+          </section>
+          <section>
+            <span>主体段 2 示范</span>
+            <p>
+              <span class="mark-connective">Second,</span> ${modelSentences[1] || "a wider social effect should also be considered."}
+              <span class="mark-argument">This paragraph should develop a different angle rather than repeat the first body paragraph.</span>
+              It can use topic expressions such as <span class="mark-phrase">${chosenChunks[2]?.[1] || "precise topic vocabulary"}</span> and <span class="mark-phrase">${chosenChunks[3]?.[1] || "long-term consequences"}</span>.
+              <span class="mark-connective">Therefore,</span> the argument becomes more specific and easier to score well for Lexical Resource.
+              <span class="mark-argument">The final sentence should clearly explain how this second point supports the overall position.</span>
+            </p>
+          </section>
+          <section>
+            <span>备选 / 让步段示范</span>
+            <p>
+              <span class="mark-connective">Admittedly,</span> ${modelSentences[2] || "there may be another side to the argument."}
+              <span class="mark-argument">This concession prevents the essay from sounding one-sided, but it should not weaken the main position.</span>
+              <span class="mark-connective">However,</span> this opposing view is less convincing when compared with <span class="mark-phrase">${chosenChunks[4]?.[1] || "the stronger long-term impact"}</span>.
+              <span class="mark-connective">Overall,</span> the paragraph should return to the question and make the writer's judgement clear.
+            </p>
+          </section>
+        </div>
       </article>
     </details>
   `;
