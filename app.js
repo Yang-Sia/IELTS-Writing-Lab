@@ -2293,6 +2293,51 @@ function isTopicVocabRevealed(key) {
   return Boolean(state.topicVocabRevealed?.[key]);
 }
 
+function getRotatedItems(items, start, count) {
+  if (!items.length) return [];
+  return Array.from({ length: count }, (_, offset) => items[(start + offset) % items.length]);
+}
+
+function renderQuestionSupport(selectedKey, questionIndex, branch, type, question, topicChunks, logicIdeas, topicSentences) {
+  const chosenIdeas = getRotatedItems(logicIdeas, questionIndex, 3);
+  const chosenChunks = getRotatedItems(topicChunks, questionIndex * 3, 5);
+  const chosenSentences = getRotatedItems(topicSentences, questionIndex * 2, 3);
+  const modelSentences = chosenSentences.map(([, en]) => en);
+  return `
+    <details class="question-support">
+      <summary>展开主体段观点 + 可用词伙 + 参考范文</summary>
+      <div class="question-support-grid">
+        <article>
+          <strong>建议主体段</strong>
+          <ol>
+            <li><b>主体段 1</b>${chosenIdeas[0] || `先解释 ${branch} 为什么重要。`}</li>
+            <li><b>主体段 2</b>${chosenIdeas[1] || `再分析 ${branch} 对个人或社会的影响。`}</li>
+            <li><b>备选 / 让步</b>${chosenIdeas[2] || `承认另一方有道理，再回到自己的立场。`}</li>
+          </ol>
+        </article>
+        <article>
+          <strong>本题可用词伙</strong>
+          <div class="support-phrase-list">
+            ${chosenChunks.map(([zh, en]) => `<span><b>${zh}</b><em>${en}</em></span>`).join("")}
+          </div>
+        </article>
+      </div>
+      <article class="model-answer-card">
+        <strong>参考范文</strong>
+        <p>
+          A strong answer to this ${type} question should not simply list examples; it should build two clear body paragraphs around the issue of ${branch}.
+          First, ${modelSentences[0] || "this issue can have a direct impact on individuals and society."}
+          This point can be developed with precise topic vocabulary rather than vague words.
+          Second, ${modelSentences[1] || "a wider social effect should also be considered."}
+          For example, expressions such as ${chosenChunks.slice(0, 3).map(([, en]) => en).join(", ")} can be used to make the argument more specific.
+          Admittedly, ${modelSentences[2] || "there may be another side to the argument."}
+          However, the final position should return clearly to the question and explain which side has the stronger long-term impact.
+        </p>
+      </article>
+    </details>
+  `;
+}
+
 function renderTopicVocabularyMatrix() {
   const lesson = getCurrentTopicVocabularyLesson();
   const selectedKey = Object.entries(topicVocabularyLessons).find(([, item]) => item === lesson)?.[0] || "government";
@@ -2381,6 +2426,7 @@ function renderTopicVocabularyMatrix() {
                 </div>
                 <p>${question}</p>
                 <a href="${url}" target="_blank" rel="noreferrer">${source}</a>
+                ${renderQuestionSupport(selectedKey, index, branch, type, question, topicChunks, extension.logicIdeas, topicSentences)}
               </article>
             `).join("")}
           </div>

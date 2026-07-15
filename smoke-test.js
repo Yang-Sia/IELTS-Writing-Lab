@@ -57,6 +57,10 @@ assertIncludes(js, "topicVocabularyEnhancements", "expanded topic vocabulary dat
 assertIncludes(js, "topicQuestionExamples", "topic question examples");
 assertIncludes(js, "近年题型方向与题目例子", "topic question example section");
 assertIncludes(js, "真题风格训练", "question source caution");
+assertIncludes(js, "renderQuestionSupport", "question body paragraph support");
+assertIncludes(js, "建议主体段", "body paragraph ideas for questions");
+assertIncludes(js, "本题可用词伙", "linked vocabulary for questions");
+assertIncludes(js, "参考范文", "model answer for question cards");
 assertIncludes(js, "logicIdeas", "topic logic ideas");
 assertIncludes(js, "topic-vocab-stats", "topic vocabulary counts");
 assertIncludes(js, "中文逻辑思路", "Chinese logic ideas section");

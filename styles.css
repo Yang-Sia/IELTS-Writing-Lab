@@ -840,6 +840,90 @@ button.secondary:hover {
   border-bottom: 1px solid rgba(15, 118, 110, 0.35);
 }
 
+.question-support {
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.question-support summary {
+  color: var(--accent-dark);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.question-support-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.question-support-grid article,
+.model-answer-card {
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid #edf1f5;
+  border-radius: 8px;
+}
+
+.question-support-grid strong,
+.model-answer-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-dark);
+}
+
+.question-support-grid ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.question-support-grid li + li {
+  margin-top: 8px;
+}
+
+.question-support-grid li b {
+  display: block;
+  color: var(--ink);
+}
+
+.support-phrase-list {
+  display: grid;
+  gap: 8px;
+}
+
+.support-phrase-list span {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 8px;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #edf1f5;
+  border-radius: 8px;
+}
+
+.support-phrase-list b {
+  color: var(--ink);
+}
+
+.support-phrase-list em {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.model-answer-card {
+  margin-top: 12px;
+}
+
+.model-answer-card p {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.75;
+  font-weight: 700;
+}
+
 .sentence-pattern-list,
 .topic-vocab-practice {
   display: grid;
@@ -1778,6 +1862,7 @@ textarea:focus {
   .topic-vocab-stats,
   .topic-logic-grid,
   .topic-question-grid,
+  .question-support-grid,
   .stage-overview,
   .module-meta,
   .course-detail-grid,
