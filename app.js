@@ -2380,14 +2380,20 @@ function renderQuestionSupport(selectedKey, questionIndex, branch, type, questio
       </div>
       <article class="model-answer-card">
         <strong>参考范文</strong>
+        <div class="model-legend">
+          <span class="mark-connective">连接/结构</span>
+          <span class="mark-phrase">主题词伙</span>
+          <span class="mark-argument">论证动作</span>
+        </div>
         <p>
-          A strong answer to this ${type} question should not simply list examples; it should build two clear body paragraphs around the issue of ${branch}.
-          First, ${modelSentences[0] || "this issue can have a direct impact on individuals and society."}
-          This point can be developed with precise topic vocabulary rather than vague words.
-          Second, ${modelSentences[1] || "a wider social effect should also be considered."}
-          For example, expressions such as ${chosenChunks.slice(0, 3).map(([, en]) => en).join(", ")} can be used to make the argument more specific.
-          Admittedly, ${modelSentences[2] || "there may be another side to the argument."}
-          However, the final position should return clearly to the question and explain which side has the stronger long-term impact.
+          <span class="mark-argument">A strong answer to this ${type} question should not simply list examples;</span>
+          it should build <span class="mark-argument">two clear body paragraphs</span> around the issue of <span class="mark-phrase">${branch}</span>.
+          <span class="mark-connective">First,</span> ${modelSentences[0] || "this issue can have a direct impact on individuals and society."}
+          <span class="mark-argument">This point can be developed</span> with <span class="mark-phrase">precise topic vocabulary</span> rather than vague words.
+          <span class="mark-connective">Second,</span> ${modelSentences[1] || "a wider social effect should also be considered."}
+          <span class="mark-connective">For example,</span> expressions such as <span class="mark-phrase">${chosenChunks.slice(0, 3).map(([, en]) => en).join(", ")}</span> can be used to make the argument more specific.
+          <span class="mark-connective">Admittedly,</span> ${modelSentences[2] || "there may be another side to the argument."}
+          <span class="mark-connective">However,</span> <span class="mark-argument">the final position should return clearly to the question</span> and explain which side has the stronger long-term impact.
         </p>
       </article>
     </details>

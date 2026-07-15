@@ -955,6 +955,39 @@ button.secondary:hover {
   font-weight: 700;
 }
 
+.model-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.model-legend span,
+.model-answer-card p span {
+  display: inline;
+  padding: 2px 5px;
+  border-radius: 6px;
+}
+
+.mark-connective {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.mark-phrase {
+  color: #047857;
+  background: #d1fae5;
+}
+
+.mark-argument {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.model-legend span {
+  font-weight: 900;
+}
+
 .sentence-pattern-list,
 .topic-vocab-practice {
   display: grid;
