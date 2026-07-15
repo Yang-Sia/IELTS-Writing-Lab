@@ -855,7 +855,7 @@ button.secondary:hover {
 
 .question-support-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.95fr);
   gap: 12px;
   margin-top: 12px;
 }
@@ -911,6 +911,37 @@ button.secondary:hover {
 .support-phrase-list em {
   color: var(--muted);
   font-style: normal;
+}
+
+.score-check-title {
+  display: block;
+  margin: 12px 0 8px;
+  color: var(--accent-dark);
+}
+
+.score-check-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.score-check-grid article {
+  padding: 10px;
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
+  border-radius: 8px;
+}
+
+.score-check-grid b {
+  display: block;
+  color: var(--accent-dark);
+  font-size: 1.05rem;
+}
+
+.score-check-grid span {
+  color: var(--muted);
+  font-weight: 800;
 }
 
 .model-answer-card {
@@ -1357,6 +1388,41 @@ button.secondary:hover {
 .academic-rule-strip span {
   color: var(--muted);
   font-weight: 800;
+}
+
+.absorbed-loop {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.absorbed-loop article {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 16px;
+  background: #fff8e8;
+  border: 1px solid #f0d79d;
+  border-radius: 8px;
+}
+
+.absorbed-loop span {
+  color: #8a5a12;
+  font-weight: 900;
+}
+
+.absorbed-loop strong {
+  color: var(--ink);
+}
+
+.absorbed-loop p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.absorbed-loop b {
+  color: #8a5a12;
 }
 
 .source-grid {
@@ -1857,12 +1923,14 @@ textarea:focus {
   .exercise-grid,
   .method-grid,
   .academic-rule-strip,
+  .absorbed-loop,
   .source-grid,
   .resource-grid,
   .topic-vocab-stats,
   .topic-logic-grid,
   .topic-question-grid,
   .question-support-grid,
+  .score-check-grid,
   .stage-overview,
   .module-meta,
   .course-detail-grid,

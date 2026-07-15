@@ -145,6 +145,45 @@ const academicSourceLessons = [
   }
 ];
 
+const absorbedTrainingLoop = [
+  {
+    step: "01 官方边界",
+    source: "IELTS / British Council",
+    action: "只练 Academic Writing：Task 1 图表 + Task 2 议论文，不包含非 Academic Task 1。",
+    siteUse: "Academic 标准页和 Task 1 / Task 2 入口"
+  },
+  {
+    step: "02 审题拆任务",
+    source: "IELTS Advantage",
+    action: "先判断题型、关键词、限定词和任务数量，再决定立场。",
+    siteUse: "第二阶段：审题方法 + 题目例子卡"
+  },
+  {
+    step: "03 先计划再写",
+    source: "IELTS Advantage / British Council",
+    action: "Task 2 先用 5-10 分钟列提纲，再写两个主体段。",
+    siteUse: "题目展开区：建议主体段"
+  },
+  {
+    step: "04 按弱点训练",
+    source: "IELTS Buddy",
+    action: "把问题分成审题弱、观点弱、段落弱、衔接弱、语言弱。",
+    siteUse: "左侧三阶段课程目录"
+  },
+  {
+    step: "05 题库要可索引",
+    source: "IELTS Mentor / IELTS Liz",
+    action: "题目按主题、分支、题型、来源和难点管理，不只堆题目。",
+    siteUse: "03 主题词汇：近年题型方向与题目例子"
+  },
+  {
+    step: "06 写后复盘",
+    source: "IELTS 官方评分标准",
+    action: "每篇作文按 TR / CC / LR / GRA 四项复盘，而不是只改语法。",
+    siteUse: "第三阶段：批改复盘 + 练习记录"
+  }
+];
+
 const grammarWritingPoints = [
   {
     id: "svo",
@@ -2308,6 +2347,16 @@ function renderQuestionSupport(selectedKey, questionIndex, branch, type, questio
       <summary>展开主体段观点 + 可用词伙 + 参考范文</summary>
       <div class="question-support-grid">
         <article>
+          <strong>写前 5 步</strong>
+          <ol>
+            <li><b>审题</b>确认题型是 ${type}，圈出核心分支：${branch}。</li>
+            <li><b>立场</b>先决定倾向，不要两边都写但没有判断。</li>
+            <li><b>计划</b>用 2 个主体段承载主要论证，第三个观点作让步或备选。</li>
+            <li><b>展开</b>每段按观点 -> 原因 -> 影响 -> 例子 -> 回扣写。</li>
+            <li><b>检查</b>最后用 TR / CC / LR / GRA 四项快速复盘。</li>
+          </ol>
+        </article>
+        <article>
           <strong>建议主体段</strong>
           <ol>
             <li><b>主体段 1</b>${chosenIdeas[0] || `先解释 ${branch} 为什么重要。`}</li>
@@ -2321,6 +2370,13 @@ function renderQuestionSupport(selectedKey, questionIndex, branch, type, questio
             ${chosenChunks.map(([zh, en]) => `<span><b>${zh}</b><em>${en}</em></span>`).join("")}
           </div>
         </article>
+      </div>
+      <strong class="score-check-title">评分自查</strong>
+      <div class="score-check-grid">
+        <article><b>TR</b><span>是否完整回答 ${type} 的任务？立场有没有清楚？</span></article>
+        <article><b>CC</b><span>两个主体段是否各有一个中心？连接是否自然？</span></article>
+        <article><b>LR</b><span>是否使用本题词伙，而不是重复 basic words？</span></article>
+        <article><b>GRA</b><span>是否至少有 because / although / if / relative clause 等句型变化？</span></article>
       </div>
       <article class="model-answer-card">
         <strong>参考范文</strong>
@@ -2549,17 +2605,31 @@ function renderBookMethod() {
 }
 
 function renderAcademicSources() {
-  document.querySelector("#academicSourceGrid").innerHTML = academicSourceLessons.map((item) => `
-    <article class="source-card">
-      <div>
-        <span class="method-badge">${item.label}</span>
-        <strong>${item.title}</strong>
-      </div>
-      <p><b>为什么吸收：</b>${item.why}</p>
-      <p><b>吸收到网站：</b>${item.absorb}</p>
-      <a href="${item.url}" target="_blank" rel="noreferrer">查看来源</a>
-    </article>
-  `).join("");
+  document.querySelector("#academicSourceGrid").innerHTML = `
+    <div class="absorbed-loop">
+      ${absorbedTrainingLoop.map((item) => `
+        <article>
+          <span>${item.step}</span>
+          <strong>${item.action}</strong>
+          <p><b>学习来源：</b>${item.source}</p>
+          <p><b>网站落点：</b>${item.siteUse}</p>
+        </article>
+      `).join("")}
+    </div>
+    <div class="source-grid">
+      ${academicSourceLessons.map((item) => `
+        <article class="source-card">
+          <div>
+            <span class="method-badge">${item.label}</span>
+            <strong>${item.title}</strong>
+          </div>
+          <p><b>为什么吸收：</b>${item.why}</p>
+          <p><b>吸收到网站：</b>${item.absorb}</p>
+          <a href="${item.url}" target="_blank" rel="noreferrer">查看来源</a>
+        </article>
+      `).join("")}
+    </div>
+  `;
 }
 
 function renderTopicGrid() {
