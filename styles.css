@@ -2063,10 +2063,6 @@ textarea:focus {
   color: rgba(255, 255, 255, 0.78);
 }
 
-.vocabulary-topic.upcoming {
-  opacity: 0.62;
-}
-
 .vocabulary-workspace {
   display: grid;
   grid-template-columns: minmax(190px, 0.32fr) minmax(0, 1fr);

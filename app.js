@@ -1899,6 +1899,7 @@ const lifeVocabularyTopics = {
   shopping: {
     name: "Shopping",
     zh: "买东西",
+    memory: "<b>buy</b> 普通买 · <b>purchase</b> 正式买 · <b>get</b> 口语买 · <b>pick up</b> 顺便买 · <b>shop around</b> 货比三家 · <b>stock up on</b> 大量囤",
     categories: [
       {
         id: "buying",
@@ -1984,6 +1985,152 @@ const lifeVocabularyTopics = {
           { word: "purchasing habits", meaning: "购买习惯", tone: "学术表达", difference: "描述消费者经常如何、为何以及在哪里购买。", collocation: "change purchasing habits", example: "Online advertising can influence young people's purchasing habits.", translation: "网络广告会影响年轻人的购买习惯。" },
           { word: "impulse buying", meaning: "冲动消费", tone: "无计划购买", difference: "指未提前计划、受情绪或促销刺激而购买。", collocation: "encourage impulse buying", example: "Limited-time discounts often encourage impulse buying.", translation: "限时折扣往往会刺激冲动消费。" },
           { word: "purchasing power", meaning: "购买力", tone: "经济表达", difference: "指个人或群体用现有收入能够购买商品和服务的能力。", collocation: "increase consumers' purchasing power", example: "Higher wages may increase consumers' purchasing power.", translation: "更高的工资可能提升消费者的购买力。" }
+        ]
+      }
+    ]
+  },
+  food: {
+    name: "Food",
+    zh: "食物与用餐",
+    memory: "<b>food</b> 泛指食物 · <b>dish</b> 一道菜 · <b>meal</b> 一顿饭 · <b>cuisine</b> 地方菜系 · <b>snack</b> 小吃 · <b>ingredient</b> 食材",
+    categories: [
+      {
+        id: "food-basics",
+        label: "食物与菜品",
+        hint: "分清 food、dish、meal 和 cuisine：它们都和“吃”有关，但指代范围不同。",
+        words: [
+          { word: "food", meaning: "食物；食品", tone: "泛指 · 通常不可数", difference: "泛指供人或动物食用的东西；谈不同种类时也可用 foods。", collocation: "healthy / processed food", example: "Access to healthy food is essential for children's development.", translation: "获得健康食物对儿童成长至关重要。" },
+          { word: "dish", meaning: "一道菜", tone: "具体菜品", difference: "指经过烹饪、端上桌的一道菜，不等于盘子里的所有 food。", collocation: "a traditional dish", example: "This restaurant is famous for its seafood dishes.", translation: "这家餐厅以海鲜菜肴闻名。" },
+          { word: "meal", meaning: "一顿饭", tone: "用餐单位", difference: "指早餐、午餐或晚餐等完整的一餐，而不是某一道菜。", collocation: "have / skip a meal", example: "Families rarely have meals together during the week.", translation: "许多家庭工作日很少一起吃饭。" },
+          { word: "cuisine", meaning: "菜系；烹饪风格", tone: "文化 · 正式", difference: "指某个国家或地区特有的烹饪传统和风格。", collocation: "local / Italian cuisine", example: "Trying local cuisine is an important part of travelling.", translation: "品尝当地菜肴是旅行的重要部分。" }
+        ]
+      },
+      {
+        id: "taste",
+        label: "味道与口感",
+        hint: "味道用 sweet、sour 等；口感用 crispy、tender 等。",
+        words: [
+          { word: "flavour", meaning: "风味；味道", tone: "综合味觉", difference: "包含食物的味道与香气；美式英语拼作 flavor。", collocation: "a rich / mild flavour", example: "Fresh herbs add flavour without adding much salt.", translation: "新鲜香草可以增加风味，却不会增加太多盐。" },
+          { word: "spicy", meaning: "辛辣的；香料味浓的", tone: "味道", difference: "可指辣椒带来的辣，也可指加入多种香料；hot 更常强调辣度。", collocation: "spicy food", example: "I enjoy spicy food, but this curry is too hot for me.", translation: "我喜欢辛辣食物，但这份咖喱对我来说太辣了。" },
+          { word: "crispy", meaning: "酥脆的", tone: "口感", difference: "形容薄而脆、咬下去有清脆声音；crunchy 通常更厚、更硬。", collocation: "crispy vegetables", example: "The vegetables should remain fresh and crispy.", translation: "这些蔬菜应该保持新鲜爽脆。" },
+          { word: "tender", meaning: "嫩的；易咀嚼的", tone: "肉类口感", difference: "常形容肉或蔬菜柔软易咬，反义词是 tough。", collocation: "tender meat", example: "The meat was tender and full of flavour.", translation: "这块肉很嫩，而且味道浓郁。" }
+        ]
+      },
+      {
+        id: "cooking",
+        label: "烹饪方式",
+        hint: "按是否用水、油和直接热源来区分常见烹饪动词。",
+        words: [
+          { word: "boil", meaning: "煮沸；水煮", tone: "在沸水中", difference: "把食物放在沸腾液体里煮；boil 也可表示液体本身沸腾。", collocation: "boil an egg", example: "Boil the vegetables for five minutes.", translation: "把蔬菜煮五分钟。" },
+          { word: "steam", meaning: "蒸", tone: "用蒸汽", difference: "食物不直接浸在水里，通常比 fry 少油。", collocation: "steamed fish", example: "Steaming helps vegetables retain more nutrients.", translation: "蒸制有助于蔬菜保留更多营养。" },
+          { word: "grill", meaning: "烧烤；烤制", tone: "直接高温", difference: "用上方或下方直接热源烤；英美英语对设备用法略有差异。", collocation: "grilled chicken", example: "We grilled the vegetables instead of frying them.", translation: "我们烤了蔬菜，而不是油炸。" },
+          { word: "bake", meaning: "烘焙；烤", tone: "烤箱干热", difference: "常用于面包、蛋糕，也可用于烤鱼或蔬菜。", collocation: "freshly baked bread", example: "The café serves freshly baked bread every morning.", translation: "这家咖啡馆每天早晨供应新鲜烘焙的面包。" }
+        ]
+      },
+      {
+        id: "restaurant",
+        label: "餐厅点餐",
+        hint: "从订位、看菜单、点餐到结账，按真实流程记忆。",
+        words: [
+          { word: "book a table", meaning: "预订餐桌", tone: "餐厅用语", difference: "英式英语常用 book，美式英语也常说 reserve a table。", collocation: "book a table for two", example: "I'd like to book a table for two at seven.", translation: "我想预订一张晚上七点的双人桌。" },
+          { word: "order", meaning: "点餐；订单", tone: "动词/名词", difference: "在餐厅表示点菜，也能表示网购下单或订单本身。", collocation: "take / place an order", example: "Are you ready to order, or do you need more time?", translation: "您准备好点餐了吗，还是需要再看一会儿？" },
+          { word: "the bill", meaning: "账单", tone: "英式餐厅用语", difference: "英式英语常说 ask for the bill；美式英语常说 check。", collocation: "ask for the bill", example: "Could we have the bill, please?", translation: "请给我们账单好吗？" },
+          { word: "tip", meaning: "小费；给小费", tone: "服务费用", difference: "指在账单之外给服务人员的钱，不同国家习惯不同。", collocation: "leave a tip", example: "Service is included, so you do not need to leave a tip.", translation: "账单已含服务费，因此不必另留小费。" }
+        ]
+      },
+      {
+        id: "nutrition",
+        label: "营养与健康",
+        hint: "雅思写作中常用这些词讨论饮食、肥胖与公共健康。",
+        words: [
+          { word: "a balanced diet", meaning: "均衡饮食", tone: "健康核心表达", difference: "强调不同营养类别比例合理，而不只是少吃。", collocation: "maintain a balanced diet", example: "Schools should teach children how to maintain a balanced diet.", translation: "学校应该教儿童如何保持均衡饮食。" },
+          { word: "nutritious", meaning: "有营养的", tone: "正面评价", difference: "形容含有身体需要的营养；nutritional 表示“与营养有关的”。", collocation: "nutritious meals", example: "Low-income families may struggle to afford nutritious meals.", translation: "低收入家庭可能难以负担营养餐。" },
+          { word: "processed food", meaning: "加工食品", tone: "公共健康", difference: "经过工业加工的食品；ultra-processed food 指加工程度更高的产品。", collocation: "highly processed food", example: "Highly processed food often contains excessive salt and sugar.", translation: "高度加工食品通常含有过量盐和糖。" },
+          { word: "obesity", meaning: "肥胖症", tone: "正式 · 医学/写作", difference: "比 overweight 严重，是医学上的健康状况。", collocation: "childhood obesity", example: "Sugary drinks contribute to rising rates of childhood obesity.", translation: "含糖饮料导致儿童肥胖率上升。" }
+        ]
+      },
+      {
+        id: "food-society",
+        label: "雅思写作升级",
+        hint: "从个人饮食提升到粮食浪费、食品安全与可持续农业。",
+        words: [
+          { word: "food waste", meaning: "食物浪费", tone: "环境议题", difference: "指可食用食物在家庭、餐厅或供应链中被丢弃。", collocation: "reduce food waste", example: "Clearer date labels could help households reduce food waste.", translation: "更清晰的日期标签可以帮助家庭减少食物浪费。" },
+          { word: "food security", meaning: "粮食安全", tone: "社会政策", difference: "指所有人都能稳定获得足够、安全且有营养的食物。", collocation: "ensure food security", example: "Climate change poses a serious threat to global food security.", translation: "气候变化严重威胁全球粮食安全。" },
+          { word: "sustainable agriculture", meaning: "可持续农业", tone: "环境 · 学术", difference: "在满足粮食需求的同时保护土壤、水和生态系统。", collocation: "promote sustainable agriculture", example: "Governments should invest in sustainable agriculture.", translation: "政府应该投资可持续农业。" },
+          { word: "locally sourced", meaning: "本地采购的", tone: "供应链", difference: "指食材来自附近生产者，可减少运输但不必然更环保。", collocation: "locally sourced ingredients", example: "The restaurant uses locally sourced ingredients whenever possible.", translation: "这家餐厅尽可能使用本地采购的食材。" }
+        ]
+      }
+    ]
+  },
+  travel: {
+    name: "Travel",
+    zh: "旅行与出行",
+    memory: "<b>travel</b> 泛指旅行 · <b>trip</b> 一次往返 · <b>journey</b> 旅程过程 · <b>tour</b> 游览行程 · <b>commute</b> 通勤 · <b>destination</b> 目的地",
+    categories: [
+      {
+        id: "travel-basics",
+        label: "旅行基本词",
+        hint: "travel、trip、journey 和 tour 的区别是旅行话题的基础。",
+        words: [
+          { word: "travel", meaning: "旅行；出行", tone: "泛指 · 通常不可数", difference: "泛指从一地到另一地或旅行活动；不能通常说 a travel。", collocation: "air / business travel", example: "Travel has become more affordable in recent decades.", translation: "近几十年来，旅行变得更负担得起。" },
+          { word: "trip", meaning: "一次旅行；出行", tone: "具体一次 · 常含往返", difference: "强调一次具体的出行，可因工作或休闲。", collocation: "go on a business trip", example: "We are planning a short trip to Berlin.", translation: "我们正计划去柏林短途旅行。" },
+          { word: "journey", meaning: "旅程；行程过程", tone: "强调从A到B", difference: "强调路上的过程、时间和经历，不一定包含游玩。", collocation: "a long train journey", example: "The journey takes approximately three hours by train.", translation: "这段旅程乘火车大约需要三小时。" },
+          { word: "tour", meaning: "游览；巡回旅行", tone: "多地点参观", difference: "按路线参观多个景点，也可指演出或比赛巡演。", collocation: "a guided tour", example: "We joined a guided tour of the old town.", translation: "我们参加了老城区的导览游。" }
+        ]
+      },
+      {
+        id: "planning",
+        label: "计划与预订",
+        hint: "旅行前的关键词：目的地、行程、预订和住宿。",
+        words: [
+          { word: "destination", meaning: "目的地", tone: "旅行终点", difference: "指人或交通工具要前往的地方。", collocation: "a popular tourist destination", example: "The island has become a popular tourist destination.", translation: "这座岛已经成为热门旅游目的地。" },
+          { word: "itinerary", meaning: "旅行计划；行程单", tone: "正式 · 计划", difference: "列出每天地点、交通和活动的详细安排。", collocation: "a detailed itinerary", example: "Our itinerary includes three cities in seven days.", translation: "我们的行程包括七天游览三座城市。" },
+          { word: "book", meaning: "预订", tone: "酒店/交通", difference: "提前保留座位、房间或服务；reserve 含义相近且更正式。", collocation: "book a flight / room", example: "It is cheaper to book flights several weeks in advance.", translation: "提前几周预订航班通常更便宜。" },
+          { word: "accommodation", meaning: "住宿；住处", tone: "英式 · 通常不可数", difference: "泛指酒店、民宿等住宿条件；不要写 accommodations 表示普通住宿。", collocation: "find affordable accommodation", example: "The price includes transport and accommodation.", translation: "该价格包含交通和住宿。" }
+        ]
+      },
+      {
+        id: "airport",
+        label: "机场与飞行",
+        hint: "按值机、安检、登机和到达的流程学习。",
+        words: [
+          { word: "check in", meaning: "办理值机；登记入住", tone: "机场/酒店", difference: "机场确认乘客并领取登机牌；酒店办理入住。名词写作 check-in。", collocation: "check in online", example: "Passengers can check in online 24 hours before departure.", translation: "乘客可在起飞前24小时在线值机。" },
+          { word: "boarding pass", meaning: "登机牌", tone: "机场文件", difference: "通过安检后登机所需凭证，不等同于机票 ticket。", collocation: "show your boarding pass", example: "Please have your passport and boarding pass ready.", translation: "请准备好护照和登机牌。" },
+          { word: "departure", meaning: "出发；起飞", tone: "正式 · 交通", difference: "depart 的名词；反义词 arrival 表示到达。", collocation: "departure time / lounge", example: "The departure was delayed because of bad weather.", translation: "航班因恶劣天气延迟起飞。" },
+          { word: "layover", meaning: "中途停留；转机等待", tone: "航空旅行", difference: "两段航班之间在中转机场等待的一段时间。", collocation: "a two-hour layover", example: "We have a two-hour layover in Amsterdam.", translation: "我们要在阿姆斯特丹转机等待两小时。" }
+        ]
+      },
+      {
+        id: "transport",
+        label: "交通与通勤",
+        hint: "区分公共交通、换乘、通勤和交通延误。",
+        words: [
+          { word: "public transport", meaning: "公共交通", tone: "英式常用", difference: "包括公交、地铁和火车；美式英语常说 public transportation。", collocation: "reliable public transport", example: "Reliable public transport can reduce dependence on private cars.", translation: "可靠的公共交通可以减少对私家车的依赖。" },
+          { word: "commute", meaning: "通勤；上下班往返", tone: "规律性出行", difference: "经常在住所和工作或学习地点之间往返。", collocation: "commute to work", example: "She commutes to work by train every day.", translation: "她每天乘火车通勤上班。" },
+          { word: "transfer", meaning: "换乘；转乘", tone: "交通连接", difference: "从一辆车或一条线路换到另一辆或另一条。", collocation: "transfer to another line", example: "Transfer to Line 2 at the next station.", translation: "请在下一站换乘2号线。" },
+          { word: "congestion", meaning: "拥堵；堵塞", tone: "正式 · 写作", difference: "traffic congestion 是雅思中比 traffic jam 更正式的表达。", collocation: "ease traffic congestion", example: "Flexible working hours may help ease traffic congestion.", translation: "弹性工作时间可能有助于缓解交通拥堵。" }
+        ]
+      },
+      {
+        id: "sightseeing",
+        label: "观光与体验",
+        hint: "描述景点、观光以及融入当地文化的旅行体验。",
+        words: [
+          { word: "sightseeing", meaning: "观光；游览", tone: "旅行活动", difference: "不可数名词，常与 go 连用：go sightseeing。", collocation: "go sightseeing", example: "We spent the morning sightseeing in the city centre.", translation: "我们上午在市中心观光。" },
+          { word: "attraction", meaning: "景点；吸引人的事物", tone: "旅游地点", difference: "tourist attraction 指游客参观的地点或活动。", collocation: "a major tourist attraction", example: "The museum is one of the city's main attractions.", translation: "这座博物馆是该市的主要景点之一。" },
+          { word: "landmark", meaning: "地标；标志性建筑", tone: "有辨识度", difference: "容易辨认、具有历史或象征意义的建筑或地点。", collocation: "a historic landmark", example: "The bridge is a well-known local landmark.", translation: "这座桥是当地著名的地标。" },
+          { word: "immerse yourself in", meaning: "使自己沉浸于", tone: "文化体验", difference: "强调深度参与当地语言、文化或环境，而非走马观花。", collocation: "immerse yourself in local culture", example: "Staying with a local family helps travellers immerse themselves in the culture.", translation: "住在当地家庭有助于旅行者沉浸于当地文化。" }
+        ]
+      },
+      {
+        id: "tourism",
+        label: "雅思写作升级",
+        hint: "从个人旅行提升到大众旅游、当地经济和环境影响。",
+        words: [
+          { word: "mass tourism", meaning: "大众旅游；大规模旅游", tone: "社会议题", difference: "大量游客集中前往同一目的地，常带来拥挤与环境压力。", collocation: "the growth of mass tourism", example: "Mass tourism can place enormous pressure on small communities.", translation: "大众旅游会给小型社区带来巨大压力。" },
+          { word: "overtourism", meaning: "过度旅游", tone: "现代旅游议题", difference: "游客数量超过目的地承载能力，损害居民生活或当地环境。", collocation: "tackle overtourism", example: "Some cities have introduced visitor limits to tackle overtourism.", translation: "一些城市通过限制游客数量来应对过度旅游。" },
+          { word: "sustainable tourism", meaning: "可持续旅游", tone: "环境 · 学术", difference: "在创造经济收益的同时减少环境和文化损害。", collocation: "promote sustainable tourism", example: "Sustainable tourism should benefit both visitors and local residents.", translation: "可持续旅游应该同时惠及游客和当地居民。" },
+          { word: "boost the local economy", meaning: "促进当地经济", tone: "影响表达", difference: "描述旅游消费如何创造就业并增加当地企业收入。", collocation: "tourism boosts the local economy", example: "International tourism can boost the local economy and create jobs.", translation: "国际旅游可以促进当地经济并创造就业。" }
         ]
       }
     ]
@@ -2986,6 +3133,10 @@ function renderLifeVocabulary() {
   const topic = lifeVocabularyTopics[state.lifeVocabularyTopic] || lifeVocabularyTopics.shopping;
   const category = topic.categories.find((item) => item.id === state.lifeVocabularyCategory) || topic.categories[0];
   document.querySelector("#vocabularyProgress").textContent = `${topic.name} · ${topic.categories.length} 个分类 · ${topic.categories.reduce((sum, item) => sum + item.words.length, 0)} 个表达`;
+  document.querySelector("#vocabularyMemoryText").innerHTML = topic.memory;
+  document.querySelectorAll("[data-life-topic]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.lifeTopic === state.lifeVocabularyTopic);
+  });
   document.querySelector("#vocabularyCategoryList").innerHTML = topic.categories.map((item, index) => `
     <button type="button" class="vocabulary-category-button ${item.id === category.id ? "active" : ""}" data-vocabulary-category="${item.id}">
       <span>${String(index + 1).padStart(2, "0")}</span>
@@ -3023,6 +3174,16 @@ function renderLifeVocabulary() {
       saveState();
       renderLifeVocabulary();
     });
+  });
+  document.querySelectorAll("[data-life-topic]").forEach((button) => {
+    button.onclick = () => {
+      const nextTopic = lifeVocabularyTopics[button.dataset.lifeTopic];
+      if (!nextTopic) return;
+      state.lifeVocabularyTopic = button.dataset.lifeTopic;
+      state.lifeVocabularyCategory = nextTopic.categories[0].id;
+      saveState();
+      renderLifeVocabulary();
+    };
   });
   document.querySelectorAll("[data-vocabulary-card]").forEach((button) => {
     button.addEventListener("click", () => {
