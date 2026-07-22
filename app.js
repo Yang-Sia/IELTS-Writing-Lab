@@ -3183,6 +3183,14 @@ document.querySelector("#sidebarToggle").addEventListener("click", () => {
 document.querySelectorAll(".utility-nav a").forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
+    if (link.dataset.moduleShortcut) {
+      const targetModule = coursePhases.flatMap((phase) => phase.modules).find((module) => module.id === link.dataset.moduleShortcut);
+      const targetPhase = coursePhases.find((phase) => phase.modules.some((module) => module.id === link.dataset.moduleShortcut));
+      if (targetModule && targetPhase) {
+        state.stage = targetPhase.id;
+        state.module = targetModule.id;
+      }
+    }
     const viewId = link.getAttribute("href").replace("#", "");
     setActiveView(viewId);
   });

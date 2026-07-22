@@ -21,28 +21,57 @@
           <span class="toggle-icon">☰</span>
           <span class="toggle-text">隐藏侧栏</span>
         </button>
-        <nav class="sidebar" aria-label="主要功能">
-          <div class="nav-group course-nav">
-            <span class="nav-label">Task 2 课程目录</span>
+        <nav class="sidebar" aria-label="学习导航">
+          <div class="sidebar-map-head">
+            <span class="nav-label">IELTS 学习导航</span>
+            <strong>先打基础，再进入专项</strong>
+          </div>
+
+          <details class="nav-domain foundation-nav" open>
+            <summary><span class="domain-icon">A</span><span><strong>学习基础</strong><small>Vocabulary · Grammar</small></span></summary>
+            <div class="nav-domain-links utility-nav">
+              <a href="#vocabulary-topics"><b>单词</b><small>按生活 Topic 学习</small></a>
+              <a href="#course-system" data-module-shortcut="foundation-grammar"><b>语法</b><small>基础语法写作化</small></a>
+            </div>
+          </details>
+
+          <div class="skill-domain-grid" aria-label="听说读写四项">
+            <div class="skill-domain muted-domain"><span>L</span><b>听力</b><small>待添加</small></div>
+            <div class="skill-domain muted-domain"><span>S</span><b>口语</b><small>待添加</small></div>
+            <div class="skill-domain muted-domain"><span>R</span><b>阅读</b><small>待添加</small></div>
+            <div class="skill-domain active-domain"><span>W</span><b>写作</b><small>当前重点</small></div>
+          </div>
+
+          <details class="nav-domain writing-nav" open>
+            <summary><span class="domain-icon">W</span><span><strong>写作 Writing</strong><small>课程 · 练习 · 复盘</small></span></summary>
+            <div class="nav-domain-links utility-nav">
+              <a href="#course-system"><b>课程体系</b><small>三阶段学习路线</small></a>
+              <a href="#task2-topics"><b>话题训练</b><small>Task 2 高频主题</small></a>
+              <a href="#practice"><b>主体段练习</b><small>观点与论证展开</small></a>
+              <a href="#interactive-drills"><b>句子练习</b><small>配对 · 填空 · 默写</small></a>
+              <a href="#phrase-drills"><b>词组练习</b><small>Native expressions</small></a>
+              <a href="#record"><b>学习记录</b><small>保存与复盘</small></a>
+            </div>
+          </details>
+
+          <details class="nav-domain secondary-nav-domain">
+            <summary><span class="domain-icon">＋</span><span><strong>写作参考</strong><small>标准 · 方法 · 题型</small></span></summary>
+            <div class="nav-domain-links utility-nav">
+              <a href="#academic-standard"><b>Academic 标准</b></a>
+              <a href="#task-switch"><b>Task 1 / Task 2</b></a>
+              <a href="#book-method"><b>顾家北方法路线</b></a>
+            </div>
+          </details>
+
+          <details class="nav-domain secondary-nav-domain course-nav">
+            <summary><span class="domain-icon">≡</span><span><strong>详细课程目录</strong><small>按阶段选择模块</small></span></summary>
             <div id="sidebarCourseTree" class="course-tree"></div>
-          </div>
-          <div class="nav-group topic-nav">
-            <span class="nav-label">Task 2 话题</span>
+          </details>
+
+          <details class="nav-domain secondary-nav-domain topic-nav">
+            <summary><span class="domain-icon">#</span><span><strong>作文话题选择</strong><small>选择当前 Task 2 话题</small></span></summary>
             <div id="sidebarTopicList" class="sidebar-topic-list"></div>
-          </div>
-          <div class="nav-group utility-nav">
-            <span class="nav-label">功能区</span>
-            <a href="#course-system">Task 2 课程体系</a>
-            <a href="#academic-standard">Academic 标准</a>
-            <a href="#task-switch">Academic Task 1 / Task 2</a>
-            <a href="#book-method">顾家北方法路线</a>
-            <a href="#task2-topics">Task 2 话题训练</a>
-            <a href="#vocabulary-topics">生活单词 Topic</a>
-            <a href="#practice">主体段练习</a>
-            <a href="#interactive-drills">句子小练习</a>
-            <a href="#phrase-drills">Native 词组练习</a>
-            <a href="#record">练习记录</a>
-          </div>
+          </details>
         </nav>
       </aside>
 
