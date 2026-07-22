@@ -318,6 +318,11 @@ h3 {
   border-color: var(--blue);
 }
 
+.skill-domain.speaking-domain {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
 .skill-domain.active-domain span,
 .skill-domain.active-domain small {
   color: rgba(255, 255, 255, 0.75);
@@ -2021,6 +2026,76 @@ textarea:focus {
   margin-bottom: 18px;
 }
 
+.speaking-part-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.speaking-part-tabs button {
+  display: grid;
+  gap: 3px;
+  padding: 13px 15px;
+  color: var(--ink);
+  text-align: left;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.speaking-part-tabs button small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.speaking-part-tabs button.active {
+  color: #fff;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.speaking-part-tabs button.active small {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.vocabulary-topic-bar {
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+}
+
+.speaking-question-strip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  background: #eef5fb;
+  border: 1px solid #cbdceb;
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+}
+
+.speaking-question-strip > span {
+  padding: 5px 9px;
+  color: #fff;
+  background: var(--blue);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.speaking-question-strip b,
+.speaking-question-strip p {
+  display: block;
+  margin: 0;
+}
+
+.speaking-question-strip p {
+  margin-top: 3px;
+  color: var(--muted);
+}
+
 .vocabulary-topic {
   min-height: 76px;
   display: grid;
@@ -2413,6 +2488,10 @@ textarea:focus {
 }
 
 @media (max-width: 520px) {
+  .speaking-part-tabs,
+  .speaking-question-strip {
+    grid-template-columns: 1fr;
+  }
   .vocabulary-topic-bar,
   .memory-strip {
     grid-template-columns: 1fr;

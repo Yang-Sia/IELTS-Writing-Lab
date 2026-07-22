@@ -37,7 +37,7 @@
 
           <div class="skill-domain-grid" aria-label="听说读写四项">
             <div class="skill-domain muted-domain"><span>L</span><b>听力</b><small>待添加</small></div>
-            <div class="skill-domain muted-domain"><span>S</span><b>口语</b><small>待添加</small></div>
+            <div class="skill-domain active-domain speaking-domain"><span>S</span><b>口语</b><small>词汇 Topic</small></div>
             <div class="skill-domain muted-domain"><span>R</span><b>阅读</b><small>待添加</small></div>
             <div class="skill-domain active-domain"><span>W</span><b>写作</b><small>当前重点</small></div>
           </div>
@@ -140,24 +140,22 @@
         <section id="vocabulary-topics" class="panel vocabulary-panel">
           <div class="section-head vocabulary-hero">
             <div>
-              <p class="eyebrow">Vocabulary by Topic</p>
-              <h2>生活单词：按场景建立表达网络</h2>
-              <p class="muted">不孤立背单词。先选择 Topic，再按动作、价格、付款和售后等真实场景学习近义词区别、固定搭配与例句。</p>
+              <p class="eyebrow">IELTS Speaking Vocabulary</p>
+              <h2>口语单词：按 Part 和 Topic 建立表达网络</h2>
+              <p class="muted">先选择 Part 1 / 2 / 3，再进入对应高频话题。词汇不仅用来背，还要直接放进真实口语问题中回答。</p>
             </div>
             <div class="vocabulary-progress" id="vocabularyProgress">Shopping · 8 个分类</div>
           </div>
 
-          <div class="vocabulary-topic-bar" aria-label="生活单词主题">
-            <button type="button" class="vocabulary-topic active" data-life-topic="shopping">
-              <span>01</span><strong>Shopping</strong><small>买东西</small>
-            </button>
-            <button type="button" class="vocabulary-topic" data-life-topic="food">
-              <span>02</span><strong>Food</strong><small>食物与用餐</small>
-            </button>
-            <button type="button" class="vocabulary-topic" data-life-topic="travel">
-              <span>03</span><strong>Travel</strong><small>旅行与出行</small>
-            </button>
+          <div class="speaking-part-tabs" id="speakingPartTabs" aria-label="雅思口语部分">
+            <button type="button" data-speaking-part="part1"><b>Part 1</b><small>个人与日常生活</small></button>
+            <button type="button" data-speaking-part="part2"><b>Part 2</b><small>人物 · 地点 · 事件</small></button>
+            <button type="button" data-speaking-part="part3"><b>Part 3</b><small>社会观点与讨论</small></button>
           </div>
+
+          <div id="vocabularyTopicBar" class="vocabulary-topic-bar" aria-label="口语单词主题"></div>
+
+          <div id="speakingQuestionStrip" class="speaking-question-strip"></div>
 
           <div class="vocabulary-workspace">
             <nav id="vocabularyCategoryList" class="vocabulary-category-list" aria-label="Shopping 词汇分类"></nav>

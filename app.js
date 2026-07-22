@@ -1899,6 +1899,12 @@ const lifeVocabularyTopics = {
   shopping: {
     name: "Shopping",
     zh: "买东西",
+    parts: ["part1", "part2", "part3"],
+    questions: {
+      part1: "Do you enjoy shopping? What do you usually buy?",
+      part2: "Describe something you bought that you were pleased with.",
+      part3: "How has online shopping changed people's purchasing habits?"
+    },
     memory: "<b>buy</b> 普通买 · <b>purchase</b> 正式买 · <b>get</b> 口语买 · <b>pick up</b> 顺便买 · <b>shop around</b> 货比三家 · <b>stock up on</b> 大量囤",
     categories: [
       {
@@ -1992,6 +1998,12 @@ const lifeVocabularyTopics = {
   food: {
     name: "Food",
     zh: "食物与用餐",
+    parts: ["part1", "part2", "part3"],
+    questions: {
+      part1: "What kind of food do you enjoy eating?",
+      part2: "Describe a memorable meal you had with other people.",
+      part3: "Why are people's eating habits changing?"
+    },
     memory: "<b>food</b> 泛指食物 · <b>dish</b> 一道菜 · <b>meal</b> 一顿饭 · <b>cuisine</b> 地方菜系 · <b>snack</b> 小吃 · <b>ingredient</b> 食材",
     categories: [
       {
@@ -2065,6 +2077,12 @@ const lifeVocabularyTopics = {
   travel: {
     name: "Travel",
     zh: "旅行与出行",
+    parts: ["part1", "part2", "part3"],
+    questions: {
+      part1: "Do you like travelling? How often do you travel?",
+      part2: "Describe a journey that you remember well.",
+      part3: "What are the benefits and drawbacks of international tourism?"
+    },
     memory: "<b>travel</b> 泛指旅行 · <b>trip</b> 一次往返 · <b>journey</b> 旅程过程 · <b>tour</b> 游览行程 · <b>commute</b> 通勤 · <b>destination</b> 目的地",
     categories: [
       {
@@ -2137,6 +2155,161 @@ const lifeVocabularyTopics = {
   }
 };
 
+const speakingVocabularyExpansion = {
+  family: {
+    name: "Family", zh: "家庭与亲人", parts: ["part1", "part2", "part3"],
+    questions: { part1: "Do you spend much time with your family?", part2: "Describe a family member you admire.", part3: "How are family relationships changing in modern society?" },
+    memory: "<b>close-knit</b> 关系紧密 · <b>get along with</b> 相处融洽 · <b>look up to</b> 敬佩 · <b>take after</b> 像某位亲人",
+    categories: [
+      { id: "relationships", label: "家庭关系", hint: "描述亲密程度、相处方式和家庭支持。", words: [
+        { word: "close-knit", meaning: "关系紧密的", tone: "自然口语", difference: "形容家庭或群体成员彼此关系密切。", collocation: "a close-knit family", example: "I come from a close-knit family, so we talk almost every day.", translation: "我来自一个关系紧密的家庭，所以我们几乎每天聊天。" },
+        { word: "get along with", meaning: "与……相处融洽", tone: "Part 1 高频", difference: "强调两个人关系和谐，后面直接接人。", collocation: "get along well with my parents", example: "I get along really well with my older sister.", translation: "我和姐姐相处得非常好。" },
+        { word: "supportive", meaning: "给予支持的", tone: "正面性格", difference: "不仅是同意，还包括情感或实际帮助。", collocation: "supportive parents", example: "My parents have always been supportive of my decisions.", translation: "父母一直很支持我的决定。" },
+        { word: "family gathering", meaning: "家庭聚会", tone: "生活场景", difference: "家人在节日、生日或周末聚在一起。", collocation: "attend a family gathering", example: "We usually have a large family gathering during the Spring Festival.", translation: "春节期间我们通常会举行大型家庭聚会。" }
+      ]},
+      { id: "family-people", label: "描述家人", hint: "Part 2 描述人物时结合性格、影响与具体事例。", words: [
+        { word: "look up to", meaning: "敬佩；尊敬", tone: "人物题核心", difference: "因某人的品质或成就把对方视为榜样。", collocation: "look up to my grandfather", example: "I have always looked up to my mother because she is incredibly resilient.", translation: "我一直很敬佩母亲，因为她非常坚韧。" },
+        { word: "take after", meaning: "像某位亲人", tone: "外貌/性格", difference: "表示遗传性地像家中某位年长成员。", collocation: "take after my father", example: "I take after my father in both appearance and personality.", translation: "我的外貌和性格都像父亲。" },
+        { word: "reliable", meaning: "可靠的", tone: "性格描述", difference: "表示可以信任对方会履行承诺或提供帮助。", collocation: "a reliable person", example: "My brother is reliable, so I can always turn to him for help.", translation: "哥哥很可靠，所以我总能向他求助。" },
+        { word: "have an influence on", meaning: "对……产生影响", tone: "Part 2/3", difference: "用于解释某人如何改变自己的价值观或选择。", collocation: "have a positive influence on me", example: "My grandmother has had a profound influence on the way I see life.", translation: "祖母对我的人生观产生了深远影响。" }
+      ]},
+      { id: "family-change", label: "家庭与社会", hint: "Part 3 讨论代际关系、家庭结构与现代生活。", words: [
+        { word: "generation gap", meaning: "代沟", tone: "社会讨论", difference: "不同年龄群体在观念、习惯或价值观方面的差异。", collocation: "bridge the generation gap", example: "Open communication can help bridge the generation gap.", translation: "坦诚沟通有助于缩小代沟。" },
+        { word: "extended family", meaning: "大家庭；扩展家庭", tone: "家庭结构", difference: "除父母子女外还包括祖父母、叔姨等亲属。", collocation: "live with an extended family", example: "Living with an extended family can provide practical support.", translation: "与大家庭同住能够提供实际帮助。" },
+        { word: "work-life balance", meaning: "工作与生活平衡", tone: "现代议题", difference: "常用于解释工作如何影响家庭时间。", collocation: "maintain a healthy work-life balance", example: "Long working hours make it difficult to maintain a healthy work-life balance.", translation: "长时间工作让人难以维持健康的工作生活平衡。" },
+        { word: "family bonds", meaning: "家庭纽带；亲情", tone: "抽象表达", difference: "指家庭成员间长期的情感联系。", collocation: "strengthen family bonds", example: "Shared activities can strengthen family bonds.", translation: "共同活动可以加强家庭纽带。" }
+      ]}
+    ]
+  },
+  home: {
+    name: "Home", zh: "家与居住", parts: ["part1", "part2", "part3"],
+    questions: { part1: "What do you like most about your home?", part2: "Describe a home you would like to live in.", part3: "Why is housing becoming less affordable in many cities?" },
+    memory: "<b>home</b> 有归属感的家 · <b>house</b> 房屋建筑 · <b>neighbourhood</b> 社区 · <b>spacious</b> 宽敞",
+    categories: [
+      { id: "home-type", label: "住房与空间", hint: "分清 home 和 house，并描述户型与空间感。", words: [
+        { word: "apartment", meaning: "公寓", tone: "美式常用", difference: "英式英语常说 flat；两者都指一套公寓住宅。", collocation: "a one-bedroom apartment", example: "I live in a small apartment near the city centre.", translation: "我住在市中心附近的一套小公寓里。" },
+        { word: "spacious", meaning: "宽敞的", tone: "正面描述", difference: "表示空间大且活动舒适，比 big 更具体。", collocation: "a spacious living room", example: "The living room is bright and surprisingly spacious.", translation: "客厅明亮，而且出乎意料地宽敞。" },
+        { word: "cosy", meaning: "温馨舒适的", tone: "英式拼写", difference: "不一定大，但让人感觉温暖、放松；美式拼作 cozy。", collocation: "a cosy bedroom", example: "My room is quite small, but it feels cosy.", translation: "我的房间很小，但感觉很温馨。" },
+        { word: "feel at home", meaning: "感觉自在；有归属感", tone: "地道表达", difference: "不仅表示在自己家，也指在某地感觉舒适自然。", collocation: "make someone feel at home", example: "The friendly neighbours made me feel at home immediately.", translation: "友好的邻居让我立刻有了归属感。" }
+      ]},
+      { id: "neighbourhood", label: "社区与设施", hint: "描述居住地点、便利程度和社区氛围。", words: [
+        { word: "neighbourhood", meaning: "社区；街区", tone: "居住区域", difference: "指住所周边的一片区域及其中的社区。", collocation: "a quiet neighbourhood", example: "It is a safe and quiet neighbourhood with plenty of green space.", translation: "这是一个安全安静、绿地充足的社区。" },
+        { word: "within walking distance", meaning: "步行范围内", tone: "位置优势", difference: "表示距离近，可以轻松步行到达。", collocation: "within walking distance of shops", example: "Everything I need is within walking distance.", translation: "我需要的一切都在步行范围内。" },
+        { word: "well-connected", meaning: "交通连接便利的", tone: "城市描述", difference: "表示公共交通或道路网络方便到达其他地区。", collocation: "well-connected by public transport", example: "The area is well-connected to the rest of the city.", translation: "这个地区与城市其他地方交通便利。" },
+        { word: "sense of community", meaning: "社区归属感", tone: "Part 3", difference: "居民互相信任、参与和归属的感觉。", collocation: "create a sense of community", example: "Local events can create a stronger sense of community.", translation: "当地活动可以增强社区归属感。" }
+      ]},
+      { id: "housing", label: "住房社会议题", hint: "Part 3 讨论住房成本、城市化与生活质量。", words: [
+        { word: "affordable housing", meaning: "可负担住房", tone: "政策表达", difference: "指普通或低收入群体能够承担的住房。", collocation: "provide affordable housing", example: "Governments need to provide more affordable housing in major cities.", translation: "政府需要在大城市提供更多可负担住房。" },
+        { word: "cost of living", meaning: "生活成本", tone: "经济议题", difference: "包括住房、食品、交通等基本开支。", collocation: "the rising cost of living", example: "The rising cost of living forces many young people to share accommodation.", translation: "不断上涨的生活成本迫使许多年轻人合租。" },
+        { word: "urban sprawl", meaning: "城市蔓延", tone: "学术表达", difference: "城市低密度地向郊区无序扩张。", collocation: "control urban sprawl", example: "Urban sprawl increases car dependence and infrastructure costs.", translation: "城市蔓延会增加汽车依赖和基础设施成本。" },
+        { word: "quality of life", meaning: "生活质量", tone: "高频抽象词", difference: "综合描述居住舒适、健康、安全和满意程度。", collocation: "improve quality of life", example: "Good housing and public services improve residents' quality of life.", translation: "良好住房和公共服务能够改善居民生活质量。" }
+      ]}
+    ]
+  },
+  study: {
+    name: "Study & Work", zh: "学习与工作", parts: ["part1", "part2", "part3"],
+    questions: { part1: "Do you work or are you a student?", part2: "Describe a skill you would like to learn.", part3: "What skills will people need in the future workplace?" },
+    memory: "<b>major in</b> 主修 · <b>workload</b> 工作量 · <b>hands-on</b> 实践性的 · <b>career prospects</b> 职业前景",
+    categories: [
+      { id: "study-life", label: "学习生活", hint: "回答专业、课程、学习压力和学习收获。", words: [
+        { word: "major in", meaning: "主修", tone: "学生身份", difference: "后接专业名称；major 也可作名词表示专业。", collocation: "major in engineering", example: "I major in engineering because I enjoy solving practical problems.", translation: "我主修工程，因为我喜欢解决实际问题。" },
+        { word: "workload", meaning: "学习量；工作量", tone: "可数整体概念", difference: "指某段时间必须完成的全部任务。", collocation: "a heavy workload", example: "My workload becomes much heavier before final exams.", translation: "期末考试前我的学习任务会重很多。" },
+        { word: "hands-on", meaning: "实践性的", tone: "课程/经验", difference: "通过亲自操作学习，而不只是理论。", collocation: "hands-on experience", example: "The course gives students valuable hands-on experience.", translation: "这门课程为学生提供宝贵的实践经验。" },
+        { word: "keep up with", meaning: "跟上；不落后于", tone: "自然短语", difference: "表示跟上课程、变化或工作进度。", collocation: "keep up with my studies", example: "Good time management helps me keep up with my studies.", translation: "良好的时间管理帮助我跟上学习进度。" }
+      ]},
+      { id: "work-life", label: "工作与职业", hint: "描述职业职责、满意度和未来发展。", words: [
+        { word: "job satisfaction", meaning: "工作满意度", tone: "职业话题", difference: "来自工作意义、环境或成就的满足感。", collocation: "a high level of job satisfaction", example: "Flexible hours can improve employees' job satisfaction.", translation: "弹性工作时间可以提高员工的工作满意度。" },
+        { word: "career prospects", meaning: "职业前景", tone: "未来发展", difference: "指未来晋升、收入和就业机会。", collocation: "improve career prospects", example: "Learning digital skills can improve young people's career prospects.", translation: "学习数字技能可以改善年轻人的职业前景。" },
+        { word: "meet a deadline", meaning: "按时完成", tone: "工作动作", difference: "在规定日期前完成任务，不能说 catch a deadline。", collocation: "work hard to meet a deadline", example: "I sometimes work late to meet a tight deadline.", translation: "为了赶紧迫的截止日期，我有时会工作到很晚。" },
+        { word: "sense of achievement", meaning: "成就感", tone: "积极感受", difference: "成功完成有挑战的事情后产生的满足。", collocation: "give me a sense of achievement", example: "Completing a difficult project gives me a real sense of achievement.", translation: "完成困难项目给我真正的成就感。" }
+      ]},
+      { id: "future-work", label: "教育与未来工作", hint: "Part 3 讨论技能、自动化和终身学习。", words: [
+        { word: "transferable skills", meaning: "可迁移技能", tone: "学术/职业", difference: "可用于不同工作和行业的沟通、协作等能力。", collocation: "develop transferable skills", example: "University should help students develop transferable skills.", translation: "大学应帮助学生培养可迁移技能。" },
+        { word: "lifelong learning", meaning: "终身学习", tone: "教育趋势", difference: "人在正式教育结束后持续更新知识和技能。", collocation: "encourage lifelong learning", example: "Rapid technological change makes lifelong learning essential.", translation: "快速的技术变化使终身学习至关重要。" },
+        { word: "job security", meaning: "工作稳定性", tone: "劳动力议题", difference: "免于失业威胁的稳定感。", collocation: "provide greater job security", example: "Many workers value job security more than a high salary.", translation: "许多员工看重工作稳定性胜过高工资。" },
+        { word: "work remotely", meaning: "远程工作", tone: "现代工作", difference: "在办公室以外通过数字工具完成工作。", collocation: "the option to work remotely", example: "Working remotely can save commuting time but may reduce social contact.", translation: "远程工作可以节省通勤时间，但可能减少社交接触。" }
+      ]}
+    ]
+  },
+  hobbies: {
+    name: "Hobbies", zh: "兴趣与休闲", parts: ["part1", "part2", "part3"],
+    questions: { part1: "What do you enjoy doing in your free time?", part2: "Describe a hobby you would like to try.", part3: "Why do adults have less leisure time than children?" },
+    memory: "<b>be into</b> 喜欢 · <b>take up</b> 开始培养爱好 · <b>unwind</b> 放松 · <b>leisure time</b> 空闲时间",
+    categories: [
+      { id: "free-time", label: "兴趣与频率", hint: "不要只说 like；表达喜爱程度、开始时间和频率。", words: [
+        { word: "be into", meaning: "很喜欢；对……感兴趣", tone: "自然口语", difference: "比 be interested in 更随意、更像真实口语。", collocation: "be really into photography", example: "I'm really into photography, especially street photography.", translation: "我非常喜欢摄影，尤其是街头摄影。" },
+        { word: "take up", meaning: "开始培养某项爱好", tone: "动作短语", difference: "指开始一项持续性活动或兴趣。", collocation: "take up painting", example: "I took up swimming last year to become more active.", translation: "去年我开始游泳，希望让自己更活跃。" },
+        { word: "from time to time", meaning: "偶尔", tone: "频率表达", difference: "表示不规律地偶尔发生，接近 occasionally。", collocation: "go hiking from time to time", example: "I go hiking with my friends from time to time.", translation: "我偶尔和朋友一起徒步。" },
+        { word: "be passionate about", meaning: "热爱；充满热情", tone: "强烈兴趣", difference: "比 like 强烈，适合解释长期投入。", collocation: "be passionate about music", example: "I've been passionate about music since I was a child.", translation: "我从小就非常热爱音乐。" }
+      ]},
+      { id: "benefits", label: "休闲的益处", hint: "解释爱好如何影响情绪、健康与社交。", words: [
+        { word: "unwind", meaning: "放松；松弛下来", tone: "地道口语", difference: "忙碌或压力之后逐渐放松。", collocation: "a good way to unwind", example: "Reading is my favourite way to unwind after work.", translation: "阅读是我下班后最喜欢的放松方式。" },
+        { word: "clear my mind", meaning: "放空头脑；理清思绪", tone: "感受表达", difference: "暂时摆脱担忧或杂念，恢复专注。", collocation: "help me clear my mind", example: "Going for a run helps me clear my mind.", translation: "跑步有助于我放空头脑。" },
+        { word: "socialise", meaning: "社交；与人交往", tone: "英式拼写", difference: "通过活动与他人相处；美式拼作 socialize。", collocation: "socialise with friends", example: "Team sports give people a chance to exercise and socialise.", translation: "团队运动让人们有机会锻炼和社交。" },
+        { word: "creative outlet", meaning: "创造力的出口", tone: "高级自然表达", difference: "通过艺术或活动表达想法与情绪的方式。", collocation: "provide a creative outlet", example: "Painting provides a creative outlet for people with stressful jobs.", translation: "绘画为工作压力大的人提供了创造力出口。" }
+      ]},
+      { id: "leisure-society", label: "休闲与社会", hint: "Part 3 讨论屏幕时间、商业化休闲和生活节奏。", words: [
+        { word: "leisure time", meaning: "闲暇时间", tone: "正式常用", difference: "不工作或学习时可自由安排的时间。", collocation: "spend leisure time", example: "People increasingly spend their leisure time on digital devices.", translation: "人们越来越多地把闲暇时间花在数字设备上。" },
+        { word: "screen time", meaning: "屏幕使用时间", tone: "现代生活", difference: "使用手机、电脑、电视等屏幕的总时长。", collocation: "limit screen time", example: "Parents often struggle to limit their children's screen time.", translation: "父母常常难以限制孩子的屏幕时间。" },
+        { word: "sedentary lifestyle", meaning: "久坐的生活方式", tone: "健康议题", difference: "日常活动量低、长时间坐着的生活模式。", collocation: "lead a sedentary lifestyle", example: "Passive entertainment can contribute to a sedentary lifestyle.", translation: "被动娱乐可能导致久坐的生活方式。" },
+        { word: "recreational facilities", meaning: "休闲设施", tone: "城市政策", difference: "供运动、娱乐和休闲使用的公共场所与设备。", collocation: "invest in recreational facilities", example: "Cities should invest in accessible recreational facilities.", translation: "城市应该投资建设便利可达的休闲设施。" }
+      ]}
+    ]
+  },
+  technology: {
+    name: "Technology", zh: "科技与网络", parts: ["part1", "part2", "part3"],
+    questions: { part1: "What technology do you use every day?", part2: "Describe a useful piece of technology you own.", part3: "How might technology change the way people work and communicate?" },
+    memory: "<b>user-friendly</b> 易用 · <b>rely on</b> 依赖 · <b>keep in touch</b> 保持联系 · <b>digital divide</b> 数字鸿沟",
+    categories: [
+      { id: "daily-tech", label: "日常科技", hint: "描述设备的用途、便利性和使用频率。", words: [
+        { word: "user-friendly", meaning: "用户友好的；易用的", tone: "产品评价", difference: "设计直观，使用者不需要复杂学习。", collocation: "a user-friendly app", example: "The app is user-friendly, even for older people.", translation: "这个应用非常易用，即使老年人也能操作。" },
+        { word: "rely on", meaning: "依赖；依靠", tone: "高频短语", difference: "表示日常功能离不开某人或某物。", collocation: "rely heavily on my phone", example: "I rely on my phone for navigation and communication.", translation: "我依靠手机导航和沟通。" },
+        { word: "save time", meaning: "节省时间", tone: "好处展开", difference: "用于解释技术提高效率的具体结果。", collocation: "save a great deal of time", example: "Online banking saves me a great deal of time.", translation: "网上银行为我节省了大量时间。" },
+        { word: "keep in touch", meaning: "保持联系", tone: "社交科技", difference: "持续与远方朋友或家人交流。", collocation: "keep in touch with friends", example: "Social media helps me keep in touch with friends abroad.", translation: "社交媒体帮助我与国外朋友保持联系。" }
+      ]},
+      { id: "tech-effects", label: "科技的影响", hint: "平衡便利与过度依赖、隐私等问题。", words: [
+        { word: "screen addiction", meaning: "屏幕成瘾", tone: "负面影响", difference: "难以控制使用电子屏幕的行为。", collocation: "develop screen addiction", example: "Children may develop screen addiction without clear limits.", translation: "如果没有明确限制，儿童可能形成屏幕成瘾。" },
+        { word: "privacy concerns", meaning: "隐私担忧", tone: "Part 3", difference: "对个人数据收集、存储或滥用的忧虑。", collocation: "raise privacy concerns", example: "Facial recognition technology raises serious privacy concerns.", translation: "人脸识别技术引发严重的隐私担忧。" },
+        { word: "face-to-face interaction", meaning: "面对面交流", tone: "沟通对比", difference: "与 online communication 相对的线下直接交流。", collocation: "reduce face-to-face interaction", example: "Excessive phone use can reduce face-to-face interaction.", translation: "过度使用手机会减少面对面交流。" },
+        { word: "digital divide", meaning: "数字鸿沟", tone: "社会公平", difference: "不同群体获得设备、网络和数字技能的差距。", collocation: "bridge the digital divide", example: "Affordable internet access is necessary to bridge the digital divide.", translation: "平价网络接入是弥合数字鸿沟的必要条件。" }
+      ]},
+      { id: "future-tech", label: "未来科技", hint: "Part 3 讨论自动化、人工智能和科技监管。", words: [
+        { word: "artificial intelligence", meaning: "人工智能", tone: "正式全称", difference: "首次使用可写 artificial intelligence (AI)，之后使用 AI。", collocation: "advances in artificial intelligence", example: "Artificial intelligence is likely to transform many industries.", translation: "人工智能很可能改变许多行业。" },
+        { word: "automation", meaning: "自动化", tone: "工作议题", difference: "用机器或软件自动完成原本由人执行的任务。", collocation: "the spread of automation", example: "Automation may replace routine jobs but create new roles.", translation: "自动化可能取代常规工作，但也会创造新岗位。" },
+        { word: "technological innovation", meaning: "技术创新", tone: "学术表达", difference: "新技术、产品或方法的开发与应用。", collocation: "encourage technological innovation", example: "Public investment can encourage technological innovation.", translation: "公共投资可以鼓励技术创新。" },
+        { word: "regulate", meaning: "监管；规范", tone: "政策动词", difference: "政府通过规则控制行业或活动。", collocation: "regulate technology companies", example: "Governments must regulate how companies use personal data.", translation: "政府必须监管企业使用个人数据的方式。" }
+      ]}
+    ]
+  },
+  health: {
+    name: "Health", zh: "健康与运动", parts: ["part1", "part2", "part3"],
+    questions: { part1: "What do you do to stay healthy?", part2: "Describe a healthy habit you have developed.", part3: "Who should be responsible for improving public health?" },
+    memory: "<b>stay in shape</b> 保持身材 · <b>work out</b> 锻炼 · <b>cut down on</b> 减少 · <b>well-being</b> 身心健康",
+    categories: [
+      { id: "healthy-habits", label: "健康习惯", hint: "用具体动作解释如何保持身体健康。", words: [
+        { word: "stay in shape", meaning: "保持良好体形", tone: "自然口语", difference: "强调通过运动维持身体状态。", collocation: "exercise to stay in shape", example: "I cycle to work to stay in shape.", translation: "我骑车上班以保持良好体形。" },
+        { word: "work out", meaning: "锻炼；健身", tone: "口语动词", difference: "通常指有计划的体育锻炼；workout 合写时是名词。", collocation: "work out at the gym", example: "I try to work out three times a week.", translation: "我尽量每周锻炼三次。" },
+        { word: "cut down on", meaning: "减少", tone: "习惯改变", difference: "减少某物的数量或频率，常接糖、咖啡或垃圾食品。", collocation: "cut down on sugar", example: "I'm trying to cut down on sugary drinks.", translation: "我正努力减少含糖饮料。" },
+        { word: "get enough sleep", meaning: "获得充足睡眠", tone: "生活习惯", difference: "比 sleep enough 更常见自然。", collocation: "struggle to get enough sleep", example: "I feel much more productive when I get enough sleep.", translation: "睡眠充足时，我的效率高得多。" }
+      ]},
+      { id: "wellbeing", label: "身心健康", hint: "健康不仅是没有疾病，也包括情绪和心理状态。", words: [
+        { word: "well-being", meaning: "身心健康；幸福状态", tone: "综合概念", difference: "同时涵盖身体、心理和生活满意度。", collocation: "mental and physical well-being", example: "Regular exercise improves both physical and mental well-being.", translation: "规律运动能改善身心健康。" },
+        { word: "cope with stress", meaning: "应对压力", tone: "心理健康", difference: "管理压力并减少它对生活的影响。", collocation: "learn to cope with stress", example: "Young people need healthy ways to cope with stress.", translation: "年轻人需要学习健康的压力应对方式。" },
+        { word: "feel run-down", meaning: "感觉疲惫虚弱", tone: "自然口语", difference: "因过劳或可能生病而感到身体状态差。", collocation: "feel tired and run-down", example: "I tend to feel run-down when I do not sleep properly.", translation: "睡不好时我往往会感觉疲惫虚弱。" },
+        { word: "recharge my batteries", meaning: "恢复精力", tone: "口语比喻", difference: "通过休息或放松重新获得精神和体力。", collocation: "take a break to recharge my batteries", example: "A quiet weekend helps me recharge my batteries.", translation: "安静的周末能帮我恢复精力。" }
+      ]},
+      { id: "public-health", label: "公共健康", hint: "Part 3 讨论个人责任、政府政策和医疗资源。", words: [
+        { word: "preventive healthcare", meaning: "预防性医疗", tone: "政策表达", difference: "通过筛查、疫苗和健康教育提前预防疾病。", collocation: "invest in preventive healthcare", example: "Preventive healthcare can reduce long-term medical costs.", translation: "预防性医疗可以降低长期医疗成本。" },
+        { word: "health awareness", meaning: "健康意识", tone: "社会教育", difference: "公众对健康风险和良好习惯的认识。", collocation: "raise health awareness", example: "Schools can play a major role in raising health awareness.", translation: "学校可以在提高健康意识方面发挥重要作用。" },
+        { word: "healthcare system", meaning: "医疗体系", tone: "宏观讨论", difference: "提供医疗服务的医院、人员、资金和政策整体。", collocation: "place pressure on the healthcare system", example: "An ageing population places pressure on the healthcare system.", translation: "人口老龄化给医疗体系带来压力。" },
+        { word: "sedentary behaviour", meaning: "久坐行为", tone: "正式健康词", difference: "清醒时坐着或躺着、能量消耗很低的行为。", collocation: "reduce sedentary behaviour", example: "Workplaces should encourage employees to reduce sedentary behaviour.", translation: "工作场所应鼓励员工减少久坐行为。" }
+      ]}
+    ]
+  }
+};
+
+Object.assign(lifeVocabularyTopics, speakingVocabularyExpansion);
+
 const defaultState = {
   course: "task2",
   activeView: "course-system",
@@ -2147,6 +2320,7 @@ const defaultState = {
   topicVocab: "government",
   topicVocabRevealed: {},
   lifeVocabularyTopic: "shopping",
+  speakingPart: "part1",
   lifeVocabularyCategory: "buying",
   lifeVocabularyOpenCards: {},
   grammarSet: {},
@@ -3134,9 +3308,15 @@ function renderLifeVocabulary() {
   const category = topic.categories.find((item) => item.id === state.lifeVocabularyCategory) || topic.categories[0];
   document.querySelector("#vocabularyProgress").textContent = `${topic.name} · ${topic.categories.length} 个分类 · ${topic.categories.reduce((sum, item) => sum + item.words.length, 0)} 个表达`;
   document.querySelector("#vocabularyMemoryText").innerHTML = topic.memory;
-  document.querySelectorAll("[data-life-topic]").forEach((button) => {
-    button.classList.toggle("active", button.dataset.lifeTopic === state.lifeVocabularyTopic);
-  });
+  const partLabels = { part1: "Part 1 · 个人与日常", part2: "Part 2 · 人物地点事件", part3: "Part 3 · 社会观点" };
+  const partTopics = Object.entries(lifeVocabularyTopics).filter(([, item]) => item.parts?.includes(state.speakingPart));
+  document.querySelector("#vocabularyTopicBar").innerHTML = partTopics.map(([key, item], index) => `
+    <button type="button" class="vocabulary-topic ${key === state.lifeVocabularyTopic ? "active" : ""}" data-life-topic="${key}">
+      <span>${String(index + 1).padStart(2, "0")}</span><strong>${item.name}</strong><small>${item.zh}</small>
+    </button>
+  `).join("");
+  document.querySelectorAll("[data-speaking-part]").forEach((button) => button.classList.toggle("active", button.dataset.speakingPart === state.speakingPart));
+  document.querySelector("#speakingQuestionStrip").innerHTML = `<span>${partLabels[state.speakingPart]}</span><div><b>本 Topic 口语题</b><p>${topic.questions?.[state.speakingPart] || "Use the vocabulary below to answer this topic."}</p></div>`;
   document.querySelector("#vocabularyCategoryList").innerHTML = topic.categories.map((item, index) => `
     <button type="button" class="vocabulary-category-button ${item.id === category.id ? "active" : ""}" data-vocabulary-category="${item.id}">
       <span>${String(index + 1).padStart(2, "0")}</span>
@@ -3181,6 +3361,18 @@ function renderLifeVocabulary() {
       if (!nextTopic) return;
       state.lifeVocabularyTopic = button.dataset.lifeTopic;
       state.lifeVocabularyCategory = nextTopic.categories[0].id;
+      saveState();
+      renderLifeVocabulary();
+    };
+  });
+  document.querySelectorAll("[data-speaking-part]").forEach((button) => {
+    button.onclick = () => {
+      state.speakingPart = button.dataset.speakingPart;
+      const firstTopic = Object.entries(lifeVocabularyTopics).find(([, item]) => item.parts?.includes(state.speakingPart));
+      if (firstTopic && !lifeVocabularyTopics[state.lifeVocabularyTopic]?.parts?.includes(state.speakingPart)) {
+        state.lifeVocabularyTopic = firstTopic[0];
+        state.lifeVocabularyCategory = firstTopic[1].categories[0].id;
+      }
       saveState();
       renderLifeVocabulary();
     };
