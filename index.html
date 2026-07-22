@@ -27,22 +27,29 @@
             <strong>先打基础，再进入专项</strong>
           </div>
 
-          <details class="nav-domain foundation-nav" open>
-            <summary><span class="domain-icon">A</span><span><strong>学习基础</strong><small>Vocabulary · Grammar</small></span></summary>
+          <details class="nav-domain primary-domain foundation-nav" data-nav-domain="foundation">
+            <summary><span class="domain-icon">A</span><span><strong>学习基础</strong><small>Grammar Foundation</small></span></summary>
             <div class="nav-domain-links utility-nav">
-              <a href="#vocabulary-topics"><b>单词</b><small>按生活 Topic 学习</small></a>
               <a href="#course-system" data-module-shortcut="foundation-grammar"><b>语法</b><small>基础语法写作化</small></a>
             </div>
           </details>
 
-          <div class="skill-domain-grid" aria-label="听说读写四项">
-            <div class="skill-domain muted-domain"><span>L</span><b>听力</b><small>待添加</small></div>
-            <div class="skill-domain active-domain speaking-domain"><span>S</span><b>口语</b><small>词汇 Topic</small></div>
-            <div class="skill-domain muted-domain"><span>R</span><b>阅读</b><small>待添加</small></div>
-            <div class="skill-domain active-domain"><span>W</span><b>写作</b><small>当前重点</small></div>
+          <div class="skill-placeholder" aria-label="听力栏目待添加">
+            <span class="domain-icon">L</span><span><strong>听力 Listening</strong><small>课程内容待添加</small></span>
           </div>
 
-          <details class="nav-domain writing-nav" open>
+          <details class="nav-domain primary-domain speaking-nav" data-nav-domain="speaking">
+            <summary><span class="domain-icon">S</span><span><strong>口语 Speaking</strong><small>Part 1 · Part 2 · Part 3</small></span></summary>
+            <div class="nav-domain-links utility-nav">
+              <a href="#vocabulary-topics"><b>口语话题词汇</b><small>按 Part 和 Topic 学习</small></a>
+            </div>
+          </details>
+
+          <div class="skill-placeholder" aria-label="阅读栏目待添加">
+            <span class="domain-icon">R</span><span><strong>阅读 Reading</strong><small>课程内容待添加</small></span>
+          </div>
+
+          <details class="nav-domain primary-domain writing-nav" data-nav-domain="writing">
             <summary><span class="domain-icon">W</span><span><strong>写作 Writing</strong><small>课程 · 练习 · 复盘</small></span></summary>
             <div class="nav-domain-links utility-nav">
               <a href="#course-system"><b>课程体系</b><small>三阶段学习路线</small></a>
@@ -54,7 +61,7 @@
             </div>
           </details>
 
-          <details class="nav-domain secondary-nav-domain">
+          <details class="nav-domain secondary-nav-domain" data-nav-domain="reference">
             <summary><span class="domain-icon">＋</span><span><strong>写作参考</strong><small>标准 · 方法 · 题型</small></span></summary>
             <div class="nav-domain-links utility-nav">
               <a href="#academic-standard"><b>Academic 标准</b></a>
@@ -63,12 +70,12 @@
             </div>
           </details>
 
-          <details class="nav-domain secondary-nav-domain course-nav">
+          <details class="nav-domain secondary-nav-domain course-nav" data-nav-domain="course-detail">
             <summary><span class="domain-icon">≡</span><span><strong>详细课程目录</strong><small>按阶段选择模块</small></span></summary>
             <div id="sidebarCourseTree" class="course-tree"></div>
           </details>
 
-          <details class="nav-domain secondary-nav-domain topic-nav">
+          <details class="nav-domain secondary-nav-domain topic-nav" data-nav-domain="topic-detail">
             <summary><span class="domain-icon">#</span><span><strong>作文话题选择</strong><small>选择当前 Task 2 话题</small></span></summary>
             <div id="sidebarTopicList" class="sidebar-topic-list"></div>
           </details>

@@ -242,6 +242,10 @@ h3 {
   background: var(--blue);
 }
 
+.speaking-nav .domain-icon {
+  background: var(--accent);
+}
+
 .secondary-nav-domain .domain-icon {
   color: var(--muted);
   background: #edf1f5;
@@ -275,57 +279,33 @@ h3 {
   color: rgba(255, 255, 255, 0.76);
 }
 
-.skill-domain-grid {
+.skill-placeholder {
+  min-height: 54px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
-}
-
-.skill-domain {
-  min-width: 0;
-  display: grid;
-  justify-items: center;
-  gap: 2px;
-  padding: 9px 3px;
-  background: #fff;
-  border: 1px solid var(--line);
+  grid-template-columns: 36px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  opacity: 0.48;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px dashed var(--line);
   border-radius: 8px;
 }
 
-.skill-domain span {
+.skill-placeholder .domain-icon {
+  color: var(--muted);
+  background: #edf1f5;
+}
+
+.skill-placeholder strong,
+.skill-placeholder small {
+  display: block;
+}
+
+.skill-placeholder small {
+  margin-top: 2px;
   color: var(--muted);
   font-size: 0.72rem;
-  font-weight: 900;
-}
-
-.skill-domain b {
-  font-size: 0.78rem;
-}
-
-.skill-domain small {
-  color: var(--muted);
-  font-size: 0.58rem;
-  white-space: nowrap;
-}
-
-.skill-domain.muted-domain {
-  opacity: 0.53;
-}
-
-.skill-domain.active-domain {
-  color: #fff;
-  background: var(--blue);
-  border-color: var(--blue);
-}
-
-.skill-domain.speaking-domain {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-.skill-domain.active-domain span,
-.skill-domain.active-domain small {
-  color: rgba(255, 255, 255, 0.75);
 }
 
 .nav-domain .course-tree,
@@ -2439,7 +2419,7 @@ textarea:focus {
   }
 
   .sidebar-map-head,
-  .skill-domain-grid,
+  .skill-placeholder,
   .nav-domain {
     grid-column: 1 / -1;
   }

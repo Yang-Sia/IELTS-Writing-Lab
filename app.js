@@ -2374,7 +2374,19 @@ function renderVisiblePanels() {
     panel.hidden = panel.id !== state.activeView;
   });
   document.querySelectorAll(".utility-nav a").forEach((link) => {
-    link.classList.toggle("active", link.getAttribute("href") === `#${state.activeView}`);
+    const targetsCurrentView = link.getAttribute("href") === `#${state.activeView}`;
+    const shortcutMatches = link.dataset.moduleShortcut
+      ? state.module === link.dataset.moduleShortcut
+      : !(state.activeView === "course-system" && state.module === "foundation-grammar" && link.getAttribute("href") === "#course-system");
+    link.classList.toggle("active", targetsCurrentView && shortcutMatches);
+  });
+  const activeDomain = state.activeView === "vocabulary-topics"
+    ? "speaking"
+    : state.activeView === "course-system" && state.module === "foundation-grammar"
+      ? "foundation"
+      : "writing";
+  document.querySelectorAll(".primary-domain").forEach((domain) => {
+    domain.open = domain.dataset.navDomain === activeDomain;
   });
 }
 
