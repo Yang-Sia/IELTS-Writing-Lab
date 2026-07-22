@@ -5,6 +5,14 @@ const root = __dirname;
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const js = fs.readFileSync(path.join(root, "app.js"), "utf8");
 
+const sectionIds = new Set([...html.matchAll(/<section\s+id="([^"]+)"/g)].map((match) => match[1]));
+const navigationTargets = [...html.matchAll(/<a\s+href="#([^"]+)"/g)].map((match) => match[1]);
+navigationTargets.forEach((target) => {
+  if (!sectionIds.has(target)) {
+    throw new Error(`navigation target missing: #${target}`);
+  }
+});
+
 function assertIncludes(source, value, label) {
   if (!source.includes(value)) {
     throw new Error(`${label} missing: ${value}`);
@@ -32,6 +40,7 @@ assertIncludes(html, "阅读", "reading navigation category");
 assertIncludes(html, 'data-module-shortcut="foundation-grammar"', "grammar shortcut");
 assertIncludes(html, 'data-nav-domain="speaking"', "speaking navigation state");
 assertIncludes(js, "const activeDomain", "single active navigation domain");
+assertIncludes(js, 'state.module = "sentence-patterns"', "writing course navigation reset");
 assertIncludes(html, 'id="book-method"', "book method section");
 assertIncludes(html, 'id="matchingExercise"', "matching exercise");
 assertIncludes(html, 'id="clozeExercise"', "cloze exercise");

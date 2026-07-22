@@ -3548,6 +3548,7 @@ document.querySelector("#sidebarToggle").addEventListener("click", () => {
 document.querySelectorAll(".utility-nav a").forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
+    const viewId = link.getAttribute("href").replace("#", "");
     if (link.dataset.moduleShortcut) {
       const targetModule = coursePhases.flatMap((phase) => phase.modules).find((module) => module.id === link.dataset.moduleShortcut);
       const targetPhase = coursePhases.find((phase) => phase.modules.some((module) => module.id === link.dataset.moduleShortcut));
@@ -3555,8 +3556,10 @@ document.querySelectorAll(".utility-nav a").forEach((link) => {
         state.stage = targetPhase.id;
         state.module = targetModule.id;
       }
+    } else if (viewId === "course-system" && state.module === "foundation-grammar") {
+      state.stage = "stage1";
+      state.module = "sentence-patterns";
     }
-    const viewId = link.getAttribute("href").replace("#", "");
     setActiveView(viewId);
   });
 });
