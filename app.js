@@ -1895,6 +1895,101 @@ const nativePhraseBank = [
   { topic: "cities", en: "bumper-to-bumper", zh: "交通十分拥堵的", definition: "very close together and moving slowly" }
 ];
 
+const lifeVocabularyTopics = {
+  shopping: {
+    name: "Shopping",
+    zh: "买东西",
+    categories: [
+      {
+        id: "buying",
+        label: "表示“买”",
+        hint: "先掌握语气和使用场景：普通、正式、口语和顺便购买。",
+        words: [
+          { word: "buy", meaning: "买；购买", tone: "最常见 · 通用", difference: "强调付钱买下某物，日常场景首选。", collocation: "buy something for someone", example: "I bought a birthday present for my sister.", translation: "我给妹妹买了一份生日礼物。" },
+          { word: "purchase", meaning: "购买；购置", tone: "正式 · 商业/书面", difference: "含义接近 buy，但更正式，也可作名词。", collocation: "purchase goods online", example: "Tickets can be purchased online in advance.", translation: "门票可以提前在网上购买。" },
+          { word: "get", meaning: "买到；弄到", tone: "口语 · 自然", difference: "重点是获得某物，不特别强调付款过程。", collocation: "get some milk", example: "I need to get some milk on my way home.", translation: "我回家路上得买点牛奶。" },
+          { word: "pick up", meaning: "顺便买；取回", tone: "口语 · 顺路", difference: "常指路过某处时顺便购买少量东西。", collocation: "pick up some groceries", example: "Could you pick up some bread after work?", translation: "你下班后能顺便买些面包吗？" }
+        ]
+      },
+      {
+        id: "choosing",
+        label: "逛街与选购",
+        hint: "区分购物活动、随便看看、货比三家和最终挑选。",
+        words: [
+          { word: "go shopping", meaning: "去购物；逛街", tone: "日常活动", difference: "表示购物这项活动，不强调买了什么。", collocation: "go shopping for clothes", example: "We went shopping for winter clothes yesterday.", translation: "我们昨天去买冬装了。" },
+          { word: "browse", meaning: "随便看看；浏览", tone: "无明确购买目标", difference: "只看商品，可能不会购买；线上线下都能用。", collocation: "browse online stores", example: "I was just browsing and did not intend to buy anything.", translation: "我只是随便看看，没打算买东西。" },
+          { word: "shop around", meaning: "货比三家", tone: "比较选择", difference: "在决定购买前比较不同商家的价格或质量。", collocation: "shop around for the best deal", example: "It is worth shopping around before buying a laptop.", translation: "买笔记本电脑前值得货比三家。" },
+          { word: "select", meaning: "挑选；选定", tone: "比 choose 正式", difference: "强调经过考虑后，从多个选项中选定一个。", collocation: "carefully select a product", example: "Customers can select a delivery time at checkout.", translation: "顾客可以在结账时选择配送时间。" }
+        ]
+      },
+      {
+        id: "bulk",
+        label: "大量购买与囤货",
+        hint: "表达为未来做准备，或通过一次买很多来降低成本。",
+        words: [
+          { word: "stock up on", meaning: "囤积；备足", tone: "为以后准备", difference: "后接要大量储备的物品，介词 on 不能漏。", collocation: "stock up on food", example: "People stocked up on food before the storm.", translation: "人们在暴风雨前囤积了食物。" },
+          { word: "buy in bulk", meaning: "批量购买", tone: "强调数量与省钱", difference: "一次购买大量同类商品，通常价格更低。", collocation: "buy household goods in bulk", example: "Large families can save money by buying in bulk.", translation: "大家庭可以通过批量购买来省钱。" }
+        ]
+      },
+      {
+        id: "price",
+        label: "价格与优惠",
+        hint: "描述价格高低时，尽量使用准确评价，而不只说 cheap 或 expensive。",
+        words: [
+          { word: "affordable", meaning: "价格负担得起的", tone: "正面 · 常用于写作", difference: "价格在人们经济承受范围内，不等于质量差。", collocation: "affordable products / housing", example: "Online platforms give consumers access to more affordable products.", translation: "网络平台让消费者可以买到价格更实惠的产品。" },
+          { word: "overpriced", meaning: "定价过高的", tone: "负面评价", difference: "不仅贵，而且贵得不合理、不值这个价格。", collocation: "an overpriced product", example: "The jacket looks stylish, but it is clearly overpriced.", translation: "这件夹克很时尚，但定价明显过高。" },
+          { word: "a bargain", meaning: "便宜货；划算的交易", tone: "口语 · 正面", difference: "指价格远低于预期，买得非常划算。", collocation: "pick up a bargain", example: "I got this coat for half price—it was a real bargain.", translation: "这件外套我半价买的，真的很划算。" },
+          { word: "good value for money", meaning: "物有所值", tone: "实用评价", difference: "重点是质量、用途与价格相比很值得，不一定便宜。", collocation: "offer good value for money", example: "The basic model offers good value for money.", translation: "基础款物有所值。" }
+        ]
+      },
+      {
+        id: "payment",
+        label: "付款与结账",
+        hint: "注意 pay、spend、afford 的句型不同。",
+        words: [
+          { word: "pay for", meaning: "为……付款", tone: "强调支付对象", difference: "pay 后接金额；pay for 后接商品或服务。", collocation: "pay for the meal", example: "She paid for the order by card.", translation: "她用银行卡支付了订单。" },
+          { word: "spend ... on", meaning: "把……花在……上", tone: "强调花费", difference: "句型为 spend + 钱/时间 + on + 名词。", collocation: "spend money on clothes", example: "Young consumers often spend more money on experiences.", translation: "年轻消费者往往在体验上花更多钱。" },
+          { word: "afford", meaning: "买得起；承担得起", tone: "能力与成本", difference: "通常接名词或 to do，不能说 afford to something。", collocation: "afford to buy", example: "Many students cannot afford to buy new textbooks.", translation: "许多学生买不起新教材。" },
+          { word: "checkout", meaning: "结账处；结账流程", tone: "商店/网购", difference: "可指实体店收银区，也可指网购的最后付款页面。", collocation: "proceed to checkout", example: "You can apply the discount code at checkout.", translation: "你可以在结账时使用折扣码。" }
+        ]
+      },
+      {
+        id: "returns",
+        label: "退换货与售后",
+        hint: "保存 receipt，并分清 return、exchange 和 refund。",
+        words: [
+          { word: "return", meaning: "退货；归还", tone: "把商品退回", difference: "强调把不需要或有问题的商品交回商家。", collocation: "return an item", example: "You can return the item within 30 days.", translation: "你可以在30天内退回该商品。" },
+          { word: "exchange", meaning: "换货；更换", tone: "换成另一件", difference: "不是拿回钱，而是换尺寸、颜色或另一件商品。", collocation: "exchange it for a larger size", example: "Could I exchange this shirt for a larger size?", translation: "我能把这件衬衫换成大一码的吗？" },
+          { word: "refund", meaning: "退款；退还款项", tone: "拿回钱", difference: "既可作名词，也可作动词；强调钱被退回。", collocation: "request / receive a refund", example: "The company offered a full refund.", translation: "公司提供了全额退款。" },
+          { word: "warranty", meaning: "保修；质保", tone: "售后保障", difference: "商品在规定期限内出现问题时的维修或更换承诺。", collocation: "under warranty", example: "The phone is still under warranty.", translation: "这部手机仍在保修期内。" }
+        ]
+      },
+      {
+        id: "online",
+        label: "线上购物",
+        hint: "按照下单、配送到收货的顺序记忆网购表达。",
+        words: [
+          { word: "place an order", meaning: "下单", tone: "订单开始", difference: "比 make an order 更自然，是固定搭配。", collocation: "place an order online", example: "I placed the order on Monday and received it today.", translation: "我周一下单，今天收到了。" },
+          { word: "add to cart", meaning: "加入购物车", tone: "网购操作", difference: "美式英语常用 cart，英式网站也常见 basket。", collocation: "add an item to your cart", example: "Add the item to your cart before it sells out.", translation: "在商品售罄前把它加入购物车。" },
+          { word: "out of stock", meaning: "缺货；售罄", tone: "库存状态", difference: "反义表达是 in stock，表示有现货。", collocation: "temporarily out of stock", example: "This colour is currently out of stock.", translation: "这个颜色目前缺货。" },
+          { word: "delivery", meaning: "配送；送货", tone: "物流环节", difference: "shipping 更偏运输过程或运费；delivery 强调送到收件人。", collocation: "free / next-day delivery", example: "The store offers free next-day delivery.", translation: "这家商店提供免费的次日送达服务。" }
+        ]
+      },
+      {
+        id: "ielts",
+        label: "雅思写作升级",
+        hint: "把日常购物提升为消费行为、社会趋势和环境影响。",
+        words: [
+          { word: "consumerism", meaning: "消费主义", tone: "社会议题", difference: "指鼓励不断购买商品的社会观念，不等于普通 consumption。", collocation: "the rise of consumerism", example: "The rise of consumerism has increased the amount of household waste.", translation: "消费主义的兴起增加了家庭垃圾量。" },
+          { word: "purchasing habits", meaning: "购买习惯", tone: "学术表达", difference: "描述消费者经常如何、为何以及在哪里购买。", collocation: "change purchasing habits", example: "Online advertising can influence young people's purchasing habits.", translation: "网络广告会影响年轻人的购买习惯。" },
+          { word: "impulse buying", meaning: "冲动消费", tone: "无计划购买", difference: "指未提前计划、受情绪或促销刺激而购买。", collocation: "encourage impulse buying", example: "Limited-time discounts often encourage impulse buying.", translation: "限时折扣往往会刺激冲动消费。" },
+          { word: "purchasing power", meaning: "购买力", tone: "经济表达", difference: "指个人或群体用现有收入能够购买商品和服务的能力。", collocation: "increase consumers' purchasing power", example: "Higher wages may increase consumers' purchasing power.", translation: "更高的工资可能提升消费者的购买力。" }
+        ]
+      }
+    ]
+  }
+};
+
 const defaultState = {
   course: "task2",
   activeView: "course-system",
@@ -1904,6 +1999,9 @@ const defaultState = {
   grammarPoint: "svo",
   topicVocab: "government",
   topicVocabRevealed: {},
+  lifeVocabularyTopic: "shopping",
+  lifeVocabularyCategory: "buying",
+  lifeVocabularyOpenCards: {},
   grammarSet: {},
   grammarPractice: {},
   sidebarCollapsed: false,
@@ -2884,6 +2982,58 @@ function renderPhraseStats() {
   document.querySelector("#phraseFeedback").textContent = state.phraseFeedback || "选择话题和模式后开始练习。";
 }
 
+function renderLifeVocabulary() {
+  const topic = lifeVocabularyTopics[state.lifeVocabularyTopic] || lifeVocabularyTopics.shopping;
+  const category = topic.categories.find((item) => item.id === state.lifeVocabularyCategory) || topic.categories[0];
+  document.querySelector("#vocabularyProgress").textContent = `${topic.name} · ${topic.categories.length} 个分类 · ${topic.categories.reduce((sum, item) => sum + item.words.length, 0)} 个表达`;
+  document.querySelector("#vocabularyCategoryList").innerHTML = topic.categories.map((item, index) => `
+    <button type="button" class="vocabulary-category-button ${item.id === category.id ? "active" : ""}" data-vocabulary-category="${item.id}">
+      <span>${String(index + 1).padStart(2, "0")}</span>
+      <strong>${item.label}</strong>
+      <small>${item.words.length} 个表达</small>
+    </button>
+  `).join("");
+  document.querySelector("#vocabularyCategoryIntro").innerHTML = `
+    <p class="eyebrow">${topic.name} / ${category.label}</p>
+    <h3>${category.label}</h3>
+    <p class="muted">${category.hint}</p>
+  `;
+  document.querySelector("#vocabularyWordGrid").innerHTML = category.words.map((item, index) => {
+    const cardKey = `${topic.name}:${category.id}:${index}`;
+    const open = Boolean(state.lifeVocabularyOpenCards?.[cardKey]);
+    return `
+      <article class="vocabulary-word-card ${open ? "open" : ""}">
+        <button type="button" class="vocabulary-word-summary" data-vocabulary-card="${cardKey}" aria-expanded="${open}">
+          <span><strong>${item.word}</strong><small>${item.tone}</small></span>
+          <b>${item.meaning}</b>
+          <i>${open ? "收起 −" : "学习 +"}</i>
+        </button>
+        <div class="vocabulary-word-detail">
+          <p><span>怎么区分</span>${item.difference}</p>
+          <p><span>常用搭配</span><b>${item.collocation}</b></p>
+          <blockquote>${item.example}<small>${item.translation}</small></blockquote>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  document.querySelectorAll("[data-vocabulary-category]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.lifeVocabularyCategory = button.dataset.vocabularyCategory;
+      saveState();
+      renderLifeVocabulary();
+    });
+  });
+  document.querySelectorAll("[data-vocabulary-card]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const key = button.dataset.vocabularyCard;
+      state.lifeVocabularyOpenCards = { ...(state.lifeVocabularyOpenCards || {}), [key]: !state.lifeVocabularyOpenCards?.[key] };
+      saveState();
+      renderLifeVocabulary();
+    });
+  });
+}
+
 function updateProgress() {
   const progressText = document.querySelector("#progressText");
   const progressBar = document.querySelector("#progressBar");
@@ -2920,6 +3070,7 @@ function applyState() {
   renderPractice();
   renderInteractiveDrills();
   renderPhraseDrill();
+  renderLifeVocabulary();
   renderFeedback();
   renderSavedNote();
   updateProgress();

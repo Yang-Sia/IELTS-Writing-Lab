@@ -37,6 +37,7 @@
             <a href="#task-switch">Academic Task 1 / Task 2</a>
             <a href="#book-method">顾家北方法路线</a>
             <a href="#task2-topics">Task 2 话题训练</a>
+            <a href="#vocabulary-topics">生活单词 Topic</a>
             <a href="#practice">主体段练习</a>
             <a href="#interactive-drills">句子小练习</a>
             <a href="#phrase-drills">Native 词组练习</a>
@@ -105,6 +106,42 @@
           <h2>Task 2 话题训练：为主体段服务</h2>
           <p class="muted">话题不是孤立背素材，而是服务顾家北式训练：审题、确定立场、找两个主体段思路、再写准确英文。</p>
           <div class="topic-grid" id="topicGrid"></div>
+        </section>
+
+        <section id="vocabulary-topics" class="panel vocabulary-panel">
+          <div class="section-head vocabulary-hero">
+            <div>
+              <p class="eyebrow">Vocabulary by Topic</p>
+              <h2>生活单词：按场景建立表达网络</h2>
+              <p class="muted">不孤立背单词。先选择 Topic，再按动作、价格、付款和售后等真实场景学习近义词区别、固定搭配与例句。</p>
+            </div>
+            <div class="vocabulary-progress" id="vocabularyProgress">Shopping · 8 个分类</div>
+          </div>
+
+          <div class="vocabulary-topic-bar" aria-label="生活单词主题">
+            <button type="button" class="vocabulary-topic active" data-life-topic="shopping">
+              <span>01</span><strong>Shopping</strong><small>买东西</small>
+            </button>
+            <div class="vocabulary-topic upcoming">
+              <span>02</span><strong>Food</strong><small>之后添加</small>
+            </div>
+            <div class="vocabulary-topic upcoming">
+              <span>03</span><strong>Travel</strong><small>之后添加</small>
+            </div>
+          </div>
+
+          <div class="vocabulary-workspace">
+            <nav id="vocabularyCategoryList" class="vocabulary-category-list" aria-label="Shopping 词汇分类"></nav>
+            <section class="vocabulary-category-content">
+              <div id="vocabularyCategoryIntro"></div>
+              <div id="vocabularyWordGrid" class="vocabulary-word-grid"></div>
+            </section>
+          </div>
+
+          <aside class="memory-strip">
+            <span>快速记忆</span>
+            <p><b>buy</b> 普通买 · <b>purchase</b> 正式买 · <b>get</b> 口语买 · <b>pick up</b> 顺便买 · <b>shop around</b> 货比三家 · <b>stock up on</b> 大量囤</p>
+          </aside>
         </section>
 
         <section id="practice" class="panel">
