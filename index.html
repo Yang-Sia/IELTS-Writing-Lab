@@ -207,6 +207,49 @@
             <span>快速记忆</span>
             <p id="vocabularyMemoryText"></p>
           </aside>
+
+          <section class="speaking-bank">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">2026 May-August Question Bank</p>
+                <h3>5-8 月雅思口语题库</h3>
+                <p class="muted">按 Part、地区和题目状态整理。Part 3 已与对应的 Part 2 题卡关联。</p>
+              </div>
+              <div id="speakingBankStats" class="speaking-bank-stats"></div>
+            </div>
+
+            <div class="speaking-bank-toolbar">
+              <div class="question-part-tabs" id="questionPartTabs">
+                <button type="button" data-question-part="part1">Part 1</button>
+                <button type="button" data-question-part="part2">Part 2</button>
+                <button type="button" data-question-part="part3">Part 3</button>
+              </div>
+              <label>
+                <span>地区</span>
+                <select id="questionRegionFilter">
+                  <option value="mainland">大陆地区</option>
+                  <option value="overseas">非大陆地区</option>
+                  <option value="all">全部地区</option>
+                </select>
+              </label>
+              <label>
+                <span>题目状态</span>
+                <select id="questionStatusFilter">
+                  <option value="all">全部题目</option>
+                  <option value="new">新题</option>
+                  <option value="retained">保留题</option>
+                  <option value="evergreen">万年题</option>
+                </select>
+              </label>
+              <label class="question-search-field">
+                <span>搜索</span>
+                <input id="questionBankSearch" type="search" placeholder="搜索 Food、family、technology...">
+              </label>
+            </div>
+
+            <div id="speakingQuestionBankList" class="speaking-question-bank-list"></div>
+            <p class="bank-source-note">来源：用户提供的《2026年5-8月最新雅思口语题库先行版》。题库会随考季动态变化，网页用于分类复习。</p>
+          </section>
         </section>
 
         <section id="practice" class="panel">
@@ -399,6 +442,7 @@
       </section>
     </main>
 
+    <script src="speaking-bank-data.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

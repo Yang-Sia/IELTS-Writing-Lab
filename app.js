@@ -2328,6 +2328,10 @@ const defaultState = {
   vocabularyVoiceAccent: "en-GB",
   pageFontScale: 100,
   vocabularyStudyStats: { reviewed: 0, remembered: 0 },
+  questionBankPart: "part1",
+  questionBankRegion: "mainland",
+  questionBankStatus: "all",
+  questionBankSearch: "",
   grammarSet: {},
   grammarPractice: {},
   sidebarCollapsed: false,
@@ -3404,6 +3408,88 @@ function renderVocabularyFocusCard(category) {
     : "点击发音听读，查看答案后选择记忆状态。";
 }
 
+function getSpeakingQuestionBankEntries() {
+  return typeof speakingQuestionBank2026MayAugust === "undefined"
+    ? []
+    : speakingQuestionBank2026MayAugust.entries;
+}
+
+function getQuestionStatusLabel(status) {
+  return { new: "新题", retained: "保留题", evergreen: "万年题" }[status] || status;
+}
+
+function getQuestionRegionLabel(region) {
+  return region === "mainland" ? "大陆" : "非大陆";
+}
+
+function renderSpeakingQuestionBank() {
+  const entries = getSpeakingQuestionBankEntries();
+  const targetPart = state.questionBankPart || "part1";
+  const search = (state.questionBankSearch || "").trim().toLowerCase();
+  const filtered = entries.filter((entry) => {
+    const partMatches = targetPart === "part1" ? entry.part === "part1" : entry.part === "part2";
+    const regionMatches = state.questionBankRegion === "all" || entry.region === state.questionBankRegion;
+    const statusMatches = state.questionBankStatus === "all" || entry.status === state.questionBankStatus;
+    const searchable = [
+      entry.topic,
+      ...(entry.questions || []),
+      entry.prompt || "",
+      ...(entry.cuePoints || []),
+      ...(entry.part3Questions || [])
+    ].join(" ").toLowerCase();
+    return partMatches && regionMatches && statusMatches && (!search || searchable.includes(search));
+  });
+
+  const questionCount = filtered.reduce((total, entry) => {
+    if (targetPart === "part1") return total + (entry.questions?.length || 0);
+    if (targetPart === "part3") return total + (entry.part3Questions?.length || 0);
+    return total + 1;
+  }, 0);
+  document.querySelector("#speakingBankStats").innerHTML = `<strong>${filtered.length}</strong><span>组题目</span><strong>${questionCount}</strong><span>${targetPart === "part2" ? "题卡" : "小问"}</span>`;
+  document.querySelectorAll("[data-question-part]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.questionPart === targetPart);
+  });
+  document.querySelector("#questionRegionFilter").value = state.questionBankRegion;
+  document.querySelector("#questionStatusFilter").value = state.questionBankStatus;
+  document.querySelector("#questionBankSearch").value = state.questionBankSearch || "";
+
+  document.querySelector("#speakingQuestionBankList").innerHTML = filtered.length
+    ? filtered.map((entry, index) => {
+        const meta = `<div class="bank-card-meta"><span>${String(index + 1).padStart(2, "0")}</span><b>${getQuestionStatusLabel(entry.status)}</b><em>${getQuestionRegionLabel(entry.region)}</em></div>`;
+        if (targetPart === "part1") {
+          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map((question) => `<li>${question}</li>`).join("")}</ol></details>`;
+        }
+        if (targetPart === "part2") {
+          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div></details>`;
+        }
+        return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary><div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => `<li>${question}</li>`).join("")}</ol></div></details>`;
+      }).join("")
+    : `<div class="empty-question-bank"><strong>没有找到符合条件的题目</strong><p>可以尝试切换地区、题目状态或清除搜索词。</p></div>`;
+
+  document.querySelectorAll("[data-question-part]").forEach((button) => {
+    button.onclick = () => {
+      state.questionBankPart = button.dataset.questionPart;
+      saveState();
+      renderSpeakingQuestionBank();
+    };
+  });
+  document.querySelector("#questionRegionFilter").onchange = (event) => {
+    state.questionBankRegion = event.target.value;
+    saveState();
+    renderSpeakingQuestionBank();
+  };
+  document.querySelector("#questionStatusFilter").onchange = (event) => {
+    state.questionBankStatus = event.target.value;
+    saveState();
+    renderSpeakingQuestionBank();
+  };
+  document.querySelector("#questionBankSearch").oninput = (event) => {
+    state.questionBankSearch = event.target.value;
+    saveState();
+    renderSpeakingQuestionBank();
+  };
+}
+
 function renderLifeVocabulary() {
   const topic = lifeVocabularyTopics[state.lifeVocabularyTopic] || lifeVocabularyTopics.shopping;
   const category = topic.categories.find((item) => item.id === state.lifeVocabularyCategory) || topic.categories[0];
@@ -3532,6 +3618,7 @@ function applyState() {
   renderInteractiveDrills();
   renderPhraseDrill();
   renderLifeVocabulary();
+  renderSpeakingQuestionBank();
   renderFeedback();
   renderSavedNote();
   updateProgress();
