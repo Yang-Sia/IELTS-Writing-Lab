@@ -2312,7 +2312,7 @@ Object.assign(lifeVocabularyTopics, speakingVocabularyExpansion);
 
 const defaultState = {
   course: "task2",
-  activeView: "course-system",
+  activeView: "learning-home",
   topic: "education",
   stage: "stage1",
   module: "foundation-grammar",
@@ -2398,7 +2398,9 @@ function renderVisiblePanels() {
       : !(state.activeView === "course-system" && state.module === "foundation-grammar" && link.getAttribute("href") === "#course-system");
     link.classList.toggle("active", targetsCurrentView && shortcutMatches);
   });
-  const activeDomain = state.activeView === "settings"
+  const activeDomain = state.activeView === "learning-home"
+    ? "home"
+    : state.activeView === "settings"
     ? "settings"
     : state.activeView === "vocabulary-topics"
     ? "speaking"
@@ -4084,6 +4086,9 @@ document.querySelectorAll(".utility-nav a").forEach((link) => {
       state.module = "sentence-patterns";
     }
     setActiveView(viewId);
+    if (link.dataset.innerTarget) {
+      window.setTimeout(() => document.querySelector(`.${link.dataset.innerTarget}`)?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+    }
   });
 });
 
