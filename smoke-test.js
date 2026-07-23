@@ -95,6 +95,8 @@ assertIncludes(js, "speakVocabularyWord", "vocabulary speech synthesis");
 assertIncludes(js, "scoreVoiceQuality", "natural voice quality ranking");
 assertIncludes(js, "advanceVocabularyFocus", "vocabulary memory rating");
 assertIncludes(js, "renderHomeProgress", "home learning progress renderer");
+assertIncludes(js, "speakingQuestionAnswerBank", "question-specific speaking answers");
+assertIncludes(js, "What is your favourite food?", "food question reference answer");
 assertIncludes(js, "renderLearningSettings", "learning settings renderer");
 assertIncludes(js, "renderSpeakingQuestionBank", "speaking question bank renderer");
 assertIncludes(js, "renderSpeakingCoach", "speaking answer coaching");

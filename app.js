@@ -3593,6 +3593,52 @@ const speakingCoachingBank = [
   }
 ];
 
+const speakingQuestionAnswerBank = {
+  "What is your favourite food?": {
+    idea: "直接说具体食物 → 描述味道 → 补充什么时候吃",
+    answer: `My favourite food is probably <mark>hot pot</mark>. I love its <mark>rich, spicy flavour</mark>, and I also enjoy sharing it with friends. I do not eat it very often, but it is always my first choice for a celebration.`,
+    structure: `My favourite food is ___. I love its ___ flavour, and I also enjoy ___. I usually have it when ___.`,
+    vocab: [["rich, spicy flavour", "浓郁辛辣的味道"], ["share it with friends", "和朋友一起分享"], ["my first choice", "我的首选"]]
+  },
+  "What kind of food did you like when you were young?": {
+    idea: "说明小时候喜欢什么 → 给一个具体例子 → 对比现在",
+    answer: `When I was young, I had <mark>a real sweet tooth</mark>, so I loved chocolate cake and ice cream. My parents only bought them <mark>as an occasional treat</mark>, which made them feel even more special. These days, I do not eat as much sugary food.`,
+    structure: `When I was young, I was really into ___. For example, ___. These days, however, I ___.`,
+    vocab: [["have a sweet tooth", "爱吃甜食"], ["an occasional treat", "偶尔享用的美食"], ["sugary food", "高糖食物"]]
+  },
+  "Do you eat different foods at different times of the year?": {
+    idea: "先回答 Yes → 夏季举例 → 冬季对比例子",
+    answer: `Yes, definitely. In summer, I tend to eat <mark>lighter and more refreshing food</mark>, such as salads and watermelon. In winter, I prefer <mark>hearty meals</mark> like soup or hot pot because they help me stay warm.`,
+    structure: `Yes. In summer, I tend to eat ___ because ___. In winter, I prefer ___ since ___.`,
+    vocab: [["refreshing food", "清爽的食物"], ["hearty meals", "丰盛暖胃的饭菜"], ["stay warm", "保持温暖"]]
+  },
+  "Has your favourite food changed since you were a child?": {
+    idea: "明确说 Yes/No → 过去偏好 → 现在偏好及原因",
+    answer: `Yes, it has changed quite a lot. As a child, I mainly liked fried food and sweet snacks, but now I prefer <mark>lighter, more nutritious meals</mark>. I think my taste has <mark>matured over time</mark>, and I am also more conscious of my health.`,
+    structure: `Yes, it has. I used to prefer ___, whereas now I tend to choose ___. That is mainly because ___.`,
+    vocab: [["nutritious meals", "营养丰富的饭菜"], ["mature over time", "随着时间逐渐成熟"], ["be conscious of", "意识到；关注"]]
+  }
+};
+
+function renderPart1QuestionWithAnswer(question) {
+  const reference = speakingQuestionAnswerBank[question];
+  if (!reference) return `<li class="part1-question-item"><p>${question}</p></li>`;
+  return `
+    <li class="part1-question-item">
+      <p>${question}</p>
+      <details class="question-reference-answer">
+        <summary>查看具体参考答案</summary>
+        <div class="reference-answer-body">
+          <div><b>中文思路</b><p>${reference.idea}</p></div>
+          <div><b>自然参考答案</b><p class="english-reference-answer">${reference.answer}</p></div>
+          <div><b>可替换结构</b><p>${reference.structure}</p></div>
+          <div class="reference-vocabulary"><b>重点词汇</b><p>${reference.vocab.map(([word, meaning]) => `<span><mark>${word}</mark><small>${meaning}</small></span>`).join("")}</p></div>
+        </div>
+      </details>
+    </li>
+  `;
+}
+
 function getSpeakingCoach(entry) {
   const text = `${entry.topic} ${entry.prompt || ""}`;
   return speakingCoachingBank.find((coach) => coach.match.test(text)) || {
@@ -3728,7 +3774,7 @@ function renderSpeakingQuestionBank() {
     ? filtered.map((entry, index) => {
         const meta = `<div class="bank-card-meta"><span>${String(index + 1).padStart(2, "0")}</span><b>${getQuestionStatusLabel(entry.status)}</b><em>${getQuestionRegionLabel(entry.region)}</em></div>`;
         if (targetPart === "part1") {
-          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map((question) => `<li>${question}</li>`).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
+          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map(renderPart1QuestionWithAnswer).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
         }
         if (targetPart === "part2") {
           return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderSpeakingCoach(entry, targetPart)}</details>`;

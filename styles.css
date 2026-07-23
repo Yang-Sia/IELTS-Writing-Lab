@@ -3013,6 +3013,84 @@ textarea:focus {
   color: var(--muted);
 }
 
+.part1-question-item {
+  margin-bottom: 12px;
+}
+
+.part1-question-item > p {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.question-reference-answer {
+  overflow: hidden;
+  border: 1px solid #eadde1;
+  border-radius: 10px;
+  background: #fffafa;
+}
+
+.question-reference-answer > summary {
+  min-height: auto;
+  display: block;
+  padding: 10px 12px;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.question-reference-answer[open] > summary {
+  border-bottom: 1px solid #eadde1;
+}
+
+.reference-answer-body {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.reference-answer-body b {
+  color: var(--accent-dark);
+  font-size: 0.75rem;
+}
+
+.reference-answer-body p {
+  margin: 4px 0 0;
+}
+
+.english-reference-answer {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.reference-answer-body mark {
+  padding: 1px 4px;
+  color: #754657;
+  background: #f6dfe5;
+  border-radius: 4px;
+}
+
+.reference-vocabulary p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.reference-vocabulary span {
+  display: grid;
+  gap: 2px;
+  padding: 7px 9px;
+  border: 1px solid #eadde1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.reference-vocabulary small {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
 .bank-card-meta {
   display: flex;
   align-items: center;
