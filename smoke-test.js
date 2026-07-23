@@ -23,6 +23,7 @@ function assertIncludes(source, value, label) {
 assertIncludes(html, 'id="interactive-drills"', "exercise section");
 assertIncludes(html, 'id="course-system"', "task 2 course system");
 assertIncludes(html, 'id="learning-home"', "all courses home");
+assertIncludes(html, 'class="content-hub-nav utility-nav"', "persistent main navigation");
 assertIncludes(html, "账户系统预留", "future account access design");
 assertIncludes(html, "原有写作课程全部保留", "writing content visibility");
 assertIncludes(html, 'id="academic-standard"', "academic standard section");

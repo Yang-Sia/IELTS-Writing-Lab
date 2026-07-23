@@ -2368,7 +2368,8 @@ const fields = ["branchNote", "vocabulary", "angles", "argumentChain", "reflecti
 
 function loadState() {
   try {
-    return { ...defaultState, ...JSON.parse(localStorage.getItem(storageKey)) };
+    const savedState = JSON.parse(localStorage.getItem(storageKey));
+    return { ...defaultState, ...savedState, activeView: "learning-home" };
   } catch {
     return { ...defaultState };
   }
