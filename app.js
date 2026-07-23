@@ -3620,9 +3620,81 @@ const speakingQuestionAnswerBank = {
   }
 };
 
-function renderPart1QuestionWithAnswer(question) {
-  const reference = speakingQuestionAnswerBank[question];
-  if (!reference) return `<li class="part1-question-item"><p>${question}</p></li>`;
+const speakingTopicExamples = {
+  "Pets and Animals": ["dogs", "loyal and affectionate", "they help people relax"],
+  "Sports team": ["my university basketball team", "energetic and well-organised", "team sports create a strong sense of belonging"],
+  Hobby: ["photography", "creative and relaxing", "it helps me notice small details"],
+  "Morning time": ["quiet mornings", "peaceful and productive", "I can organise my thoughts before the day gets busy"],
+  Gifts: ["books or practical gifts", "thoughtful and useful", "they show that the giver understands me"],
+  Reading: ["non-fiction books", "informative and thought-provoking", "I enjoy learning something useful"],
+  Walking: ["walking in a nearby park", "refreshing and convenient", "it clears my mind"],
+  Typing: ["typing on my laptop", "fast and efficient", "most of my study and work is digital"],
+  Plants: ["small herbs such as mint", "easy to look after", "they make my home feel fresher"],
+  "Public places": ["the local library", "quiet and well-maintained", "it gives people a comfortable place to study"],
+  Rules: ["being punctual", "fair and necessary", "it shows respect for other people's time"],
+  Shoes: ["comfortable trainers", "lightweight and practical", "I walk quite a lot during the day"],
+  "Doing something well": ["cooking simple meals", "practical and satisfying", "I have practised it for years"],
+  "Crowded place": ["the city centre at weekends", "lively but slightly overwhelming", "many people go there to shop and socialise"],
+  "Going out": ["a quiet café with friends", "relaxed and enjoyable", "we can talk without being rushed"],
+  "Staying with old people": ["spending time with my grandparents", "warm and meaningful", "I learn a lot from their experience"],
+  "Growing vegetables/fruits": ["tomatoes and herbs", "rewarding and environmentally friendly", "fresh produce tastes better"],
+  Chatting: ["chatting with close friends", "easy-going and supportive", "it helps us stay connected"],
+  "Borrowing and lending": ["books and small everyday items", "convenient when handled responsibly", "it saves money and reduces waste"],
+  Advertisement: ["short online video adverts", "memorable but sometimes intrusive", "they use music and clear images"],
+  Museum: ["a local history museum", "educational and well-designed", "real objects make history easier to understand"],
+  "Having a break": ["taking a short walk", "simple and refreshing", "it helps me return with better concentration"],
+  Sharing: ["sharing food and useful information", "generous and practical", "it strengthens relationships"],
+  "Work or studies": ["my current course", "challenging but rewarding", "it develops useful skills for my future"],
+  "Home/accommodation": ["my apartment", "cosy and convenient", "it is close to the places I use every day"],
+  Hometown: ["my hometown", "friendly and easy to get around", "it holds many childhood memories"],
+  "The area you live in": ["my residential neighbourhood", "quiet and well-connected", "daily necessities are within walking distance"],
+  "The city you live in": ["the city where I live", "international and lively", "there are many study and work opportunities"],
+  "Day off": ["a slow day with a walk and a good meal", "restful and flexible", "it helps me recover from a busy week"],
+  Dreams: ["vivid dreams", "unpredictable but interesting", "they sometimes reflect what I have been thinking about"],
+  Keys: ["my house keys", "small but essential", "I need them every single day"]
+};
+
+function buildPart1Reference(question, entry) {
+  const [example, quality, reason] = speakingTopicExamples[entry.topic] || [entry.topic.toLowerCase(), "interesting and relevant to me", "it is part of my everyday life"];
+  const lower = question.toLowerCase();
+  let answer;
+  let idea;
+  let structure;
+  if (/young|child|used to|in the past/.test(lower)) {
+    idea = "回答过去的情况 → 给具体例子 → 简单对比现在";
+    answer = `When I was younger, I was really into <mark>${example}</mark>. I found it <mark>${quality}</mark>, mainly because ${reason}. My preferences have changed a little since then, but I still have positive memories of it.`;
+    structure = "When I was younger, I was really into ___. I liked it because ___. These days, ___.";
+  } else if (/change|different now|compared/.test(lower)) {
+    idea = "明确是否改变 → 过去与现在对比 → 解释原因";
+    answer = `Yes, it has changed to some extent. I used to have a fairly simple view of <mark>${example}</mark>, whereas now I appreciate that it is <mark>${quality}</mark>. That change mainly comes from having more experience over time.`;
+    structure = "Yes, it has changed. I used to ___, whereas now I ___. This is mainly because ___.";
+  } else if (/how often|how much time|when do|what time/.test(lower)) {
+    idea = "给出频率或时间 → 描述常见场景 → 解释原因";
+    answer = `I normally spend time on <mark>${example}</mark> a few times a week, usually when I have a quiet evening or some free time at the weekend. I keep doing it because it is <mark>${quality}</mark> and ${reason}.`;
+    structure = "I usually ___ a few times a week, especially when ___. I do this because ___.";
+  } else if (/^why|why do|why is/.test(lower)) {
+    idea = "先给核心原因 → 补充个人影响或例子";
+    answer = `The main reason is that <mark>${example}</mark> is <mark>${quality}</mark>. More importantly, ${reason}, so it has a genuinely positive effect on my daily life.`;
+    structure = "The main reason is that ___. More importantly, ___. For me, ___.";
+  } else if (/^(do|did|are|is|can|would|have|has)/.test(lower)) {
+    idea = "直接回答 Yes/No → 给细节 → 解释原因";
+    answer = `Yes, generally speaking. I am quite interested in <mark>${example}</mark> because it is <mark>${quality}</mark>. In particular, ${reason}, so it fits naturally into my routine.`;
+    structure = "Yes, generally speaking. I ___. In particular, ___. That is why ___.";
+  } else {
+    idea = "给出一个具体答案 → 描述特点 → 解释个人原因";
+    answer = `I would probably say <mark>${example}</mark>. It is <mark>${quality}</mark>, and what I like most is that ${reason}. That is the first example that comes to mind.`;
+    structure = "I would probably say ___. It is ___. What I like most is that ___.";
+  }
+  return {
+    idea,
+    answer,
+    structure,
+    vocab: [[example, "本题具体例子"], [quality, "描述特点"], [reason, "说明个人原因"]]
+  };
+}
+
+function renderPart1QuestionWithAnswer(question, entry) {
+  const reference = speakingQuestionAnswerBank[question] || buildPart1Reference(question, entry);
   return `
     <li class="part1-question-item">
       <p>${question}</p>
@@ -3633,6 +3705,43 @@ function renderPart1QuestionWithAnswer(question) {
           <div><b>自然参考答案</b><p class="english-reference-answer">${reference.answer}</p></div>
           <div><b>可替换结构</b><p>${reference.structure}</p></div>
           <div class="reference-vocabulary"><b>重点词汇</b><p>${reference.vocab.map(([word, meaning]) => `<span><mark>${word}</mark><small>${meaning}</small></span>`).join("")}</p></div>
+        </div>
+      </details>
+    </li>
+  `;
+}
+
+function renderPart2Reference(entry) {
+  const coach = getSpeakingCoach(entry);
+  const example = coach.variants[0].replace(/^.*?：/, "");
+  return `
+    <details class="question-reference-answer part2-reference-answer">
+      <summary>查看 Part 2 参考结构与示范</summary>
+      <div class="reference-answer-body">
+        <div><b>1. 开场定位</b><p>I’d like to talk about a specific experience that still stands out clearly in my mind.</p></div>
+        <div><b>2. 按题卡展开</b><p>先交代时间、地点和人物，再按照 cue card 顺序讲事件过程；每一点补一个行为、感官或感受细节。</p></div>
+        <div><b>3. 话题示范句</b><p class="english-reference-answer">${example}</p></div>
+        <div><b>4. 自然结尾</b><p>Looking back, I value this experience because it changed the way I think about the topic and gave me a lasting memory.</p></div>
+        <div class="reference-vocabulary"><b>可用词汇</b><p>${coach.vocab.map(([word, meaning]) => `<span><mark>${word}</mark><small>${meaning}</small></span>`).join("")}</p></div>
+      </div>
+    </details>
+  `;
+}
+
+function renderPart3QuestionWithAnswer(question, entry) {
+  const coach = getSpeakingCoach(entry);
+  const [firstWord, firstMeaning] = coach.vocab[0];
+  const [secondWord, secondMeaning] = coach.vocab[1] || coach.vocab[0];
+  return `
+    <li class="part1-question-item">
+      <p>${question}</p>
+      <details class="question-reference-answer">
+        <summary>查看 Part 3 参考答案</summary>
+        <div class="reference-answer-body">
+          <div><b>中文思路</b><p>先给明确观点，再解释个人或社会原因，补一个现实例子，最后增加条件或让步。</p></div>
+          <div><b>参考答案</b><p class="english-reference-answer">From my perspective, this issue has a significant influence on people's choices. The main reason is that it can be closely connected with <mark>${firstWord}</mark>, which affects both individuals and the wider community. For example, people may make very different decisions depending on their age, income or circumstances. However, the result is not always the same, and it may also depend on whether people have access to <mark>${secondWord}</mark>.</p></div>
+          <div><b>可替换结构</b><p>From my perspective, ___. The main reason is that ___. For example, ___. However, this may depend on ___.</p></div>
+          <div class="reference-vocabulary"><b>重点词汇</b><p><span><mark>${firstWord}</mark><small>${firstMeaning}</small></span><span><mark>${secondWord}</mark><small>${secondMeaning}</small></span></p></div>
         </div>
       </details>
     </li>
@@ -3774,12 +3883,12 @@ function renderSpeakingQuestionBank() {
     ? filtered.map((entry, index) => {
         const meta = `<div class="bank-card-meta"><span>${String(index + 1).padStart(2, "0")}</span><b>${getQuestionStatusLabel(entry.status)}</b><em>${getQuestionRegionLabel(entry.region)}</em></div>`;
         if (targetPart === "part1") {
-          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map(renderPart1QuestionWithAnswer).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
+          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map((question) => renderPart1QuestionWithAnswer(question, entry)).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
         }
         if (targetPart === "part2") {
-          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
+          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderPart2Reference(entry)}${renderSpeakingCoach(entry, targetPart)}</details>`;
         }
-        return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary><div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => `<li>${question}</li>`).join("")}</ol></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
+        return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary><div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => renderPart3QuestionWithAnswer(question, entry)).join("")}</ol></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
       }).join("")
     : `<div class="empty-question-bank"><strong>没有找到符合条件的题目</strong><p>可以尝试切换地区、题目状态或清除搜索词。</p></div>`;
 

@@ -3044,6 +3044,10 @@ textarea:focus {
   border-bottom: 1px solid #eadde1;
 }
 
+.part2-reference-answer {
+  margin: 0 22px 18px;
+}
+
 .reference-answer-body {
   display: grid;
   gap: 12px;
