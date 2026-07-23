@@ -166,10 +166,11 @@ h3 {
 
 .sidebar {
   display: grid;
-  gap: 14px;
+  align-content: start;
+  gap: 16px;
   max-height: calc(100vh - 92px);
   overflow: auto;
-  padding-right: 2px;
+  padding: 2px 8px 18px 2px;
 }
 
 .sidebar-map-head {
@@ -184,19 +185,22 @@ h3 {
 }
 
 .nav-domain {
-  overflow: hidden;
+  min-width: 0;
+  overflow: visible;
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .nav-domain > summary {
-  min-height: 60px;
+  width: 100%;
+  min-height: 78px;
+  height: auto;
   display: grid;
-  grid-template-columns: 36px 1fr;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  gap: 12px;
+  padding: 14px;
   cursor: pointer;
   list-style: none;
 }
@@ -208,6 +212,7 @@ h3 {
 .nav-domain > summary::after {
   content: "+";
   grid-column: 3;
+  justify-self: end;
   color: var(--muted);
   font-weight: 900;
 }
@@ -220,17 +225,20 @@ h3 {
 .nav-domain > summary strong,
 .nav-domain > summary small {
   display: block;
+  min-width: 0;
 }
 
 .nav-domain > summary small {
-  margin-top: 2px;
+  margin-top: 4px;
   color: var(--muted);
   font-size: 0.74rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .domain-icon {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
   color: #fff;
@@ -255,8 +263,8 @@ h3 {
 
 .nav-domain-links {
   display: grid;
-  gap: 6px;
-  padding: 0 8px 8px 54px;
+  gap: 8px;
+  padding: 0 12px 12px 68px;
 }
 
 .sidebar .nav-domain-links a {
@@ -312,7 +320,7 @@ h3 {
 
 .nav-domain .course-tree,
 .nav-domain .sidebar-topic-list {
-  padding: 0 8px 8px;
+  padding: 0 12px 12px;
 }
 
 .settings-nav {
