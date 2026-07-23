@@ -2326,6 +2326,7 @@ const defaultState = {
   vocabularyFocusIndex: 0,
   vocabularyFocusRevealed: false,
   vocabularyVoiceAccent: "en-GB",
+  vocabularyVoiceName: "",
   pageFontScale: 100,
   vocabularyStudyStats: { reviewed: 0, remembered: 0 },
   questionBankPart: "part1",
@@ -2422,6 +2423,54 @@ function renderLearningSettings() {
   document.querySelectorAll("[data-font-scale]").forEach((button) => {
     button.classList.toggle("active", Number(button.dataset.fontScale) === scale);
   });
+  populateNaturalVoiceOptions();
+}
+
+function scoreVoiceQuality(voice, targetLang) {
+  const name = voice.name.toLowerCase();
+  let score = voice.lang === targetLang ? 30 : voice.lang.startsWith(targetLang.slice(0, 2)) ? 10 : 0;
+  if (/premium|enhanced|natural|siri/.test(name)) score += 100;
+  if (/ava|serena|samantha|daniel|jamie|allison|karen|moira|rishi|aaron/.test(name)) score += 45;
+  if (/compact|espeak|festival/.test(name)) score -= 80;
+  if (voice.localService) score += 8;
+  return score;
+}
+
+function getEnglishVoices() {
+  if (!("speechSynthesis" in window)) return [];
+  const targetLang = state.vocabularyVoiceAccent || "en-GB";
+  return window.speechSynthesis.getVoices()
+    .filter((voice) => voice.lang?.toLowerCase().startsWith("en"))
+    .sort((a, b) => scoreVoiceQuality(b, targetLang) - scoreVoiceQuality(a, targetLang));
+}
+
+function getPreferredVoice() {
+  const voices = getEnglishVoices();
+  return voices.find((voice) => voice.name === state.vocabularyVoiceName)
+    || voices.find((voice) => voice.lang === state.vocabularyVoiceAccent)
+    || voices[0];
+}
+
+function populateNaturalVoiceOptions() {
+  const select = document.querySelector("#naturalVoiceSelect");
+  if (!select) return;
+  const voices = getEnglishVoices();
+  if (!voices.length) {
+    select.innerHTML = '<option value="">等待浏览器载入声音…</option>';
+    return;
+  }
+  const preferredVoice = getPreferredVoice();
+  if (!state.vocabularyVoiceName && preferredVoice) {
+    state.vocabularyVoiceName = preferredVoice.name;
+    saveState();
+  }
+  select.replaceChildren(...voices.map((voice, index) => {
+    const option = document.createElement("option");
+    option.value = voice.name;
+    option.textContent = `${voice.name} · ${voice.lang}${index === 0 ? " · 推荐" : ""}`;
+    option.selected = voice.name === state.vocabularyVoiceName;
+    return option;
+  }));
 }
 
 function renderHomeProgress() {
@@ -3379,9 +3428,13 @@ function speakVocabularyWord(word) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(word);
   utterance.lang = state.vocabularyVoiceAccent || "en-GB";
-  utterance.rate = 0.82;
-  const matchingVoice = window.speechSynthesis.getVoices().find((voice) => voice.lang === utterance.lang);
-  if (matchingVoice) utterance.voice = matchingVoice;
+  utterance.rate = word.trim().includes(" ") ? 0.92 : 0.88;
+  utterance.pitch = 1;
+  const preferredVoice = getPreferredVoice();
+  if (preferredVoice) {
+    utterance.voice = preferredVoice;
+    utterance.lang = preferredVoice.lang;
+  }
   window.speechSynthesis.speak(utterance);
 }
 
@@ -3417,6 +3470,7 @@ function renderVocabularyFocusCard(category) {
     button.classList.toggle("active", button.dataset.voiceAccent === state.vocabularyVoiceAccent);
     button.onclick = () => {
       state.vocabularyVoiceAccent = button.dataset.voiceAccent;
+      state.vocabularyVoiceName = "";
       saveState();
       renderVocabularyFocusCard(category);
       speakVocabularyWord(item.word);
@@ -4133,10 +4187,28 @@ document.querySelectorAll(".utility-nav a").forEach((link) => {
 document.querySelectorAll("[data-setting-voice]").forEach((button) => {
   button.addEventListener("click", () => {
     state.vocabularyVoiceAccent = button.dataset.settingVoice;
+    state.vocabularyVoiceName = "";
     saveState();
     renderLearningSettings();
   });
 });
+
+document.querySelector("#naturalVoiceSelect").addEventListener("change", (event) => {
+  state.vocabularyVoiceName = event.target.value;
+  const voice = getEnglishVoices().find((item) => item.name === state.vocabularyVoiceName);
+  if (voice) state.vocabularyVoiceAccent = voice.lang;
+  saveState();
+  renderLearningSettings();
+  speakVocabularyWord("Learning English should sound clear, calm, and natural.");
+});
+
+document.querySelector("#previewVoiceBtn").addEventListener("click", () => {
+  speakVocabularyWord("Learning English should sound clear, calm, and natural.");
+});
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.addEventListener("voiceschanged", populateNaturalVoiceOptions);
+}
 
 document.querySelectorAll("[data-font-scale]").forEach((button) => {
   button.addEventListener("click", () => {

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IELTS Writing Lab</title>
-    <link rel="stylesheet" href="styles.css?v=20260724-1">
+    <link rel="stylesheet" href="styles.css?v=20260724-2">
   </head>
   <body>
     <header class="topbar">
@@ -545,6 +545,12 @@
                 <button type="button" data-setting-voice="en-GB"><b>英音</b><small>British English</small></button>
                 <button type="button" data-setting-voice="en-US"><b>美音</b><small>American English</small></button>
               </div>
+              <label class="natural-voice-picker">
+                <span>选择设备里的具体声音</span>
+                <select id="naturalVoiceSelect" aria-label="选择英语发音声音"></select>
+              </label>
+              <button type="button" id="previewVoiceBtn" class="secondary voice-preview-button">▶ 试听自然句子</button>
+              <p class="voice-quality-note">声音质量由你的浏览器和设备提供；网页会优先推荐 Premium、Enhanced 或 Natural 声音。</p>
             </article>
 
             <article class="setting-card">
@@ -583,7 +589,7 @@
       </section>
     </main>
 
-    <script src="speaking-bank-data.js?v=20260724-1"></script>
-    <script src="app.js?v=20260724-1"></script>
+    <script src="speaking-bank-data.js?v=20260724-2"></script>
+    <script src="app.js?v=20260724-2"></script>
   </body>
 </html>
