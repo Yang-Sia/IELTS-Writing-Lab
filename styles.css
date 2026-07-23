@@ -315,6 +315,14 @@ h3 {
   padding: 0 8px 8px;
 }
 
+.settings-nav {
+  padding: 0;
+}
+
+.sidebar .settings-nav a {
+  border-style: dashed;
+}
+
 .nav-group {
   display: grid;
   gap: 8px;
@@ -2192,6 +2200,112 @@ textarea:focus {
   font-size: 0.78rem;
 }
 
+.settings-panel {
+  border-top: 5px solid var(--accent);
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.setting-card {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  background: #fffafa;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.setting-card strong,
+.setting-card p {
+  display: block;
+}
+
+.setting-card p {
+  margin: 7px 0 0;
+  color: var(--muted);
+}
+
+.setting-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  color: var(--accent-dark);
+  background: #f4e5e9;
+  border-radius: 9px;
+  font-weight: 900;
+}
+
+.setting-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.setting-options button {
+  display: grid;
+  gap: 3px;
+  padding: 13px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.setting-options button small {
+  color: var(--muted);
+}
+
+.setting-options button.active {
+  color: var(--mint-dark);
+  background: var(--mint);
+  border-color: #a9d1c9;
+}
+
+.setting-options button.active small {
+  color: var(--mint-dark);
+}
+
+.font-size-options {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.settings-preview {
+  margin-top: 18px;
+  padding: 24px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.settings-preview span {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 3px 9px;
+  color: var(--accent-dark);
+  background: #f6e8ec;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.settings-preview strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+}
+
+.settings-preview p {
+  margin: 7px 0 0;
+  color: var(--muted);
+}
+
 .vocabulary-progress {
   flex: 0 0 auto;
   padding: 11px 14px;
@@ -2661,6 +2775,10 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
   .vocabulary-workspace,
   .vocabulary-word-grid {
     grid-template-columns: 1fr;
@@ -2672,6 +2790,9 @@ textarea:focus {
 }
 
 @media (max-width: 520px) {
+  .font-size-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .focus-card-toolbar,
   .focus-card-toolbar > div {
     align-items: stretch;

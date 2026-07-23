@@ -2326,6 +2326,7 @@ const defaultState = {
   vocabularyFocusIndex: 0,
   vocabularyFocusRevealed: false,
   vocabularyVoiceAccent: "en-GB",
+  pageFontScale: 100,
   vocabularyStudyStats: { reviewed: 0, remembered: 0 },
   grammarSet: {},
   grammarPractice: {},
@@ -2384,13 +2385,26 @@ function renderVisiblePanels() {
       : !(state.activeView === "course-system" && state.module === "foundation-grammar" && link.getAttribute("href") === "#course-system");
     link.classList.toggle("active", targetsCurrentView && shortcutMatches);
   });
-  const activeDomain = state.activeView === "vocabulary-topics"
+  const activeDomain = state.activeView === "settings"
+    ? "settings"
+    : state.activeView === "vocabulary-topics"
     ? "speaking"
     : state.activeView === "course-system" && state.module === "foundation-grammar"
       ? "foundation"
       : "writing";
   document.querySelectorAll(".primary-domain").forEach((domain) => {
     domain.open = domain.dataset.navDomain === activeDomain;
+  });
+}
+
+function renderLearningSettings() {
+  const scale = Number(state.pageFontScale) || 100;
+  document.documentElement.style.fontSize = `${scale}%`;
+  document.querySelectorAll("[data-setting-voice]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.settingVoice === state.vocabularyVoiceAccent);
+  });
+  document.querySelectorAll("[data-font-scale]").forEach((button) => {
+    button.classList.toggle("active", Number(button.dataset.fontScale) === scale);
   });
 }
 
@@ -3349,6 +3363,7 @@ function advanceVocabularyFocus(category, rating) {
   state.vocabularyFocusRevealed = false;
   saveState();
   renderLifeVocabulary();
+  renderLearningSettings();
 }
 
 function renderVocabularyFocusCard(category) {
@@ -3642,6 +3657,22 @@ document.querySelectorAll(".utility-nav a").forEach((link) => {
       state.module = "sentence-patterns";
     }
     setActiveView(viewId);
+  });
+});
+
+document.querySelectorAll("[data-setting-voice]").forEach((button) => {
+  button.addEventListener("click", () => {
+    state.vocabularyVoiceAccent = button.dataset.settingVoice;
+    saveState();
+    renderLearningSettings();
+  });
+});
+
+document.querySelectorAll("[data-font-scale]").forEach((button) => {
+  button.addEventListener("click", () => {
+    state.pageFontScale = Number(button.dataset.fontScale);
+    saveState();
+    renderLearningSettings();
   });
 });
 

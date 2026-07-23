@@ -79,6 +79,10 @@
             <summary><span class="domain-icon">#</span><span><strong>作文话题选择</strong><small>选择当前 Task 2 话题</small></span></summary>
             <div id="sidebarTopicList" class="sidebar-topic-list"></div>
           </details>
+
+          <div class="nav-domain-links utility-nav settings-nav">
+            <a href="#settings"><b>⚙ 学习设置</b><small>发音与页面字体</small></a>
+          </div>
         </nav>
       </aside>
 
@@ -335,6 +339,50 @@
             <button id="newPhraseRoundBtn" type="button" class="secondary">换一组题</button>
           </div>
           <p id="phraseFeedback" class="exercise-result">选择话题和模式后开始练习。</p>
+        </section>
+
+        <section id="settings" class="panel settings-panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Learning Preferences</p>
+              <h2>学习设置</h2>
+              <p class="muted">设置会自动保存在当前浏览器中，下次打开网页时继续使用。</p>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <article class="setting-card">
+              <div>
+                <span class="setting-icon">🔊</span>
+                <strong>默认英语发音</strong>
+                <p>选择单词卡默认使用的英语口音。你仍然可以在学习卡上临时切换。</p>
+              </div>
+              <div class="setting-options" id="settingsVoiceOptions">
+                <button type="button" data-setting-voice="en-GB"><b>英音</b><small>British English</small></button>
+                <button type="button" data-setting-voice="en-US"><b>美音</b><small>American English</small></button>
+              </div>
+            </article>
+
+            <article class="setting-card">
+              <div>
+                <span class="setting-icon">Aa</span>
+                <strong>网页字体大小</strong>
+                <p>调整整个学习网页的文字和主要控件大小。</p>
+              </div>
+              <div class="setting-options font-size-options" id="settingsFontOptions">
+                <button type="button" data-font-scale="90"><b>小</b><small>90%</small></button>
+                <button type="button" data-font-scale="100"><b>标准</b><small>100%</small></button>
+                <button type="button" data-font-scale="112"><b>大</b><small>112%</small></button>
+                <button type="button" data-font-scale="125"><b>超大</b><small>125%</small></button>
+              </div>
+            </article>
+          </div>
+
+          <div class="settings-preview">
+            <span>预览</span>
+            <strong>Learning English can be clear and enjoyable.</strong>
+            <p>学习英语可以清晰、轻松，也可以按照适合自己的节奏进行。</p>
+          </div>
         </section>
 
         <section id="record" class="panel">
