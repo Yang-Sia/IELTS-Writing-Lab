@@ -65,6 +65,7 @@ assertIncludes(js, "sustainable tourism", "travel vocabulary content");
 assertIncludes(html, 'data-speaking-part="part1"', "speaking part one navigation");
 assertIncludes(html, 'id="vocabularyTopicBar"', "dynamic speaking topic bar");
 assertIncludes(html, 'id="focusWordText"', "large vocabulary focus card");
+assertIncludes(html, "点击单词即可朗读", "tap word pronunciation hint");
 assertIncludes(html, 'id="speakWordBtn"', "vocabulary pronunciation control");
 assertIncludes(js, "speakingVocabularyExpansion", "expanded speaking vocabulary topics");
 assertIncludes(js, "generation gap", "family speaking vocabulary");

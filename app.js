@@ -3358,6 +3358,7 @@ function renderVocabularyFocusCard(category) {
   document.querySelector("#focusWordPosition").textContent = `${index + 1} / ${total}`;
   document.querySelector("#focusWordTone").textContent = item.tone;
   document.querySelector("#focusWordText").textContent = item.word;
+  document.querySelector("#focusWordText").onclick = () => speakVocabularyWord(item.word);
   document.querySelector("#focusWordAnswer").innerHTML = state.vocabularyFocusRevealed
     ? `<strong>${item.meaning}</strong><p>${item.difference}</p><blockquote>${item.example}<small>${item.translation}</small></blockquote>`
     : "";
