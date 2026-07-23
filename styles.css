@@ -1,14 +1,16 @@
 :root {
-  --ink: #1d2433;
-  --muted: #667085;
-  --line: #d8dee8;
-  --paper: #f7f4ee;
-  --panel: #ffffff;
-  --accent: #0f766e;
-  --accent-dark: #115e59;
-  --gold: #c58a2b;
-  --blue: #375a7f;
-  --shadow: 0 18px 40px rgba(35, 48, 72, 0.12);
+  --ink: #29252b;
+  --muted: #736b76;
+  --line: #e4dadd;
+  --paper: #f7f1f0;
+  --panel: #fffdfd;
+  --accent: #b77f8d;
+  --accent-dark: #855462;
+  --gold: #c89655;
+  --blue: #66758f;
+  --mint: #dcefeb;
+  --mint-dark: #3f766d;
+  --shadow: 0 18px 40px rgba(91, 62, 72, 0.1);
 }
 
 * {
@@ -38,7 +40,7 @@ input {
   justify-content: space-between;
   gap: 24px;
   padding: 34px clamp(18px, 5vw, 64px) 26px;
-  background: #ffffff;
+  background: #fffafa;
   border-bottom: 1px solid var(--line);
 }
 
@@ -1988,6 +1990,183 @@ textarea:focus {
   border-bottom: 1px solid var(--line);
 }
 
+.vocabulary-panel {
+  background: #fcf8f8;
+}
+
+.vocabulary-focus {
+  margin-bottom: 22px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 18px 42px rgba(106, 73, 84, 0.12);
+}
+
+.focus-card-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee5e7;
+}
+
+.focus-card-toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.focus-card-toolbar small {
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.focus-new-tag {
+  padding: 4px 9px;
+  color: var(--accent-dark);
+  background: #f6e8ec;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 850;
+}
+
+.voice-controls button {
+  min-height: 34px;
+  padding: 6px 10px;
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  box-shadow: none;
+  font-size: 0.78rem;
+}
+
+.voice-controls button.active {
+  color: var(--mint-dark);
+  background: var(--mint);
+  border-color: #a9d1c9;
+}
+
+.voice-controls .speak-word-button {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.focus-word-stage {
+  min-height: 390px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(26px, 5vw, 56px);
+  text-align: center;
+}
+
+.focus-word-tone {
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.focus-word-text {
+  color: #262126;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 500;
+  line-height: 1.05;
+  word-break: break-word;
+}
+
+.focus-word-answer {
+  width: min(680px, 100%);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.25s ease, opacity 0.2s ease, margin 0.2s ease;
+}
+
+.focus-word-answer.visible {
+  max-height: 300px;
+  margin-top: 24px;
+  opacity: 1;
+}
+
+.focus-word-answer > strong {
+  color: var(--accent-dark);
+  font-size: 1.35rem;
+}
+
+.focus-word-answer p {
+  margin: 8px 0;
+  color: var(--muted);
+}
+
+.focus-word-answer blockquote {
+  margin: 12px 0 0;
+  padding: 12px 16px;
+  background: #faf5f6;
+  border-radius: 8px;
+}
+
+.focus-word-answer blockquote small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.focus-reveal-button {
+  width: min(560px, 100%);
+  margin-top: 28px;
+  padding: 14px 18px;
+  background: var(--accent);
+  border-color: var(--accent);
+  border-radius: 8px;
+}
+
+.focus-memory-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
+  background: #faf6f6;
+  border-top: 1px solid var(--line);
+}
+
+.focus-memory-actions button {
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.focus-memory-actions button:first-child {
+  color: #a74f58;
+  background: #fff4f4;
+}
+
+.focus-memory-actions button:nth-child(2) {
+  color: #9a6a25;
+  background: #fff9eb;
+}
+
+.focus-memory-actions button:last-child {
+  color: var(--mint-dark);
+  background: #edf8f5;
+}
+
+.focus-study-stats {
+  margin: 0;
+  padding: 0 16px 13px;
+  color: var(--muted);
+  background: #faf6f6;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
 .vocabulary-progress {
   flex: 0 0 auto;
   padding: 11px 14px;
@@ -2468,6 +2647,21 @@ textarea:focus {
 }
 
 @media (max-width: 520px) {
+  .focus-card-toolbar,
+  .focus-card-toolbar > div {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .voice-controls {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .focus-word-stage {
+    min-height: 330px;
+  }
+
   .speaking-part-tabs,
   .speaking-question-strip {
     grid-template-columns: 1fr;

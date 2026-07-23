@@ -2323,6 +2323,10 @@ const defaultState = {
   speakingPart: "part1",
   lifeVocabularyCategory: "buying",
   lifeVocabularyOpenCards: {},
+  vocabularyFocusIndex: 0,
+  vocabularyFocusRevealed: false,
+  vocabularyVoiceAccent: "en-GB",
+  vocabularyStudyStats: { reviewed: 0, remembered: 0 },
   grammarSet: {},
   grammarPractice: {},
   sidebarCollapsed: false,
@@ -3315,6 +3319,75 @@ function renderPhraseStats() {
   document.querySelector("#phraseFeedback").textContent = state.phraseFeedback || "选择话题和模式后开始练习。";
 }
 
+function getVocabularyFocusWord(category) {
+  const words = category?.words || [];
+  if (!words.length) return null;
+  const safeIndex = Math.abs(Number(state.vocabularyFocusIndex) || 0) % words.length;
+  return { item: words[safeIndex], index: safeIndex, total: words.length };
+}
+
+function speakVocabularyWord(word) {
+  if (!("speechSynthesis" in window) || !word) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = state.vocabularyVoiceAccent || "en-GB";
+  utterance.rate = 0.82;
+  const matchingVoice = window.speechSynthesis.getVoices().find((voice) => voice.lang === utterance.lang);
+  if (matchingVoice) utterance.voice = matchingVoice;
+  window.speechSynthesis.speak(utterance);
+}
+
+function advanceVocabularyFocus(category, rating) {
+  const focus = getVocabularyFocusWord(category);
+  if (!focus) return;
+  const stats = state.vocabularyStudyStats || { reviewed: 0, remembered: 0 };
+  state.vocabularyStudyStats = {
+    reviewed: stats.reviewed + 1,
+    remembered: stats.remembered + (rating === "known" ? 1 : 0)
+  };
+  state.vocabularyFocusIndex = (focus.index + 1) % focus.total;
+  state.vocabularyFocusRevealed = false;
+  saveState();
+  renderLifeVocabulary();
+}
+
+function renderVocabularyFocusCard(category) {
+  const focus = getVocabularyFocusWord(category);
+  if (!focus) return;
+  const { item, index, total } = focus;
+  document.querySelector("#focusWordPosition").textContent = `${index + 1} / ${total}`;
+  document.querySelector("#focusWordTone").textContent = item.tone;
+  document.querySelector("#focusWordText").textContent = item.word;
+  document.querySelector("#focusWordAnswer").innerHTML = state.vocabularyFocusRevealed
+    ? `<strong>${item.meaning}</strong><p>${item.difference}</p><blockquote>${item.example}<small>${item.translation}</small></blockquote>`
+    : "";
+  document.querySelector("#focusWordAnswer").classList.toggle("visible", Boolean(state.vocabularyFocusRevealed));
+  document.querySelector("#revealFocusWordBtn").textContent = state.vocabularyFocusRevealed ? "隐藏答案" : "显示答案";
+  document.querySelectorAll("[data-voice-accent]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.voiceAccent === state.vocabularyVoiceAccent);
+    button.onclick = () => {
+      state.vocabularyVoiceAccent = button.dataset.voiceAccent;
+      saveState();
+      renderVocabularyFocusCard(category);
+      speakVocabularyWord(item.word);
+    };
+  });
+  document.querySelector("#speakWordBtn").onclick = () => speakVocabularyWord(item.word);
+  document.querySelector("#revealFocusWordBtn").onclick = () => {
+    state.vocabularyFocusRevealed = !state.vocabularyFocusRevealed;
+    saveState();
+    renderVocabularyFocusCard(category);
+  };
+  document.querySelectorAll("[data-memory-rating]").forEach((button) => {
+    button.onclick = () => advanceVocabularyFocus(category, button.dataset.memoryRating);
+  });
+  const stats = state.vocabularyStudyStats || { reviewed: 0, remembered: 0 };
+  const accuracy = stats.reviewed ? Math.round((stats.remembered / stats.reviewed) * 100) : 0;
+  document.querySelector("#focusStudyStats").textContent = stats.reviewed
+    ? `已复习 ${stats.reviewed} 次 · 记住 ${stats.remembered} 次 · 掌握率 ${accuracy}%`
+    : "点击发音听读，查看答案后选择记忆状态。";
+}
+
 function renderLifeVocabulary() {
   const topic = lifeVocabularyTopics[state.lifeVocabularyTopic] || lifeVocabularyTopics.shopping;
   const category = topic.categories.find((item) => item.id === state.lifeVocabularyCategory) || topic.categories[0];
@@ -3329,6 +3402,7 @@ function renderLifeVocabulary() {
   `).join("");
   document.querySelectorAll("[data-speaking-part]").forEach((button) => button.classList.toggle("active", button.dataset.speakingPart === state.speakingPart));
   document.querySelector("#speakingQuestionStrip").innerHTML = `<span>${partLabels[state.speakingPart]}</span><div><b>本 Topic 口语题</b><p>${topic.questions?.[state.speakingPart] || "Use the vocabulary below to answer this topic."}</p></div>`;
+  renderVocabularyFocusCard(category);
   document.querySelector("#vocabularyCategoryList").innerHTML = topic.categories.map((item, index) => `
     <button type="button" class="vocabulary-category-button ${item.id === category.id ? "active" : ""}" data-vocabulary-category="${item.id}">
       <span>${String(index + 1).padStart(2, "0")}</span>
@@ -3363,6 +3437,8 @@ function renderLifeVocabulary() {
   document.querySelectorAll("[data-vocabulary-category]").forEach((button) => {
     button.addEventListener("click", () => {
       state.lifeVocabularyCategory = button.dataset.vocabularyCategory;
+      state.vocabularyFocusIndex = 0;
+      state.vocabularyFocusRevealed = false;
       saveState();
       renderLifeVocabulary();
     });
@@ -3373,6 +3449,8 @@ function renderLifeVocabulary() {
       if (!nextTopic) return;
       state.lifeVocabularyTopic = button.dataset.lifeTopic;
       state.lifeVocabularyCategory = nextTopic.categories[0].id;
+      state.vocabularyFocusIndex = 0;
+      state.vocabularyFocusRevealed = false;
       saveState();
       renderLifeVocabulary();
     };
@@ -3385,6 +3463,8 @@ function renderLifeVocabulary() {
         state.lifeVocabularyTopic = firstTopic[0];
         state.lifeVocabularyCategory = firstTopic[1].categories[0].id;
       }
+      state.vocabularyFocusIndex = 0;
+      state.vocabularyFocusRevealed = false;
       saveState();
       renderLifeVocabulary();
     };

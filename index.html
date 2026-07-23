@@ -164,6 +164,32 @@
 
           <div id="speakingQuestionStrip" class="speaking-question-strip"></div>
 
+          <section class="vocabulary-focus" aria-label="单词专注学习卡">
+            <div class="focus-card-toolbar">
+              <div>
+                <span class="focus-new-tag">今日学习</span>
+                <small id="focusWordPosition">1 / 4</small>
+              </div>
+              <div class="voice-controls" aria-label="发音设置">
+                <button type="button" id="voiceUkBtn" data-voice-accent="en-GB">英音</button>
+                <button type="button" id="voiceUsBtn" data-voice-accent="en-US">美音</button>
+                <button type="button" id="speakWordBtn" class="speak-word-button" aria-label="播放单词发音">▶ 发音</button>
+              </div>
+            </div>
+            <div class="focus-word-stage">
+              <p id="focusWordTone" class="focus-word-tone"></p>
+              <strong id="focusWordText" class="focus-word-text"></strong>
+              <div id="focusWordAnswer" class="focus-word-answer"></div>
+              <button type="button" id="revealFocusWordBtn" class="focus-reveal-button">显示答案</button>
+            </div>
+            <div class="focus-memory-actions">
+              <button type="button" data-memory-rating="again">不记得</button>
+              <button type="button" data-memory-rating="unsure">记不清</button>
+              <button type="button" data-memory-rating="known">记住了</button>
+            </div>
+            <p id="focusStudyStats" class="focus-study-stats">从当前分类开始学习。</p>
+          </section>
+
           <div class="vocabulary-workspace">
             <nav id="vocabularyCategoryList" class="vocabulary-category-list" aria-label="Shopping 词汇分类"></nav>
             <section class="vocabulary-category-content">
