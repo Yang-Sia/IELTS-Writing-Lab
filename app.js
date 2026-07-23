@@ -4071,7 +4071,7 @@ document.querySelector("#sidebarToggle").addEventListener("click", () => {
 
 document.querySelector("#startSpeakingMockBtn").addEventListener("click", startSpeakingMock);
 
-document.querySelectorAll(".primary-domain[data-default-view] > summary").forEach((summary) => {
+document.querySelectorAll(".nav-domain[data-default-view] > summary").forEach((summary) => {
   summary.addEventListener("click", (event) => {
     event.preventDefault();
     const domain = summary.parentElement;
