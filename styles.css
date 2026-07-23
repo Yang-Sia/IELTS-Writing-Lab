@@ -2312,6 +2312,168 @@ textarea:focus {
   border-top: 2px solid var(--line);
 }
 
+.speaking-mock {
+  margin-top: 28px;
+  padding-top: 26px;
+  border-top: 2px solid var(--line);
+}
+
+.speaking-mock-stage {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.mock-empty,
+.mock-complete {
+  padding: 46px 24px;
+  text-align: center;
+}
+
+.mock-empty strong,
+.mock-complete strong {
+  font-size: 1.3rem;
+}
+
+.mock-empty p,
+.mock-complete p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.mock-complete button {
+  margin-top: 16px;
+}
+
+.mock-stage-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f5e7eb;
+}
+
+.mock-stage-head span {
+  padding: 4px 9px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.mock-stage-head b {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.mock-stage-head strong {
+  color: var(--accent-dark);
+  font-size: 1.25rem;
+}
+
+.mock-question-card {
+  min-height: 210px;
+  display: grid;
+  align-content: center;
+  padding: clamp(24px, 5vw, 50px);
+  text-align: center;
+}
+
+.mock-question-card > p {
+  color: var(--muted);
+}
+
+.mock-question-card h4 {
+  max-width: 780px;
+  margin: 0 auto;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+}
+
+.mock-question-card ul {
+  max-width: 600px;
+  margin: 18px auto 0;
+  text-align: left;
+}
+
+.mock-note-field {
+  display: grid;
+  gap: 6px;
+  padding: 0 18px 16px;
+}
+
+.mock-note-field span {
+  font-weight: 850;
+}
+
+.mock-note-field textarea {
+  min-height: 90px;
+}
+
+.mock-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  padding: 14px 18px;
+  background: #faf6f6;
+  border-top: 1px solid var(--line);
+}
+
+.mock-recording-status {
+  margin: 0;
+  padding: 0 18px 12px;
+  color: var(--muted);
+  background: #faf6f6;
+  font-size: 0.76rem;
+}
+
+#mockAudioPlayback {
+  width: calc(100% - 36px);
+  margin: 0 18px 16px;
+}
+
+.speaking-daily-progress {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
+.speaking-daily-progress > div {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.speaking-daily-progress span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.speaking-daily-progress strong {
+  color: var(--accent-dark);
+  font-size: 1.15rem;
+}
+
+.daily-progress-meter {
+  height: 6px;
+  overflow: hidden;
+  background: #eee7e9;
+  border-radius: 999px;
+}
+
+.daily-progress-meter i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
 .speaking-bank-stats {
   display: grid;
   grid-template-columns: auto auto;
@@ -2335,7 +2497,7 @@ textarea:focus {
 
 .speaking-bank-toolbar {
   display: grid;
-  grid-template-columns: 1.2fr 0.7fr 0.8fr 1.3fr;
+  grid-template-columns: 1.2fr 0.7fr 0.8fr 1.3fr 0.8fr;
   gap: 10px;
   margin-bottom: 14px;
   padding: 12px;
@@ -2611,6 +2773,38 @@ textarea:focus {
 
 .practice-template small {
   color: var(--muted);
+}
+
+.question-study-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  padding: 0 14px 14px;
+}
+
+.question-study-actions button {
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.question-study-actions button.active {
+  color: #8a5c1b;
+  background: #fff5d9;
+  border-color: #e8cd83;
+}
+
+.question-study-actions button.active.weak {
+  color: #a14e59;
+  background: #fff0f2;
+  border-color: #e6b7bf;
+}
+
+.question-study-actions button.active.practiced {
+  color: var(--mint-dark);
+  background: var(--mint);
+  border-color: #a9d1c9;
 }
 
 .bank-source-note {
@@ -3099,6 +3293,10 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
+  .speaking-daily-progress {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .vocabulary-workspace,
   .vocabulary-word-grid {
     grid-template-columns: 1fr;
@@ -3110,6 +3308,11 @@ textarea:focus {
 }
 
 @media (max-width: 520px) {
+  .mock-stage-head,
+  .mock-controls,
+  .question-study-actions {
+    grid-template-columns: 1fr;
+  }
   .speaking-bank-toolbar,
   .question-bank-card summary {
     grid-template-columns: 1fr;

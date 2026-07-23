@@ -72,6 +72,8 @@ assertIncludes(html, 'id="settings"', "learning settings section");
 assertIncludes(html, 'data-setting-voice="en-GB"', "British pronunciation setting");
 assertIncludes(html, 'data-font-scale="125"', "large font setting");
 assertIncludes(html, 'id="speakingQuestionBankList"', "speaking question bank");
+assertIncludes(html, 'id="speakingMockStage"', "speaking mock test");
+assertIncludes(html, 'id="questionLearningFilter"', "question learning filter");
 assertIncludes(html, 'src="speaking-bank-data.js"', "speaking bank data script");
 assertIncludes(js, "speakingVocabularyExpansion", "expanded speaking vocabulary topics");
 assertIncludes(js, "generation gap", "family speaking vocabulary");
@@ -85,6 +87,9 @@ assertIncludes(js, "renderSpeakingQuestionBank", "speaking question bank rendere
 assertIncludes(js, "renderSpeakingCoach", "speaking answer coaching");
 assertIncludes(js, "seasonal fruit", "food answer variation");
 assertIncludes(js, "举一反三结构", "transferable speaking answer structure");
+assertIncludes(js, "buildSpeakingMockQueue", "speaking mock test generator");
+assertIncludes(js, "toggleSpeakingMockRecording", "speaking recording control");
+assertIncludes(js, "renderSpeakingDailyProgress", "speaking daily progress");
 assertIncludes(speakingBank, '"part": "part1"', "Part 1 question data");
 assertIncludes(speakingBank, '"part": "part2"', "Part 2 and Part 3 question data");
 assertIncludes(js, "renderPhraseDrill", "native phrase renderer");

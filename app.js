@@ -2332,6 +2332,10 @@ const defaultState = {
   questionBankRegion: "mainland",
   questionBankStatus: "all",
   questionBankSearch: "",
+  questionBankLearningFilter: "all",
+  speakingQuestionMarks: {},
+  speakingPracticeLog: {},
+  speakingMockNotes: {},
   grammarSet: {},
   grammarPractice: {},
   sidebarCollapsed: false,
@@ -2354,6 +2358,11 @@ const defaultState = {
 };
 
 let state = loadState();
+let speakingMockQueue = [];
+let speakingMockIndex = 0;
+let speakingMockTimer = null;
+let speakingMockRecorder = null;
+let speakingMockChunks = [];
 
 const fields = ["branchNote", "vocabulary", "angles", "argumentChain", "reflection"];
 
@@ -3520,8 +3529,49 @@ function getSpeakingCoach(entry) {
   };
 }
 
+function getSpeakingQuestionKey(entry, part) {
+  return `${part}:${entry.region}:${entry.status}:${entry.topic}`;
+}
+
+function getTodayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function renderSpeakingDailyProgress() {
+  const marks = state.speakingQuestionMarks || {};
+  const log = state.speakingPracticeLog || {};
+  const todayCount = Object.values(log).filter((date) => date === getTodayKey()).length;
+  const favoriteCount = Object.values(marks).filter((mark) => mark === "favorite").length;
+  const weakCount = Object.values(marks).filter((mark) => mark === "weak").length;
+  const target = 5;
+  const percent = Math.min(100, Math.round((todayCount / target) * 100));
+  document.querySelector("#speakingDailyProgress").innerHTML = `
+    <div><span>今日任务</span><strong>${todayCount} / ${target}</strong><div class="daily-progress-meter"><i style="width:${percent}%"></i></div></div>
+    <div><span>收藏题</span><strong>${favoriteCount}</strong></div>
+    <div><span>薄弱题</span><strong>${weakCount}</strong></div>
+    <div><span>累计练习</span><strong>${Object.keys(log).length}</strong></div>
+  `;
+}
+
+function updateSpeakingQuestionMark(key, action) {
+  const marks = { ...(state.speakingQuestionMarks || {}) };
+  const log = { ...(state.speakingPracticeLog || {}) };
+  if (action === "practiced") {
+    log[key] = getTodayKey();
+  } else {
+    marks[key] = marks[key] === action ? "" : action;
+  }
+  state.speakingQuestionMarks = marks;
+  state.speakingPracticeLog = log;
+  saveState();
+  renderSpeakingQuestionBank();
+}
+
 function renderSpeakingCoach(entry, part) {
   const coach = getSpeakingCoach(entry);
+  const questionKey = getSpeakingQuestionKey(entry, part);
+  const currentMark = state.speakingQuestionMarks?.[questionKey] || "";
+  const practiced = Boolean(state.speakingPracticeLog?.[questionKey]);
   const routes = part === "part1"
     ? ["直接回答，不绕圈", "补一个具体细节或例子", "解释原因或个人感受"]
     : part === "part2"
@@ -3550,6 +3600,11 @@ function renderSpeakingCoach(entry, part) {
         <div>${coach.vocab.map(([word, meaning]) => `<span><mark>${word}</mark><small>${meaning}</small></span>`).join("")}</div>
       </div>
       <div class="practice-template"><b>举一反三结构</b><p>${template}</p><small>把横线换成自己的真实经历；同一个结构可以练习本组中的其他问题。</small></div>
+      <div class="question-study-actions">
+        <button type="button" class="${currentMark === "favorite" ? "active" : ""}" data-question-action="favorite" data-question-key="${questionKey}">★ 收藏</button>
+        <button type="button" class="${currentMark === "weak" ? "active weak" : ""}" data-question-action="weak" data-question-key="${questionKey}">! 薄弱题</button>
+        <button type="button" class="${practiced ? "active practiced" : ""}" data-question-action="practiced" data-question-key="${questionKey}">${practiced ? "✓ 今日已练" : "完成练习"}</button>
+      </div>
     </section>
   `;
 }
@@ -3569,7 +3624,14 @@ function renderSpeakingQuestionBank() {
       ...(entry.cuePoints || []),
       ...(entry.part3Questions || [])
     ].join(" ").toLowerCase();
-    return partMatches && regionMatches && statusMatches && (!search || searchable.includes(search));
+    const key = getSpeakingQuestionKey(entry, targetPart);
+    const mark = state.speakingQuestionMarks?.[key] || "";
+    const practiced = Boolean(state.speakingPracticeLog?.[key]);
+    const learningMatches = state.questionBankLearningFilter === "all"
+      || (state.questionBankLearningFilter === "favorite" && mark === "favorite")
+      || (state.questionBankLearningFilter === "weak" && mark === "weak")
+      || (state.questionBankLearningFilter === "unpracticed" && !practiced);
+    return partMatches && regionMatches && statusMatches && learningMatches && (!search || searchable.includes(search));
   });
 
   const questionCount = filtered.reduce((total, entry) => {
@@ -3583,7 +3645,9 @@ function renderSpeakingQuestionBank() {
   });
   document.querySelector("#questionRegionFilter").value = state.questionBankRegion;
   document.querySelector("#questionStatusFilter").value = state.questionBankStatus;
+  document.querySelector("#questionLearningFilter").value = state.questionBankLearningFilter;
   document.querySelector("#questionBankSearch").value = state.questionBankSearch || "";
+  renderSpeakingDailyProgress();
 
   document.querySelector("#speakingQuestionBankList").innerHTML = filtered.length
     ? filtered.map((entry, index) => {
@@ -3615,11 +3679,153 @@ function renderSpeakingQuestionBank() {
     saveState();
     renderSpeakingQuestionBank();
   };
+  document.querySelector("#questionLearningFilter").onchange = (event) => {
+    state.questionBankLearningFilter = event.target.value;
+    saveState();
+    renderSpeakingQuestionBank();
+  };
   document.querySelector("#questionBankSearch").oninput = (event) => {
     state.questionBankSearch = event.target.value;
     saveState();
     renderSpeakingQuestionBank();
   };
+  document.querySelectorAll("[data-question-action]").forEach((button) => {
+    button.onclick = () => updateSpeakingQuestionMark(button.dataset.questionKey, button.dataset.questionAction);
+  });
+}
+
+function shuffleSpeakingItems(items) {
+  return [...items].sort(() => Math.random() - 0.5);
+}
+
+function buildSpeakingMockQueue() {
+  const entries = getSpeakingQuestionBankEntries().filter((entry) => entry.region === "mainland");
+  const part1Items = shuffleSpeakingItems(entries.filter((entry) => entry.part === "part1"))
+    .slice(0, 3)
+    .map((entry) => ({
+      part: "Part 1",
+      question: entry.questions[Math.floor(Math.random() * entry.questions.length)],
+      seconds: 30,
+      guide: "直接回答，再补充一个细节和原因。"
+    }));
+  const part2Entry = shuffleSpeakingItems(entries.filter((entry) => entry.part === "part2"))[0];
+  const part2Item = {
+    part: "Part 2",
+    question: part2Entry.prompt,
+    cuePoints: part2Entry.cuePoints,
+    seconds: 60,
+    guide: "准备时间：快速记录人物、时间、地点、过程和感受。"
+  };
+  const part3Items = shuffleSpeakingItems(part2Entry.part3Questions).slice(0, 3).map((question) => ({
+    part: "Part 3",
+    question,
+    seconds: 60,
+    guide: "给出观点，用原因和例子展开，最后补充条件或让步。"
+  }));
+  return [...part1Items, part2Item, ...part3Items];
+}
+
+function stopSpeakingMockTimer() {
+  if (speakingMockTimer) window.clearInterval(speakingMockTimer);
+  speakingMockTimer = null;
+}
+
+function startSpeakingMockTimer(seconds) {
+  stopSpeakingMockTimer();
+  let remaining = seconds;
+  const timer = document.querySelector("#mockTimer");
+  if (timer) timer.textContent = `${remaining}s`;
+  speakingMockTimer = window.setInterval(() => {
+    remaining -= 1;
+    const currentTimer = document.querySelector("#mockTimer");
+    if (currentTimer) currentTimer.textContent = remaining > 0 ? `${remaining}s` : "时间到";
+    if (remaining <= 0) stopSpeakingMockTimer();
+  }, 1000);
+}
+
+async function toggleSpeakingMockRecording() {
+  const status = document.querySelector("#mockRecordingStatus");
+  const button = document.querySelector("#mockRecordBtn");
+  if (speakingMockRecorder?.state === "recording") {
+    speakingMockRecorder.stop();
+    button.textContent = "● 重新录音";
+    status.textContent = "录音已结束，正在生成回放。";
+    return;
+  }
+  if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
+    status.textContent = "当前浏览器不支持录音，请使用最新版 Chrome 或 Safari。";
+    return;
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    speakingMockChunks = [];
+    speakingMockRecorder = new MediaRecorder(stream);
+    speakingMockRecorder.ondataavailable = (event) => {
+      if (event.data.size) speakingMockChunks.push(event.data);
+    };
+    speakingMockRecorder.onstop = () => {
+      const blob = new Blob(speakingMockChunks, { type: speakingMockRecorder.mimeType || "audio/webm" });
+      const player = document.querySelector("#mockAudioPlayback");
+      player.src = URL.createObjectURL(blob);
+      player.hidden = false;
+      stream.getTracks().forEach((track) => track.stop());
+      status.textContent = "可以回放并检查流利度、停顿和发音。";
+    };
+    speakingMockRecorder.start();
+    button.textContent = "■ 停止录音";
+    status.textContent = "正在录音…";
+  } catch {
+    status.textContent = "麦克风未授权。请允许浏览器使用麦克风后重试。";
+  }
+}
+
+function renderSpeakingMockStage() {
+  const stage = document.querySelector("#speakingMockStage");
+  const item = speakingMockQueue[speakingMockIndex];
+  if (!item) {
+    stopSpeakingMockTimer();
+    stage.innerHTML = `<div class="mock-complete"><strong>本轮模拟完成</strong><p>回到题库，把卡住的题目标记为“薄弱题”，再用答题结构重新练习。</p><button type="button" id="restartSpeakingMockBtn">再练一轮</button></div>`;
+    document.querySelector("#restartSpeakingMockBtn").onclick = startSpeakingMock;
+    return;
+  }
+  const noteKey = `${speakingMockIndex}:${item.part}:${item.question}`;
+  stage.innerHTML = `
+    <div class="mock-stage-head"><span>${item.part}</span><b>第 ${speakingMockIndex + 1} / ${speakingMockQueue.length} 题</b><strong id="mockTimer">${item.seconds}s</strong></div>
+    <div class="mock-question-card">
+      <p>${item.guide}</p>
+      <h4>${item.question}</h4>
+      ${item.cuePoints?.length ? `<ul>${item.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul>` : ""}
+    </div>
+    <label class="mock-note-field"><span>回答笔记</span><textarea id="mockAnswerNote" placeholder="记录关键词、例子或刚才没有说好的地方。">${state.speakingMockNotes?.[noteKey] || ""}</textarea></label>
+    <div class="mock-controls">
+      <button type="button" id="mockRecordBtn">● 开始录音</button>
+      <button type="button" id="mockNextBtn">下一题 →</button>
+      <button type="button" id="mockExitBtn" class="secondary">结束本轮</button>
+    </div>
+    <p id="mockRecordingStatus" class="mock-recording-status">录音只保留在当前页面，不会上传。</p>
+    <audio id="mockAudioPlayback" controls hidden></audio>
+  `;
+  document.querySelector("#mockAnswerNote").oninput = (event) => {
+    state.speakingMockNotes = { ...(state.speakingMockNotes || {}), [noteKey]: event.target.value };
+    saveState();
+  };
+  document.querySelector("#mockRecordBtn").onclick = toggleSpeakingMockRecording;
+  document.querySelector("#mockNextBtn").onclick = () => {
+    if (speakingMockRecorder?.state === "recording") speakingMockRecorder.stop();
+    speakingMockIndex += 1;
+    renderSpeakingMockStage();
+  };
+  document.querySelector("#mockExitBtn").onclick = () => {
+    speakingMockIndex = speakingMockQueue.length;
+    renderSpeakingMockStage();
+  };
+  startSpeakingMockTimer(item.seconds);
+}
+
+function startSpeakingMock() {
+  speakingMockQueue = buildSpeakingMockQueue();
+  speakingMockIndex = 0;
+  renderSpeakingMockStage();
 }
 
 function renderLifeVocabulary() {
@@ -3859,6 +4065,8 @@ document.querySelector("#sidebarToggle").addEventListener("click", () => {
   saveState();
   applyState();
 });
+
+document.querySelector("#startSpeakingMockBtn").addEventListener("click", startSpeakingMock);
 
 document.querySelectorAll(".utility-nav a").forEach((link) => {
   link.addEventListener("click", (event) => {
