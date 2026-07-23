@@ -78,7 +78,7 @@ assertIncludes(html, 'data-font-scale="125"', "large font setting");
 assertIncludes(html, 'id="speakingQuestionBankList"', "speaking question bank");
 assertIncludes(html, 'id="speakingMockStage"', "speaking mock test");
 assertIncludes(html, 'id="questionLearningFilter"', "question learning filter");
-assertIncludes(html, 'src="speaking-bank-data.js"', "speaking bank data script");
+assertIncludes(html, 'src="speaking-bank-data.js?', "versioned speaking bank data script");
 assertIncludes(js, "speakingVocabularyExpansion", "expanded speaking vocabulary topics");
 assertIncludes(js, "generation gap", "family speaking vocabulary");
 assertIncludes(js, "affordable housing", "home speaking vocabulary");
