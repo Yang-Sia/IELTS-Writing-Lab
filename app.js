@@ -4071,6 +4071,24 @@ document.querySelector("#sidebarToggle").addEventListener("click", () => {
 
 document.querySelector("#startSpeakingMockBtn").addEventListener("click", startSpeakingMock);
 
+document.querySelectorAll(".primary-domain[data-default-view] > summary").forEach((summary) => {
+  summary.addEventListener("click", (event) => {
+    event.preventDefault();
+    const domain = summary.parentElement;
+    if (domain.dataset.defaultModule) {
+      const targetPhase = coursePhases.find((phase) =>
+        phase.modules.some((module) => module.id === domain.dataset.defaultModule)
+      );
+      if (targetPhase) {
+        state.stage = targetPhase.id;
+        state.module = domain.dataset.defaultModule;
+      }
+    }
+    setActiveView(domain.dataset.defaultView);
+    domain.open = true;
+  });
+});
+
 document.querySelectorAll(".utility-nav a").forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();

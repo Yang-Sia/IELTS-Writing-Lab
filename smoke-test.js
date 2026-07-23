@@ -43,6 +43,8 @@ assertIncludes(html, "口语", "speaking navigation category");
 assertIncludes(html, "阅读", "reading navigation category");
 assertIncludes(html, 'data-module-shortcut="foundation-grammar"', "grammar shortcut");
 assertIncludes(html, 'data-nav-domain="speaking"', "speaking navigation state");
+assertIncludes(html, 'data-default-view="vocabulary-topics"', "speaking main navigation target");
+assertIncludes(html, 'data-default-view="task2-topics"', "writing main navigation target");
 assertIncludes(js, "const activeDomain", "single active navigation domain");
 assertIncludes(js, 'state.module = "sentence-patterns"', "writing course navigation reset");
 assertIncludes(html, 'id="book-method"', "book method section");
