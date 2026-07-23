@@ -2424,6 +2424,24 @@ function renderLearningSettings() {
   });
 }
 
+function renderHomeProgress() {
+  const vocabularyReviewed = Number(state.vocabularyStudyStats?.reviewed) || 0;
+  const speakingMarked = Object.values(state.speakingQuestionMarks || {}).filter(Boolean).length;
+  const writingSaved = state.savedNote?.trim() ? 1 : 0;
+  const phraseTotal = Number(state.phraseStats?.total) || 0;
+  const phraseCorrect = Number(state.phraseStats?.correct) || 0;
+  const phraseAccuracy = phraseTotal ? Math.round((phraseCorrect / phraseTotal) * 100) : 0;
+  const activityTotal = vocabularyReviewed + speakingMarked + writingSaved + phraseTotal;
+
+  document.querySelector("#homeVocabularyProgress").textContent = vocabularyReviewed;
+  document.querySelector("#homeSpeakingProgress").textContent = speakingMarked;
+  document.querySelector("#homeWritingProgress").textContent = writingSaved;
+  document.querySelector("#homePhraseProgress").textContent = `${phraseAccuracy}%`;
+  document.querySelector("#homeProgressSummary").textContent = activityTotal
+    ? `已留下 ${activityTotal} 条学习记录`
+    : "今天从第一项开始";
+}
+
 function getCurrentPhase() {
   return coursePhases.find((phase) => phase.id === state.stage) || coursePhases[0];
 }
@@ -3960,6 +3978,7 @@ function applyState() {
   renderPhraseDrill();
   renderLifeVocabulary();
   renderSpeakingQuestionBank();
+  renderHomeProgress();
   renderFeedback();
   renderSavedNote();
   updateProgress();

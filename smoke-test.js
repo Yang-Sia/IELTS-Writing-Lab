@@ -23,6 +23,9 @@ function assertIncludes(source, value, label) {
 assertIncludes(html, 'id="interactive-drills"', "exercise section");
 assertIncludes(html, 'id="course-system"', "task 2 course system");
 assertIncludes(html, 'id="learning-home"', "all courses home");
+assertIncludes(html, 'class="study-dashboard"', "daily study dashboard");
+assertIncludes(html, 'id="homeVocabularyProgress"', "home vocabulary progress");
+assertIncludes(html, 'class="learning-loop"', "practice feedback learning loop");
 assertIncludes(html, "账户系统预留", "future account access design");
 assertIncludes(html, "原有写作课程全部保留", "writing content visibility");
 assertIncludes(html, 'id="academic-standard"', "academic standard section");
@@ -88,6 +91,7 @@ assertIncludes(js, "transferable skills", "study and work vocabulary");
 assertIncludes(js, "digital divide", "technology speaking vocabulary");
 assertIncludes(js, "speakVocabularyWord", "vocabulary speech synthesis");
 assertIncludes(js, "advanceVocabularyFocus", "vocabulary memory rating");
+assertIncludes(js, "renderHomeProgress", "home learning progress renderer");
 assertIncludes(js, "renderLearningSettings", "learning settings renderer");
 assertIncludes(js, "renderSpeakingQuestionBank", "speaking question bank renderer");
 assertIncludes(js, "renderSpeakingCoach", "speaking answer coaching");

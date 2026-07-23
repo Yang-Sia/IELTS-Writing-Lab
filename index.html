@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IELTS Writing Lab</title>
-    <link rel="stylesheet" href="styles.css?v=20260723-6">
+    <link rel="stylesheet" href="styles.css?v=20260724-1">
   </head>
   <body>
     <header class="topbar">
@@ -103,6 +103,42 @@
               <span class="access-account">登录后</span>
               <span class="access-premium">待解锁</span>
             </div>
+          </div>
+
+          <section class="study-dashboard" aria-labelledby="todayFocusTitle">
+            <div class="today-focus-card">
+              <p class="eyebrow">Today’s Focus</p>
+              <h3 id="todayFocusTitle">今天先完成 15 分钟</h3>
+              <ol class="today-plan">
+                <li><span>5 分钟</span>复习 5 个口语词汇并朗读</li>
+                <li><span>5 分钟</span>回答 1 道 Part 1 题目</li>
+                <li><span>5 分钟</span>写 1 条 Task 2 论证链</li>
+              </ol>
+              <div class="today-actions utility-nav">
+                <a href="#vocabulary-topics" class="today-primary-action">开始今日学习 →</a>
+                <a href="#record">查看练习记录</a>
+              </div>
+            </div>
+
+            <div class="progress-overview">
+              <div class="progress-overview-head">
+                <div><p class="eyebrow">My Progress</p><h3>当前学习进度</h3></div>
+                <span id="homeProgressSummary">刚刚开始</span>
+              </div>
+              <div class="home-progress-grid">
+                <article><span>词汇复习</span><strong id="homeVocabularyProgress">0</strong><small>已复习表达</small></article>
+                <article><span>口语题库</span><strong id="homeSpeakingProgress">0</strong><small>已标记题目</small></article>
+                <article><span>写作练习</span><strong id="homeWritingProgress">0</strong><small>已保存记录</small></article>
+                <article><span>词组正确率</span><strong id="homePhraseProgress">0%</strong><small>最近练习</small></article>
+              </div>
+            </div>
+          </section>
+
+          <div class="learning-loop" aria-label="学习闭环">
+            <span><b>01</b>练习</span><i>→</i>
+            <span><b>02</b>查看反馈</span><i>→</i>
+            <span><b>03</b>记录薄弱点</span><i>→</i>
+            <span><b>04</b>获得下一步</span>
           </div>
 
           <div class="home-domain-section">
@@ -547,7 +583,7 @@
       </section>
     </main>
 
-    <script src="speaking-bank-data.js?v=20260723-6"></script>
-    <script src="app.js?v=20260723-6"></script>
+    <script src="speaking-bank-data.js?v=20260724-1"></script>
+    <script src="app.js?v=20260724-1"></script>
   </body>
 </html>
