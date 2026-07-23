@@ -3422,6 +3422,138 @@ function getQuestionRegionLabel(region) {
   return region === "mainland" ? "大陆" : "非大陆";
 }
 
+const speakingCoachingBank = [
+  {
+    match: /food|dinner|meal/i,
+    vocab: [
+      ["seasonal fruit", "时令水果"], ["refreshing", "清爽的"], ["naturally sweet", "天然清甜的"],
+      ["comfort food", "令人安心的食物"], ["versatile", "做法多样的"], ["a balanced diet", "均衡饮食"]
+    ],
+    variants: [
+      `水果方向：My go-to choice is <mark>seasonal fruit</mark>, especially berries, because they are <mark>refreshing</mark> and <mark>naturally sweet</mark>.`,
+      `主食方向：I would probably choose noodles. They are incredibly <mark>versatile</mark>, so I can have them in soup or stir-fried.`,
+      `健康方向：I try to maintain <mark>a balanced diet</mark>, so I normally choose fresh food over highly processed snacks.`
+    ]
+  },
+  {
+    match: /family|friend|person|people|famous|sportsperson/i,
+    vocab: [["close-knit", "关系紧密"], ["supportive", "给予支持的"], ["look up to", "敬佩"], ["reliable", "可靠的"], ["have a positive influence on", "产生积极影响"]],
+    variants: [
+      `关系方向：We are quite <mark>close-knit</mark>, and this person has always been extremely <mark>supportive</mark>.`,
+      `人物方向：I really <mark>look up to</mark> this person because they are both hardworking and <mark>reliable</mark>.`
+    ]
+  },
+  {
+    match: /home|house|accommodation|area|city|hometown|place/i,
+    vocab: [["cosy", "温馨的"], ["spacious", "宽敞的"], ["within walking distance", "步行可达"], ["well-connected", "交通便利"], ["sense of community", "社区归属感"]],
+    variants: [
+      `住房方向：It is not particularly large, but it feels <mark>cosy</mark> and gets plenty of natural light.`,
+      `位置方向：The area is <mark>well-connected</mark>, and most daily necessities are <mark>within walking distance</mark>.`
+    ]
+  },
+  {
+    match: /work|job|stud|school|teacher|career|science/i,
+    vocab: [["hands-on experience", "实践经验"], ["heavy workload", "繁重任务"], ["career prospects", "职业前景"], ["sense of achievement", "成就感"], ["transferable skills", "可迁移技能"]],
+    variants: [
+      `学习方向：The course gives me valuable <mark>hands-on experience</mark> and helps me develop <mark>transferable skills</mark>.`,
+      `工作方向：The job can be demanding, but it offers good <mark>career prospects</mark> and a strong <mark>sense of achievement</mark>.`
+    ]
+  },
+  {
+    match: /technology|phone|app|social media|electric/i,
+    vocab: [["user-friendly", "容易使用的"], ["rely on", "依赖"], ["save time", "节省时间"], ["keep in touch", "保持联系"], ["privacy concerns", "隐私担忧"]],
+    variants: [
+      `便利方向：It is extremely <mark>user-friendly</mark> and helps me <mark>save a great deal of time</mark>.`,
+      `影响方向：Although technology helps people <mark>keep in touch</mark>, it also raises serious <mark>privacy concerns</mark>.`
+    ]
+  },
+  {
+    match: /travel|journey|country|lost|natural place/i,
+    vocab: [["memorable journey", "难忘旅程"], ["breathtaking scenery", "壮丽景色"], ["immerse myself in", "沉浸于"], ["well worth visiting", "非常值得参观"], ["broaden my horizons", "开阔眼界"]],
+    variants: [
+      `体验方向：It was a truly <mark>memorable journey</mark>, mainly because of the <mark>breathtaking scenery</mark>.`,
+      `文化方向：Travelling allows me to <mark>immerse myself in</mark> another culture and <mark>broaden my horizons</mark>.`
+    ]
+  },
+  {
+    match: /shop|shoes|mall|buy|service/i,
+    vocab: [["shop around", "货比三家"], ["good value for money", "物有所值"], ["impulse buying", "冲动购物"], ["customer service", "顾客服务"], ["meet my needs", "满足需求"]],
+    variants: [
+      `商品方向：I usually <mark>shop around</mark> first because I want something that offers <mark>good value for money</mark>.`,
+      `服务方向：The staff provided excellent <mark>customer service</mark> and quickly found a product that <mark>met my needs</mark>.`
+    ]
+  },
+  {
+    match: /hobby|sport|drawing|painting|music|talent|activity|walking/i,
+    vocab: [["be really into", "非常喜欢"], ["take up", "开始培养"], ["a good way to unwind", "放松的好方式"], ["sense of achievement", "成就感"], ["from time to time", "偶尔"]],
+    variants: [
+      `兴趣方向：I am really <mark>into</mark> this activity because it is <mark>a good way to unwind</mark>.`,
+      `成长方向：I <mark>took it up</mark> a few years ago, and improving gradually gives me a real <mark>sense of achievement</mark>.`
+    ]
+  },
+  {
+    match: /read|book|story|movie|film/i,
+    vocab: [["gripping", "引人入胜的"], ["thought-provoking", "发人深省的"], ["storyline", "故事情节"], ["relate to", "产生共鸣"], ["leave a lasting impression", "留下深刻印象"]],
+    variants: [
+      `内容方向：The <mark>storyline</mark> was so <mark>gripping</mark> that I finished it in one sitting.`,
+      `感受方向：I could really <mark>relate to</mark> the main character, and the ending <mark>left a lasting impression</mark> on me.`
+    ]
+  },
+  {
+    match: /animal|pet|plant|vegetable|environment/i,
+    vocab: [["take care of", "照顾"], ["natural habitat", "自然栖息地"], ["raise awareness", "提高意识"], ["protect biodiversity", "保护生物多样性"], ["environmentally friendly", "环保的"]],
+    variants: [
+      `个人方向：Looking after it taught me how to be patient and <mark>take care of</mark> another living thing.`,
+      `社会方向：Protecting animals in their <mark>natural habitat</mark> is essential for <mark>biodiversity</mark>.`
+    ]
+  }
+];
+
+function getSpeakingCoach(entry) {
+  const text = `${entry.topic} ${entry.prompt || ""}`;
+  return speakingCoachingBank.find((coach) => coach.match.test(text)) || {
+    vocab: [["give a specific example", "给出具体例子"], ["from my perspective", "在我看来"], ["the main reason is that", "主要原因是"], ["as a result", "因此"], ["it depends on", "视情况而定"]],
+    variants: [
+      `个人经历：<mark>From my perspective</mark>, the best answer comes from a real experience and one clear detail.`,
+      `观点讨论：<mark>The main reason is that</mark> this issue affects people differently, so <mark>it depends on</mark> their situation.`
+    ]
+  };
+}
+
+function renderSpeakingCoach(entry, part) {
+  const coach = getSpeakingCoach(entry);
+  const routes = part === "part1"
+    ? ["直接回答，不绕圈", "补一个具体细节或例子", "解释原因或个人感受"]
+    : part === "part2"
+      ? ["交代时间、地点和人物", "按 cue card 讲清事件过程", "加入感官或行为细节", "最后解释意义和感受"]
+      : ["先给明确观点", "解释原因和影响", "给社会或生活例子", "补充让步、对比或条件"];
+  const template = part === "part1"
+    ? `I’d say ___ is my favourite / usual choice. What I like most about it is ___. For example, ___.`
+    : part === "part2"
+      ? `I’d like to talk about ___. It happened when ___. What made it memorable was ___. Looking back, I feel ___.`
+      : `From my perspective, ___. The main reason is that ___. For example, ___. However, this may depend on ___.`;
+  return `
+    <section class="speaking-coach-card">
+      <div class="coach-card-title"><span>答题训练</span><strong>结构 → 方向 → 词汇 → 自己练</strong></div>
+      <div class="coach-layout">
+        <div>
+          <b>解题思路</b>
+          <ol class="answer-route">${routes.map((route) => `<li>${route}</li>`).join("")}</ol>
+        </div>
+        <div>
+          <b>可替换的回答方向</b>
+          <div class="answer-variants">${coach.variants.map((variant) => `<p>${variant}</p>`).join("")}</div>
+        </div>
+      </div>
+      <div class="highlight-vocabulary">
+        <b>重点词汇</b>
+        <div>${coach.vocab.map(([word, meaning]) => `<span><mark>${word}</mark><small>${meaning}</small></span>`).join("")}</div>
+      </div>
+      <div class="practice-template"><b>举一反三结构</b><p>${template}</p><small>把横线换成自己的真实经历；同一个结构可以练习本组中的其他问题。</small></div>
+    </section>
+  `;
+}
+
 function renderSpeakingQuestionBank() {
   const entries = getSpeakingQuestionBankEntries();
   const targetPart = state.questionBankPart || "part1";
@@ -3457,12 +3589,12 @@ function renderSpeakingQuestionBank() {
     ? filtered.map((entry, index) => {
         const meta = `<div class="bank-card-meta"><span>${String(index + 1).padStart(2, "0")}</span><b>${getQuestionStatusLabel(entry.status)}</b><em>${getQuestionRegionLabel(entry.region)}</em></div>`;
         if (targetPart === "part1") {
-          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map((question) => `<li>${question}</li>`).join("")}</ol></details>`;
+          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map((question) => `<li>${question}</li>`).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
         }
         if (targetPart === "part2") {
-          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div></details>`;
+          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
         }
-        return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary><div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => `<li>${question}</li>`).join("")}</ol></div></details>`;
+        return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary><div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => `<li>${question}</li>`).join("")}</ol></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
       }).join("")
     : `<div class="empty-question-bank"><strong>没有找到符合条件的题目</strong><p>可以尝试切换地区、题目状态或清除搜索词。</p></div>`;
 

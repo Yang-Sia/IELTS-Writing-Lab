@@ -2497,6 +2497,122 @@ textarea:focus {
   color: var(--muted);
 }
 
+.speaking-coach-card {
+  margin: 0 16px 16px;
+  overflow: hidden;
+  background: #fcf9f9;
+  border: 1px solid #eadde1;
+  border-radius: 10px;
+}
+
+.coach-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #f5e7eb;
+}
+
+.coach-card-title span {
+  padding: 3px 8px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 850;
+}
+
+.coach-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 14px;
+  padding: 14px;
+}
+
+.coach-layout > div {
+  padding: 13px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.answer-route {
+  margin: 10px 0 0;
+  padding-left: 22px;
+}
+
+.answer-route li {
+  margin-bottom: 6px;
+}
+
+.answer-variants {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.answer-variants p {
+  margin: 0;
+  padding: 10px 12px;
+  background: #faf6f6;
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+}
+
+.answer-variants mark,
+.highlight-vocabulary mark {
+  padding: 1px 4px;
+  color: #7f3f51;
+  background: #f5dce3;
+  border-radius: 4px;
+  font-weight: 850;
+}
+
+.highlight-vocabulary,
+.practice-template {
+  margin: 0 14px 14px;
+  padding: 13px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.highlight-vocabulary > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.highlight-vocabulary > div > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #fff8fa;
+  border: 1px solid #efdce2;
+  border-radius: 7px;
+}
+
+.highlight-vocabulary small {
+  color: var(--muted);
+}
+
+.practice-template {
+  background: #eef8f5;
+  border-color: #c5e1da;
+}
+
+.practice-template p {
+  margin: 8px 0;
+  color: var(--mint-dark);
+  font-weight: 750;
+}
+
+.practice-template small {
+  color: var(--muted);
+}
+
 .bank-source-note {
   margin: 12px 0 0;
   font-size: 0.74rem;
@@ -2977,6 +3093,10 @@ textarea:focus {
 
   .speaking-bank-toolbar {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .coach-layout {
+    grid-template-columns: 1fr;
   }
 
   .vocabulary-workspace,
