@@ -3663,6 +3663,91 @@ const speakingTopicExamples = {
   Keys: ["my house keys", "small but essential", "I need them every single day"]
 };
 
+const part1TopicChoiceBank = {
+  Food: ["mango", "roast chicken", "noodles", "hotpot", "ice cream"],
+  "Pets and Animals": ["a dog", "a cat", "a rabbit", "fish", "wild birds"],
+  "Sports team": ["a national football team", "a university basketball team", "a local club", "an e-sports team"],
+  Hobby: ["photography", "cooking", "reading", "cycling", "drawing"],
+  "Morning time": ["having breakfast", "going for a walk", "checking my plan", "commuting", "sleeping in"],
+  Gifts: ["a book", "a handmade card", "headphones", "flowers", "a practical household item"],
+  Reading: ["novels", "biographies", "news articles", "self-help books", "online posts"],
+  Walking: ["a nearby park", "the riverside", "my neighbourhood", "the city centre", "a hiking trail"],
+  Typing: ["a laptop", "a tablet", "a phone", "a mechanical keyboard", "voice typing"],
+  Plants: ["mint", "a small cactus", "tomatoes", "flowers", "indoor green plants"],
+  "Public places": ["a library", "a public park", "a museum", "a shopping centre", "a community centre"],
+  Rules: ["being punctual", "wearing a uniform", "keeping quiet", "traffic rules", "screen-time limits"],
+  Shoes: ["trainers", "boots", "formal shoes", "sandals", "running shoes"],
+  "Doing something well": ["cooking", "organising my time", "taking photos", "explaining ideas", "playing a sport"],
+  "Crowded place": ["a shopping mall", "a train station", "a tourist attraction", "a concert", "a night market"],
+  "Going out": ["a quiet café", "a cinema", "a park", "a restaurant", "a friend's home"],
+  "Staying with old people": ["my grandparents", "an elderly neighbour", "older relatives", "senior volunteers"],
+  "Growing vegetables/fruits": ["tomatoes", "strawberries", "herbs", "chillies", "apples"],
+  Chatting: ["close friends", "family members", "classmates", "colleagues", "online friends"],
+  "Borrowing and lending": ["books", "a charger", "an umbrella", "notes", "small amounts of money"],
+  Advertisement: ["a short video advert", "a poster", "a social-media advert", "a celebrity campaign", "a product review"],
+  Museum: ["a history museum", "an art gallery", "a science museum", "a local exhibition", "an online museum"],
+  "Having a break": ["taking a short walk", "having tea", "listening to music", "stretching", "talking to a friend"],
+  Sharing: ["food", "study notes", "photos", "useful information", "household items"],
+  "Work or studies": ["my current course", "a favourite subject", "a group project", "a part-time job", "a future career"],
+  "Home/accommodation": ["my apartment", "my bedroom", "the living room", "a balcony", "my ideal home"],
+  Hometown: ["a local landmark", "traditional food", "the weather", "friendly residents", "recent changes"],
+  "The area you live in": ["public transport", "nearby shops", "a local park", "my neighbours", "the quiet streets"],
+  "The city you live in": ["job opportunities", "public transport", "cultural events", "busy streets", "nightlife"],
+  "Day off": ["sleeping a little longer", "meeting friends", "doing exercise", "watching a film", "preparing for the week"],
+  Dreams: ["a vivid dream", "a recurring dream", "a dream job", "a travel goal", "a childhood ambition"],
+  Keys: ["house keys", "a car key", "an electronic key card", "a spare key", "a key ring"]
+};
+
+const part1TopicContextBank = {
+  "Morning time": "before class · on weekdays · at weekends",
+  Gifts: "on birthdays · during festivals · for a close friend",
+  Walking: "after dinner · on my way home · at weekends",
+  "Public places": "with friends · when I need to study · during holidays",
+  "Crowded place": "at weekends · during rush hour · on public holidays",
+  "Going out": "on Friday evenings · after class · with close friends",
+  "Staying with old people": "during family visits · at weekends · on traditional holidays",
+  "Work or studies": "in class · during a group project · before an exam",
+  "Home/accommodation": "after a busy day · with my family · when I need privacy",
+  Hometown: "during my childhood · when friends visit · during festivals",
+  "The area you live in": "on my daily commute · at weekends · when buying necessities",
+  "The city you live in": "during rush hour · at night · when visitors arrive",
+  "Day off": "on Saturday mornings · after a busy week · when the weather is good",
+  Dreams: "when I wake up · during stressful periods · when planning my future"
+};
+
+function renderPart1TopicPlanner(entry) {
+  const choices = part1TopicChoiceBank[entry.topic] || [speakingTopicExamples[entry.topic]?.[0] || entry.topic.toLowerCase()];
+  const [, quality = "interesting and useful", reason = "it is closely connected with my daily life"] = speakingTopicExamples[entry.topic] || [];
+  const contexts = part1TopicContextBank[entry.topic] || "in daily life · at weekends · with friends or family";
+  return `
+    <section class="part1-topic-planner">
+      <header>
+        <div><span>先选自己的答案</span><h4>${entry.topic} 怎么展开？</h4></div>
+        <b>每道题都用 3 句话</b>
+      </header>
+      <div class="part1-planner-grid">
+        <article>
+          <strong>① 我可以讲什么？</strong>
+          <div class="part1-choice-chips">${choices.map((choice) => `<span>${choice}</span>`).join("")}</div>
+        </article>
+        <article>
+          <strong>② 从哪些方向描述？</strong>
+          <p><b>特点</b>${quality}</p>
+          <p><b>个人联系</b>${reason}</p>
+          <p><b>具体场景</b>${contexts}</p>
+        </article>
+        <article class="part1-three-line-plan">
+          <strong>③ 三句话怎么说？</strong>
+          <p><b>1</b>先直接回答，并给一个具体选择</p>
+          <p><b>2</b>补两个特点，或解释两个相关原因</p>
+          <p><b>3</b>加人物、时间、地点或过去现在对比</p>
+        </article>
+      </div>
+      <p class="part1-planner-note">下面每一道题都可以展开查看：中文路线、三句话参考答案、可替换句型和重点词汇。</p>
+    </section>
+  `;
+}
+
 function buildPart1Reference(question, entry) {
   const [example, quality, reason] = speakingTopicExamples[entry.topic] || [entry.topic.toLowerCase(), "interesting and relevant to me", "it is part of my everyday life"];
   const lower = question.toLowerCase();
@@ -3899,7 +3984,7 @@ function renderSpeakingQuestionBank() {
   const renderBankCard = (entry, index) => {
     const meta = `<div class="bank-card-meta"><span>${String(index + 1).padStart(2, "0")}</span><b>${getQuestionStatusLabel(entry.status)}</b><em>${getQuestionRegionLabel(entry.region)}</em></div>`;
     if (targetPart === "part1") {
-      return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map((question) => renderPart1QuestionWithAnswer(question, entry)).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
+      return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary>${renderPart1TopicPlanner(entry)}<ol>${entry.questions.map((question) => renderPart1QuestionWithAnswer(question, entry)).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
     }
     if (targetPart === "part2") {
       return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderPart2Reference(entry)}${renderSpeakingCoach(entry, targetPart)}</details>`;

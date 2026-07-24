@@ -3191,6 +3191,119 @@ textarea:focus {
   border-top: 1px solid #eee5e7;
 }
 
+.part1-topic-planner {
+  margin: 0;
+  padding: 18px 22px;
+  background:
+    radial-gradient(circle at 94% 8%, rgba(187, 222, 216, 0.48), transparent 27%),
+    #fcf8f9;
+  border-top: 1px solid #eee5e7;
+}
+
+.part1-topic-planner > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.part1-topic-planner > header div {
+  display: grid;
+  gap: 2px;
+}
+
+.part1-topic-planner > header span {
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.part1-topic-planner > header h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.part1-topic-planner > header > b {
+  padding: 6px 9px;
+  color: #2f6f68;
+  background: #e3f3f0;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.part1-planner-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.2fr 1.1fr;
+  gap: 9px;
+}
+
+.part1-planner-grid > article {
+  min-width: 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e7dce0;
+  border-radius: 9px;
+}
+
+.part1-planner-grid > article > strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-dark);
+  font-size: 0.76rem;
+}
+
+.part1-choice-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.part1-choice-chips span {
+  padding: 5px 7px;
+  color: var(--ink);
+  background: #f3ecee;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.part1-planner-grid article p {
+  display: grid;
+  grid-template-columns: 66px 1fr;
+  gap: 6px;
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.part1-planner-grid article p b {
+  color: #38776f;
+}
+
+.part1-three-line-plan p {
+  grid-template-columns: 20px 1fr !important;
+}
+
+.part1-three-line-plan p b {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  color: #fff !important;
+  background: #75a59e;
+  border-radius: 50%;
+  font-size: 0.64rem;
+}
+
+.part1-planner-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
 .question-bank-card li {
   margin-bottom: 9px;
 }
@@ -4568,6 +4681,14 @@ textarea:focus {
   .speaking-bank-toolbar,
   .question-bank-card summary {
     grid-template-columns: 1fr;
+  }
+  .part1-topic-planner > header,
+  .part1-planner-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .part1-topic-planner > header > b {
+    justify-self: start;
   }
   .font-size-options {
     grid-template-columns: repeat(2, minmax(0, 1fr));
