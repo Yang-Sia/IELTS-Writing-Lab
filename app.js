@@ -4082,10 +4082,18 @@ function renderSpeakingQuestionBank() {
   const entries = getSpeakingQuestionBankEntries();
   const targetPart = state.questionBankPart || "part1";
   const partEntries = entries.filter((entry) => targetPart === "part1" ? entry.part === "part1" : entry.part === "part2");
-  const availableTopics = [...new Set(partEntries.map((entry) => entry.topic))].sort((a, b) => a.localeCompare(b, "en"));
+  const topicSourceEntries = partEntries.filter((entry) => {
+    const regionMatches = state.questionBankRegion === "all" || entry.region === state.questionBankRegion;
+    const statusMatches = state.questionBankStatus === "all" || entry.status === state.questionBankStatus;
+    return regionMatches && statusMatches;
+  });
+  const availableTopics = [...new Set(topicSourceEntries.map((entry) => entry.topic))].sort((a, b) => a.localeCompare(b, "en"));
   if (state.questionBankTopic !== "all" && !availableTopics.includes(state.questionBankTopic)) {
     state.questionBankTopic = "all";
   }
+  const selectedStatusLabel = state.questionBankStatus === "all"
+    ? "全部"
+    : getQuestionStatusLabel(state.questionBankStatus);
   const filtered = entries.filter((entry) => {
     const partMatches = targetPart === "part1" ? entry.part === "part1" : entry.part === "part2";
     const regionMatches = state.questionBankRegion === "all" || entry.region === state.questionBankRegion;
@@ -4118,7 +4126,7 @@ function renderSpeakingQuestionBank() {
   document.querySelector("#questionStatusFilter").value = state.questionBankStatus;
   document.querySelector("#questionLearningFilter").value = state.questionBankLearningFilter;
   document.querySelector("#questionTopicFilter").innerHTML = `
-    <option value="all">全部 Topic（${availableTopics.length}）</option>
+    <option value="all">${selectedStatusLabel} Topic（${availableTopics.length}）</option>
     ${availableTopics.map((topic) => `<option value="${topic}">${topic}</option>`).join("")}
   `;
   document.querySelector("#questionTopicFilter").value = state.questionBankTopic || "all";

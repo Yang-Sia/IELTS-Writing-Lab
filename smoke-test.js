@@ -131,6 +131,8 @@ assertIncludes(js, "question-status-group", "grouped Part 1 question statuses");
 assertIncludes(js, "renderLearningSettings", "learning settings renderer");
 assertIncludes(js, "renderSpeakingQuestionBank", "speaking question bank renderer");
 assertIncludes(js, "availableTopics", "automatic speaking topic options");
+assertIncludes(js, "topicSourceEntries", "status-linked topic options");
+assertIncludes(js, "selectedStatusLabel", "topic selector status label");
 assertIncludes(js, "renderSpeakingCoach", "speaking answer coaching");
 assertIncludes(js, "seasonal fruit", "food answer variation");
 assertIncludes(js, "举一反三结构", "transferable speaking answer structure");
