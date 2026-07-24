@@ -2322,6 +2322,7 @@ const defaultState = {
   lifeVocabularyTopic: "shopping",
   speakingPart: "part1",
   speakingSection: "bank",
+  speakingTipPart: "all",
   lifeVocabularyCategory: "buying",
   lifeVocabularyOpenCards: {},
   vocabularyFocusIndex: 0,
@@ -2413,6 +2414,8 @@ function renderVisiblePanels() {
     ? "settings"
     : state.activeView === "vocabulary-topics"
     ? "speaking"
+    : state.activeView === "speaking-tips"
+    ? "speaking"
     : state.activeView === "course-system" && state.module === "foundation-grammar"
       ? "foundation"
       : "writing";
@@ -2431,6 +2434,37 @@ function renderLearningSettings() {
     button.classList.toggle("active", Number(button.dataset.fontScale) === scale);
   });
   populateNaturalVoiceOptions();
+}
+
+function renderSpeakingTips() {
+  const tips = typeof simonSpeakingTips === "undefined" ? [] : simonSpeakingTips;
+  const filter = state.speakingTipPart || "all";
+  const visibleTips = filter === "all" ? tips : tips.filter((tip) => tip.part === filter);
+  const partLabels = { general: "通用", part1: "Part 1", part2: "Part 2", part3: "Part 3" };
+  document.querySelector("#speakingTipCount").textContent = visibleTips.length;
+  document.querySelectorAll("[data-tip-part]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.tipPart === filter);
+  });
+  document.querySelector("#speakingTipsList").innerHTML = visibleTips.map((tip, index) => `
+    <details class="speaking-tip-card">
+      <summary>
+        <span>${String(index + 1).padStart(2, "0")}</span>
+        <div><b>${tip.title}</b><small>${partLabels[tip.part]} · PDF 第 ${tip.page} 页</small></div>
+        <em>展开</em>
+      </summary>
+      <div class="speaking-tip-body">
+        <p>${tip.advice}</p>
+        <ol>${tip.steps.map((step) => `<li>${step}</li>`).join("")}</ol>
+      </div>
+    </details>
+  `).join("");
+  document.querySelectorAll("[data-tip-part]").forEach((button) => {
+    button.onclick = () => {
+      state.speakingTipPart = button.dataset.tipPart;
+      saveState();
+      renderSpeakingTips();
+    };
+  });
 }
 
 function scoreVoiceQuality(voice, targetLang) {
@@ -4272,6 +4306,7 @@ function applyState() {
   renderPhraseDrill();
   renderLifeVocabulary();
   renderSpeakingQuestionBank();
+  renderSpeakingTips();
   renderHomeProgress();
   renderFeedback();
   renderSavedNote();

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IELTS Writing Lab</title>
-    <link rel="stylesheet" href="styles.css?v=20260724-7">
+    <link rel="stylesheet" href="styles.css?v=20260724-8">
   </head>
   <body>
     <header class="topbar">
@@ -45,9 +45,8 @@
           <details class="nav-domain primary-domain speaking-nav" data-nav-domain="speaking" data-default-view="vocabulary-topics" data-default-speaking-section="bank">
             <summary><span class="domain-icon">S</span><span><strong>口语 Speaking</strong><small>Part 1 · Part 2 · Part 3</small></span></summary>
             <div class="nav-domain-links utility-nav">
-              <a href="#vocabulary-topics" data-speaking-section="bank" data-question-part="part1" data-inner-target="speaking-bank"><b>Part 1 题库</b><small>32 个 Topic · 190 道小问</small></a>
-              <a href="#vocabulary-topics" data-speaking-section="bank" data-question-part="part2" data-inner-target="speaking-bank"><b>Part 2 题卡</b><small>43 张 Cue Card</small></a>
-              <a href="#vocabulary-topics" data-speaking-section="bank" data-question-part="part3" data-inner-target="speaking-bank"><b>Part 3 讨论</b><small>217 道关联追问</small></a>
+              <a href="#vocabulary-topics" data-speaking-section="bank" data-question-part="part1" data-inner-target="speaking-bank"><b>2026 年 5–8 月题库</b><small>Part 1 · Part 2 · Part 3</small></a>
+              <a href="#speaking-tips"><b>口语回答技巧</b><small>Simon 资料 · 55 条整理</small></a>
               <a href="#vocabulary-topics" data-speaking-section="vocabulary" data-inner-target="speaking-part-tabs"><b>Topic 词汇</b><small>Shopping · Food · Travel 等</small></a>
             </div>
           </details>
@@ -396,6 +395,31 @@
           </section>
         </section>
 
+        <section id="speaking-tips" class="panel speaking-tips-panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Speaking Answer Skills</p>
+              <h2>口语回答技巧</h2>
+              <p class="muted">根据用户提供的 Simon 口语资料 115 页逐项整理。保留原资料的核心原则，并改写成可以直接练习的中文步骤。</p>
+            </div>
+            <div class="speaking-tip-count"><strong id="speakingTipCount">55</strong><span>条技巧</span></div>
+          </div>
+          <div class="speaking-tip-tabs" id="speakingTipTabs">
+            <button type="button" data-tip-part="all">全部</button>
+            <button type="button" data-tip-part="general">通用</button>
+            <button type="button" data-tip-part="part1">Part 1</button>
+            <button type="button" data-tip-part="part2">Part 2</button>
+            <button type="button" data-tip-part="part3">Part 3</button>
+          </div>
+          <div class="speaking-tip-summary">
+            <article><b>Part 1</b><span>短、完整、直接</span></article>
+            <article><b>Part 2</b><span>按题卡展开并讲故事</span></article>
+            <article><b>Part 3</b><span>观点、解释、例子与让步</span></article>
+          </div>
+          <div id="speakingTipsList" class="speaking-tips-list"></div>
+          <p class="bank-source-note">整理来源：用户提供的《simon口语资料网站整理123》。内容为学习用途的结构化转述，并标注对应 PDF 页码。</p>
+        </section>
+
         <section id="practice" class="panel">
           <div class="section-head">
             <div>
@@ -592,7 +616,8 @@
       </section>
     </main>
 
-    <script src="speaking-bank-data.js?v=20260724-7"></script>
-    <script src="app.js?v=20260724-7"></script>
+    <script src="speaking-bank-data.js?v=20260724-8"></script>
+    <script src="speaking-tips-data.js?v=20260724-8"></script>
+    <script src="app.js?v=20260724-8"></script>
   </body>
 </html>
