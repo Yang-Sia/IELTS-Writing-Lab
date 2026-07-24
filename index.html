@@ -626,8 +626,11 @@
                 <span>选择设备里的具体声音</span>
                 <select id="naturalVoiceSelect" aria-label="选择英语发音声音"></select>
               </label>
-              <button type="button" id="previewVoiceBtn" class="secondary voice-preview-button">▶ 试听自然句子</button>
-              <p class="voice-quality-note">声音质量由你的浏览器和设备提供；网页会优先推荐 Premium、Enhanced 或 Natural 声音。</p>
+              <div class="voice-preview-actions">
+                <button type="button" id="autoVoiceBtn" class="secondary voice-preview-button">✨ 自动选自然声音</button>
+                <button type="button" id="previewVoiceBtn" class="secondary voice-preview-button">▶ 试听自然句子</button>
+              </div>
+              <p class="voice-quality-note">优先选择较轻柔的女声以及 Premium、Enhanced、Natural 或 Neural 声音，并自动避开明显机械或厚重的系统音色。</p>
             </article>
 
             <article class="setting-card">
@@ -666,7 +669,7 @@
       </section>
     </main>
 
-    <script src="speaking-bank-data.js?v=20260724-17"></script>
-    <script src="app.js?v=20260724-17"></script>
+    <script src="speaking-bank-data.js?v=20260724-18"></script>
+    <script src="app.js?v=20260724-18"></script>
   </body>
 </html>
