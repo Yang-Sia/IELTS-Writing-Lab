@@ -105,6 +105,8 @@ assertIncludes(js, "buildPart1Reference", "all Part 1 reference answer coverage"
 assertIncludes(js, "renderPart2Reference", "all Part 2 reference structure coverage");
 assertIncludes(js, "renderPart3QuestionWithAnswer", "all Part 3 reference answer coverage");
 assertIncludes(js, "getSeasonQuestionsForTopic", "topic-linked seasonal speaking questions");
+assertIncludes(js, "statusPriority", "evergreen-first speaking question ordering");
+assertIncludes(js, "question-status-group", "grouped Part 1 question statuses");
 assertIncludes(js, "renderLearningSettings", "learning settings renderer");
 assertIncludes(js, "renderSpeakingQuestionBank", "speaking question bank renderer");
 assertIncludes(js, "renderSpeakingCoach", "speaking answer coaching");

@@ -2984,6 +2984,64 @@ textarea:focus {
   gap: 9px;
 }
 
+.question-status-group {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.question-status-group > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border-left: 5px solid var(--accent);
+  border-radius: 10px;
+  background: #f8f2f4;
+}
+
+.question-status-group > header div {
+  display: grid;
+  gap: 3px;
+}
+
+.question-status-group > header span {
+  color: var(--accent-dark);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.question-status-group > header strong,
+.question-status-group > header em {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-style: normal;
+}
+
+.question-status-list {
+  display: grid;
+  gap: 10px;
+}
+
+.question-status-group.status-evergreen > header {
+  border-left-color: var(--mint-dark);
+  background: #eaf5f2;
+}
+
+.question-status-group.status-evergreen > header span {
+  color: var(--mint-dark);
+}
+
+.question-status-group.status-retained > header {
+  border-left-color: var(--blue);
+  background: #f0f3f8;
+}
+
+.question-status-group.status-retained > header span {
+  color: var(--blue);
+}
+
 .question-bank-card {
   overflow: hidden;
   background: #fff;
@@ -3860,6 +3918,11 @@ textarea:focus {
 }
 
 @media (max-width: 520px) {
+  .question-status-group > header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .home-progress-grid,
   .learning-loop {
     grid-template-columns: 1fr;

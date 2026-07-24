@@ -3871,7 +3871,11 @@ function renderSpeakingQuestionBank() {
     return partMatches && regionMatches && statusMatches && learningMatches && (!search || searchable.includes(search));
   });
 
-  const questionCount = filtered.reduce((total, entry) => {
+  const statusPriority = { evergreen: 0, new: 1, retained: 2 };
+  const sortedEntries = [...filtered].sort((a, b) =>
+    (statusPriority[a.status] ?? 9) - (statusPriority[b.status] ?? 9)
+  );
+  const questionCount = sortedEntries.reduce((total, entry) => {
     if (targetPart === "part1") return total + (entry.questions?.length || 0);
     if (targetPart === "part3") return total + (entry.part3Questions?.length || 0);
     return total + 1;
@@ -3890,18 +3894,41 @@ function renderSpeakingQuestionBank() {
   }
   renderSpeakingDailyProgress();
 
-  document.querySelector("#speakingQuestionBankList").innerHTML = filtered.length
-    ? filtered.map((entry, index) => {
-        const meta = `<div class="bank-card-meta"><span>${String(index + 1).padStart(2, "0")}</span><b>${getQuestionStatusLabel(entry.status)}</b><em>${getQuestionRegionLabel(entry.region)}</em></div>`;
-        if (targetPart === "part1") {
-          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map((question) => renderPart1QuestionWithAnswer(question, entry)).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
-        }
-        if (targetPart === "part2") {
-          return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderPart2Reference(entry)}${renderSpeakingCoach(entry, targetPart)}</details>`;
-        }
-        return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary><div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => renderPart3QuestionWithAnswer(question, entry)).join("")}</ol></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
-      }).join("")
-    : `<div class="empty-question-bank"><strong>没有找到符合条件的题目</strong><p>可以尝试切换地区、题目状态或清除搜索词。</p></div>`;
+  const renderBankCard = (entry, index) => {
+    const meta = `<div class="bank-card-meta"><span>${String(index + 1).padStart(2, "0")}</span><b>${getQuestionStatusLabel(entry.status)}</b><em>${getQuestionRegionLabel(entry.region)}</em></div>`;
+    if (targetPart === "part1") {
+      return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary><ol>${entry.questions.map((question) => renderPart1QuestionWithAnswer(question, entry)).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
+    }
+    if (targetPart === "part2") {
+      return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderPart2Reference(entry)}${renderSpeakingCoach(entry, targetPart)}</details>`;
+    }
+    return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary><div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => renderPart3QuestionWithAnswer(question, entry)).join("")}</ol></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
+  };
+
+  const statusGroups = [
+    { id: "evergreen", title: "万年题", note: "长期高频，优先准备并反复练习" },
+    { id: "new", title: "新题", note: "本考季新增，重点熟悉题意和表达" },
+    { id: "retained", title: "保留题", note: "上一考季延续，保持熟练度" }
+  ];
+  let runningIndex = 0;
+  const groupedPartOne = statusGroups.map((group) => {
+    const groupEntries = sortedEntries.filter((entry) => entry.status === group.id);
+    if (!groupEntries.length) return "";
+    const groupQuestionCount = groupEntries.reduce((sum, entry) => sum + entry.questions.length, 0);
+    const cards = groupEntries.map((entry) => renderBankCard(entry, runningIndex++)).join("");
+    return `
+      <section class="question-status-group status-${group.id}">
+        <header><div><span>${group.title}</span><strong>${group.note}</strong></div><em>${groupEntries.length} 个 Topic · ${groupQuestionCount} 题</em></header>
+        <div class="question-status-list">${cards}</div>
+      </section>
+    `;
+  }).join("");
+
+  document.querySelector("#speakingQuestionBankList").innerHTML = !sortedEntries.length
+    ? `<div class="empty-question-bank"><strong>没有找到符合条件的题目</strong><p>可以尝试切换地区、题目状态或清除搜索词。</p></div>`
+    : targetPart === "part1"
+      ? groupedPartOne
+      : sortedEntries.map(renderBankCard).join("");
 
   document.querySelectorAll("[data-question-part]").forEach((button) => {
     button.onclick = () => {
