@@ -3126,6 +3126,32 @@ textarea:focus {
   line-height: 1.75;
 }
 
+.reference-answer-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.reference-answer-heading button {
+  min-width: 76px;
+  padding: 6px 9px;
+  color: #2f6f68;
+  background: #e5f4f1;
+  border: 1px solid #b9ddd7;
+  border-radius: 999px;
+  box-shadow: none;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.reference-answer-heading button:hover,
+.reference-answer-heading button.playing {
+  color: #fff;
+  background: #4c887f;
+  border-color: #4c887f;
+}
+
 .reference-answer-body mark {
   padding: 1px 4px;
   color: #754657;

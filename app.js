@@ -3447,6 +3447,51 @@ function speakVocabularyWord(word) {
   window.speechSynthesis.speak(utterance);
 }
 
+function getPlainSpeakingText(html) {
+  return String(html || "")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function resetReferenceSpeakButtons() {
+  document.querySelectorAll("[data-speak-reference]").forEach((button) => {
+    button.classList.remove("playing");
+    button.textContent = "🔊 朗读";
+    button.setAttribute("aria-label", "朗读参考答案");
+  });
+}
+
+function speakReferenceAnswer(button) {
+  if (!("speechSynthesis" in window)) {
+    button.textContent = "当前浏览器不支持";
+    return;
+  }
+  const wasPlaying = button.classList.contains("playing");
+  window.speechSynthesis.cancel();
+  resetReferenceSpeakButtons();
+  if (wasPlaying) return;
+  const text = decodeURIComponent(button.dataset.speakReference || "");
+  if (!text) return;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = state.vocabularyVoiceAccent || "en-GB";
+  utterance.rate = 0.9;
+  utterance.pitch = 1;
+  const preferredVoice = getPreferredVoice();
+  if (preferredVoice) {
+    utterance.voice = preferredVoice;
+    utterance.lang = preferredVoice.lang;
+  }
+  button.classList.add("playing");
+  button.textContent = "■ 停止";
+  button.setAttribute("aria-label", "停止朗读参考答案");
+  utterance.onend = resetReferenceSpeakButtons;
+  utterance.onerror = resetReferenceSpeakButtons;
+  window.speechSynthesis.speak(utterance);
+}
+
 function advanceVocabularyFocus(category, rating) {
   const focus = getVocabularyFocusWord(category);
   if (!focus) return;
@@ -3792,6 +3837,7 @@ function buildPart1Reference(question, entry) {
 
 function renderPart1QuestionWithAnswer(question, entry) {
   const reference = speakingQuestionAnswerBank[question] || buildPart1Reference(question, entry);
+  const spokenAnswer = encodeURIComponent(getPlainSpeakingText(reference.answer));
   return `
     <li class="part1-question-item">
       <p>${question}</p>
@@ -3799,7 +3845,10 @@ function renderPart1QuestionWithAnswer(question, entry) {
         <summary>查看具体参考答案</summary>
         <div class="reference-answer-body">
           <div><b>中文思路</b><p>${reference.idea}</p></div>
-          <div><b>自然参考答案</b><p class="english-reference-answer">${reference.answer}</p></div>
+          <div>
+            <div class="reference-answer-heading"><b>自然参考答案</b><button type="button" data-speak-reference="${spokenAnswer}" aria-label="朗读参考答案">🔊 朗读</button></div>
+            <p class="english-reference-answer">${reference.answer}</p>
+          </div>
           <div><b>可替换结构</b><p>${reference.structure}</p></div>
           <div class="reference-vocabulary"><b>重点词汇</b><p>${reference.vocab.map(([word, meaning]) => `<span><mark>${word}</mark><small>${meaning}</small></span>`).join("")}</p></div>
         </div>
@@ -3811,13 +3860,17 @@ function renderPart1QuestionWithAnswer(question, entry) {
 function renderPart2Reference(entry) {
   const coach = getSpeakingCoach(entry);
   const example = coach.variants[0].replace(/^.*?：/, "");
+  const spokenExample = encodeURIComponent(getPlainSpeakingText(example));
   return `
     <details class="question-reference-answer part2-reference-answer">
       <summary>查看 Part 2 参考结构与示范</summary>
       <div class="reference-answer-body">
         <div><b>1. 开场定位</b><p>I’d like to talk about a specific experience that still stands out clearly in my mind.</p></div>
         <div><b>2. 按题卡展开</b><p>先交代时间、地点和人物，再按照 cue card 顺序讲事件过程；每一点补一个行为、感官或感受细节。</p></div>
-        <div><b>3. 话题示范句</b><p class="english-reference-answer">${example}</p></div>
+        <div>
+          <div class="reference-answer-heading"><b>3. 话题示范句</b><button type="button" data-speak-reference="${spokenExample}" aria-label="朗读参考答案">🔊 朗读</button></div>
+          <p class="english-reference-answer">${example}</p>
+        </div>
         <div><b>4. 自然结尾</b><p>Looking back, I value this experience because it changed the way I think about the topic and gave me a lasting memory.</p></div>
         <div class="reference-vocabulary"><b>可用词汇</b><p>${coach.vocab.map(([word, meaning]) => `<span><mark>${word}</mark><small>${meaning}</small></span>`).join("")}</p></div>
       </div>
@@ -3829,6 +3882,8 @@ function renderPart3QuestionWithAnswer(question, entry) {
   const coach = getSpeakingCoach(entry);
   const [firstWord, firstMeaning] = coach.vocab[0];
   const [secondWord, secondMeaning] = coach.vocab[1] || coach.vocab[0];
+  const answer = `From my perspective, this issue has a significant influence on people's choices. The main reason is that it can be closely connected with <mark>${firstWord}</mark>, which affects both individuals and the wider community. For example, people may make very different decisions depending on their age, income or circumstances. However, the result is not always the same, and it may also depend on whether people have access to <mark>${secondWord}</mark>.`;
+  const spokenAnswer = encodeURIComponent(getPlainSpeakingText(answer));
   return `
     <li class="part1-question-item">
       <p>${question}</p>
@@ -3836,7 +3891,10 @@ function renderPart3QuestionWithAnswer(question, entry) {
         <summary>查看 Part 3 参考答案</summary>
         <div class="reference-answer-body">
           <div><b>中文思路</b><p>先给明确观点，再解释个人或社会原因，补一个现实例子，最后增加条件或让步。</p></div>
-          <div><b>参考答案</b><p class="english-reference-answer">From my perspective, this issue has a significant influence on people's choices. The main reason is that it can be closely connected with <mark>${firstWord}</mark>, which affects both individuals and the wider community. For example, people may make very different decisions depending on their age, income or circumstances. However, the result is not always the same, and it may also depend on whether people have access to <mark>${secondWord}</mark>.</p></div>
+          <div>
+            <div class="reference-answer-heading"><b>参考答案</b><button type="button" data-speak-reference="${spokenAnswer}" aria-label="朗读参考答案">🔊 朗读</button></div>
+            <p class="english-reference-answer">${answer}</p>
+          </div>
           <div><b>可替换结构</b><p>From my perspective, ___. The main reason is that ___. For example, ___. However, this may depend on ___.</p></div>
           <div class="reference-vocabulary"><b>重点词汇</b><p><span><mark>${firstWord}</mark><small>${firstMeaning}</small></span><span><mark>${secondWord}</mark><small>${secondMeaning}</small></span></p></div>
         </div>
@@ -4054,6 +4112,9 @@ function renderSpeakingQuestionBank() {
   };
   document.querySelectorAll("[data-question-action]").forEach((button) => {
     button.onclick = () => updateSpeakingQuestionMark(button.dataset.questionKey, button.dataset.questionAction);
+  });
+  document.querySelectorAll("[data-speak-reference]").forEach((button) => {
+    button.onclick = () => speakReferenceAnswer(button);
   });
 }
 
