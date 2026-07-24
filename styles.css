@@ -3546,6 +3546,37 @@ textarea:focus {
   gap: 5px;
 }
 
+.speaking-term-chip {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  padding: 5px 7px;
+  color: var(--ink);
+  text-align: left;
+  background: #f0f6ef;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.speaking-term-chip:hover,
+.speaking-term-chip:focus-visible {
+  color: var(--ink);
+  background: #fff;
+  border-color: #7faa7e;
+  transform: translateY(-1px);
+}
+
+.speaking-term-chip b {
+  color: var(--ink) !important;
+  font-size: 0.68rem;
+}
+
+.speaking-term-chip span {
+  color: var(--muted);
+  font-size: 0.62rem;
+}
+
 .part1-detail-branches p {
   display: grid !important;
   grid-template-columns: 1fr !important;
@@ -4374,6 +4405,85 @@ textarea:focus {
   border-top: 4px solid #7baaa3;
   border-radius: 8px;
   box-shadow: 0 5px 16px rgba(72, 53, 60, 0.06);
+}
+
+.food-description-branches article > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.food-description-branches .speaking-term-chip {
+  background: #f4f8f7;
+}
+
+.speaking-term-popup {
+  position: fixed;
+  z-index: 1000;
+  display: grid;
+  gap: 7px;
+  padding: 18px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #cfdedb;
+  border-radius: 14px;
+  box-shadow: 0 18px 46px rgba(46, 37, 42, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.speaking-term-popup[hidden] {
+  display: none;
+}
+
+.speaking-term-popup .term-popup-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--muted);
+  background: #f3eff0;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.speaking-term-popup .term-popup-label {
+  color: #4f877f;
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.speaking-term-popup > strong {
+  padding-right: 28px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.65rem;
+}
+
+.speaking-term-popup > em {
+  color: var(--accent-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+}
+
+.speaking-term-popup > p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.speaking-term-popup .term-popup-speak {
+  justify-self: start;
+  padding: 7px 11px;
+  color: #fff;
+  background: #4f877f;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: none;
+  font-size: 0.72rem;
 }
 
 .food-description-branches strong,

@@ -3457,6 +3457,89 @@ function speakVocabularyWord(word) {
   window.speechSynthesis.speak(utterance);
 }
 
+const speakingTermPhonetics = {
+  red: "/red/", yellow: "/ˈjeləʊ/", green: "/ɡriːn/", orange: "/ˈɒrɪndʒ/", purple: "/ˈpɜːpəl/",
+  sweet: "/swiːt/", sour: "/ˈsaʊə/", savoury: "/ˈseɪvəri/", spicy: "/ˈspaɪsi/", rich: "/rɪtʃ/", refreshing: "/rɪˈfreʃɪŋ/",
+  crunchy: "/ˈkrʌntʃi/", juicy: "/ˈdʒuːsi/", tender: "/ˈtendə/", chewy: "/ˈtʃuːi/", creamy: "/ˈkriːmi/", crispy: "/ˈkrɪspi/",
+  nutritious: "/njuːˈtrɪʃəs/", convenient: "/kənˈviːniənt/", comforting: "/ˈkʌmfətɪŋ/", filling: "/ˈfɪlɪŋ/",
+  cactus: "/ˈkæktəs/", succulent: "/ˈsʌkjələnt/", "spider plant": "/ˈspaɪdə plɑːnt/", rose: "/rəʊz/",
+  sunflower: "/ˈsʌnflaʊə/", orchid: "/ˈɔːkɪd/", mint: "/mɪnt/", basil: "/ˈbæzəl/", tomato: "/təˈmɑːtəʊ/",
+  sunlight: "/ˈsʌnlaɪt/", watering: "/ˈwɔːtərɪŋ/", soil: "/sɔɪl/", nutrients: "/ˈnjuːtriənts/",
+  petals: "/ˈpetəlz/", fragrance: "/ˈfreɪɡrəns/", "low-maintenance": "/ˌləʊ ˈmeɪntənəns/",
+  "well-drained soil": "/ˌwel dreɪnd ˈsɔɪl/", "plenty of sunlight": "/ˈplenti əv ˈsʌnlaɪt/",
+  "regular watering": "/ˈreɡjələ ˈwɔːtərɪŋ/", "a warm environment": "/ə wɔːm ɪnˈvaɪrənmənt/",
+  "plant seeds": "/plɑːnt siːdz/", "water the plant": "/ˈwɔːtə ðə plɑːnt/", "repot it": "/ˌriːˈpɒt ɪt/"
+};
+
+function renderInteractiveSpeakingTerm(en, zh) {
+  const phonetic = speakingTermPhonetics[en.toLowerCase()] || "";
+  return `<button type="button" class="speaking-term-chip" data-speaking-term="${encodeURIComponent(en)}" data-speaking-meaning="${encodeURIComponent(zh)}" data-speaking-phonetic="${encodeURIComponent(phonetic)}"><b>${en}</b><span>${zh}</span></button>`;
+}
+
+async function findOnlinePhonetic(term) {
+  if (!/^[a-z-]+$/i.test(term)) return "";
+  try {
+    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(term)}`);
+    if (!response.ok) return "";
+    const entries = await response.json();
+    return entries?.[0]?.phonetic || entries?.[0]?.phonetics?.find((item) => item.text)?.text || "";
+  } catch {
+    return "";
+  }
+}
+
+async function showSpeakingTermPopup(button) {
+  let popup = document.querySelector("#speakingTermPopup");
+  if (!popup) {
+    popup = document.createElement("aside");
+    popup.id = "speakingTermPopup";
+    popup.className = "speaking-term-popup";
+    popup.setAttribute("role", "dialog");
+    popup.onclick = (event) => event.stopPropagation();
+    document.body.appendChild(popup);
+  }
+  const term = decodeURIComponent(button.dataset.speakingTerm || "");
+  const meaning = decodeURIComponent(button.dataset.speakingMeaning || "");
+  const localPhonetic = decodeURIComponent(button.dataset.speakingPhonetic || "");
+  popup.dataset.currentTerm = term;
+  popup.innerHTML = `
+    <button type="button" class="term-popup-close" aria-label="关闭词卡">×</button>
+    <span class="term-popup-label">Vocabulary</span>
+    <strong>${term}</strong>
+    <em>${localPhonetic || "正在查询音标…"}</em>
+    <p>${meaning}</p>
+    <button type="button" class="term-popup-speak">🔊 听发音</button>
+  `;
+  popup.hidden = false;
+  const rect = button.getBoundingClientRect();
+  const popupWidth = Math.min(300, window.innerWidth - 24);
+  const left = Math.min(window.innerWidth - popupWidth - 12, Math.max(12, rect.left));
+  const top = Math.min(window.innerHeight - 210, rect.bottom + 8);
+  popup.style.width = `${popupWidth}px`;
+  popup.style.left = `${left}px`;
+  popup.style.top = `${Math.max(12, top)}px`;
+  popup.querySelector(".term-popup-close").onclick = () => { popup.hidden = true; };
+  popup.querySelector(".term-popup-speak").onclick = () => speakVocabularyWord(term);
+  if (!localPhonetic) {
+    const onlinePhonetic = await findOnlinePhonetic(term);
+    if (popup.dataset.currentTerm === term) {
+      popup.querySelector("em").textContent = onlinePhonetic || "点击喇叭听发音";
+    }
+  }
+}
+
+function bindSpeakingTermInteractions() {
+  document.querySelectorAll("[data-speaking-term]").forEach((button) => {
+    button.onclick = (event) => {
+      event.stopPropagation();
+      showSpeakingTermPopup(button);
+    };
+    if (window.matchMedia?.("(hover: hover)").matches) {
+      button.onmouseenter = () => showSpeakingTermPopup(button);
+    }
+  });
+}
+
 function getPlainSpeakingText(html) {
   return String(html || "")
     .replace(/<[^>]*>/g, " ")
@@ -3900,7 +3983,7 @@ function renderCustomPart1IdeaMap(topic) {
           ${map.branches.map((branch) => `
             <article>
               <h5>${branch.title}</h5>
-              <div>${branch.items.map(([en, zh]) => `<p><b>${en}</b><span>${zh}</span></p>`).join("")}</div>
+              <div>${branch.items.map(([en, zh]) => renderInteractiveSpeakingTerm(en, zh)).join("")}</div>
             </article>
           `).join("")}
         </div>
@@ -3976,7 +4059,7 @@ function renderSpeakingTopicMindMap(entry, part) {
           ${branches.map((branch) => `
             <article>
               <h5>${branch.title}</h5>
-              <div>${branch.items.map(([en, zh]) => `<p><b>${en}</b><span>${zh}</span></p>`).join("")}</div>
+              <div>${branch.items.map(([en, zh]) => renderInteractiveSpeakingTerm(en, zh)).join("")}</div>
             </article>
           `).join("")}
         </div>
@@ -4362,6 +4445,7 @@ function renderSpeakingQuestionBank() {
       button.setAttribute("aria-expanded", String(revealed));
     };
   });
+  bindSpeakingTermInteractions();
 }
 
 function shuffleSpeakingItems(items) {
@@ -4534,11 +4618,11 @@ const foodSpeakingIdeaMap = {
     { name: "聚餐菜 Shared dishes", examples: "hotpot · barbecue · roast dinner · seafood", cue: "适合讲朋友、家庭和社交氛围" }
   ],
   branches: [
-    { label: "颜色 Colour", words: "red · yellow · green · orange · purple · golden-brown" },
-    { label: "味道 Taste", words: "sweet · sour · savoury · spicy · rich · refreshing" },
-    { label: "口感 Texture", words: "crunchy · juicy · tender · chewy · creamy · crispy" },
-    { label: "原因 Reason", words: "nutritious · convenient · comforting · filling · good for sharing" },
-    { label: "场景 Context", words: "at breakfast · after exercise · at weekends · in summer · with my family" }
+    { label: "颜色 Colour", items: [["red", "红色"], ["yellow", "黄色"], ["green", "绿色"], ["orange", "橙色"], ["purple", "紫色"], ["golden-brown", "金棕色"]] },
+    { label: "味道 Taste", items: [["sweet", "甜的"], ["sour", "酸的"], ["savoury", "咸香的"], ["spicy", "辛辣的"], ["rich", "味道浓郁的"], ["refreshing", "清爽的"]] },
+    { label: "口感 Texture", items: [["crunchy", "松脆的"], ["juicy", "多汁的"], ["tender", "鲜嫩的"], ["chewy", "有嚼劲的"], ["creamy", "绵密顺滑的"], ["crispy", "酥脆的"]] },
+    { label: "原因 Reason", items: [["nutritious", "有营养的"], ["convenient", "方便的"], ["comforting", "令人满足安心的"], ["filling", "有饱腹感的"], ["good for sharing", "适合分享的"]] },
+    { label: "场景 Context", items: [["at breakfast", "早餐时"], ["after exercise", "运动后"], ["at weekends", "周末"], ["in summer", "夏天"], ["with my family", "和家人一起"]] }
   ],
   answers: [
     {
@@ -4612,7 +4696,7 @@ function renderFoodIdeaMap() {
     </div>
     <div class="food-description-branches">
       ${foodSpeakingIdeaMap.branches.map((branch) => `
-        <article><strong>${branch.label}</strong><p>${branch.words}</p></article>
+        <article><strong>${branch.label}</strong><div>${branch.items.map(([en, zh]) => renderInteractiveSpeakingTerm(en, zh)).join("")}</div></article>
       `).join("")}
     </div>
     <div class="food-answer-builder">
@@ -4636,6 +4720,7 @@ function renderFoodIdeaMap() {
       <p><strong>favourite food</strong> 讲现在的选择；<strong>when you were young</strong> 换成童年食物；<strong>different times of the year</strong> 对比夏季和冬季；<strong>changed since childhood</strong> 对比过去和现在。</p>
     </aside>
   `;
+  bindSpeakingTermInteractions();
 }
 
 function renderLifeVocabulary() {
@@ -4995,6 +5080,11 @@ document.querySelector("#autoVoiceBtn").addEventListener("click", () => {
 if ("speechSynthesis" in window) {
   window.speechSynthesis.addEventListener("voiceschanged", populateNaturalVoiceOptions);
 }
+
+document.addEventListener("click", () => {
+  const popup = document.querySelector("#speakingTermPopup");
+  if (popup) popup.hidden = true;
+});
 
 document.querySelectorAll("[data-font-scale]").forEach((button) => {
   button.addEventListener("click", () => {
