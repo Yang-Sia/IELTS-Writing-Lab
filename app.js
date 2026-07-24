@@ -4127,6 +4127,119 @@ function getSeasonQuestionsForTopic(topicKey, part) {
   return [...new Set(questions)].slice(0, 8);
 }
 
+const foodSpeakingIdeaMap = {
+  choices: [
+    { name: "水果 Fruit", examples: "apple · banana · mango · strawberry · watermelon", cue: "清爽、健康，适合讲颜色和口感" },
+    { name: "肉类 Meat", examples: "chicken · beef · pork · lamb", cue: "适合讲烹饪方法、香味和嫩度" },
+    { name: "主食 Staples", examples: "rice · noodles · bread · dumplings", cue: "熟悉、方便，容易联系家庭和童年" },
+    { name: "甜品 Desserts", examples: "cake · ice cream · chocolate · cookies", cue: "适合讲甜味、心情和特殊场合" },
+    { name: "聚餐菜 Shared dishes", examples: "hotpot · barbecue · roast dinner · seafood", cue: "适合讲朋友、家庭和社交氛围" }
+  ],
+  branches: [
+    { label: "颜色 Colour", words: "red · yellow · green · orange · purple · golden-brown" },
+    { label: "味道 Taste", words: "sweet · sour · savoury · spicy · rich · refreshing" },
+    { label: "口感 Texture", words: "crunchy · juicy · tender · chewy · creamy · crispy" },
+    { label: "原因 Reason", words: "nutritious · convenient · comforting · filling · good for sharing" },
+    { label: "场景 Context", words: "at breakfast · after exercise · at weekends · in summer · with my family" }
+  ],
+  answers: [
+    {
+      tag: "水果方向",
+      title: "Mango",
+      sentences: [
+        "My favourite food is mango, especially the ripe yellow kind.",
+        "I love it because it is naturally sweet, juicy and really refreshing.",
+        "I normally eat it as an afternoon snack in summer."
+      ]
+    },
+    {
+      tag: "肉类方向",
+      title: "Roast chicken",
+      sentences: [
+        "My favourite food is roast chicken, particularly the one my mum makes.",
+        "It is savoury and tender, and it also reminds me of family meals.",
+        "We normally have it together at weekends or on special occasions."
+      ]
+    },
+    {
+      tag: "主食方向",
+      title: "Noodles",
+      sentences: [
+        "My favourite food is noodles, especially beef noodles.",
+        "What I like most is that they are filling, flavourful and very convenient.",
+        "I often have a bowl for lunch when I do not have much time to cook."
+      ]
+    },
+    {
+      tag: "聚餐方向",
+      title: "Hotpot",
+      sentences: [
+        "My favourite food is hotpot, especially Sichuan-style hotpot.",
+        "It is rich in flavour, and it is also a very social meal.",
+        "I normally have it with close friends at weekends, especially in winter."
+      ]
+    }
+  ]
+};
+
+function renderFoodIdeaMap() {
+  const container = document.querySelector("#foodIdeaMap");
+  if (!container) return;
+  const shouldShow = state.lifeVocabularyTopic === "food" && state.speakingPart === "part1";
+  container.hidden = !shouldShow;
+  if (!shouldShow) {
+    container.innerHTML = "";
+    return;
+  }
+  container.innerHTML = `
+    <div class="food-map-heading">
+      <div>
+        <p class="eyebrow">Build Your Own Answer</p>
+        <h3>Food 选材思维导图</h3>
+        <p>先选一种自己熟悉的食物，再从颜色、味道、口感、原因和场景中各挑一两个细节。答案不需要和别人一样。</p>
+      </div>
+      <span>选食物 → 挑特征 → 加场景</span>
+    </div>
+    <div class="food-map-canvas">
+      <div class="food-map-centre"><small>TOPIC</small><strong>FOOD</strong><span>我能讲什么？</span></div>
+      <div class="food-choice-list">
+        ${foodSpeakingIdeaMap.choices.map((choice) => `
+          <article>
+            <strong>${choice.name}</strong>
+            <p>${choice.examples}</p>
+            <small>${choice.cue}</small>
+          </article>
+        `).join("")}
+      </div>
+    </div>
+    <div class="food-description-branches">
+      ${foodSpeakingIdeaMap.branches.map((branch) => `
+        <article><strong>${branch.label}</strong><p>${branch.words}</p></article>
+      `).join("")}
+    </div>
+    <div class="food-answer-builder">
+      <div class="food-answer-formula">
+        <b>Part 1 三句话</b>
+        <span>① 直接回答 + 具体种类</span>
+        <span>② 两个特点或原因</span>
+        <span>③ 时间、人物或场景</span>
+      </div>
+      <div class="food-sample-grid">
+        ${foodSpeakingIdeaMap.answers.map((answer) => `
+          <article>
+            <header><span>${answer.tag}</span><strong>${answer.title}</strong></header>
+            ${answer.sentences.map((sentence, index) => `<p><b>${index + 1}</b>${sentence}</p>`).join("")}
+          </article>
+        `).join("")}
+      </div>
+    </div>
+    <aside class="food-transfer-tip">
+      <b>四道 Food 题都能复用</b>
+      <p><strong>favourite food</strong> 讲现在的选择；<strong>when you were young</strong> 换成童年食物；<strong>different times of the year</strong> 对比夏季和冬季；<strong>changed since childhood</strong> 对比过去和现在。</p>
+    </aside>
+  `;
+}
+
 function renderLifeVocabulary() {
   const topic = lifeVocabularyTopics[state.lifeVocabularyTopic] || lifeVocabularyTopics.shopping;
   const category = topic.categories.find((item) => item.id === state.lifeVocabularyCategory) || topic.categories[0];
@@ -4157,6 +4270,7 @@ function renderLifeVocabulary() {
       ` : ""}
     </div>
   `;
+  renderFoodIdeaMap();
   renderVocabularyFocusCard(category);
   document.querySelector("#vocabularyCategoryList").innerHTML = topic.categories.map((item, index) => `
     <button type="button" class="vocabulary-category-button ${item.id === category.id ? "active" : ""}" data-vocabulary-category="${item.id}">

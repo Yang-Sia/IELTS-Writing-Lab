@@ -3813,6 +3813,276 @@ textarea:focus {
   color: var(--muted);
 }
 
+.food-idea-map {
+  margin: 0 0 22px;
+  padding: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 84% 7%, rgba(189, 224, 218, 0.55), transparent 25%),
+    linear-gradient(145deg, #fffaf8, #f7f4f5);
+  border: 1px solid #e4d9dc;
+  border-radius: 16px;
+}
+
+.food-idea-map[hidden] {
+  display: none;
+}
+
+.food-map-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 22px;
+}
+
+.food-map-heading h3,
+.food-map-heading p {
+  margin: 0;
+}
+
+.food-map-heading h3 {
+  margin-bottom: 6px;
+  font-size: 1.45rem;
+}
+
+.food-map-heading p:not(.eyebrow) {
+  max-width: 760px;
+  color: var(--muted);
+}
+
+.food-map-heading > span {
+  flex: 0 0 auto;
+  padding: 9px 12px;
+  color: #2f6f68;
+  background: #e5f5f2;
+  border: 1px solid #b9ddd7;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.food-map-canvas {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: 34px;
+  align-items: stretch;
+}
+
+.food-map-centre {
+  position: relative;
+  display: grid;
+  place-content: center;
+  min-height: 246px;
+  padding: 22px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(145deg, #a97182, #7d849d);
+  border-radius: 76px 22px 76px 22px;
+}
+
+.food-map-centre::after {
+  position: absolute;
+  top: 50%;
+  right: -35px;
+  width: 35px;
+  height: 2px;
+  content: "";
+  background: #cfb9c0;
+}
+
+.food-map-centre small,
+.food-map-centre span {
+  opacity: 0.82;
+}
+
+.food-map-centre strong {
+  font-size: 1.8rem;
+  letter-spacing: 0.08em;
+}
+
+.food-choice-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.food-choice-list article {
+  position: relative;
+  padding: 13px 15px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #e2d5d9;
+  border-radius: 11px;
+}
+
+.food-choice-list article::before {
+  position: absolute;
+  top: 50%;
+  left: -35px;
+  width: 35px;
+  height: 1px;
+  content: "";
+  background: #cfb9c0;
+}
+
+.food-choice-list strong,
+.food-choice-list p,
+.food-choice-list small {
+  display: block;
+  margin: 0;
+}
+
+.food-choice-list strong {
+  color: var(--accent-dark);
+}
+
+.food-choice-list p {
+  margin: 4px 0;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.food-choice-list small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.food-description-branches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.food-description-branches article {
+  padding: 12px;
+  background: #fff;
+  border-top: 4px solid #7baaa3;
+  border-radius: 8px;
+  box-shadow: 0 5px 16px rgba(72, 53, 60, 0.06);
+}
+
+.food-description-branches strong,
+.food-description-branches p {
+  margin: 0;
+}
+
+.food-description-branches strong {
+  color: #316f68;
+  font-size: 0.78rem;
+}
+
+.food-description-branches p {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.food-answer-builder {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid #e2d8db;
+}
+
+.food-answer-formula {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.food-answer-formula b,
+.food-answer-formula span {
+  padding: 7px 10px;
+  border-radius: 7px;
+}
+
+.food-answer-formula b {
+  color: #fff;
+  background: var(--accent);
+}
+
+.food-answer-formula span {
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid #e3d9dc;
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.food-sample-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.food-sample-grid article {
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #e3d8db;
+  border-radius: 11px;
+}
+
+.food-sample-grid header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.food-sample-grid header span {
+  padding: 4px 7px;
+  color: var(--accent-dark);
+  background: #f5e7eb;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 850;
+}
+
+.food-sample-grid p {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 7px;
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.food-sample-grid p b {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  background: #7baaa3;
+  border-radius: 50%;
+  font-size: 0.68rem;
+}
+
+.food-transfer-tip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: #eef6f5;
+  border-left: 4px solid #4e8b83;
+  border-radius: 8px;
+}
+
+.food-transfer-tip b {
+  color: #316f68;
+}
+
+.food-transfer-tip p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .vocabulary-topic {
   min-height: 76px;
   display: grid;
@@ -4320,6 +4590,33 @@ textarea:focus {
   .speaking-part-tabs,
   .speaking-question-strip {
     grid-template-columns: 1fr;
+  }
+  .food-map-heading,
+  .food-transfer-tip {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .food-map-heading > span {
+    justify-self: start;
+  }
+  .food-map-canvas {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .food-map-centre {
+    min-height: 130px;
+    border-radius: 18px;
+  }
+  .food-map-centre::after,
+  .food-choice-list article::before {
+    display: none;
+  }
+  .food-choice-list,
+  .food-sample-grid {
+    grid-template-columns: 1fr;
+  }
+  .food-description-branches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .vocabulary-topic-bar,
   .memory-strip {
