@@ -3423,6 +3423,26 @@ textarea:focus {
   border-radius: 12px;
 }
 
+.question-bank-card > .part1-detailed-map {
+  margin: 16px 22px;
+}
+
+.universal-speaking-map .part1-detail-centre {
+  background: linear-gradient(145deg, #6f809e, #9c7585);
+}
+
+.universal-speaking-map .part1-detail-branches article {
+  border-color: #ddd5e1;
+}
+
+.universal-speaking-map .part1-detail-branches h5 {
+  color: var(--accent-dark);
+}
+
+.universal-speaking-map .part1-detail-branches p {
+  background: #f5f1f5;
+}
+
 .part1-detail-map-title {
   display: grid;
   grid-template-columns: minmax(210px, auto) 1fr;

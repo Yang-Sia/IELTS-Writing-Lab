@@ -119,6 +119,11 @@ assertIncludes(js, "buildPart1Reference", "all Part 1 reference answer coverage"
 assertIncludes(js, "part1TopicChoiceBank", "all Part 1 topic choice banks");
 assertIncludes(js, "renderPart1TopicPlanner", "Part 1 topic expansion planner");
 assertIncludes(js, "part1DetailedIdeaMaps", "detailed bilingual Part 1 mind maps");
+assertIncludes(js, "renderSpeakingTopicMindMap", "mind maps for every speaking part");
+assertIncludes(js, 'renderSpeakingTopicMindMap(entry, "part2")', "Part 2 topic mind maps");
+assertIncludes(js, 'renderSpeakingTopicMindMap(entry, "part3")', "Part 3 topic mind maps");
+assertIncludes(js, "故事细节 Details", "Part 2 story expansion branches");
+assertIncludes(js, "讨论方向 Angles", "Part 3 discussion branches");
 assertIncludes(js, "plenty of sunlight", "Plants sunlight vocabulary");
 assertIncludes(js, "well-drained soil", "Plants soil vocabulary");
 assertIncludes(js, "中英双语思维导图", "bilingual topic mind map label");

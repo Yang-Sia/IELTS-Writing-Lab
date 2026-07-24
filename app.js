@@ -3885,7 +3885,7 @@ const part1DetailedIdeaMaps = {
   }
 };
 
-function renderPart1DetailedIdeaMap(topic) {
+function renderCustomPart1IdeaMap(topic) {
   const map = part1DetailedIdeaMaps[topic];
   if (!map) return "";
   return `
@@ -3908,6 +3908,82 @@ function renderPart1DetailedIdeaMap(topic) {
       <div class="part1-detail-sample">
         <b>把思维导图变成三句话</b>
         ${map.sample.map((sentence, index) => `<p><span>${index + 1}</span>${sentence}</p>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderSpeakingTopicMindMap(entry, part) {
+  if (part === "part1" && part1DetailedIdeaMaps[entry.topic]) {
+    return renderCustomPart1IdeaMap(entry.topic);
+  }
+  const coach = getSpeakingCoach(entry);
+  const choices = part1TopicChoiceBank[entry.topic] || [speakingTopicExamples[entry.topic]?.[0] || entry.topic];
+  const [, quality = "specific and meaningful", reason = "it is connected with everyday life"] = speakingTopicExamples[entry.topic] || [];
+  const contexts = part1TopicContextBank[entry.topic] || "in daily life · at weekends · with friends or family";
+  let intro;
+  let branches;
+  let sample;
+  if (part === "part1") {
+    intro = "先选一个真实、具体的答案，再挑特点、原因和生活场景，最后组成三句话。";
+    branches = [
+      { title: "可选素材 Choices", items: choices.map((choice) => [choice, "可替换成自己的真实选择"]) },
+      { title: "重点词汇 Vocabulary", items: coach.vocab.slice(0, 6) },
+      { title: "展开角度 Angles", items: [[quality, "特点描述"], [reason, "个人原因"], [contexts, "时间、人物或场景"]] },
+      { title: "三句结构 Structure", items: [["I’d say ...", "直接回答"], ["What I like most is ...", "特点或两个原因"], ["I normally ... when ...", "具体生活细节"]] }
+    ];
+    sample = [
+      `I’d probably choose ${choices[0]}.`,
+      `I find it ${quality}, mainly because ${reason}.`,
+      `It usually comes up ${contexts.split(" · ")[0] || "in my daily life"}.`
+    ];
+  } else if (part === "part2") {
+    intro = "把题卡关键词变成一个完整故事：先定位对象，再补背景、过程、细节和感受。";
+    branches = [
+      { title: "题卡任务 Cue card", items: (entry.cuePoints || []).map((point) => [point, "这一点至少展开一至两句"]) },
+      { title: "重点词汇 Vocabulary", items: coach.vocab.slice(0, 6) },
+      { title: "故事细节 Details", items: [["when and where", "时间与地点"], ["who was involved", "相关人物"], ["what happened next", "事情经过"], ["sensory details", "动作或感官细节"], ["how I felt", "个人感受"]] },
+      { title: "两分钟结构 Structure", items: [["I’d like to talk about ...", "确定对象"], ["It happened when ...", "交代背景"], ["What happened was ...", "展开过程"], ["Looking back, ...", "感受与意义"]] }
+    ];
+    sample = [
+      "Start with one specific person, place, object or experience.",
+      "Tell the events in a clear order and add one concrete detail.",
+      "Finish by explaining why it was important or memorable."
+    ];
+  } else {
+    intro = "不要只回答 Yes 或 No；从个人或社会角度给观点，再用原因、例子和条件形成一个小段落。";
+    branches = [
+      { title: "讨论方向 Angles", items: [["individual choices", "个人选择"], ["family and education", "家庭与教育"], ["society and culture", "社会与文化"], ["business and technology", "商业与科技"], ["government policy", "政府政策"]] },
+      { title: "重点词汇 Vocabulary", items: coach.vocab.slice(0, 6) },
+      { title: "逻辑展开 Logic", items: [["clear opinion", "明确观点"], ["two linked reasons", "两个相关原因"], ["a real-world example", "现实例子"], ["a condition or exception", "条件、让步或例外"]] },
+      { title: "观点结构 Structure", items: [["From my perspective, ...", "给出观点"], ["The main reason is that ...", "解释原因"], ["For example, ...", "举例说明"], ["However, it depends on ...", "补充条件"]] }
+    ];
+    sample = [
+      "Give your position in the first sentence.",
+      "Explain why and support it with a clear example.",
+      "Add a condition or another side to make the answer balanced."
+    ];
+  }
+  return `
+    <div class="part1-detailed-map universal-speaking-map">
+      <div class="part1-detail-map-title">
+        <div><span>${part.toUpperCase()} Topic Mind Map</span><strong>${entry.topic} 中英双语思维导图</strong></div>
+        <p>${intro}</p>
+      </div>
+      <div class="part1-detail-map-canvas">
+        <div class="part1-detail-centre"><strong>${part.toUpperCase()}</strong><span>${entry.topic}</span></div>
+        <div class="part1-detail-branches">
+          ${branches.map((branch) => `
+            <article>
+              <h5>${branch.title}</h5>
+              <div>${branch.items.map(([en, zh]) => `<p><b>${en}</b><span>${zh}</span></p>`).join("")}</div>
+            </article>
+          `).join("")}
+        </div>
+      </div>
+      <div class="part1-detail-sample">
+        <b>${part === "part1" ? "三句话示范" : part === "part2" ? "两分钟路线" : "观点段落路线"}</b>
+        ${sample.map((sentence, index) => `<p><span>${index + 1}</span>${sentence}</p>`).join("")}
       </div>
     </div>
   `;
@@ -3941,7 +4017,7 @@ function renderPart1TopicPlanner(entry) {
           <p><b>3</b>加人物、时间、地点或过去现在对比</p>
         </article>
       </div>
-      ${renderPart1DetailedIdeaMap(entry.topic)}
+      ${renderSpeakingTopicMindMap(entry, "part1")}
       <p class="part1-planner-note">下面每一道题都可以展开查看：中文路线、三句话参考答案、可替换句型和重点词汇。</p>
     </section>
   `;
@@ -4209,9 +4285,9 @@ function renderSpeakingQuestionBank() {
       return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.questions.length} questions</small></summary>${renderPart1TopicPlanner(entry)}<ol>${entry.questions.map((question) => renderPart1QuestionWithAnswer(question, entry)).join("")}</ol>${renderSpeakingCoach(entry, targetPart)}</details>`;
     }
     if (targetPart === "part2") {
-      return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary><div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderPart2Reference(entry)}${renderSpeakingCoach(entry, targetPart)}</details>`;
+      return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>Part 2 cue card</small></summary>${renderSpeakingTopicMindMap(entry, "part2")}<div class="part2-card-content"><h4>${entry.prompt}</h4><span>You should say:</span><ul>${entry.cuePoints.map((point) => `<li>${point}</li>`).join("")}</ul><p>${entry.part3Questions.length} 个关联 Part 3 问题</p></div>${renderPart2Reference(entry)}${renderSpeakingCoach(entry, targetPart)}</details>`;
     }
-    return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary><div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => renderPart3QuestionWithAnswer(question, entry)).join("")}</ol></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
+    return `<details class="question-bank-card"><summary>${meta}<strong>${entry.topic}</strong><small>${entry.part3Questions.length} questions</small></summary>${renderSpeakingTopicMindMap(entry, "part3")}<div class="part3-card-content"><p class="linked-part2">关联 Part 2：${entry.prompt}</p><ol>${entry.part3Questions.map((question) => renderPart3QuestionWithAnswer(question, entry)).join("")}</ol></div>${renderSpeakingCoach(entry, targetPart)}</details>`;
   };
 
   const statusGroups = [
