@@ -47,6 +47,10 @@ assertIncludes(html, "阅读", "reading navigation category");
 assertIncludes(html, 'data-module-shortcut="foundation-grammar"', "grammar shortcut");
 assertIncludes(html, 'data-nav-domain="speaking"', "speaking navigation state");
 assertIncludes(html, 'data-default-view="vocabulary-topics"', "speaking main navigation target");
+assertIncludes(html, 'data-question-part="part1"', "Part 1 sidebar question-bank navigation");
+assertIncludes(html, 'data-question-part="part2"', "Part 2 sidebar question-bank navigation");
+assertIncludes(html, 'data-question-part="part3"', "Part 3 sidebar question-bank navigation");
+assertIncludes(html, 'data-speaking-section="vocabulary"', "speaking vocabulary sidebar navigation");
 assertIncludes(html, 'data-default-view="task2-topics"', "writing main navigation target");
 assertIncludes(html, 'data-default-view="academic-standard"', "writing reference main navigation target");
 assertIncludes(js, "const activeDomain", "single active navigation domain");
@@ -100,6 +104,7 @@ assertIncludes(js, "What is your favourite food?", "food question reference answ
 assertIncludes(js, "buildPart1Reference", "all Part 1 reference answer coverage");
 assertIncludes(js, "renderPart2Reference", "all Part 2 reference structure coverage");
 assertIncludes(js, "renderPart3QuestionWithAnswer", "all Part 3 reference answer coverage");
+assertIncludes(js, "getSeasonQuestionsForTopic", "topic-linked seasonal speaking questions");
 assertIncludes(js, "renderLearningSettings", "learning settings renderer");
 assertIncludes(js, "renderSpeakingQuestionBank", "speaking question bank renderer");
 assertIncludes(js, "renderSpeakingCoach", "speaking answer coaching");

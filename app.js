@@ -2321,6 +2321,7 @@ const defaultState = {
   topicVocabRevealed: {},
   lifeVocabularyTopic: "shopping",
   speakingPart: "part1",
+  speakingSection: "bank",
   lifeVocabularyCategory: "buying",
   lifeVocabularyOpenCards: {},
   vocabularyFocusIndex: 0,
@@ -2395,10 +2396,16 @@ function renderVisiblePanels() {
   });
   document.querySelectorAll(".utility-nav a").forEach((link) => {
     const targetsCurrentView = link.getAttribute("href") === `#${state.activeView}`;
-    const shortcutMatches = link.dataset.moduleShortcut
+    const moduleMatches = link.dataset.moduleShortcut
       ? state.module === link.dataset.moduleShortcut
       : !(state.activeView === "course-system" && state.module === "foundation-grammar" && link.getAttribute("href") === "#course-system");
-    link.classList.toggle("active", targetsCurrentView && shortcutMatches);
+    const questionPartMatches = link.dataset.questionPart
+      ? state.questionBankPart === link.dataset.questionPart
+      : true;
+    const speakingSectionMatches = link.dataset.speakingSection
+      ? state.speakingSection === link.dataset.speakingSection
+      : true;
+    link.classList.toggle("active", targetsCurrentView && moduleMatches && questionPartMatches && speakingSectionMatches);
   });
   const activeDomain = state.activeView === "learning-home"
     ? "home"
@@ -3877,6 +3884,10 @@ function renderSpeakingQuestionBank() {
   document.querySelector("#questionStatusFilter").value = state.questionBankStatus;
   document.querySelector("#questionLearningFilter").value = state.questionBankLearningFilter;
   document.querySelector("#questionBankSearch").value = state.questionBankSearch || "";
+  if (state.speakingSection === "bank") {
+    const partLabel = { part1: "Part 1", part2: "Part 2", part3: "Part 3" }[targetPart];
+    document.querySelector("#vocabularyProgress").textContent = `5–8 月题库 · ${partLabel} · ${questionCount} 道`;
+  }
   renderSpeakingDailyProgress();
 
   document.querySelector("#speakingQuestionBankList").innerHTML = filtered.length
@@ -3894,7 +3905,9 @@ function renderSpeakingQuestionBank() {
 
   document.querySelectorAll("[data-question-part]").forEach((button) => {
     button.onclick = () => {
+      state.speakingSection = "bank";
       state.questionBankPart = button.dataset.questionPart;
+      state.speakingPart = button.dataset.questionPart;
       saveState();
       renderSpeakingQuestionBank();
     };
@@ -4058,10 +4071,39 @@ function startSpeakingMock() {
   renderSpeakingMockStage();
 }
 
+const speakingTopicQuestionMatchers = {
+  shopping: /shop|shopping|mall|shoe|gift|advert|service|borrow|lend/i,
+  food: /food|meal|dinner|fruit|vegetable|cook/i,
+  travel: /travel|journey|foreign|lost|place|country/i,
+  family: /family|friend|old people|person/i,
+  home: /home|house|accommodation|area|city|hometown/i,
+  study: /work|stud|job|career|school|science/i,
+  hobbies: /hobby|sport|music|drawing|painting|walking|activity/i,
+  technology: /technology|phone|app|typing|social media|electric/i,
+  health: /health|sport|walking|food|vegetable/i
+};
+
+function getSeasonQuestionsForTopic(topicKey, part) {
+  const matcher = speakingTopicQuestionMatchers[topicKey];
+  if (!matcher) return [];
+  const entries = getSpeakingQuestionBankEntries();
+  const questions = [];
+  entries.forEach((entry) => {
+    const entryText = `${entry.topic} ${entry.prompt || ""} ${(entry.questions || []).join(" ")} ${(entry.part3Questions || []).join(" ")}`;
+    if (!matcher.test(entryText)) return;
+    if (part === "part1" && entry.part === "part1") questions.push(...(entry.questions || []));
+    if (part === "part2" && entry.part === "part2" && entry.prompt) questions.push(entry.prompt);
+    if (part === "part3" && entry.part === "part2") questions.push(...(entry.part3Questions || []));
+  });
+  return [...new Set(questions)].slice(0, 8);
+}
+
 function renderLifeVocabulary() {
   const topic = lifeVocabularyTopics[state.lifeVocabularyTopic] || lifeVocabularyTopics.shopping;
   const category = topic.categories.find((item) => item.id === state.lifeVocabularyCategory) || topic.categories[0];
-  document.querySelector("#vocabularyProgress").textContent = `${topic.name} · ${topic.categories.length} 个分类 · ${topic.categories.reduce((sum, item) => sum + item.words.length, 0)} 个表达`;
+  if (state.speakingSection === "vocabulary") {
+    document.querySelector("#vocabularyProgress").textContent = `${topic.name} · ${topic.categories.length} 个分类 · ${topic.categories.reduce((sum, item) => sum + item.words.length, 0)} 个表达`;
+  }
   document.querySelector("#vocabularyMemoryText").innerHTML = topic.memory;
   const partLabels = { part1: "Part 1 · 个人与日常", part2: "Part 2 · 人物地点事件", part3: "Part 3 · 社会观点" };
   const partTopics = Object.entries(lifeVocabularyTopics).filter(([, item]) => item.parts?.includes(state.speakingPart));
@@ -4071,7 +4113,21 @@ function renderLifeVocabulary() {
     </button>
   `).join("");
   document.querySelectorAll("[data-speaking-part]").forEach((button) => button.classList.toggle("active", button.dataset.speakingPart === state.speakingPart));
-  document.querySelector("#speakingQuestionStrip").innerHTML = `<span>${partLabels[state.speakingPart]}</span><div><b>本 Topic 口语题</b><p>${topic.questions?.[state.speakingPart] || "Use the vocabulary below to answer this topic."}</p></div>`;
+  const seasonQuestions = getSeasonQuestionsForTopic(state.lifeVocabularyTopic, state.speakingPart);
+  document.querySelector("#speakingQuestionStrip").innerHTML = `
+    <span>${partLabels[state.speakingPart]}</span>
+    <div>
+      <b>本 Topic 口语题</b>
+      <p>${topic.questions?.[state.speakingPart] || "Use the vocabulary below to answer this topic."}</p>
+      ${seasonQuestions.length ? `
+        <details class="topic-season-questions">
+          <summary>查看 5–8 月相关题目（${seasonQuestions.length}）</summary>
+          <ol>${seasonQuestions.map((question) => `<li>${question}</li>`).join("")}</ol>
+          <small>完整的逐题答案、结构和高亮词汇在本页上方“5–8 月雅思口语题库”中。</small>
+        </details>
+      ` : ""}
+    </div>
+  `;
   renderVocabularyFocusCard(category);
   document.querySelector("#vocabularyCategoryList").innerHTML = topic.categories.map((item, index) => `
     <button type="button" class="vocabulary-category-button ${item.id === category.id ? "active" : ""}" data-vocabulary-category="${item.id}">
@@ -4117,6 +4173,7 @@ function renderLifeVocabulary() {
     button.onclick = () => {
       const nextTopic = lifeVocabularyTopics[button.dataset.lifeTopic];
       if (!nextTopic) return;
+      state.speakingSection = "vocabulary";
       state.lifeVocabularyTopic = button.dataset.lifeTopic;
       state.lifeVocabularyCategory = nextTopic.categories[0].id;
       state.vocabularyFocusIndex = 0;
@@ -4127,6 +4184,7 @@ function renderLifeVocabulary() {
   });
   document.querySelectorAll("[data-speaking-part]").forEach((button) => {
     button.onclick = () => {
+      state.speakingSection = "vocabulary";
       state.speakingPart = button.dataset.speakingPart;
       const firstTopic = Object.entries(lifeVocabularyTopics).find(([, item]) => item.parts?.includes(state.speakingPart));
       if (firstTopic && !lifeVocabularyTopics[state.lifeVocabularyTopic]?.parts?.includes(state.speakingPart)) {
@@ -4316,8 +4374,16 @@ document.querySelectorAll(".nav-domain[data-default-view] > summary").forEach((s
         state.module = domain.dataset.defaultModule;
       }
     }
+    if (domain.dataset.defaultSpeakingSection) {
+      state.speakingSection = domain.dataset.defaultSpeakingSection;
+      state.questionBankPart = "part1";
+      state.speakingPart = "part1";
+    }
     setActiveView(domain.dataset.defaultView);
     domain.open = true;
+    if (domain.dataset.defaultSpeakingSection) {
+      window.setTimeout(() => document.querySelector(".speaking-bank")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+    }
   });
 });
 
@@ -4325,6 +4391,13 @@ document.querySelectorAll(".utility-nav a").forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
     const viewId = link.getAttribute("href").replace("#", "");
+    if (link.dataset.speakingSection) {
+      state.speakingSection = link.dataset.speakingSection;
+    }
+    if (link.dataset.questionPart) {
+      state.questionBankPart = link.dataset.questionPart;
+      state.speakingPart = link.dataset.questionPart;
+    }
     if (link.dataset.moduleShortcut) {
       const targetModule = coursePhases.flatMap((phase) => phase.modules).find((module) => module.id === link.dataset.moduleShortcut);
       const targetPhase = coursePhases.find((phase) => phase.modules.some((module) => module.id === link.dataset.moduleShortcut));
@@ -4451,5 +4524,12 @@ document.querySelector("#resetBtn").addEventListener("click", () => {
   saveState();
   applyState();
 });
+
+const speakingPanel = document.querySelector("#vocabulary-topics");
+const speakingBank = speakingPanel?.querySelector(".speaking-bank");
+const speakingPartTabs = speakingPanel?.querySelector("#speakingPartTabs");
+if (speakingPanel && speakingBank && speakingPartTabs) {
+  speakingPanel.insertBefore(speakingBank, speakingPartTabs);
+}
 
 applyState();

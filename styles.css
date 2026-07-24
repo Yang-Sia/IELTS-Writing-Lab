@@ -3415,6 +3415,35 @@ textarea:focus {
   color: var(--muted);
 }
 
+.topic-season-questions {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid #cadce9;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.topic-season-questions summary {
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.topic-season-questions ol {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.topic-season-questions li {
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.topic-season-questions small {
+  color: var(--muted);
+}
+
 .vocabulary-topic {
   min-height: 76px;
   display: grid;

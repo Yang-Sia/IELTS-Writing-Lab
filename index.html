@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IELTS Writing Lab</title>
-    <link rel="stylesheet" href="styles.css?v=20260724-5">
+    <link rel="stylesheet" href="styles.css?v=20260724-6">
   </head>
   <body>
     <header class="topbar">
@@ -42,10 +42,13 @@
             <span class="domain-icon">L</span><span><strong>听力 Listening</strong><small>课程内容待添加</small></span>
           </div>
 
-          <details class="nav-domain primary-domain speaking-nav" data-nav-domain="speaking" data-default-view="vocabulary-topics">
+          <details class="nav-domain primary-domain speaking-nav" data-nav-domain="speaking" data-default-view="vocabulary-topics" data-default-speaking-section="bank">
             <summary><span class="domain-icon">S</span><span><strong>口语 Speaking</strong><small>Part 1 · Part 2 · Part 3</small></span></summary>
             <div class="nav-domain-links utility-nav">
-              <a href="#vocabulary-topics"><b>口语话题词汇</b><small>按 Part 和 Topic 学习</small></a>
+              <a href="#vocabulary-topics" data-speaking-section="bank" data-question-part="part1" data-inner-target="speaking-bank"><b>Part 1 题库</b><small>32 个 Topic · 190 道小问</small></a>
+              <a href="#vocabulary-topics" data-speaking-section="bank" data-question-part="part2" data-inner-target="speaking-bank"><b>Part 2 题卡</b><small>43 张 Cue Card</small></a>
+              <a href="#vocabulary-topics" data-speaking-section="bank" data-question-part="part3" data-inner-target="speaking-bank"><b>Part 3 讨论</b><small>217 道关联追问</small></a>
+              <a href="#vocabulary-topics" data-speaking-section="vocabulary" data-inner-target="speaking-part-tabs"><b>Topic 词汇</b><small>Shopping · Food · Travel 等</small></a>
             </div>
           </details>
 
@@ -264,9 +267,9 @@
         <section id="vocabulary-topics" class="panel vocabulary-panel">
           <div class="section-head vocabulary-hero">
             <div>
-              <p class="eyebrow">IELTS Speaking Vocabulary</p>
-              <h2>口语单词：按 Part 和 Topic 建立表达网络</h2>
-              <p class="muted">先选择 Part 1 / 2 / 3，再进入对应高频话题。词汇不仅用来背，还要直接放进真实口语问题中回答。</p>
+              <p class="eyebrow">IELTS Speaking Centre</p>
+              <h2>口语学习：先看题库，再按 Topic 补充词汇</h2>
+              <p class="muted">左侧选择 Part 1 / 2 / 3 后先查看 5–8 月题目与逐题答案；需要扩充表达时，再进入 Shopping、Food 等 Topic 词汇。</p>
             </div>
             <div class="vocabulary-progress" id="vocabularyProgress">Shopping · 8 个分类</div>
           </div>
@@ -343,7 +346,7 @@
               <div>
                 <p class="eyebrow">2026 May-August Question Bank</p>
                 <h3>5-8 月雅思口语题库</h3>
-                <p class="muted">按 Part、地区和题目状态整理。Part 3 已与对应的 Part 2 题卡关联。</p>
+                <p class="muted">题目和刚整理好的参考答案都在这里。按 Part、地区和题目状态筛选，再点击 Topic 展开完整题目；Part 3 已与对应的 Part 2 题卡关联。</p>
               </div>
               <div id="speakingBankStats" class="speaking-bank-stats"></div>
             </div>
@@ -589,7 +592,7 @@
       </section>
     </main>
 
-    <script src="speaking-bank-data.js?v=20260724-5"></script>
-    <script src="app.js?v=20260724-5"></script>
+    <script src="speaking-bank-data.js?v=20260724-6"></script>
+    <script src="app.js?v=20260724-6"></script>
   </body>
 </html>
