@@ -4303,6 +4303,10 @@ document.querySelectorAll(".nav-domain[data-default-view] > summary").forEach((s
   summary.addEventListener("click", (event) => {
     event.preventDefault();
     const domain = summary.parentElement;
+    if (domain.open) {
+      domain.open = false;
+      return;
+    }
     if (domain.dataset.defaultModule) {
       const targetPhase = coursePhases.find((phase) =>
         phase.modules.some((module) => module.id === domain.dataset.defaultModule)
