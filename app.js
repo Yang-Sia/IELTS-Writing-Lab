@@ -3464,6 +3464,19 @@ function resetReferenceSpeakButtons() {
   });
 }
 
+function resetQuestionListenButtons() {
+  document.querySelectorAll("[data-listen-question]").forEach((button) => {
+    button.classList.remove("playing");
+    button.textContent = "🎧 听题";
+    button.setAttribute("aria-label", "播放口语题目");
+  });
+}
+
+function resetSpeakingAudioButtons() {
+  resetReferenceSpeakButtons();
+  resetQuestionListenButtons();
+}
+
 function speakReferenceAnswer(button) {
   if (!("speechSynthesis" in window)) {
     button.textContent = "当前浏览器不支持";
@@ -3471,7 +3484,7 @@ function speakReferenceAnswer(button) {
   }
   const wasPlaying = button.classList.contains("playing");
   window.speechSynthesis.cancel();
-  resetReferenceSpeakButtons();
+  resetSpeakingAudioButtons();
   if (wasPlaying) return;
   const text = decodeURIComponent(button.dataset.speakReference || "");
   if (!text) return;
@@ -3487,9 +3500,53 @@ function speakReferenceAnswer(button) {
   button.classList.add("playing");
   button.textContent = "■ 停止";
   button.setAttribute("aria-label", "停止朗读参考答案");
-  utterance.onend = resetReferenceSpeakButtons;
-  utterance.onerror = resetReferenceSpeakButtons;
+  utterance.onend = resetSpeakingAudioButtons;
+  utterance.onerror = resetSpeakingAudioButtons;
   window.speechSynthesis.speak(utterance);
+}
+
+function speakQuestionPrompt(button) {
+  if (!("speechSynthesis" in window)) {
+    button.textContent = "当前浏览器不支持";
+    return;
+  }
+  const wasPlaying = button.classList.contains("playing");
+  window.speechSynthesis.cancel();
+  resetSpeakingAudioButtons();
+  if (wasPlaying) return;
+  const text = decodeURIComponent(button.dataset.listenQuestion || "");
+  if (!text) return;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = state.vocabularyVoiceAccent || "en-GB";
+  utterance.rate = 0.88;
+  utterance.pitch = 1;
+  const preferredVoice = getPreferredVoice();
+  if (preferredVoice) {
+    utterance.voice = preferredVoice;
+    utterance.lang = preferredVoice.lang;
+  }
+  button.classList.add("playing");
+  button.textContent = "■ 停止";
+  button.setAttribute("aria-label", "停止播放口语题目");
+  utterance.onend = resetSpeakingAudioButtons;
+  utterance.onerror = resetSpeakingAudioButtons;
+  window.speechSynthesis.speak(utterance);
+}
+
+function renderQuestionListeningPractice(question) {
+  const spokenQuestion = encodeURIComponent(getPlainSpeakingText(question));
+  return `
+    <div class="question-listening-practice">
+      <div class="question-mask">
+        <span class="question-hidden-message">题目已遮住 · 先听再回答</span>
+        <p class="spoken-question-text">${question}</p>
+      </div>
+      <div class="question-listen-actions">
+        <button type="button" data-listen-question="${spokenQuestion}" aria-label="播放口语题目">🎧 听题</button>
+        <button type="button" data-reveal-question aria-expanded="false">显示题目</button>
+      </div>
+    </div>
+  `;
 }
 
 function advanceVocabularyFocus(category, rating) {
@@ -3924,7 +3981,7 @@ function renderPart1QuestionWithAnswer(question, entry) {
   const spokenAnswer = encodeURIComponent(getPlainSpeakingText(reference.answer));
   return `
     <li class="part1-question-item">
-      <p>${question}</p>
+      ${renderQuestionListeningPractice(question)}
       <details class="question-reference-answer">
         <summary>查看具体参考答案</summary>
         <div class="reference-answer-body">
@@ -3970,7 +4027,7 @@ function renderPart3QuestionWithAnswer(question, entry) {
   const spokenAnswer = encodeURIComponent(getPlainSpeakingText(answer));
   return `
     <li class="part1-question-item">
-      <p>${question}</p>
+      ${renderQuestionListeningPractice(question)}
       <details class="question-reference-answer">
         <summary>查看 Part 3 参考答案</summary>
         <div class="reference-answer-body">
@@ -4207,6 +4264,17 @@ function renderSpeakingQuestionBank() {
   });
   document.querySelectorAll("[data-speak-reference]").forEach((button) => {
     button.onclick = () => speakReferenceAnswer(button);
+  });
+  document.querySelectorAll("[data-listen-question]").forEach((button) => {
+    button.onclick = () => speakQuestionPrompt(button);
+  });
+  document.querySelectorAll("[data-reveal-question]").forEach((button) => {
+    button.onclick = () => {
+      const practice = button.closest(".question-listening-practice");
+      const revealed = practice.classList.toggle("revealed");
+      button.textContent = revealed ? "重新遮住" : "显示题目";
+      button.setAttribute("aria-expanded", String(revealed));
+    };
   });
 }
 

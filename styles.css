@@ -3081,6 +3081,83 @@ textarea:focus {
   font-weight: 800;
 }
 
+.question-listening-practice {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: stretch;
+  margin-bottom: 9px;
+}
+
+.question-mask {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 48px;
+  padding: 10px 12px;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(135deg, #f4eff1 0, #f4eff1 8px, #faf7f8 8px, #faf7f8 16px);
+  border: 1px dashed #d8c8cd;
+  border-radius: 8px;
+}
+
+.question-hidden-message {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.spoken-question-text {
+  display: none;
+  margin: 0;
+  color: var(--ink);
+  font-weight: 850;
+}
+
+.question-listening-practice.revealed .question-mask {
+  background: #fff;
+  border-style: solid;
+}
+
+.question-listening-practice.revealed .question-hidden-message {
+  display: none;
+}
+
+.question-listening-practice.revealed .spoken-question-text {
+  display: block;
+}
+
+.question-listen-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.question-listen-actions button {
+  min-width: 82px;
+  padding: 8px 10px;
+  color: var(--accent-dark);
+  background: #fff;
+  border: 1px solid #decfd4;
+  border-radius: 8px;
+  box-shadow: none;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.question-listen-actions button:first-child {
+  color: #2f6f68;
+  background: #e6f4f2;
+  border-color: #b9ddd7;
+}
+
+.question-listen-actions button:hover,
+.question-listen-actions button.playing {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
 .question-reference-answer {
   overflow: hidden;
   border: 1px solid #eadde1;
@@ -4905,6 +4982,13 @@ textarea:focus {
   }
   .part1-detail-sample > b {
     grid-row: auto;
+  }
+  .question-listening-practice {
+    grid-template-columns: 1fr;
+  }
+  .question-listen-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .font-size-options {
     grid-template-columns: repeat(2, minmax(0, 1fr));

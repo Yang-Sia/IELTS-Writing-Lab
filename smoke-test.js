@@ -125,6 +125,10 @@ assertIncludes(js, "renderPart3QuestionWithAnswer", "all Part 3 reference answer
 assertIncludes(js, "speakReferenceAnswer", "reference answer pronunciation");
 assertIncludes(js, "data-speak-reference", "reference answer speaker buttons");
 assertIncludes(js, "停止朗读参考答案", "reference answer stop control");
+assertIncludes(js, "renderQuestionListeningPractice", "hidden question listening practice");
+assertIncludes(js, "data-listen-question", "question listening button");
+assertIncludes(js, "data-reveal-question", "question reveal button");
+assertIncludes(js, "题目已遮住 · 先听再回答", "hidden question prompt");
 assertIncludes(js, "getSeasonQuestionsForTopic", "topic-linked seasonal speaking questions");
 assertIncludes(js, "statusPriority", "evergreen-first speaking question ordering");
 assertIncludes(js, "question-status-group", "grouped Part 1 question statuses");
