@@ -3763,6 +3763,89 @@ const part1TopicContextBank = {
   Dreams: "when I wake up · during stressful periods · when planning my future"
 };
 
+const part1DetailedIdeaMaps = {
+  Plants: {
+    centre: "PLANTS",
+    centreZh: "植物",
+    intro: "先选一种自己真正见过或养过的植物，再从外观、需求、养护和作用中挑细节。",
+    branches: [
+      {
+        title: "常见植物 Types",
+        items: [
+          ["cactus", "仙人掌"], ["succulent", "多肉植物"], ["spider plant", "吊兰"],
+          ["rose", "玫瑰"], ["sunflower", "向日葵"], ["orchid", "兰花"],
+          ["mint", "薄荷"], ["basil", "罗勒"], ["tomato plant", "番茄植株"]
+        ]
+      },
+      {
+        title: "生长需要 Needs",
+        items: [
+          ["plenty of sunlight", "充足阳光"], ["regular watering", "定期浇水"],
+          ["well-drained soil", "排水良好的土壤"], ["a warm environment", "温暖环境"],
+          ["plant nutrients", "植物养分"], ["enough space to grow", "足够生长空间"]
+        ]
+      },
+      {
+        title: "外观特点 Appearance",
+        items: [
+          ["bright green leaves", "鲜绿色叶片"], ["colourful petals", "彩色花瓣"],
+          ["a pleasant fragrance", "宜人的香气"], ["thick leaves", "厚实叶片"],
+          ["small and compact", "小巧紧凑"], ["fast-growing", "生长迅速的"]
+        ]
+      },
+      {
+        title: "照顾动作 Care",
+        items: [
+          ["plant seeds", "播种"], ["water the plant", "给植物浇水"],
+          ["put it near a window", "放在窗边"], ["trim the leaves", "修剪叶片"],
+          ["repot it", "换盆"], ["take good care of it", "好好照料它"]
+        ]
+      },
+      {
+        title: "喜欢原因 Benefits",
+        items: [
+          ["low-maintenance", "容易养护的"], ["brighten up a room", "让房间更有生气"],
+          ["help me relax", "帮助我放松"], ["smell fresh", "闻起来清新"],
+          ["use it in cooking", "用于烹饪"], ["give me a sense of achievement", "给我成就感"]
+        ]
+      }
+    ],
+    sample: [
+      "I keep a small pot of mint near my kitchen window.",
+      "It has bright green leaves and a fresh smell, and it only needs regular watering and plenty of sunlight.",
+      "I enjoy looking after it because it brightens up the room and I can also use the leaves in drinks."
+    ]
+  }
+};
+
+function renderPart1DetailedIdeaMap(topic) {
+  const map = part1DetailedIdeaMaps[topic];
+  if (!map) return "";
+  return `
+    <div class="part1-detailed-map">
+      <div class="part1-detail-map-title">
+        <div><span>Topic Mind Map</span><strong>${map.centre} 中英双语思维导图</strong></div>
+        <p>${map.intro}</p>
+      </div>
+      <div class="part1-detail-map-canvas">
+        <div class="part1-detail-centre"><strong>${map.centre}</strong><span>${map.centreZh}</span></div>
+        <div class="part1-detail-branches">
+          ${map.branches.map((branch) => `
+            <article>
+              <h5>${branch.title}</h5>
+              <div>${branch.items.map(([en, zh]) => `<p><b>${en}</b><span>${zh}</span></p>`).join("")}</div>
+            </article>
+          `).join("")}
+        </div>
+      </div>
+      <div class="part1-detail-sample">
+        <b>把思维导图变成三句话</b>
+        ${map.sample.map((sentence, index) => `<p><span>${index + 1}</span>${sentence}</p>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function renderPart1TopicPlanner(entry) {
   const choices = part1TopicChoiceBank[entry.topic] || [speakingTopicExamples[entry.topic]?.[0] || entry.topic.toLowerCase()];
   const [, quality = "interesting and useful", reason = "it is closely connected with my daily life"] = speakingTopicExamples[entry.topic] || [];
@@ -3791,6 +3874,7 @@ function renderPart1TopicPlanner(entry) {
           <p><b>3</b>加人物、时间、地点或过去现在对比</p>
         </article>
       </div>
+      ${renderPart1DetailedIdeaMap(entry.topic)}
       <p class="part1-planner-note">下面每一道题都可以展开查看：中文路线、三句话参考答案、可替换句型和重点词汇。</p>
     </section>
   `;
