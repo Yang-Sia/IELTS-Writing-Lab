@@ -94,6 +94,8 @@ assertIncludes(html, "四部分两分钟展开法", "Part 2 four-part framework"
 assertIncludes(html, "观点段落回答法", "Part 3 paragraph framework");
 assertIncludes(html, 'id="speakingMockStage"', "speaking mock test");
 assertIncludes(html, 'id="questionLearningFilter"', "question learning filter");
+assertIncludes(html, 'id="questionTopicFilter"', "question topic selector");
+assertIncludes(html, "全部 Topic", "all topics selector option");
 assertIncludes(html, 'src="speaking-bank-data.js?', "versioned speaking bank data script");
 assertIncludes(js, "speakingVocabularyExpansion", "expanded speaking vocabulary topics");
 assertIncludes(js, "generation gap", "family speaking vocabulary");
@@ -121,6 +123,7 @@ assertIncludes(js, "statusPriority", "evergreen-first speaking question ordering
 assertIncludes(js, "question-status-group", "grouped Part 1 question statuses");
 assertIncludes(js, "renderLearningSettings", "learning settings renderer");
 assertIncludes(js, "renderSpeakingQuestionBank", "speaking question bank renderer");
+assertIncludes(js, "availableTopics", "automatic speaking topic options");
 assertIncludes(js, "renderSpeakingCoach", "speaking answer coaching");
 assertIncludes(js, "seasonal fruit", "food answer variation");
 assertIncludes(js, "举一反三结构", "transferable speaking answer structure");

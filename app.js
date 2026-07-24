@@ -2333,7 +2333,7 @@ const defaultState = {
   questionBankPart: "part1",
   questionBankRegion: "mainland",
   questionBankStatus: "all",
-  questionBankSearch: "",
+  questionBankTopic: "all",
   questionBankLearningFilter: "all",
   speakingQuestionMarks: {},
   speakingPracticeLog: {},
@@ -3936,18 +3936,16 @@ function renderSpeakingCoach(entry, part) {
 function renderSpeakingQuestionBank() {
   const entries = getSpeakingQuestionBankEntries();
   const targetPart = state.questionBankPart || "part1";
-  const search = (state.questionBankSearch || "").trim().toLowerCase();
+  const partEntries = entries.filter((entry) => targetPart === "part1" ? entry.part === "part1" : entry.part === "part2");
+  const availableTopics = [...new Set(partEntries.map((entry) => entry.topic))].sort((a, b) => a.localeCompare(b, "en"));
+  if (state.questionBankTopic !== "all" && !availableTopics.includes(state.questionBankTopic)) {
+    state.questionBankTopic = "all";
+  }
   const filtered = entries.filter((entry) => {
     const partMatches = targetPart === "part1" ? entry.part === "part1" : entry.part === "part2";
     const regionMatches = state.questionBankRegion === "all" || entry.region === state.questionBankRegion;
     const statusMatches = state.questionBankStatus === "all" || entry.status === state.questionBankStatus;
-    const searchable = [
-      entry.topic,
-      ...(entry.questions || []),
-      entry.prompt || "",
-      ...(entry.cuePoints || []),
-      ...(entry.part3Questions || [])
-    ].join(" ").toLowerCase();
+    const topicMatches = state.questionBankTopic === "all" || entry.topic === state.questionBankTopic;
     const key = getSpeakingQuestionKey(entry, targetPart);
     const mark = state.speakingQuestionMarks?.[key] || "";
     const practiced = Boolean(state.speakingPracticeLog?.[key]);
@@ -3955,7 +3953,7 @@ function renderSpeakingQuestionBank() {
       || (state.questionBankLearningFilter === "favorite" && mark === "favorite")
       || (state.questionBankLearningFilter === "weak" && mark === "weak")
       || (state.questionBankLearningFilter === "unpracticed" && !practiced);
-    return partMatches && regionMatches && statusMatches && learningMatches && (!search || searchable.includes(search));
+    return partMatches && regionMatches && statusMatches && learningMatches && topicMatches;
   });
 
   const statusPriority = { evergreen: 0, new: 1, retained: 2 };
@@ -3974,7 +3972,11 @@ function renderSpeakingQuestionBank() {
   document.querySelector("#questionRegionFilter").value = state.questionBankRegion;
   document.querySelector("#questionStatusFilter").value = state.questionBankStatus;
   document.querySelector("#questionLearningFilter").value = state.questionBankLearningFilter;
-  document.querySelector("#questionBankSearch").value = state.questionBankSearch || "";
+  document.querySelector("#questionTopicFilter").innerHTML = `
+    <option value="all">全部 Topic（${availableTopics.length}）</option>
+    ${availableTopics.map((topic) => `<option value="${topic}">${topic}</option>`).join("")}
+  `;
+  document.querySelector("#questionTopicFilter").value = state.questionBankTopic || "all";
   if (state.speakingSection === "bank") {
     const partLabel = { part1: "Part 1", part2: "Part 2", part3: "Part 3" }[targetPart];
     document.querySelector("#vocabularyProgress").textContent = `5–8 月题库 · ${partLabel} · ${questionCount} 道`;
@@ -4012,7 +4014,7 @@ function renderSpeakingQuestionBank() {
   }).join("");
 
   document.querySelector("#speakingQuestionBankList").innerHTML = !sortedEntries.length
-    ? `<div class="empty-question-bank"><strong>没有找到符合条件的题目</strong><p>可以尝试切换地区、题目状态或清除搜索词。</p></div>`
+    ? `<div class="empty-question-bank"><strong>没有找到符合条件的题目</strong><p>可以尝试切换 Topic、地区、题目状态或学习状态。</p></div>`
     : targetPart === "part1"
       ? groupedPartOne
       : sortedEntries.map(renderBankCard).join("");
@@ -4022,6 +4024,7 @@ function renderSpeakingQuestionBank() {
       state.speakingSection = "bank";
       state.questionBankPart = button.dataset.questionPart;
       state.speakingPart = button.dataset.questionPart;
+      state.questionBankTopic = "all";
       saveState();
       renderSpeakingQuestionBank();
     };
@@ -4041,8 +4044,8 @@ function renderSpeakingQuestionBank() {
     saveState();
     renderSpeakingQuestionBank();
   };
-  document.querySelector("#questionBankSearch").oninput = (event) => {
-    state.questionBankSearch = event.target.value;
+  document.querySelector("#questionTopicFilter").onchange = (event) => {
+    state.questionBankTopic = event.target.value;
     saveState();
     renderSpeakingQuestionBank();
   };
