@@ -131,6 +131,8 @@ assertIncludes(js, "buildSpeakingMockQueue", "speaking mock test generator");
 assertIncludes(js, "toggleSpeakingMockRecording", "speaking recording control");
 assertIncludes(js, "renderSpeakingDailyProgress", "speaking daily progress");
 assertIncludes(speakingBank, '"part": "part1"', "Part 1 question data");
+assertIncludes(speakingBank, '"topic": "Study"', "student identity question group");
+assertIncludes(speakingBank, '"topic": "Work"', "working identity question group");
 assertIncludes(speakingBank, '"part": "part2"', "Part 2 and Part 3 question data");
 assertIncludes(js, "renderPhraseDrill", "native phrase renderer");
 assertIncludes(js, "checkPhraseRound", "native phrase checker");

@@ -304,7 +304,7 @@ const speakingQuestionBank2026MayAugust = {
     },
     {
       "part": "part1",
-      "topic": "Work or studies",
+      "topic": "Study",
       "status": "evergreen",
       "region": "mainland",
       "questions": [
@@ -319,7 +319,15 @@ const speakingQuestionBank2026MayAugust = {
         "How much time do you spend on your studies each week?",
         "Are you looking forward to working?",
         "What technology do you use when you study?",
-        "What changes would you like to see in your school?",
+        "What changes would you like to see in your school?"
+      ]
+    },
+    {
+      "part": "part1",
+      "topic": "Work",
+      "status": "evergreen",
+      "region": "mainland",
+      "questions": [
         "What work do you do?",
         "Why did you choose to do that type of work (or that job)?",
         "Do you like your job?",
